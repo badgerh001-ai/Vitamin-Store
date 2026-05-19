@@ -227,18 +227,20 @@ section{padding:80px 20px;}
   box-shadow: 0 24px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(226,0,0,0.3);
   border-color: rgba(226,0,0,0.5);
 }
+
+/* FIXED: Changed aspect-ratio to 4/3 and added black background */
 .why-card-img-wrap {
   width: 100%;
-  aspect-ratio: 16/9;
+  aspect-ratio: 4/3; 
   overflow: hidden;
-  background: #000;
+  background: var(--black); 
   position: relative;
 }
-/* Fully original image colors — no filters, no overlays */
+/* FIXED: object-fit: contain prevents cropping of the marketing text */
 .why-card-img-wrap img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; 
   display: block;
   transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
 }
@@ -600,7 +602,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
 }
 @media(max-width:900px){
   .why-grid{grid-template-columns:1fr;}
-  .why-card-img-wrap{aspect-ratio: 16/9;}
+  .why-card-img-wrap{aspect-ratio: 4/3;}
   .nav-links{display:none;}
   .hero-products{display:none;}
   .owner-wrap{grid-template-columns:1fr;gap:36px;}
