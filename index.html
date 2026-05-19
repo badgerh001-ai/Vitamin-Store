@@ -206,41 +206,60 @@ section{padding:80px 20px;}
 .brand-pill:hover{color:var(--white);}
 
 /* ══ WHY US ══════════════════════════════════ */
-#why{background:var(--dark);}
-.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
-.why-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);
-  overflow:hidden;position:relative;
-  transition:transform 0.25s,border-color 0.25s,box-shadow 0.25s;
-  display:flex;flex-direction:column;
-}
-.why-card:hover{transform:translateY(-6px);border-color:rgba(226,0,0,0.3);box-shadow:0 16px 48px rgba(0,0,0,0.4);}
-.why-card-img{
-  width:100%;height:180px;object-fit:cover;
-  filter:brightness(0.72) contrast(1.12) saturate(0.9);
-  transition:transform 0.4s,filter 0.4s;display:block;
-}
-.why-card:hover .why-card-img{transform:scale(1.05);filter:brightness(0.82) contrast(1.1) saturate(1);}
-.why-card-img-wrap{overflow:hidden;position:relative;}
-.why-card-img-wrap::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to bottom,transparent 40%,rgba(30,30,30,0.95) 100%);
-}
-.why-card-body{padding:22px 24px 26px;flex:1;display:flex;flex-direction:column;gap:8px;}
-.why-card-icon{
-  width:42px;height:42px;
-  background:rgba(226,0,0,0.1);border:1px solid rgba(226,0,0,0.2);
-  border-radius:10px;display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;color:var(--red);margin-bottom:4px;
-}
-.why-card h3{font-family:var(--font-d);font-size:1.3rem;font-weight:800;color:var(--white);text-transform:uppercase;letter-spacing:0.03em;}
-.why-card p{font-size:0.88rem;color:var(--muted);line-height:1.7;}
-.why-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--red-dark),var(--red));
-  transform:scaleX(0);transform-origin:left;transition:transform 0.3s;z-index:2;
-}
-.why-card:hover::before{transform:scaleX(1);}
+<section id="why">
+  <div class="why-grid">
+
+    <!-- 100% Genuine -->
+    <div class="why-card">
+      <div class="why-card-img-wrap">
+        <img src="100%Genuine.png" alt="100% Genuine" class="why-card-img">
+      </div>
+      <div class="why-card-body">
+        <div class="why-card-icon">✔</div>
+        <h3>100% Genuine</h3>
+        <p>We guarantee authentic products with verified quality checks.</p>
+      </div>
+    </div>
+
+    <!-- Best Prices -->
+    <div class="why-card">
+      <div class="why-card-img-wrap">
+        <img src="BestPrices.png" alt="Best Prices" class="why-card-img">
+      </div>
+      <div class="why-card-body">
+        <div class="why-card-icon">💲</div>
+        <h3>Best Prices</h3>
+        <p>Competitive pricing ensures maximum value for your money.</p>
+      </div>
+    </div>
+
+    <!-- Expert Guidance -->
+    <div class="why-card">
+      <div class="why-card-img-wrap">
+        <img src="ExpertGuidance.png" alt="Expert Guidance" class="why-card-img">
+      </div>
+      <div class="why-card-body">
+        <div class="why-card-icon">🎓</div>
+        <h3>Expert Guidance</h3>
+        <p>Our specialists provide trusted advice and personalized support.</p>
+      </div>
+    </div>
+
+    <!-- Home Delivery -->
+    <div class="why-card">
+      <div class="why-card-img-wrap">
+        <img src="HomeDelivery.png" alt="Home Delivery" class="why-card-img">
+      </div>
+      <div class="why-card-body">
+        <div class="why-card-icon">🚚</div>
+        <h3>Home Delivery</h3>
+        <p>Fast and reliable delivery right to your doorstep.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 
 /* ══ OWNER / TEAM SECTION ══════════════════════ */
 #owner{background:var(--black);padding:80px 20px;}
