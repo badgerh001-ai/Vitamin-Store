@@ -218,6 +218,14 @@ nav{
 .prod-img-wrap{
   aspect-ratio:1;position:relative;overflow:hidden;flex-shrink:0;
 }
+.prod-img-real{
+  width:100%;height:100%;
+  object-fit:contain;object-position:center;
+  display:block;padding:12px;
+  background:var(--card);
+  transition:transform 0.3s ease;
+}
+.prod-card:hover .prod-img-real{transform:scale(1.05);}
 .prod-img-placeholder{
   width:100%;height:100%;
   display:flex;flex-direction:column;
@@ -590,6 +598,7 @@ const PRODUCTS = [
     mrp:9849, price:null, showPrice:false,
     inStock:true, featured:true,
     icon:'fas fa-flask',
+    image:'https://www.optimumnutrition.com/cdn/shop/files/on-1111968_Image_01.png?v=1756452646&width=600',
     gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)'
   },
   {
@@ -601,6 +610,7 @@ const PRODUCTS = [
     mrp:18929, price:null, showPrice:false,
     inStock:true, featured:false,
     icon:'fas fa-flask',
+    image:'https://www.optimumnutrition.com/cdn/shop/files/on-1111968_Image_01.png?v=1756452646&width=600',
     gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)'
   },
   {
@@ -612,6 +622,7 @@ const PRODUCTS = [
     mrp:7649, price:null, showPrice:false,
     inStock:true, featured:false,
     icon:'fas fa-flask',
+    image:'https://www.optimumnutrition.com/cdn/shop/files/on-1111968_Image_01.png?v=1756452646&width=600',
     gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)'
   },
   {
@@ -623,6 +634,7 @@ const PRODUCTS = [
     mrp:4429, price:null, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
+    image:'https://www.optimumnutrition.com/cdn/shop/files/on-1111968_Image_01.png?v=1756452646&width=600',
     gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)'
   },
   {
@@ -996,7 +1008,21 @@ function renderCard(p) {
        </div>`
     : '';
 
-  /* Call for Pricing — always shown */
+  /* Image with fallback */
+  const imgHtml = p.image
+    ? `<img class="prod-img-real" src="${p.image}" alt="${p.brand} ${p.name}"
+         loading="lazy"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+       <div class="prod-img-placeholder" style="background:${p.gradient};display:none;">
+         <i class="${p.icon||'fas fa-flask'}"></i>
+         <div class="placeholder-brand-txt">${p.brand}</div>
+         ${p.protein&&p.protein!=='—'?`<div class="placeholder-protein">${p.protein} protein</div>`:''}
+       </div>`
+    : `<div class="prod-img-placeholder" style="background:${p.gradient}">
+         <i class="${p.icon||'fas fa-flask'}"></i>
+         <div class="placeholder-brand-txt">${p.brand}</div>
+         ${p.protein&&p.protein!=='—'?`<div class="placeholder-protein">${p.protein} protein</div>`:''}
+       </div>`;
   const priceHtml = `<div class="call-for-price"><i class="fas fa-phone-alt"></i> Call / WhatsApp for Pricing</div>`;
 
   /* Protein tag */
@@ -1010,11 +1036,7 @@ function renderCard(p) {
   <meta itemprop="brand" content="${p.brand}"/>
   ${p.mrp ? `<meta itemprop="offers" content="${p.price||p.mrp}"/>` : ''}
   <div class="prod-img-wrap">
-    <div class="prod-img-placeholder" style="background:${p.gradient}">
-      <i class="${p.icon || 'fas fa-flask'}"></i>
-      <div class="placeholder-brand-txt">${p.brand}</div>
-      ${p.protein && p.protein !== '—' ? `<div class="placeholder-protein">${p.protein} protein</div>` : ''}
-    </div>
+    ${imgHtml}
     <div class="prod-badge-row">
       ${brandBadge}
       ${badgeStack}
