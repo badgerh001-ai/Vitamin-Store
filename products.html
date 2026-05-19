@@ -8,7 +8,6 @@
 <meta name="keywords" content="buy whey protein anantapur, buy mass gainer anantapur, buy pre-workout anantapur, MuscleBlaze anantapur, Optimum Nutrition anantapur, GNC anantapur, C4 pre-workout anantapur, creatine anantapur, bcaa anantapur, supplement store anantapur"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://vitaminstore.in/products.html"/>
-
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Supplements in Anantapur — Vitamin Store Products"/>
 <meta property="og:description" content="100% genuine supplements. Whey Protein, Mass Gainer, Pre-Workout & more. Buy on WhatsApp. Home delivery in Anantapur."/>
@@ -44,7 +43,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
 <style>
-/* ══ TOKENS (same as site) ══════════════════════════ */
+/* ══ TOKENS ═════════════════════════════════════════ */
 :root{
   --red:#E20000;--red-dark:#A80000;--red-glow:rgba(226,0,0,0.25);
   --black:#080808;--dark:#101010;--surface:#181818;--card:#1E1E1E;
@@ -67,7 +66,7 @@ nav{
   position:fixed;top:0;width:100%;z-index:200;
   height:66px;padding:0 24px;
   display:flex;align-items:center;justify-content:space-between;
-  background:rgba(8,8,8,0.95);backdrop-filter:blur(24px);
+  background:rgba(8,8,8,0.97);backdrop-filter:blur(24px);
   border-bottom:1px solid var(--border);
 }
 .nav-brand{display:flex;align-items:center;gap:10px;}
@@ -90,8 +89,7 @@ nav{
 
 /* ══ PAGE HERO ═══════════════════════════════════════ */
 .page-hero{
-  margin-top:66px;
-  min-height:200px;
+  margin-top:66px;min-height:200px;
   display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   text-align:center;padding:48px 24px;
@@ -124,8 +122,7 @@ nav{
 }
 .advice-bar a{
   font-size:0.83rem;color:var(--text);
-  display:inline-flex;align-items:center;gap:8px;
-  font-weight:500;
+  display:inline-flex;align-items:center;gap:8px;font-weight:500;
 }
 .advice-bar a i{color:var(--red);}
 .advice-bar a span{color:var(--red);font-weight:700;text-decoration:underline;text-decoration-color:rgba(226,0,0,0.4);}
@@ -133,16 +130,16 @@ nav{
 /* ══ FILTER BAR ══════════════════════════════════════ */
 .filter-bar{
   position:sticky;top:66px;z-index:100;
-  background:rgba(14,14,14,0.98);
+  background:rgba(14,14,14,0.99);
   backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
 }
 .filter-top{
   max-width:1200px;margin:0 auto;
   display:flex;align-items:center;gap:12px;
-  padding:14px 24px;
+  padding:14px 24px;flex-wrap:wrap;
 }
-.search-wrap{flex:1;position:relative;}
+.search-wrap{flex:1;min-width:200px;position:relative;}
 .search-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.85rem;pointer-events:none;}
 .search-input{
   width:100%;background:var(--surface);
@@ -153,14 +150,43 @@ nav{
 }
 .search-input:focus{border-color:rgba(226,0,0,0.4);}
 .search-input::placeholder{color:var(--muted2);}
+
+/* Sort + Filter controls row */
+.filter-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .sort-select{
   background:var(--surface);border:1px solid var(--border);
   color:var(--text);font-family:var(--font-b);
   font-size:0.82rem;padding:10px 12px;border-radius:8px;
-  outline:none;cursor:pointer;white-space:nowrap;min-width:160px;
+  outline:none;cursor:pointer;white-space:nowrap;min-width:170px;
 }
-.filter-count{font-size:0.8rem;color:var(--muted);white-space:nowrap;}
+.sort-select:focus{border-color:rgba(226,0,0,0.4);}
+.filter-btn{
+  display:flex;align-items:center;gap:6px;
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--muted);font-family:var(--font-b);
+  font-size:0.82rem;padding:10px 14px;border-radius:8px;
+  cursor:pointer;white-space:nowrap;transition:all 0.2s;
+}
+.filter-btn.active-filter{border-color:rgba(226,0,0,0.5);color:var(--red);}
+.filter-btn:hover{border-color:rgba(226,0,0,0.35);color:var(--text);}
+.filter-count{font-size:0.8rem;color:var(--muted);white-space:nowrap;margin-left:auto;}
 .filter-count span{color:var(--red);font-weight:700;font-family:var(--font-d);font-size:1rem;}
+
+/* Stock filter toggle */
+.stock-toggle{
+  display:flex;align-items:center;gap:8px;
+  background:var(--surface);border:1px solid var(--border);
+  color:var(--muted);font-family:var(--font-b);
+  font-size:0.82rem;padding:8px 14px;border-radius:8px;
+  cursor:pointer;white-space:nowrap;transition:all 0.2s;
+  user-select:none;
+}
+.stock-toggle .toggle-dot{
+  width:14px;height:14px;border-radius:50%;
+  background:var(--muted2);transition:background 0.2s;flex-shrink:0;
+}
+.stock-toggle.on{border-color:rgba(0,200,100,0.4);color:#00cc66;}
+.stock-toggle.on .toggle-dot{background:#00cc66;}
 
 /* CATEGORY TABS */
 .cat-tabs-wrap{
@@ -184,14 +210,35 @@ nav{
 .cat-tab.active{background:var(--red);border-color:var(--red);color:#fff;}
 .tab-count{
   background:rgba(255,255,255,0.15);color:inherit;
-  padding:1px 7px;border-radius:10px;font-size:0.7rem;
-  font-weight:700;
+  padding:1px 7px;border-radius:10px;font-size:0.7rem;font-weight:700;
 }
 .cat-tab.active .tab-count{background:rgba(255,255,255,0.25);}
 
+/* ══ ACTIVE FILTERS CHIPS ════════════════════════════ */
+.active-filters{
+  max-width:1200px;margin:0 auto;
+  padding:0 24px 10px;
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.active-filters:empty{display:none;}
+.filter-chip{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(226,0,0,0.1);border:1px solid rgba(226,0,0,0.25);
+  color:var(--red);font-size:0.75rem;font-weight:600;
+  padding:3px 10px;border-radius:20px;cursor:pointer;
+  transition:all 0.2s;
+}
+.filter-chip:hover{background:rgba(226,0,0,0.2);}
+.filter-chip i{font-size:0.65rem;}
+.clear-all-btn{
+  font-size:0.75rem;color:var(--muted);cursor:pointer;
+  text-decoration:underline;text-decoration-color:rgba(255,255,255,0.2);
+  transition:color 0.2s;
+}
+.clear-all-btn:hover{color:var(--red);}
+
 /* ══ PRODUCTS SECTION ════════════════════════════════ */
 .products-section{max-width:1200px;margin:0 auto;padding:28px 24px 90px;}
-
 .products-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -216,26 +263,31 @@ nav{
 
 /* CARD IMAGE */
 .prod-img-wrap{
-  aspect-ratio:1;position:relative;overflow:hidden;flex-shrink:0;
+  aspect-ratio:1/1;position:relative;overflow:hidden;flex-shrink:0;
+  background:var(--surface);
 }
+/* Real product image */
 .prod-img-real{
   width:100%;height:100%;
-  object-fit:contain;object-position:center;
-  display:block;padding:12px;
-  background:var(--card);
-  transition:transform 0.3s ease;
+  object-fit:contain;
+  padding:12px;
+  transition:transform 0.3s;
+  background:var(--surface);
 }
 .prod-card:hover .prod-img-real{transform:scale(1.05);}
+
+/* Fallback placeholder (shown via JS if image errors) */
 .prod-img-placeholder{
   width:100%;height:100%;
-  display:flex;flex-direction:column;
+  display:none; /* hidden by default, shown via JS on error */
+  flex-direction:column;
   align-items:center;justify-content:center;
-  gap:10px;position:relative;overflow:hidden;
+  gap:10px;position:absolute;inset:0;
 }
+.prod-img-placeholder.show{display:flex;}
 .prod-img-placeholder::before{
   content:'';position:absolute;inset:0;
-  background:inherit;opacity:0.12;
-  filter:blur(40px);
+  background:inherit;opacity:0.12;filter:blur(40px);
 }
 .prod-img-placeholder i{
   font-size:2.8rem;opacity:0.85;
@@ -253,11 +305,25 @@ nav{
   color:rgba(255,255,255,0.9);position:relative;z-index:1;letter-spacing:0.05em;
 }
 
+/* OUT OF STOCK OVERLAY */
+.oos-overlay{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,0.55);
+  display:flex;align-items:center;justify-content:center;
+  z-index:3;
+}
+.oos-tag{
+  background:rgba(0,0,0,0.8);color:var(--muted);
+  font-size:0.7rem;font-weight:700;letter-spacing:0.1em;
+  text-transform:uppercase;padding:5px 14px;border-radius:4px;
+  border:1px solid rgba(255,255,255,0.15);
+}
+
 /* BADGES */
 .prod-badge-row{
   position:absolute;top:10px;left:10px;right:10px;
   display:flex;align-items:flex-start;justify-content:space-between;gap:6px;
-  z-index:2;
+  z-index:2;pointer-events:none;
 }
 .badge{
   padding:3px 9px;border-radius:20px;
@@ -265,7 +331,6 @@ nav{
   text-transform:uppercase;letter-spacing:0.07em;white-space:nowrap;
 }
 .badge-brand{background:rgba(0,0,0,0.72);color:#fff;backdrop-filter:blur(4px);}
-.badge-discount{background:var(--red);color:#fff;}
 .badge-featured{background:rgba(255,165,0,0.92);color:#fff;}
 .badge-stack{display:flex;flex-direction:column;gap:4px;align-items:flex-end;}
 
@@ -274,28 +339,18 @@ nav{
   padding:14px 14px 16px;
   display:flex;flex-direction:column;flex:1;gap:7px;
 }
-.prod-brand-tag{
-  font-size:0.68rem;color:var(--red);
-  font-weight:700;letter-spacing:0.1em;text-transform:uppercase;
-}
+.prod-brand-tag{font-size:0.68rem;color:var(--red);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;}
 .prod-name{
   font-family:var(--font-d);font-size:1.05rem;font-weight:800;
-  color:var(--white);line-height:1.2;text-transform:uppercase;
-  letter-spacing:0.01em;
+  color:var(--white);line-height:1.2;text-transform:uppercase;letter-spacing:0.01em;
 }
-.prod-meta{
-  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
-}
-.prod-size-tag{
-  font-size:0.75rem;color:var(--muted);
-  display:flex;align-items:center;gap:4px;
-}
+.prod-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.prod-size-tag{font-size:0.75rem;color:var(--muted);display:flex;align-items:center;gap:4px;}
 .prod-protein-tag{
   font-size:0.72rem;
   background:rgba(226,0,0,0.1);
   border:1px solid rgba(226,0,0,0.2);
-  color:var(--red);padding:2px 8px;border-radius:4px;
-  font-weight:700;
+  color:var(--red);padding:2px 8px;border-radius:4px;font-weight:700;
 }
 .prod-flavours{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px;}
 .flavour-chip{
@@ -306,15 +361,13 @@ nav{
 }
 .flavour-more{color:var(--red)!important;border-color:rgba(226,0,0,0.2)!important;background:rgba(226,0,0,0.05)!important;}
 
-/* CALL FOR PRICING */
+/* CALL FOR PRICE */
 .call-for-price{
   display:inline-flex;align-items:center;gap:7px;
-  margin-top:6px;
-  padding:6px 12px;border-radius:6px;
+  margin-top:6px;padding:6px 12px;border-radius:6px;
   background:rgba(255,255,255,0.04);
   border:1px solid rgba(255,255,255,0.09);
-  font-size:0.78rem;color:var(--muted);
-  font-weight:600;letter-spacing:0.03em;
+  font-size:0.78rem;color:var(--muted);font-weight:600;letter-spacing:0.03em;
 }
 .call-for-price i{color:var(--red);font-size:0.8rem;}
 
@@ -332,11 +385,11 @@ nav{
 }
 .prod-cta:hover{background:var(--red);color:#fff;border-color:var(--red);}
 .prod-cta i{font-size:1rem;}
+.prod-cta.disabled{opacity:0.45;pointer-events:none;cursor:not-allowed;}
 
 /* ══ EMPTY STATE ═════════════════════════════════════ */
 .empty-state{
-  grid-column:1/-1;
-  text-align:center;padding:80px 20px;
+  grid-column:1/-1;text-align:center;padding:80px 20px;
   display:flex;flex-direction:column;align-items:center;gap:16px;
 }
 .empty-icon{font-size:3rem;color:var(--muted2);}
@@ -346,19 +399,16 @@ nav{
   display:inline-flex;align-items:center;gap:8px;
   padding:12px 24px;border-radius:8px;
   background:var(--red);color:#fff;
-  font-weight:700;font-size:0.9rem;
-  cursor:pointer;transition:background 0.2s;margin-top:8px;
+  font-weight:700;font-size:0.9rem;cursor:pointer;
+  transition:background 0.2s;margin-top:8px;
 }
 .empty-wa:hover{background:#c00;}
 
 /* COMING SOON */
 .coming-card{
-  background:var(--card);
-  border:1px dashed rgba(255,255,255,0.1);
-  border-radius:var(--r-md);
-  padding:40px 16px;text-align:center;
-  display:flex;flex-direction:column;align-items:center;gap:12px;
-  opacity:0.55;
+  background:var(--card);border:1px dashed rgba(255,255,255,0.1);
+  border-radius:var(--r-md);padding:40px 16px;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0.55;
 }
 .coming-card i{font-size:2rem;color:var(--muted2);}
 .coming-title{font-family:var(--font-d);font-size:1rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;}
@@ -383,8 +433,7 @@ nav{
 .talk-bar{
   display:none;
   position:fixed;bottom:62px;left:0;right:0;
-  background:var(--red);z-index:197;
-  padding:10px 16px;text-align:center;
+  background:var(--red);z-index:197;padding:10px 16px;text-align:center;
 }
 .talk-bar a{color:#fff;font-weight:800;font-size:0.95rem;display:flex;align-items:center;justify-content:center;gap:8px;}
 
@@ -431,18 +480,20 @@ footer{
   .talk-bar{display:block;}
   .wa-float{bottom:134px;right:14px;}
   footer{padding-bottom:140px;}
-  .filter-top{padding:10px 16px;flex-wrap:wrap;}
+  .filter-top{padding:10px 16px;gap:8px;}
+  .filter-controls{width:100%;}
+  .sort-select{flex:1;min-width:0;}
   .cat-tabs-wrap{padding:0 16px 12px;}
+  .active-filters{padding:0 16px 10px;}
   .products-section{padding:16px 12px 90px;}
   .products-grid{gap:10px;}
-  .filter-count{width:100%;order:3;}
+  .filter-count{display:none;}
 }
 @media(max-width:480px){
   .products-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
   .prod-body{padding:10px 10px 12px;}
-  .prod-name{font-size:0.92rem;}
-  .prod-price{font-size:1.25rem;}
-  .sort-select{display:none;}
+  .prod-name{font-size:0.9rem;}
+  .stock-toggle span{display:none;}
 }
 </style>
 </head>
@@ -509,14 +560,29 @@ footer{
   <div class="filter-top">
     <div class="search-wrap">
       <i class="fas fa-search"></i>
-      <input class="search-input" id="searchInput" type="text" placeholder="Search by product name, brand, flavour..."/>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search product, brand, flavour..."/>
     </div>
-    <select class="sort-select" id="sortSelect">
-      <option value="featured">Sort: Featured</option>
-      <option value="brand">Sort: Brand A–Z</option>
-    </select>
-    <div class="filter-count">Showing <span id="prodCount">0</span> products</div>
+    <div class="filter-controls">
+      <select class="sort-select" id="sortSelect">
+        <option value="featured">⭐ Featured First</option>
+        <option value="brand_az">Brand A → Z</option>
+        <option value="brand_za">Brand Z → A</option>
+        <option value="name_az">Name A → Z</option>
+        <option value="protein_hl">Protein: High → Low</option>
+        <option value="instock">In Stock First</option>
+      </select>
+      <div class="stock-toggle" id="stockToggle" onclick="toggleStockFilter()">
+        <div class="toggle-dot"></div>
+        <span>In Stock Only</span>
+      </div>
+      <div class="filter-count">Showing <span id="prodCount">0</span> products</div>
+    </div>
   </div>
+
+  <!-- ACTIVE FILTER CHIPS -->
+  <div class="active-filters" id="activeFilters"></div>
+
+  <!-- CATEGORY TABS -->
   <div class="cat-tabs-wrap">
     <div class="cat-tabs" id="catTabs">
       <button class="cat-tab active" data-cat="all" onclick="filterCat('all')">
@@ -564,9 +630,7 @@ footer{
 
 <!-- PRODUCTS GRID -->
 <div class="products-section">
-  <div class="products-grid" id="productsGrid">
-    <!-- Rendered by JS -->
-  </div>
+  <div class="products-grid" id="productsGrid"></div>
 </div>
 
 <!-- FOOTER -->
@@ -583,9 +647,14 @@ footer{
 </footer>
 
 <script>
-/* ════════════════════════════════════════════════════
-   PRODUCTS DATA — sourced from client Excel sheet
-   ════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   IMAGE STRATEGY:
+   - Primary: iHerb static CDN (permanent, no auth, global CDN)
+     Format: https://cloudfront.iherb.com/primg/...
+   - Secondary: Open Food Facts / Wikipedia Commons
+   - Fallback: onerror fires → hides <img>, shows gradient placeholder
+   ══════════════════════════════════════════════════════ */
+
 const PRODUCTS = [
 
   /* ── WHEY PROTEIN ──────────────────────────────── */
@@ -594,235 +663,210 @@ const PRODUCTS = [
     brand:'Optimum Nutrition', name:'Gold Standard 100% Whey',
     flavours:['Double Rich Chocolate'],
     size:'2.27 kg', protein:'24g',
-    desc:'Premium whey protein blend with whey isolate as primary ingredient. 24g protein, 5.5g BCAAs per serving.',
-    mrp:9849, price:null, showPrice:false,
     inStock:true, featured:true,
     icon:'fas fa-flask',
-    image:'https://www.optimumnutrition.com/cdn/shop/files/on-1111968_Image_01.png?v=1756452646&width=600',
-    gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)'
+    gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/0/0/27509/27509.jpg'
   },
   {
     id:'on-gs-van-4kg', cat:'whey',
     brand:'Optimum Nutrition', name:'Gold Standard 100% Whey',
     flavours:['Vanilla Ice Cream'],
     size:'4 kg', protein:'24g',
-    desc:'Premium whey protein blend with whey isolate as primary ingredient. 24g protein per serving.',
-    mrp:18929, price:null, showPrice:false,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    image:'https://www.optimumnutrition.com/cdn/shop/files/on-1111968_Image_01.png?v=1756452646&width=600',
-    gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)'
+    gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/0/0/27509/27509.jpg'
   },
   {
     id:'on-gs-choc-1700', cat:'whey',
     brand:'Optimum Nutrition', name:'Gold Standard 100% Whey',
     flavours:['Double Rich Chocolate'],
     size:'1.7 kg', protein:'24g',
-    desc:'Premium whey protein blend with whey isolate as primary ingredient. 24g protein per serving.',
-    mrp:7649, price:null, showPrice:false,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    image:'https://www.optimumnutrition.com/cdn/shop/files/on-1111968_Image_01.png?v=1756452646&width=600',
-    gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)'
+    gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/0/0/27509/27509.jpg'
   },
   {
     id:'on-gs-choc-907', cat:'whey',
     brand:'Optimum Nutrition', name:'Gold Standard 100% Whey',
     flavours:['Double Rich Chocolate'],
     size:'907 g', protein:'24g',
-    desc:'Premium whey protein blend. 24g protein, 5.5g BCAAs per serving. Starter size.',
-    mrp:4429, price:null, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    image:'https://www.optimumnutrition.com/cdn/shop/files/on-1111968_Image_01.png?v=1756452646&width=600',
-    gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)'
+    gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/0/0/27509/27509.jpg'
   },
   {
     id:'mb-biozyme-perf-1kg', cat:'whey',
     brand:'MuscleBlaze', name:'Biozyme Performance Whey',
     flavours:['Hazel Nut Chocolate','Magical Mango','Rich Chocolate'],
     size:'1 kg', protein:'25g',
-    desc:"India's most popular whey protein with enhanced absorption. 25g protein. Informed Sport certified.",
-    mrp:3599, price:null, showPrice:true,
     inStock:true, featured:true,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)'
+    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00028_1.jpg'
   },
   {
     id:'mb-biozyme-perf-2kg', cat:'whey',
     brand:'MuscleBlaze', name:'Biozyme Performance Whey',
     flavours:['Hazel Nut Chocolate','Magical Mango','Rich Chocolate','Blue Tokai Coffee'],
     size:'2 kg', protein:'25g',
-    desc:"India's most popular whey protein with enhanced absorption. 25g protein. Informed Sport certified.",
-    mrp:6699, price:null, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)'
+    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00028_1.jpg'
   },
   {
     id:'mb-biozyme-perf-4kg', cat:'whey',
     brand:'MuscleBlaze', name:'Biozyme Performance Whey',
     flavours:['Hazel Nut Chocolate','Magical Mango','Rich Chocolate','Blue Tokai Coffee'],
     size:'4 kg', protein:'25g',
-    desc:"India's most popular whey protein with enhanced absorption. 25g protein. Best value pack.",
-    mrp:12999, price:null, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)'
+    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00028_1.jpg'
   },
   {
     id:'mb-iso-zero-1kg', cat:'whey',
     brand:'MuscleBlaze', name:'ISO Zero',
     flavours:['Ice Cream Chocolate','Cookies & Cream','Swiss Chocolate'],
     size:'1 kg', protein:'27g',
-    desc:'Zero-carb whey isolate. 27g pure protein per serving. Ideal for cutting and lean muscle.',
-    mrp:5399, price:4599, showPrice:true,
     inStock:true, featured:true,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)'
+    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00044_1.jpg'
   },
   {
     id:'mb-iso-zero-2kg', cat:'whey',
     brand:'MuscleBlaze', name:'ISO Zero',
     flavours:['Ice Cream Chocolate','Cookies & Cream','Swiss Chocolate'],
     size:'2 kg', protein:'27g',
-    desc:'Zero-carb whey isolate. 27g pure protein per serving.',
-    mrp:10499, price:8999, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)'
+    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00044_1.jpg'
   },
   {
     id:'mb-iso-zero-4kg', cat:'whey',
     brand:'MuscleBlaze', name:'ISO Zero',
     flavours:['Ice Cream Chocolate','Cookies & Cream','Swiss Chocolate'],
     size:'4 kg', protein:'27g',
-    desc:'Zero-carb whey isolate. 27g pure protein per serving. Best value size.',
-    mrp:20199, price:17799, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)'
+    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00044_1.jpg'
   },
   {
     id:'mb-whey-pr-1kg', cat:'whey',
     brand:'MuscleBlaze', name:'Biozyme Whey PR',
     flavours:['Molten Chocolate Cake','Chocolate Fudge','Cookies & Cream'],
     size:'1 kg', protein:'30g',
-    desc:'High-performance whey with enhanced absorption. 30g protein per serving — highest in class.',
-    mrp:3949, price:3499, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)'
+    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00234_1.jpg'
   },
   {
     id:'mb-whey-pr-2kg', cat:'whey',
     brand:'MuscleBlaze', name:'Biozyme Whey PR',
     flavours:['Molten Chocolate Cake','Chocolate Fudge','Cookies & Cream'],
     size:'2 kg', protein:'30g',
-    desc:'High-performance whey with enhanced absorption. 30g protein per serving.',
-    mrp:7999, price:6799, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)'
+    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00234_1.jpg'
   },
   {
     id:'mb-whey-pr-4kg', cat:'whey',
     brand:'MuscleBlaze', name:'Biozyme Whey PR',
     flavours:['Molten Chocolate Cake','Chocolate Fudge','Cookies & Cream'],
     size:'4 kg', protein:'30g',
-    desc:'High-performance whey with enhanced absorption. 30g protein per serving. Best value.',
-    mrp:14699, price:13399, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)'
+    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00234_1.jpg'
   },
   {
     id:'mb-gold-whey-1kg', cat:'whey',
     brand:'MuscleBlaze', name:'Gold 100% Whey',
     flavours:['Rich Chocolate','Mango','Chocolate Hazelnut'],
     size:'1 kg', protein:'27g',
-    desc:'Premium 100% whey protein. 27g protein, Informed Sport certified.',
-    mrp:4399, price:3999, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)'
+    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00341_1.jpg'
   },
   {
     id:'mb-gold-whey-2kg', cat:'whey',
     brand:'MuscleBlaze', name:'Gold 100% Whey',
     flavours:['Rich Chocolate','Mango','Chocolate Hazelnut'],
     size:'2 kg', protein:'27g',
-    desc:'Premium 100% whey protein. 27g protein per serving.',
-    mrp:8799, price:7799, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)'
+    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00341_1.jpg'
   },
   {
     id:'mb-gold-whey-4kg', cat:'whey',
     brand:'MuscleBlaze', name:'Gold 100% Whey',
     flavours:['Rich Chocolate','Mango','Chocolate Hazelnut'],
     size:'4 kg', protein:'27g',
-    desc:'Premium 100% whey protein. 27g protein per serving. Family pack.',
-    mrp:16199, price:15399, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)'
+    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00341_1.jpg'
   },
   {
     id:'gnc-pp-whey-907', cat:'whey',
     brand:'GNC', name:'Pro Performance 100% Whey',
     flavours:['Chocolate Supreme','Café Mocha','Kesar Pista','Vanilla Cream','Cookies & Cream'],
     size:'907 g', protein:'24g',
-    desc:"World's No.1 nutrition brand. 24g protein, 5.7g BCAAs — best in class. Zero added sugar.",
-    mrp:3599, price:2999, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)'
+    gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/0/0/53812/53812.jpg'
   },
   {
     id:'gnc-pp-whey-181', cat:'whey',
     brand:'GNC', name:'Pro Performance 100% Whey',
     flavours:['Chocolate Supreme','Café Mocha','Kesar Pista','Vanilla Cream','Cookies & Cream'],
     size:'1.81 kg', protein:'24g',
-    desc:"World's No.1 nutrition brand. 24g protein, 5.7g BCAAs. Lowest carb content at 4.51g.",
-    mrp:6799, price:5129, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)'
+    gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/0/0/53812/53812.jpg'
   },
   {
     id:'gnc-pp-whey-4kg', cat:'whey',
     brand:'GNC', name:'Pro Performance 100% Whey',
     flavours:['Chocolate Supreme','Café Mocha','Kesar Pista','Vanilla Cream','Cookies & Cream'],
     size:'4 kg', protein:'24g',
-    desc:"World's No.1 nutrition brand. 24g protein, 5.7g BCAAs. Best value bulk pack.",
-    mrp:12459, price:8999, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)'
+    gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/0/0/53812/53812.jpg'
   },
   {
     id:'gnc-pure-isolate', cat:'whey',
     brand:'GNC', name:'Pure Isolate',
     flavours:['Chocolate Frosting','Vanilla'],
     size:'907g / 1.81kg', protein:'25g',
-    desc:'83% protein per scoop. Micro-filtered for purity. DigeZyme for easy digestion. Zero carbs.',
-    mrp:11999, price:8500, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)'
+    gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/0/0/53812/53812.jpg'
   },
   {
     id:'run-whey-pro', cat:'whey',
     brand:'RUN', name:'Whey Pro',
     flavours:['Pistachio','Coffee','Rich Chocolate','Birthday Cake','Tiramisu'],
     size:'1 kg / 1.81 kg', protein:'—',
-    desc:'Premium whey protein from RUN brand. Unique, indulgent flavour profiles.',
-    mrp:null, price:null, showPrice:false,
     inStock:true, featured:false,
     icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#4a0000 0%,#880022 60%,#BB0033 100%)'
+    gradient:'linear-gradient(135deg,#4a0000 0%,#880022 60%,#BB0033 100%)',
+    img:null
   },
 
   /* ── MASS GAINER ───────────────────────────────── */
@@ -831,33 +875,30 @@ const PRODUCTS = [
     brand:'MuscleBlaze', name:'Super Mass Gainer',
     flavours:['Chocolate','Cookies & Cream'],
     size:'1 kg', protein:'15g',
-    desc:'High calorie mass gainer. 158g carbs & 15g protein per serving. Ideal for hard gainers.',
-    mrp:1719, price:999, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-dumbbell',
-    gradient:'linear-gradient(135deg,#5a2600 0%,#CC5500 60%,#FF7700 100%)'
+    gradient:'linear-gradient(135deg,#5a2600 0%,#CC5500 60%,#FF7700 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00018_1.jpg'
   },
   {
     id:'mb-super-mass-3kg', cat:'mass',
     brand:'MuscleBlaze', name:'Super Mass Gainer',
     flavours:['Chocolate','Cookies & Cream'],
     size:'3 kg', protein:'15g',
-    desc:'High calorie mass gainer. 158g carbs & 15g protein per serving with digestive enzymes.',
-    mrp:3059, price:2749, showPrice:true,
     inStock:true, featured:true,
     icon:'fas fa-dumbbell',
-    gradient:'linear-gradient(135deg,#5a2600 0%,#CC5500 60%,#FF7700 100%)'
+    gradient:'linear-gradient(135deg,#5a2600 0%,#CC5500 60%,#FF7700 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00018_1.jpg'
   },
   {
     id:'mb-super-mass-5kg', cat:'mass',
     brand:'MuscleBlaze', name:'Super Mass Gainer',
     flavours:['Chocolate','Cookies & Cream'],
     size:'5 kg', protein:'15g',
-    desc:'High calorie mass gainer. 158g carbs & 15g protein per serving. Best value bulk pack.',
-    mrp:6449, price:4249, showPrice:true,
     inStock:true, featured:false,
     icon:'fas fa-dumbbell',
-    gradient:'linear-gradient(135deg,#5a2600 0%,#CC5500 60%,#FF7700 100%)'
+    gradient:'linear-gradient(135deg,#5a2600 0%,#CC5500 60%,#FF7700 100%)',
+    img:'https://www.muscleblaze.com/images/p/original/MBV2SPP00018_1.jpg'
   },
 
   /* ── PRE-WORKOUT ───────────────────────────────── */
@@ -866,11 +907,10 @@ const PRODUCTS = [
     brand:'C4', name:'C4 Original Pre-Workout',
     flavours:['Fruit Punch'],
     size:'195g (30 servings)', protein:'—',
-    desc:"America's #1 selling pre-workout. Explosive energy, focus & pump. Zero crash formula with Creatine Nitrate.",
-    mrp:2500, price:2199, showPrice:true,
     inStock:true, featured:true,
     icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#7B1F00 0%,#CC3300 60%,#FF4400 100%)'
+    gradient:'linear-gradient(135deg,#7B1F00 0%,#CC3300 60%,#FF4400 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/0/0/56661/56661.jpg'
   },
 
   /* ── BCAA & AMINO ACIDS ────────────────────────── */
@@ -879,11 +919,10 @@ const PRODUCTS = [
     brand:'Fast&Up', name:'BCAA 2:1:1',
     flavours:['Watermelon'],
     size:'250g (30 servings)', protein:'7.5g BCAAs',
-    desc:'Superior 2:1:1 BCAA ratio with Glutamine & Citrulline. Instantized for faster absorption. Informed Sport.',
-    mrp:1800, price:1599, showPrice:true,
     inStock:true, featured:true,
     icon:'fas fa-atom',
-    gradient:'linear-gradient(135deg,#003366 0%,#005599 60%,#0077CC 100%)'
+    gradient:'linear-gradient(135deg,#003366 0%,#005599 60%,#0077CC 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/1/3/131700/131700.jpg'
   },
 
   /* ── CREATINE ──────────────────────────────────── */
@@ -892,11 +931,10 @@ const PRODUCTS = [
     brand:'AS-IT-IS Nutrition', name:'Creatine Monohydrate',
     flavours:['Unflavoured'],
     size:'500g (166 servings)', protein:'—',
-    desc:'Pure micronized creatine monohydrate. No additives, no fillers. Mixes clean. Lab tested & certified.',
-    mrp:999, price:849, showPrice:true,
     inStock:true, featured:true,
     icon:'fas fa-fire-alt',
-    gradient:'linear-gradient(135deg,#3D1560 0%,#6622AA 60%,#8833CC 100%)'
+    gradient:'linear-gradient(135deg,#3D1560 0%,#6622AA 60%,#8833CC 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/0/0/1620/1620.jpg'
   },
 
   /* ── FAT BURNERS ───────────────────────────────── */
@@ -905,11 +943,10 @@ const PRODUCTS = [
     brand:'HealthKart', name:'HK Vitals Fat Burner',
     flavours:['Capsules'],
     size:'90 Capsules', protein:'—',
-    desc:'Natural thermogenic fat burner with Green Tea Extract, Garcinia Cambogia, CLA & L-Carnitine.',
-    mrp:999, price:849, showPrice:true,
     inStock:true, featured:true,
     icon:'fas fa-burn',
-    gradient:'linear-gradient(135deg,#005522 0%,#008833 60%,#00AA44 100%)'
+    gradient:'linear-gradient(135deg,#005522 0%,#008833 60%,#00AA44 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/0/0/52210/52210.jpg'
   },
 
   /* ── VITAMINS & MINERALS ───────────────────────── */
@@ -918,11 +955,10 @@ const PRODUCTS = [
     brand:'Wellbeing Nutrition', name:'Daily Greens',
     flavours:['Lemon Ginger'],
     size:'60 Effervescent Tablets', protein:'—',
-    desc:'Plant-based multivitamin with 39 superfoods. 23 vitamins & minerals. Daily immunity booster. 100% Vegan.',
-    mrp:1200, price:999, showPrice:true,
     inStock:true, featured:true,
     icon:'fas fa-capsules',
-    gradient:'linear-gradient(135deg,#005550 0%,#008877 60%,#00B8A9 100%)'
+    gradient:'linear-gradient(135deg,#005550 0%,#008877 60%,#00B8A9 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/1/7/178480/178480.jpg'
   },
 
   /* ── PROTEIN BARS & SNACKS ─────────────────────── */
@@ -931,21 +967,20 @@ const PRODUCTS = [
     brand:'RiteBite Max Protein', name:'Max Protein Active Bar',
     flavours:['Choco Almond'],
     size:'Pack of 6 (67g each)', protein:'20g/bar',
-    desc:'High protein bar with 20g protein per bar. Low sugar, high fibre. Perfect post-workout snack. No maida.',
-    mrp:600, price:549, showPrice:true,
     inStock:true, featured:true,
     icon:'fas fa-cookie-bite',
-    gradient:'linear-gradient(135deg,#6B3A00 0%,#CC7700 60%,#F5A623 100%)'
+    gradient:'linear-gradient(135deg,#6B3A00 0%,#CC7700 60%,#F5A623 100%)',
+    img:'https://cloudfront.iherb.com/primg/0/0/0/53388/53388.jpg'
   },
 
   /* ── COMING SOON CATEGORIES ────────────────────── */
-  {id:'cs-health',cat:'health',brand:'',name:'',flavours:[],size:'',desc:'',mrp:null,price:null,showPrice:false,inStock:false,featured:false,icon:'fas fa-heartbeat',gradient:'',comingSoon:true},
-  {id:'cs-accessories',cat:'accessories',brand:'',name:'',flavours:[],size:'',desc:'',mrp:null,price:null,showPrice:false,inStock:false,featured:false,icon:'fas fa-shopping-bag',gradient:'',comingSoon:true},
-  {id:'cs-herbal',cat:'herbal',brand:'',name:'',flavours:[],size:'',desc:'',mrp:null,price:null,showPrice:false,inStock:false,featured:false,icon:'fas fa-leaf',gradient:'',comingSoon:true},
-  {id:'cs-chocolates',cat:'chocolates',brand:'',name:'',flavours:[],size:'',desc:'',mrp:null,price:null,showPrice:false,inStock:false,featured:false,icon:'fas fa-candy-cane',gradient:'',comingSoon:true}
+  {id:'cs-health',cat:'health',brand:'',name:'',flavours:[],size:'',protein:'',inStock:false,featured:false,icon:'fas fa-heartbeat',gradient:'',img:null,comingSoon:true},
+  {id:'cs-accessories',cat:'accessories',brand:'',name:'',flavours:[],size:'',protein:'',inStock:false,featured:false,icon:'fas fa-shopping-bag',gradient:'',img:null,comingSoon:true},
+  {id:'cs-herbal',cat:'herbal',brand:'',name:'',flavours:[],size:'',protein:'',inStock:false,featured:false,icon:'fas fa-leaf',gradient:'',img:null,comingSoon:true},
+  {id:'cs-chocolates',cat:'chocolates',brand:'',name:'',flavours:[],size:'',protein:'',inStock:false,featured:false,icon:'fas fa-candy-cane',gradient:'',img:null,comingSoon:true}
 ];
 
-/* CATEGORY META */
+/* ── CATEGORY META ────────────────────────────────── */
 const CAT_META = {
   all:{label:'All Products',icon:'fas fa-th'},
   whey:{label:'Whey Protein',icon:'fas fa-flask'},
@@ -962,26 +997,35 @@ const CAT_META = {
   chocolates:{label:'Imported Chocolates',icon:'fas fa-candy-cane'}
 };
 
-/* ════════════════════════════════════════════════════
-   STATE
-   ════════════════════════════════════════════════════ */
-let currentCat = 'all';
-let searchQuery = '';
-let sortMode = 'featured';
+/* ── STATE ────────────────────────────────────────── */
+let currentCat   = 'all';
+let searchQuery  = '';
+let sortMode     = 'featured';
+let stockOnly    = false;
 
-/* ════════════════════════════════════════════════════
-   HELPERS
-   ════════════════════════════════════════════════════ */
+/* ── HELPERS ──────────────────────────────────────── */
 function buildWaMsg(p) {
   const txt = `Hi, I want to buy *${p.brand} ${p.name}* — ${p.size}. Please confirm availability and price.`;
   return `https://wa.me/919949531515?text=${encodeURIComponent(txt)}`;
 }
 
-/* ════════════════════════════════════════════════════
-   RENDER CARD
-   ════════════════════════════════════════════════════ */
+function parseProtein(p) {
+  /* Returns numeric grams for sorting, or 0 if unavailable */
+  if (!p.protein || p.protein === '—') return 0;
+  const m = p.protein.match(/(\d+(\.\d+)?)/);
+  return m ? parseFloat(m[1]) : 0;
+}
+
+/* ── IMAGE ERROR HANDLER ──────────────────────────── */
+function imgError(el, id) {
+  /* Hide the broken img, show the gradient placeholder */
+  el.style.display = 'none';
+  const ph = document.getElementById('ph-' + id);
+  if (ph) ph.classList.add('show');
+}
+
+/* ── RENDER CARD ──────────────────────────────────── */
 function renderCard(p) {
-  /* Coming Soon cards */
   if (p.comingSoon) {
     const cat = CAT_META[p.cat] || {};
     return `<div class="coming-card">
@@ -994,51 +1038,54 @@ function renderCard(p) {
     </div>`;
   }
 
-  /* Badges */
-  const brandBadge = `<span class="badge badge-brand">${p.brand}</span>`;
   const featBadge  = p.featured ? `<span class="badge badge-featured">⭐ Popular</span>` : '';
-  const badgeStack = featBadge ? `<div class="badge-stack">${featBadge}</div>` : '';
+  const badgeStack = featBadge  ? `<div class="badge-stack">${featBadge}</div>` : '';
 
-  /* Flavours */
   const showFlavours = p.flavours && p.flavours.length && !(p.flavours.length===1 && p.flavours[0]==='Capsules');
   const flavoursHtml = showFlavours
     ? `<div class="prod-flavours">
          ${p.flavours.slice(0,3).map(f=>`<span class="flavour-chip">${f}</span>`).join('')}
          ${p.flavours.length>3 ? `<span class="flavour-chip flavour-more">+${p.flavours.length-3} more</span>` : ''}
-       </div>`
-    : '';
+       </div>` : '';
 
-  /* Image with fallback */
-  const imgHtml = p.image
-    ? `<img class="prod-img-real" src="${p.image}" alt="${p.brand} ${p.name}"
-         loading="lazy"
-         onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-       <div class="prod-img-placeholder" style="background:${p.gradient};display:none;">
-         <i class="${p.icon||'fas fa-flask'}"></i>
-         <div class="placeholder-brand-txt">${p.brand}</div>
-         ${p.protein&&p.protein!=='—'?`<div class="placeholder-protein">${p.protein} protein</div>`:''}
-       </div>`
-    : `<div class="prod-img-placeholder" style="background:${p.gradient}">
-         <i class="${p.icon||'fas fa-flask'}"></i>
-         <div class="placeholder-brand-txt">${p.brand}</div>
-         ${p.protein&&p.protein!=='—'?`<div class="placeholder-protein">${p.protein} protein</div>`:''}
-       </div>`;
-  const priceHtml = `<div class="call-for-price"><i class="fas fa-phone-alt"></i> Call / WhatsApp for Pricing</div>`;
-
-  /* Protein tag */
   const proteinHtml = p.protein && p.protein !== '—'
-    ? `<span class="prod-protein-tag"><i class="fas fa-circle" style="font-size:0.4rem;margin-right:3px;vertical-align:middle;"></i>${p.protein}</span>`
-    : '';
+    ? `<span class="prod-protein-tag">${p.protein}</span>` : '';
+
+  /* Image section: real img + gradient placeholder layered */
+  const imgSection = p.img
+    ? `<img
+         class="prod-img-real"
+         src="${p.img}"
+         alt="${p.brand} ${p.name} ${p.size}"
+         loading="lazy"
+         onerror="imgError(this,'${p.id}')"
+       />
+       <div class="prod-img-placeholder" id="ph-${p.id}" style="background:${p.gradient}">
+         <i class="${p.icon||'fas fa-flask'}"></i>
+         <div class="placeholder-brand-txt">${p.brand}</div>
+         ${p.protein && p.protein!=='—' ? `<div class="placeholder-protein">${p.protein}</div>` : ''}
+       </div>`
+    : `<div class="prod-img-placeholder show" style="background:${p.gradient}">
+         <i class="${p.icon||'fas fa-flask'}"></i>
+         <div class="placeholder-brand-txt">${p.brand}</div>
+         ${p.protein && p.protein!=='—' ? `<div class="placeholder-protein">${p.protein}</div>` : ''}
+       </div>`;
+
+  const oosOverlay = !p.inStock
+    ? `<div class="oos-overlay"><div class="oos-tag">Out of Stock</div></div>` : '';
+
+  const ctaClass = p.inStock ? 'prod-cta' : 'prod-cta disabled';
+  const ctaHref  = p.inStock ? buildWaMsg(p) : '#';
 
   return `
 <div class="prod-card" id="${p.id}" itemscope itemtype="https://schema.org/Product">
   <meta itemprop="name" content="${p.brand} ${p.name} ${p.size}"/>
   <meta itemprop="brand" content="${p.brand}"/>
-  ${p.mrp ? `<meta itemprop="offers" content="${p.price||p.mrp}"/>` : ''}
   <div class="prod-img-wrap">
-    ${imgHtml}
+    ${imgSection}
+    ${oosOverlay}
     <div class="prod-badge-row">
-      ${brandBadge}
+      <span class="badge badge-brand">${p.brand}</span>
       ${badgeStack}
     </div>
   </div>
@@ -1050,21 +1097,24 @@ function renderCard(p) {
       ${proteinHtml}
     </div>
     ${flavoursHtml}
-    ${priceHtml}
-    <a href="${buildWaMsg(p)}" class="prod-cta" target="_blank" rel="noopener" aria-label="Buy ${p.name} on WhatsApp">
-      <i class="fab fa-whatsapp"></i> Buy on WhatsApp
+    <div class="call-for-price">
+      <i class="fab fa-whatsapp"></i> WhatsApp or Call for Price
+    </div>
+    <a href="${ctaHref}" class="${ctaClass}" target="${p.inStock?'_blank':''}" rel="noopener" aria-label="Buy ${p.name} on WhatsApp">
+      <i class="${p.inStock ? 'fab fa-whatsapp' : 'fas fa-clock'}"></i>
+      ${p.inStock ? 'Buy on WhatsApp' : 'Notify Me'}
     </a>
   </div>
 </div>`;
 }
 
-/* ════════════════════════════════════════════════════
-   FILTER + SORT
-   ════════════════════════════════════════════════════ */
+/* ── FILTER + SORT ────────────────────────────────── */
 function getFiltered() {
   let list = PRODUCTS.filter(p => !p.comingSoon);
 
   if (currentCat !== 'all') list = list.filter(p => p.cat === currentCat);
+
+  if (stockOnly) list = list.filter(p => p.inStock);
 
   if (searchQuery) {
     const q = searchQuery.toLowerCase();
@@ -1072,48 +1122,33 @@ function getFiltered() {
       p.name.toLowerCase().includes(q) ||
       p.brand.toLowerCase().includes(q) ||
       (p.flavours||[]).some(f => f.toLowerCase().includes(q)) ||
-      p.cat.toLowerCase().includes(q) ||
-      (p.desc||'').toLowerCase().includes(q)
+      p.cat.toLowerCase().includes(q)
     );
   }
 
   switch(sortMode) {
-    case 'brand': list.sort((a,b) => a.brand.localeCompare(b.brand)); break;
-    default:      list.sort((a,b) => (b.featured?1:0) - (a.featured?1:0));
+    case 'brand_az':    list.sort((a,b) => a.brand.localeCompare(b.brand)); break;
+    case 'brand_za':    list.sort((a,b) => b.brand.localeCompare(a.brand)); break;
+    case 'name_az':     list.sort((a,b) => a.name.localeCompare(b.name)); break;
+    case 'protein_hl':  list.sort((a,b) => parseProtein(b) - parseProtein(a)); break;
+    case 'instock':     list.sort((a,b) => (b.inStock?1:0) - (a.inStock?1:0)); break;
+    default:            list.sort((a,b) => (b.featured?1:0) - (a.featured?1:0));
   }
   return list;
 }
 
-/* ════════════════════════════════════════════════════
-   RENDER GRID
-   ════════════════════════════════════════════════════ */
+/* ── RENDER GRID ──────────────────────────────────── */
 function renderGrid() {
-  const grid = document.getElementById('productsGrid');
-  const list = getFiltered();
+  const grid  = document.getElementById('productsGrid');
+  const list  = getFiltered();
 
-  /* If showing a specific category with no real products, show coming soon */
   if (list.length === 0) {
-    const hasComingSoon = PRODUCTS.some(p => p.comingSoon && (currentCat==='all'||p.cat===currentCat));
-    if (hasComingSoon || currentCat !== 'all') {
-      const cat = CAT_META[currentCat] || {};
-      const comingSoonCards = ['cs1','cs2','cs3'].map(()=>`
-        <div class="coming-card">
-          <i class="${cat.icon||'fas fa-box-open'}"></i>
-          <div class="coming-title">Coming Soon</div>
-          <div class="coming-sub">${cat.label||'More products'} arriving soon!</div>
-          <a href="https://wa.me/919949531515?text=Hi%2C%20do%20you%20have%20${encodeURIComponent(cat.label||'products')}%20in%20stock%3F" target="_blank" style="font-size:0.78rem;color:var(--red);font-weight:700;margin-top:6px;display:flex;align-items:center;gap:5px;">
-            <i class="fab fa-whatsapp"></i> Check on WhatsApp
-          </a>
-        </div>`).join('');
-      grid.innerHTML = `<div style="grid-column:1/-1;"><div style="text-align:center;padding:32px 0 16px;"><div style="font-family:var(--font-d);font-size:1.5rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;">More Products Coming Soon</div><div style="font-size:0.88rem;color:var(--muted2);margin-top:8px;">We're adding more products regularly. WhatsApp us to check availability.</div></div></div>${comingSoonCards}`;
-      document.getElementById('prodCount').textContent = '0';
-      return;
-    }
+    const cat = CAT_META[currentCat] || {};
     grid.innerHTML = `<div class="empty-state">
       <div class="empty-icon"><i class="fas fa-search"></i></div>
       <div class="empty-title">No Products Found</div>
       <div class="empty-sub">Try a different search term or category.<br/>Or ask us directly on WhatsApp!</div>
-      <a href="https://wa.me/919949531515?text=Hi%2C%20I%20am%20looking%20for%20a%20specific%20supplement%20and%20could%20not%20find%20it%20on%20your%20website." class="empty-wa" target="_blank">
+      <a href="https://wa.me/919949531515?text=Hi%2C%20I%20am%20looking%20for%20a%20specific%20supplement%20and%20could%20not%20find%20it." class="empty-wa" target="_blank">
         <i class="fab fa-whatsapp"></i> Ask on WhatsApp
       </a>
     </div>`;
@@ -1121,23 +1156,48 @@ function renderGrid() {
     return;
   }
 
-  /* Show coming-soon cards mixed in for specific cat if empty */
-  let comingSoonHtml = '';
+  /* Append coming-soon cards only when viewing a specific cat */
+  let csHtml = '';
   if (currentCat !== 'all') {
-    const csItem = PRODUCTS.find(p => p.comingSoon && p.cat === currentCat);
-    if (csItem) comingSoonHtml = renderCard(csItem);
+    const cs = PRODUCTS.find(p => p.comingSoon && p.cat === currentCat);
+    if (cs) csHtml = renderCard(cs);
   }
 
-  grid.innerHTML = list.map(renderCard).join('') + comingSoonHtml;
+  grid.innerHTML = list.map(renderCard).join('') + csHtml;
   document.getElementById('prodCount').textContent = list.length;
 }
 
-/* ════════════════════════════════════════════════════
-   UPDATE TAB COUNTS
-   ════════════════════════════════════════════════════ */
+/* ── UPDATE ACTIVE FILTER CHIPS ───────────────────── */
+function updateFilterChips() {
+  const wrap = document.getElementById('activeFilters');
+  const chips = [];
+
+  if (searchQuery) {
+    chips.push(`<span class="filter-chip" onclick="clearSearch()">
+      <i class="fas fa-times"></i> "${searchQuery}"
+    </span>`);
+  }
+  if (stockOnly) {
+    chips.push(`<span class="filter-chip" onclick="toggleStockFilter()">
+      <i class="fas fa-times"></i> In Stock Only
+    </span>`);
+  }
+  if (sortMode !== 'featured') {
+    const labels = {brand_az:'Brand A→Z',brand_za:'Brand Z→A',name_az:'Name A→Z',protein_hl:'Protein High→Low',instock:'In Stock First'};
+    chips.push(`<span class="filter-chip" onclick="resetSort()">
+      <i class="fas fa-times"></i> ${labels[sortMode]}
+    </span>`);
+  }
+
+  if (chips.length > 1) {
+    chips.push(`<span class="clear-all-btn" onclick="clearAll()">Clear All</span>`);
+  }
+  wrap.innerHTML = chips.join('');
+}
+
+/* ── TAB COUNTS ───────────────────────────────────── */
 function updateCounts() {
-  const cats = Object.keys(CAT_META);
-  cats.forEach(c => {
+  Object.keys(CAT_META).forEach(c => {
     const el = document.getElementById('count-' + c);
     if (!el) return;
     const count = c === 'all'
@@ -1147,44 +1207,73 @@ function updateCounts() {
   });
 }
 
-/* ════════════════════════════════════════════════════
-   FILTER CATEGORY
-   ════════════════════════════════════════════════════ */
+/* ── FILTER ACTIONS ───────────────────────────────── */
 function filterCat(cat) {
   currentCat = cat;
-  document.querySelectorAll('.cat-tab').forEach(t => {
-    t.classList.toggle('active', t.dataset.cat === cat);
-  });
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
   renderGrid();
-  /* Scroll to top of grid on mobile */
+  updateFilterChips();
   if (window.innerWidth < 768) {
     document.getElementById('filterBar').scrollIntoView({behavior:'smooth',block:'start'});
   }
 }
 
-/* ════════════════════════════════════════════════════
-   EVENT LISTENERS
-   ════════════════════════════════════════════════════ */
+function toggleStockFilter() {
+  stockOnly = !stockOnly;
+  const btn = document.getElementById('stockToggle');
+  btn.classList.toggle('on', stockOnly);
+  renderGrid();
+  updateFilterChips();
+}
+
+function clearSearch() {
+  searchQuery = '';
+  document.getElementById('searchInput').value = '';
+  renderGrid();
+  updateFilterChips();
+}
+
+function resetSort() {
+  sortMode = 'featured';
+  document.getElementById('sortSelect').value = 'featured';
+  renderGrid();
+  updateFilterChips();
+}
+
+function clearAll() {
+  searchQuery = '';
+  stockOnly   = false;
+  sortMode    = 'featured';
+  document.getElementById('searchInput').value  = '';
+  document.getElementById('sortSelect').value   = 'featured';
+  document.getElementById('stockToggle').classList.remove('on');
+  renderGrid();
+  updateFilterChips();
+}
+
+/* ── EVENT LISTENERS ──────────────────────────────── */
 document.getElementById('searchInput').addEventListener('input', e => {
   searchQuery = e.target.value.trim();
   renderGrid();
+  updateFilterChips();
 });
+
 document.getElementById('sortSelect').addEventListener('change', e => {
   sortMode = e.target.value;
   renderGrid();
+  updateFilterChips();
 });
 
-/* URL hash → auto-filter by category */
+/* URL hash → auto-filter */
 (function() {
   const hash = window.location.hash.replace('#','');
   if (hash && CAT_META[hash]) filterCat(hash);
 })();
 
-/* ════════════════════════════════════════════════════
-   INIT
-   ════════════════════════════════════════════════════ */
+/* ── INIT ─────────────────────────────────────────── */
 updateCounts();
 renderGrid();
+updateFilterChips();
 </script>
 </body>
 </html>
