@@ -22,8 +22,10 @@
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'"/>
+<noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/></noscript>
 
 <style>
 :root{
@@ -202,131 +204,93 @@ section{padding:80px 20px;}
 .brand-pill:hover{color:var(--white);}
 
 /* ══════════════════════════════════════════════════════════
-   WHY CHOOSE US — FIXED: Brand images dominate, minimal overlay
+   WHY CHOOSE US — REDESIGNED: Clean Image top, Content bottom
    ══════════════════════════════════════════════════════════ */
-#why{background:var(--dark);padding:80px 20px;}
-
-.why-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:20px;
+#why { background: var(--dark); padding: 80px 20px; }
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
 }
-
-.why-card{
-  position:relative;
-  border-radius:var(--r-md);
-  overflow:hidden;
-  aspect-ratio:16/9;
-  cursor:default;
-  border:1px solid rgba(226,0,0,0.15);
-  transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.35s,border-color 0.35s;
+.why-card {
+  background: var(--surface);
+  border-radius: var(--r-md);
+  border: 1px solid rgba(226, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  cursor: default;
 }
-.why-card:hover{
-  transform:translateY(-8px) scale(1.01);
-  box-shadow:0 28px 70px rgba(0,0,0,0.7),0 0 0 1px rgba(226,0,0,0.25);
-  border-color:rgba(226,0,0,0.4);
+.why-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(226,0,0,0.3);
+  border-color: rgba(226,0,0,0.5);
 }
-
-/* Image fills full card — NO filter darkening on base state */
-.why-card-img{
-  position:absolute;inset:0;
-  width:100%;height:100%;
-  object-fit:cover;object-position:center;
-  display:block;
-  transition:transform 0.6s ease;
-  /* Minimal base brightness — your brand graphics are vivid enough */
-  filter:brightness(0.82) saturate(1.1) contrast(1.05);
+.why-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: #000;
+  position: relative;
 }
-.why-card:hover .why-card-img{
-  transform:scale(1.04);
-  filter:brightness(0.90) saturate(1.15) contrast(1.08);
+/* Fully original image colors — no filters, no overlays */
+.why-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
 }
-
-/* Thin gradient ONLY at the bottom — just enough for text legibility */
-.why-card-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(
-    to top,
-    rgba(4,0,0,0.92) 0%,
-    rgba(4,0,0,0.55) 28%,
-    rgba(4,0,0,0.12) 55%,
-    transparent 100%
-  );
-  transition:opacity 0.4s;
+.why-card:hover .why-card-img-wrap img {
+  transform: scale(1.04);
 }
-.why-card:hover .why-card-overlay{
-  background:linear-gradient(
-    to top,
-    rgba(4,0,0,0.95) 0%,
-    rgba(4,0,0,0.60) 30%,
-    rgba(226,0,0,0.06) 60%,
-    transparent 100%
-  );
+.why-card-content {
+  padding: 30px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
 }
-
-/* Animated red top accent line */
-.why-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--red-dark),var(--red),#ff6600);
-  transform:scaleX(0);transform-origin:left;
-  transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);z-index:4;
+.why-card-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(226, 0, 0, 0.12);
+  color: var(--red);
+  border: 1px solid rgba(226, 0, 0, 0.25);
+  font-family: var(--font-d);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 30px;
+  align-self: flex-start;
+  margin-bottom: 6px;
+  transition: background 0.3s, color 0.3s;
 }
-.why-card:hover::before{transform:scaleX(1);}
-
-/* Sheen/gloss sweep on hover */
-.why-card::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,0.04) 50%,transparent 60%);
-  opacity:0;transition:opacity 0.4s,transform 0.6s;
-  transform:translateX(-100%);z-index:3;
+.why-card:hover .why-card-pill {
+  background: var(--red);
+  color: #fff;
 }
-.why-card:hover::after{opacity:1;transform:translateX(100%);}
-
-/* Text content — bottom-left strip */
-.why-card-content{
-  position:absolute;bottom:0;left:0;right:0;
-  padding:22px 24px 24px;
-  z-index:2;
-  display:flex;flex-direction:column;gap:6px;
+.why-card-title {
+  font-family: var(--font-d);
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 900;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
 }
-
-/* Pill label in top-left */
-.why-card-pill{
-  position:absolute;top:14px;left:14px;
-  z-index:3;
-  display:inline-flex;align-items:center;gap:6px;
-  background:rgba(226,0,0,0.88);
-  border:1px solid rgba(255,100,0,0.3);
-  color:#fff;
-  font-family:var(--font-d);font-size:0.72rem;font-weight:800;
-  letter-spacing:0.14em;text-transform:uppercase;
-  padding:5px 12px;border-radius:30px;
-  backdrop-filter:blur(8px);
-  box-shadow:0 2px 12px rgba(226,0,0,0.4);
-  transition:background 0.25s,transform 0.25s;
-}
-.why-card:hover .why-card-pill{
-  background:rgba(226,0,0,1);
-  transform:scale(1.04);
-}
-.why-card-pill i{font-size:0.65rem;}
-
-.why-card-title{
-  font-family:var(--font-d);
-  font-size:clamp(1.4rem,2.8vw,1.9rem);
-  font-weight:900;color:var(--white);
-  text-transform:uppercase;letter-spacing:0.04em;
-  line-height:1;
-  text-shadow:0 2px 16px rgba(0,0,0,0.8);
-}
-.why-card-desc{
-  font-size:0.85rem;color:rgba(240,240,240,0.85);
-  line-height:1.6;max-width:340px;
-  text-shadow:0 1px 8px rgba(0,0,0,0.7);
+.why-card-desc {
+  font-size: 0.9rem;
+  color: rgba(240, 240, 240, 0.75);
+  line-height: 1.6;
 }
 
 /* ══════════════════════════════════════════════════════════
-   OWNER / TEAM SECTION — unchanged
+   OWNER / TEAM SECTION 
    ══════════════════════════════════════════════════════════ */
 #owner{background:var(--black);padding:80px 20px;}
 .owner-wrap{
@@ -377,7 +341,7 @@ section{padding:80px 20px;}
 .owner-wa-btn:hover{background:#c00;transform:translateY(-2px);box-shadow:0 10px 28px var(--red-glow);}
 
 /* ══════════════════════════════════════════════════════════
-   EXPERT ADVISORS — Real photos, horizontal layout, premium feel
+   EXPERT ADVISORS
    ══════════════════════════════════════════════════════════ */
 #team{background:var(--dark);padding:80px 20px;}
 .team-intro-row{
@@ -386,14 +350,13 @@ section{padding:80px 20px;}
 }
 .team-intro-right{font-size:0.88rem;color:var(--muted);max-width:360px;line-height:1.7;text-align:right;}
 
-/* EXPERT CARDS — with real photo backgrounds */
+/* EXPERT CARDS */
 .experts-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:18px;
   margin-bottom:40px;
 }
-
 .expert-card{
   position:relative;
   border-radius:var(--r-md);
@@ -408,8 +371,6 @@ section{padding:80px 20px;}
   box-shadow:0 24px 60px rgba(0,0,0,0.7),0 0 0 1px rgba(226,0,0,0.2);
   border-color:rgba(226,0,0,0.35);
 }
-
-/* Red top line on hover */
 .expert-card::before{
   content:'';position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(90deg,var(--red-dark),var(--red));
@@ -417,8 +378,6 @@ section{padding:80px 20px;}
   transition:transform 0.35s ease;z-index:4;
 }
 .expert-card:hover::before{transform:scaleX(1);}
-
-/* Photo */
 .expert-photo{
   position:absolute;inset:0;
   width:100%;height:100%;
@@ -431,8 +390,6 @@ section{padding:80px 20px;}
   transform:scale(1.06);
   filter:brightness(0.72) saturate(0.85);
 }
-
-/* Dark gradient from bottom — text readability */
 .expert-overlay{
   position:absolute;inset:0;
   background:linear-gradient(
@@ -444,8 +401,6 @@ section{padding:80px 20px;}
   );
   transition:opacity 0.35s;
 }
-
-/* Specialty badge — top-left */
 .expert-specialty{
   position:absolute;top:14px;left:14px;z-index:3;
   display:inline-flex;align-items:center;gap:5px;
@@ -458,8 +413,6 @@ section{padding:80px 20px;}
   backdrop-filter:blur(8px);
   box-shadow:0 2px 10px rgba(226,0,0,0.35);
 }
-
-/* Content — bottom of card */
 .expert-content{
   position:absolute;bottom:0;left:0;right:0;
   padding:20px 18px 22px;
@@ -479,7 +432,7 @@ section{padding:80px 20px;}
 .expert-desc{
   font-size:0.78rem;color:rgba(240,240,240,0.78);
   line-height:1.6;
-  display:none; /* hidden by default, shown on hover */
+  display:none; 
   transition:opacity 0.3s;
 }
 .expert-card:hover .expert-desc{display:block;}
@@ -646,8 +599,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   .experts-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:900px){
-  .why-grid{grid-template-columns:1fr 1fr;}
-  .why-card{aspect-ratio:4/3;}
+  .why-grid{grid-template-columns:1fr;}
+  .why-card-img-wrap{aspect-ratio: 16/9;}
   .nav-links{display:none;}
   .hero-products{display:none;}
   .owner-wrap{grid-template-columns:1fr;gap:36px;}
@@ -673,8 +626,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   .consult-banner{flex-direction:column;gap:20px;padding:24px;}
   .consult-right{align-items:stretch;width:100%;}
   .consult-btn{justify-content:center;}
-  .why-grid{grid-template-columns:1fr;}
-  .why-card{aspect-ratio:16/9;}
   .experts-grid{grid-template-columns:repeat(2,1fr);}
 }
 @media(max-width:480px){
@@ -684,10 +635,9 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   .hero-btns .btn{width:100%;max-width:280px;justify-content:center;}
   .cta-btns{flex-direction:column;align-items:center;}
   .cta-btns .btn{width:100%;max-width:280px;justify-content:center;}
-  .why-grid{grid-template-columns:1fr;}
-  .why-card{aspect-ratio:4/3;}
   .experts-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
   .consult-left{flex-direction:column;align-items:flex-start;gap:14px;}
+  .why-card-img-wrap{aspect-ratio: 4/3;}
 }
 </style>
 </head>
@@ -728,7 +678,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   <a href="#cta-section"><i class="fas fa-phone"></i>Contact</a>
 </div>
 
-<!-- ══ HERO ══ -->
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
@@ -747,12 +696,12 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
       </a>
     </div>
     <div class="hero-products">
-      <img class="hero-prod-img" src="https://www.optimumnutrition.co.in/cdn/shop/files/748927065725_1_e4cd4d22-bde2-4538-9b43-c261ab1b24c8.jpg?v=1773663774" alt="ON Gold Standard Whey"/>
-      <img class="hero-prod-img" src="https://img8.hkrtcdn.com/39078/prd_3907787-MuscleBlaze-Biozyme-Performance-Whey-4.4-lb-Rich-Chocolate_o.jpg" alt="MuscleBlaze Biozyme Whey"/>
-      <img class="hero-prod-img" src="https://www.bodybuildingindia.com/cdn/shop/products/GNC-Pro-performance-100_-Whey-Protein-GNC-42848142.jpg?v=1754480166" alt="GNC Whey"/>
-      <img class="hero-prod-img" src="https://img4.hkrtcdn.com/35591/prd_3559023-MuscleBlaze-Biozyme-IsoZero-4.4-lb-Low-Carb-Ice-Cream-Chocolate_o.jpg" alt="MuscleBlaze ISO Zero"/>
-      <img class="hero-prod-img" src="https://asitisnutrition.com/cdn/shop/files/AS-IT-IS_One_Creatine_RPD_100g_front-min_1_af50ae47-5137-4792-893e-797e4a30d8b2_1200x1200.jpg?v=1771217123" alt="AS-IT-IS Creatine"/>
-      <img class="hero-prod-img" src="https://img2.hkrtcdn.com/40251/prd_4025001-HK-Vitals-Fat-Burner-with-Caffeine-L-Carnitine-Garcinia-60-tablets-Unflavoured_o.jpg" alt="HK Vitals Fat Burner"/>
+      <img class="hero-prod-img" src="https://www.optimumnutrition.co.in/cdn/shop/files/748927065725_1_e4cd4d22-bde2-4538-9b43-c261ab1b24c8.jpg?v=1773663774" alt="ON Gold Standard Whey" loading="lazy"/>
+      <img class="hero-prod-img" src="https://img8.hkrtcdn.com/39078/prd_3907787-MuscleBlaze-Biozyme-Performance-Whey-4.4-lb-Rich-Chocolate_o.jpg" alt="MuscleBlaze Biozyme Whey" loading="lazy"/>
+      <img class="hero-prod-img" src="https://www.bodybuildingindia.com/cdn/shop/products/GNC-Pro-performance-100_-Whey-Protein-GNC-42848142.jpg?v=1754480166" alt="GNC Whey" loading="lazy"/>
+      <img class="hero-prod-img" src="https://img4.hkrtcdn.com/35591/prd_3559023-MuscleBlaze-Biozyme-IsoZero-4.4-lb-Low-Carb-Ice-Cream-Chocolate_o.jpg" alt="MuscleBlaze ISO Zero" loading="lazy"/>
+      <img class="hero-prod-img" src="https://asitisnutrition.com/cdn/shop/files/AS-IT-IS_One_Creatine_RPD_100g_front-min_1_af50ae47-5137-4792-893e-797e4a30d8b2_1200x1200.jpg?v=1771217123" alt="AS-IT-IS Creatine" loading="lazy"/>
+      <img class="hero-prod-img" src="https://img2.hkrtcdn.com/40251/prd_4025001-HK-Vitals-Fat-Burner-with-Caffeine-L-Carnitine-Garcinia-60-tablets-Unflavoured_o.jpg" alt="HK Vitals Fat Burner" loading="lazy"/>
     </div>
     <div class="hero-stats">
       <div class="stat-item"><div class="stat-num">100+</div><div class="stat-label">Premium Brands</div></div>
@@ -764,7 +713,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   <div class="hero-divider"></div>
 </section>
 
-<!-- ══ BRANDS MARQUEE ══ -->
 <div class="brands-strip">
   <div class="marquee-track">
     <div class="brand-pill"><i class="fas fa-circle"></i>Optimum Nutrition</div>
@@ -800,7 +748,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   </div>
 </div>
 
-<!-- ══ WHY CHOOSE US — BRAND IMAGES DOMINANT ══ -->
 <section id="why">
   <div class="container">
     <div class="sec-header reveal">
@@ -810,45 +757,45 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
     </div>
     <div class="why-grid">
 
-      <!-- Card 1: 100% Genuine — your brand image fills the card -->
       <div class="why-card reveal">
-        <img src="genuine.png" alt="100% Genuine Products" class="why-card-img"/>
-        <div class="why-card-overlay"></div>
-        <div class="why-card-pill"><i class="fas fa-shield-alt"></i> Verified</div>
+        <div class="why-card-img-wrap">
+          <img src="genuine.png" alt="100% Genuine Products" loading="lazy"/>
+        </div>
         <div class="why-card-content">
+          <div class="why-card-pill"><i class="fas fa-shield-alt"></i> Verified</div>
           <div class="why-card-title">100% Genuine</div>
           <p class="why-card-desc">Every product is authenticated and quality-verified. Zero fakes, zero compromises — always.</p>
         </div>
       </div>
 
-      <!-- Card 2: Best Prices -->
       <div class="why-card reveal d1">
-        <img src="bestprices.png" alt="Best Prices Guaranteed" class="why-card-img"/>
-        <div class="why-card-overlay"></div>
-        <div class="why-card-pill"><i class="fas fa-rupee-sign"></i> Best Price</div>
+        <div class="why-card-img-wrap">
+          <img src="bestprices.png" alt="Best Prices Guaranteed" loading="lazy"/>
+        </div>
         <div class="why-card-content">
+          <div class="why-card-pill"><i class="fas fa-rupee-sign"></i> Best Price</div>
           <div class="why-card-title">Best Prices</div>
           <p class="why-card-desc">Competitive pricing ensures maximum value for your hard-earned money. Price match guaranteed.</p>
         </div>
       </div>
 
-      <!-- Card 3: Expert Guidance -->
       <div class="why-card reveal d2">
-        <img src="expertguidence.png" alt="Expert Guidance" class="why-card-img"/>
-        <div class="why-card-overlay"></div>
-        <div class="why-card-pill"><i class="fas fa-user-graduate"></i> Expert</div>
+        <div class="why-card-img-wrap">
+          <img src="expertguidence.png" alt="Expert Guidance" loading="lazy"/>
+        </div>
         <div class="why-card-content">
+          <div class="why-card-pill"><i class="fas fa-user-graduate"></i> Expert</div>
           <div class="why-card-title">Expert Guidance</div>
           <p class="why-card-desc">Our specialists provide trusted advice and personalized supplement stacks for your goal.</p>
         </div>
       </div>
 
-      <!-- Card 4: Home Delivery -->
       <div class="why-card reveal d3">
-        <img src="homedelivery.png" alt="Home Delivery Anantapur" class="why-card-img"/>
-        <div class="why-card-overlay"></div>
-        <div class="why-card-pill"><i class="fas fa-truck"></i> Fast Delivery</div>
+        <div class="why-card-img-wrap">
+          <img src="homedelivery.png" alt="Home Delivery Anantapur" loading="lazy"/>
+        </div>
         <div class="why-card-content">
+          <div class="why-card-pill"><i class="fas fa-truck"></i> Fast Delivery</div>
           <div class="why-card-title">Home Delivery</div>
           <p class="why-card-desc">Fast, reliable delivery across Anantapur — right to your doorstep, same day when possible.</p>
         </div>
@@ -858,13 +805,12 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   </div>
 </section>
 
-<!-- ══ OWNER ══ -->
 <section id="owner">
   <div class="owner-wrap">
     <div class="owner-img-col reveal">
       <div class="owner-accent-box"></div>
       <div class="owner-img-frame">
-        <img src="FIROZ..jpg" alt="Firoz — Founder, Vitamin Store"/>
+        <img src="FIROZ..jpg" alt="Firoz — Founder, Vitamin Store" loading="lazy"/>
         <div class="owner-badge-float"><i class="fas fa-dumbbell"></i> &nbsp;Founder & Owner</div>
       </div>
       <div class="owner-accent-box2"></div>
@@ -888,7 +834,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   </div>
 </section>
 
-<!-- ══ EXPERT ADVISORS — Real fitness photos, sharp & premium ══ -->
 <section id="team">
   <div class="container">
     <div class="team-intro-row reveal">
@@ -902,15 +847,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
     </div>
 
     <div class="experts-grid">
-
-      <!-- Advisor 1: Muscle Building — male athlete, gym setting -->
       <div class="expert-card reveal">
-        <img
-          class="expert-photo"
-          src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=600&q=80"
-          alt="Muscle Building Expert"
-          loading="lazy"
-        />
+        <img class="expert-photo" src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=600&q=80" alt="Muscle Building Expert" loading="lazy"/>
         <div class="expert-overlay"></div>
         <div class="expert-specialty"><i class="fas fa-dumbbell"></i> Muscle Building</div>
         <div class="expert-content">
@@ -925,14 +863,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
         </div>
       </div>
 
-      <!-- Advisor 2: Fat Loss — fitness female coach -->
       <div class="expert-card reveal d1">
-        <img
-          class="expert-photo"
-          src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80"
-          alt="Fat Loss Expert"
-          loading="lazy"
-        />
+        <img class="expert-photo" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=600&q=80" alt="Fat Loss Expert" loading="lazy"/>
         <div class="expert-overlay"></div>
         <div class="expert-specialty"><i class="fas fa-fire"></i> Fat Loss</div>
         <div class="expert-content">
@@ -947,14 +879,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
         </div>
       </div>
 
-      <!-- Advisor 3: Performance — athletic trainer, energetic -->
       <div class="expert-card reveal d2">
-        <img
-          class="expert-photo"
-          src="https://images.unsplash.com/photo-1549476464-37392f717541?auto=format&fit=crop&w=600&q=80"
-          alt="Performance Expert"
-          loading="lazy"
-        />
+        <img class="expert-photo" src="https://images.unsplash.com/photo-1549476464-37392f717541?auto=format&fit=crop&w=600&q=80" alt="Performance Expert" loading="lazy"/>
         <div class="expert-overlay"></div>
         <div class="expert-specialty"><i class="fas fa-bolt"></i> Performance</div>
         <div class="expert-content">
@@ -969,14 +895,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
         </div>
       </div>
 
-      <!-- Advisor 4: Daily Wellness — health-focused -->
       <div class="expert-card reveal d3">
-        <img
-          class="expert-photo"
-          src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80"
-          alt="Wellness Expert"
-          loading="lazy"
-        />
+        <img class="expert-photo" src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80" alt="Wellness Expert" loading="lazy"/>
         <div class="expert-overlay"></div>
         <div class="expert-specialty"><i class="fas fa-heartbeat"></i> Wellness</div>
         <div class="expert-content">
@@ -990,10 +910,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           </div>
         </div>
       </div>
-
     </div>
 
-    <!-- Free Consultation CTA -->
     <div class="consult-banner reveal">
       <div class="consult-left">
         <div class="consult-big-icon">📞</div>
@@ -1012,11 +930,9 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
         <div class="consult-note"><i class="fas fa-circle"></i> 100% free — no pressure, no upsell</div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ══ CATEGORIES ══ -->
 <section id="categories">
   <div class="container">
     <div class="sec-header reveal">
@@ -1025,8 +941,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
       <p class="sec-sub">100+ products across all major supplement categories — all genuine, all in stock.</p>
     </div>
     <div class="cat-grid">
-      <div class="cat-card reveal" onclick="waEnquiry('Whey Protein')">
-        <img class="cat-card-img" src="https://www.optimumnutrition.co.in/cdn/shop/files/748927065725_1_e4cd4d22-bde2-4538-9b43-c261ab1b24c8.jpg?v=1773663774" alt="Whey Protein"/>
+      <div class="cat-card reveal" data-action="wa-enquiry" data-category="Whey Protein">
+        <img class="cat-card-img" src="https://www.optimumnutrition.co.in/cdn/shop/files/748927065725_1_e4cd4d22-bde2-4538-9b43-c261ab1b24c8.jpg?v=1773663774" alt="Whey Protein" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-flask"></i></div>
@@ -1035,8 +951,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal d1" onclick="waEnquiry('Mass Gainer')">
-        <img class="cat-card-img" src="https://img6.hkrtcdn.com/37800/prd_3779965-MuscleBlaze-Super-Gainer-XXL-Weight-Gainer-6.6-lb-Chocolate_o.jpg" alt="Mass Gainer"/>
+      <div class="cat-card reveal d1" data-action="wa-enquiry" data-category="Mass Gainer">
+        <img class="cat-card-img" src="https://img6.hkrtcdn.com/37800/prd_3779965-MuscleBlaze-Super-Gainer-XXL-Weight-Gainer-6.6-lb-Chocolate_o.jpg" alt="Mass Gainer" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-dumbbell"></i></div>
@@ -1045,8 +961,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal d2" onclick="waEnquiry('Pre-Workout')">
-        <img class="cat-card-img" src="https://cdn.nutrabay.com/wp-content/uploads/2021/09/NB-CEL-1003-11-01-340x340.jpg" alt="Pre-Workout"/>
+      <div class="cat-card reveal d2" data-action="wa-enquiry" data-category="Pre-Workout">
+        <img class="cat-card-img" src="https://cdn.nutrabay.com/wp-content/uploads/2021/09/NB-CEL-1003-11-01-340x340.jpg" alt="Pre-Workout" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-bolt"></i></div>
@@ -1055,8 +971,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal d3" onclick="waEnquiry('BCAA & Amino Acids')">
-        <img class="cat-card-img" src="https://www.clickoncare.com/cdn/shop/files/1_d3a644a1-f137-4b5b-906b-e58a23e132ef.jpg?v=1715007593" alt="BCAA"/>
+      <div class="cat-card reveal d3" data-action="wa-enquiry" data-category="BCAA & Amino Acids">
+        <img class="cat-card-img" src="https://www.clickoncare.com/cdn/shop/files/1_d3a644a1-f137-4b5b-906b-e58a23e132ef.jpg?v=1715007593" alt="BCAA" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-atom"></i></div>
@@ -1065,8 +981,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal" onclick="waEnquiry('Creatine')">
-        <img class="cat-card-img" src="https://asitisnutrition.com/cdn/shop/files/AS-IT-IS_One_Creatine_RPD_100g_front-min_1_af50ae47-5137-4792-893e-797e4a30d8b2_1200x1200.jpg?v=1771217123" alt="Creatine"/>
+      <div class="cat-card reveal" data-action="wa-enquiry" data-category="Creatine">
+        <img class="cat-card-img" src="https://asitisnutrition.com/cdn/shop/files/AS-IT-IS_One_Creatine_RPD_100g_front-min_1_af50ae47-5137-4792-893e-797e4a30d8b2_1200x1200.jpg?v=1771217123" alt="Creatine" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-fire-alt"></i></div>
@@ -1075,8 +991,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal d1" onclick="waEnquiry('Fat Burners')">
-        <img class="cat-card-img" src="https://img2.hkrtcdn.com/40251/prd_4025001-HK-Vitals-Fat-Burner-with-Caffeine-L-Carnitine-Garcinia-60-tablets-Unflavoured_o.jpg" alt="Fat Burners"/>
+      <div class="cat-card reveal d1" data-action="wa-enquiry" data-category="Fat Burners">
+        <img class="cat-card-img" src="https://img2.hkrtcdn.com/40251/prd_4025001-HK-Vitals-Fat-Burner-with-Caffeine-L-Carnitine-Garcinia-60-tablets-Unflavoured_o.jpg" alt="Fat Burners" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-burn"></i></div>
@@ -1085,8 +1001,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal d2" onclick="waEnquiry('Vitamins & Minerals')">
-        <img class="cat-card-img" src="https://wellbeingnutrition.com/cdn/shop/files/dailygreens_packof2.jpg?v=1750065146" alt="Vitamins & Minerals"/>
+      <div class="cat-card reveal d2" data-action="wa-enquiry" data-category="Vitamins & Minerals">
+        <img class="cat-card-img" src="https://wellbeingnutrition.com/cdn/shop/files/dailygreens_packof2.jpg?v=1750065146" alt="Vitamins & Minerals" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-capsules"></i></div>
@@ -1095,8 +1011,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal d3" onclick="waEnquiry('Gym Accessories & Protein Bars')">
-        <img class="cat-card-img" src="https://cdn2.nutrabay.com/uploads/product/featured_image/product-986-featured_image-RiteBite_Max_Protein_Daily_Choco_Almond_Bar.jpg" alt="Protein Bars & Accessories"/>
+      <div class="cat-card reveal d3" data-action="wa-enquiry" data-category="Gym Accessories & Protein Bars">
+        <img class="cat-card-img" src="https://cdn2.nutrabay.com/uploads/product/featured_image/product-986-featured_image-RiteBite_Max_Protein_Daily_Choco_Almond_Bar.jpg" alt="Protein Bars & Accessories" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-shopping-bag"></i></div>
@@ -1109,7 +1025,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   </div>
 </section>
 
-<!-- ══ GALLERY ══ -->
 <section id="gallery">
   <div class="container">
     <div class="sec-header reveal">
@@ -1118,30 +1033,30 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
       <p class="sec-sub">Take a look inside our stores and check out some of our top products.</p>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item reveal" onclick="openLightbox('video','vitaminstore.mp4')">
+      <div class="gallery-item reveal" data-action="open-lightbox" data-lb-type="video" data-lb-src="vitaminstore.mp4">
         <video src="vitaminstore.mp4" autoplay loop muted playsinline></video>
         <div class="gallery-overlay"></div>
         <i class="fas fa-play-circle play-icon"></i>
       </div>
-      <div class="gallery-item reveal d1" onclick="openLightbox('image','vitaminimg1.jpeg')">
+      <div class="gallery-item reveal d1" data-action="open-lightbox" data-lb-type="image" data-lb-src="vitaminimg1.jpeg">
         <img src="vitaminimg1.jpeg" alt="Vitamin Store" loading="lazy"/>
         <div class="gallery-overlay"></div>
       </div>
-      <div class="gallery-item reveal d2" onclick="openLightbox('video','vitaminstore1.mp4')">
+      <div class="gallery-item reveal d2" data-action="open-lightbox" data-lb-type="video" data-lb-src="vitaminstore1.mp4">
         <video src="vitaminstore1.mp4" autoplay loop muted playsinline></video>
         <div class="gallery-overlay"></div>
         <i class="fas fa-play-circle play-icon"></i>
       </div>
-      <div class="gallery-item reveal d3" onclick="openLightbox('image','vitaminimg2.jpegs.jpeg')">
-        <img src="vitaminimg2.jpegs.jpeg" alt="Vitamin Store" loading="lazy"/>
+      <div class="gallery-item reveal d3" data-action="open-lightbox" data-lb-type="image" data-lb-src="vitaminimg2.jpeg">
+        <img src="vitaminimg2.jpeg" alt="Vitamin Store" loading="lazy"/>
         <div class="gallery-overlay"></div>
       </div>
-      <div class="gallery-item reveal" onclick="openLightbox('video','vitaminstore3.mp4')">
+      <div class="gallery-item reveal" data-action="open-lightbox" data-lb-type="video" data-lb-src="vitaminstore3.mp4">
         <video src="vitaminstore3.mp4" autoplay loop muted playsinline></video>
         <div class="gallery-overlay"></div>
         <i class="fas fa-play-circle play-icon"></i>
       </div>
-      <div class="gallery-item reveal d1" onclick="openLightbox('image','vitaminimg3.jpeg')">
+      <div class="gallery-item reveal d1" data-action="open-lightbox" data-lb-type="image" data-lb-src="vitaminimg3.jpeg">
         <img src="vitaminimg3.jpeg" alt="Vitamin Store" loading="lazy"/>
         <div class="gallery-overlay"></div>
       </div>
@@ -1149,12 +1064,11 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   </div>
 </section>
 
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-  <span class="close-btn" onclick="closeLightbox()">&times;</span>
-  <div id="lightbox-container" onclick="event.stopPropagation()"></div>
+<div id="lightbox" class="lightbox">
+  <span class="close-btn" id="lightbox-close">&times;</span>
+  <div id="lightbox-container"></div>
 </div>
 
-<!-- ══ BRANCHES ══ -->
 <section id="branches">
   <div class="container">
     <div class="sec-header reveal">
@@ -1165,7 +1079,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
     <div class="branches-grid">
       <div class="branch-card reveal">
         <div class="branch-img-wrap">
-          <img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=700&q=80" alt="Vitamin Store Main Branch"/>
+          <img src="https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=700&q=80" alt="Vitamin Store Main Branch" loading="lazy"/>
           <div class="branch-img-overlay">
             <div class="branch-num">01</div>
             <div class="branch-label">Main Store</div>
@@ -1186,7 +1100,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
       </div>
       <div class="branch-card reveal d1">
         <div class="branch-img-wrap">
-          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=700&q=80" alt="Muscle Tools India Branch"/>
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=700&q=80" alt="Muscle Tools India Branch" loading="lazy"/>
           <div class="branch-img-overlay">
             <div class="branch-num">02</div>
             <div class="branch-label">Branch Store</div>
@@ -1209,7 +1123,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   </div>
 </section>
 
-<!-- ══ CTA ══ -->
 <section id="cta-section">
   <div class="container reveal">
     <div class="cta-box">
@@ -1238,12 +1151,11 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   </div>
 </section>
 
-<!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-grid">
     <div>
       <div class="footer-logo-wrap">
-        <img src="vitaminstore.png" alt="Vitamin Store" class="footer-logo"/>
+        <img src="vitaminstore.png" alt="Vitamin Store" class="footer-logo" loading="lazy"/>
         <div class="footer-bname">Vitamin <span>Store</span></div>
       </div>
       <p class="footer-tagline">Founded by Firoz. Backed by 5+ expert advisors. Anantapur's #1 sports nutrition destination. 100% genuine products. Two branches. Home delivery.</p>
@@ -1294,34 +1206,86 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
 </footer>
 
 <script>
-function waEnquiry(category){
-  const msg=encodeURIComponent(`Hi, I am interested in ${category} supplements. Please share available options and prices.`);
-  window.open(`https://wa.me/919949531515?text=${msg}`,'_blank');
-}
-function openLightbox(type,src){
-  const lb=document.getElementById('lightbox');
-  const c=document.getElementById('lightbox-container');
-  c.innerHTML = type==='video'
-    ? `<video src="${src}" class="lightbox-content" autoplay controls></video>`
-    : `<img src="${src}" class="lightbox-content" alt="Gallery"/>`;
-  lb.style.display='flex';
-}
-function closeLightbox(){
-  document.getElementById('lightbox').style.display='none';
-  document.getElementById('lightbox-container').innerHTML='';
-}
-window.addEventListener('scroll',()=>{
-  document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>40);
-});
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target);}});
-},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-document.querySelectorAll('.mob-nav a').forEach(a=>{
-  a.addEventListener('click',function(){
-    document.querySelectorAll('.mob-nav a').forEach(x=>x.classList.remove('active'));
-    this.classList.add('active');
+document.addEventListener('DOMContentLoaded', () => {
+
+  // Centralized Configuration Map for simple future updates
+  const APP_CONFIG = {
+    whatsappPrimary: "919949531515"
+  };
+
+  // Event Delegation setup for secure, scalable interactive elements
+  document.addEventListener('click', (e) => {
+    
+    // Handle WhatsApp Category Enquiries
+    const waTrigger = e.target.closest('[data-action="wa-enquiry"]');
+    if (waTrigger) {
+      const category = waTrigger.getAttribute('data-category');
+      const msg = encodeURIComponent(`Hi, I am interested in ${category} supplements. Please share available options and prices.`);
+      window.open(`https://wa.me/${APP_CONFIG.whatsappPrimary}?text=${msg}`, '_blank');
+      return;
+    }
+
+    // Handle Lightbox Triggers
+    const lbTrigger = e.target.closest('[data-action="open-lightbox"]');
+    if (lbTrigger) {
+      const type = lbTrigger.getAttribute('data-lb-type');
+      const src = lbTrigger.getAttribute('data-lb-src');
+      openLightbox(type, src);
+      return;
+    }
+
+    // Handle Lightbox Close (Clicking outside content or on 'X')
+    if (e.target.id === 'lightbox' || e.target.id === 'lightbox-close') {
+      closeLightbox();
+    }
   });
+
+  // Lightbox Handlers
+  const lb = document.getElementById('lightbox');
+  const lbContainer = document.getElementById('lightbox-container');
+
+  function openLightbox(type, src) {
+    lbContainer.innerHTML = type === 'video'
+      ? `<video src="${src}" class="lightbox-content" autoplay controls></video>`
+      : `<img src="${src}" class="lightbox-content" alt="Gallery View"/>`;
+    lb.style.display = 'flex';
+  }
+
+  function closeLightbox() {
+    lb.style.display = 'none';
+    lbContainer.innerHTML = '';
+  }
+
+  // Prevent closing when clicking inside the lightbox content itself
+  lbContainer.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  // Navbar Scroll effect
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile Nav Active State logic
+  document.querySelectorAll('.mob-nav a').forEach(a => {
+    a.addEventListener('click', function() {
+      document.querySelectorAll('.mob-nav a').forEach(x => x.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+
+  // Intersection Observer for Reveal Animations
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('on');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
 });
 </script>
 </body>
