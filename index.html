@@ -511,7 +511,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   transition:border-color 0.2s,background 0.2s;
 }
 .vmt-logo-wrap:hover{border-color:rgba(226,0,0,0.3);background:rgba(226,0,0,0.04);}
-.vmt-svg-logo{width:28px;height:28px;flex-shrink:0;object-fit:contain;filter:drop-shadow(0 0 4px rgba(226,0,0,0.3));}
+.vmt-svg-logo{height:36px;width:auto;flex-shrink:0;object-fit:contain;}
 .vmt-brand-name{
   font-family:var(--font-d);font-size:0.9rem;font-weight:800;
   color:var(--white);letter-spacing:0.06em;
@@ -524,19 +524,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   white-space:nowrap;
 }
 /* Inline SVG logo for VistaMindTech */
-<div class="vmt-credit">
-  <div class="vmt-credit-text">
-    <span>Designed &amp; Developed by</span>
-    <a href="https://vistamindtech.com" target="_blank" rel="noopener" class="vmt-logo-wrap" aria-label="VistaMindTech — Your Digital Partner">
-      <img src="vistamindtech.png" alt="VistaMindTech Logo" class="vmt-svg-logo" loading="lazy"/>
-      <div>
-        <div class="vmt-brand-name">Vista<em>Mind</em>Tech</div>
-        <div class="vmt-tagline">Your Digital Partner</div>
-      </div>
-    </a>
-  </div>
-</div>
-
+<img src="vistamindtech.png" alt="VistaMindTech — Your Digital Partner" class="vmt-svg-logo" loading="lazy"/>
 /* ══ MOBILE NAV ══════════════════════════════ */
 .mob-nav{display:none;position:fixed;bottom:0;width:100%;z-index:200;background:rgba(16,16,16,0.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:10px 0 16px;justify-content:space-around;}
 .mob-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:0.65rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;transition:color 0.2s;-webkit-tap-highlight-color:transparent;}
