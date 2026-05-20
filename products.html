@@ -354,17 +354,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
 </footer>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════
-   IMAGE STRATEGY — FINAL & DEFINITIVE
-   
-   Source: img.hkrtcdn.com (Healthkart's CDN)
-   - Same CDN already trusted and working on your index.html
-   - Permanent numeric product IDs, no versioned query strings
-   - Serves correctly in all browsers (403 from server-side is normal,
-     not hotlink protection — browser requests always succeed)
-   - onerror fallback: gradient placeholder, zero broken icons ever
-   ═══════════════════════════════════════════════════════════════ */
-
 const PRODUCTS = [
 
   /* ── WHEY PROTEIN ─────────────────────────────────── */
@@ -375,8 +364,7 @@ const PRODUCTS = [
     inStock:true, featured:true,
     icon:'fas fa-flask',
     gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)',
-    // ON Gold Standard Whey — HK CDN permanent product ID
-    img:'https://img7.hkrtcdn.com/38695/prd_3869457-Optimum-Nutrition-Gold-Standard-100-Whey-Protein-5-lb-Double-Rich-Chocolate_o.jpg'
+    img:'ongoldstandard.jpg'
   },
   {
     id:'on-gs-van-4kg', cat:'whey',
@@ -385,7 +373,7 @@ const PRODUCTS = [
     inStock:true, featured:false,
     icon:'fas fa-flask',
     gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)',
-    img:'https://img7.hkrtcdn.com/38695/prd_3869457-Optimum-Nutrition-Gold-Standard-100-Whey-Protein-5-lb-Double-Rich-Chocolate_o.jpg'
+    img:'ongoldstandard.jpg'
   },
   {
     id:'on-gs-choc-1700', cat:'whey',
@@ -394,7 +382,7 @@ const PRODUCTS = [
     inStock:true, featured:false,
     icon:'fas fa-flask',
     gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)',
-    img:'https://img7.hkrtcdn.com/38695/prd_3869457-Optimum-Nutrition-Gold-Standard-100-Whey-Protein-5-lb-Double-Rich-Chocolate_o.jpg'
+    img:'ongoldstandard.jpg'
   },
   {
     id:'on-gs-choc-907', cat:'whey',
@@ -403,7 +391,7 @@ const PRODUCTS = [
     inStock:true, featured:false,
     icon:'fas fa-flask',
     gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)',
-    img:'https://img7.hkrtcdn.com/38695/prd_3869457-Optimum-Nutrition-Gold-Standard-100-Whey-Protein-5-lb-Double-Rich-Chocolate_o.jpg'
+    img:'ongoldstandard.jpg'
   },
   {
     id:'mb-biozyme-perf-1kg', cat:'whey',
@@ -493,7 +481,7 @@ const PRODUCTS = [
     inStock:true, featured:false,
     icon:'fas fa-flask',
     gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
-    img:'https://img5.hkrtcdn.com/36966/prd_3696530-MuscleBlaze-Gold-Whey-Protein-2-2-lb-Rich-Chocolate_o.jpg'
+    img:'mbgoldwhey.jpg'
   },
   {
     id:'mb-gold-whey-2kg', cat:'whey',
@@ -502,7 +490,7 @@ const PRODUCTS = [
     inStock:true, featured:false,
     icon:'fas fa-flask',
     gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
-    img:'https://img5.hkrtcdn.com/36966/prd_3696530-MuscleBlaze-Gold-Whey-Protein-2-2-lb-Rich-Chocolate_o.jpg'
+    img:'mbgoldwhey.jpg'
   },
   {
     id:'mb-gold-whey-4kg', cat:'whey',
@@ -511,7 +499,7 @@ const PRODUCTS = [
     inStock:true, featured:false,
     icon:'fas fa-flask',
     gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
-    img:'https://img5.hkrtcdn.com/36966/prd_3696530-MuscleBlaze-Gold-Whey-Protein-2-2-lb-Rich-Chocolate_o.jpg'
+    img:'mbgoldwhey.jpg'
   },
   {
     id:'gnc-pp-whey-907', cat:'whey',
@@ -520,7 +508,7 @@ const PRODUCTS = [
     inStock:true, featured:false,
     icon:'fas fa-flask',
     gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',
-    img:'https://img3.hkrtcdn.com/34804/prd_3480302-GNC-Pro-Performance-100-Whey-Protein-Chocolate-Supreme-2-lb_o.jpg'
+    img:'gncpro.jpeg'
   },
   {
     id:'gnc-pp-whey-181', cat:'whey',
@@ -529,7 +517,7 @@ const PRODUCTS = [
     inStock:true, featured:false,
     icon:'fas fa-flask',
     gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',
-    img:'https://img3.hkrtcdn.com/34804/prd_3480302-GNC-Pro-Performance-100-Whey-Protein-Chocolate-Supreme-2-lb_o.jpg'
+    img:'gncpro.jpeg'
   },
   {
     id:'gnc-pp-whey-4kg', cat:'whey',
@@ -538,7 +526,7 @@ const PRODUCTS = [
     inStock:true, featured:false,
     icon:'fas fa-flask',
     gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',
-    img:'https://img3.hkrtcdn.com/34804/prd_3480302-GNC-Pro-Performance-100-Whey-Protein-Chocolate-Supreme-2-lb_o.jpg'
+    img:'gncpro.jpeg'
   },
   {
     id:'gnc-pure-isolate', cat:'whey',
@@ -547,7 +535,7 @@ const PRODUCTS = [
     inStock:true, featured:false,
     icon:'fas fa-flask',
     gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',
-    img:'https://img3.hkrtcdn.com/34804/prd_3480302-GNC-Pro-Performance-100-Whey-Protein-Chocolate-Supreme-2-lb_o.jpg'
+    img:'gncpro.jpeg'
   },
   {
     id:'run-whey-pro', cat:'whey',
@@ -607,7 +595,7 @@ const PRODUCTS = [
     inStock:true, featured:true,
     icon:'fas fa-atom',
     gradient:'linear-gradient(135deg,#003366 0%,#005599 60%,#0077CC 100%)',
-    img:'https://img9.hkrtcdn.com/40919/prd_4091826-Fast-Up-BCAA-2-1-1-Watermelon-250-g_o.jpg'
+    img:'fastupbcca.png'
   },
 
   /* ── CREATINE ─────────────────────────────────────── */
@@ -651,7 +639,7 @@ const PRODUCTS = [
     inStock:true, featured:true,
     icon:'fas fa-cookie-bite',
     gradient:'linear-gradient(135deg,#6B3A00 0%,#CC7700 60%,#F5A623 100%)',
-    img:'https://img6.hkrtcdn.com/38026/prd_3802453-RiteBite-Max-Protein-Active-67g-Bars-Pack-of-6-Choco-Almond_o.jpg'
+    img:'ritebite.jpeg'
   },
 
   /* ── COMING SOON ──────────────────────────────────── */
