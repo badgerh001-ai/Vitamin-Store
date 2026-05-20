@@ -490,7 +490,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
 .footer-policy a:hover{color:var(--red);}
 
 /* ══ VISTAMINDTECH CREDIT ════════════════════ */
-/* ══ VISTAMINDTECH CREDIT ════════════════════ */
 .vmt-credit{
   max-width:1100px;margin:20px auto 0;
   padding-top:20px;border-top:1px solid var(--border);
@@ -511,7 +510,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   transition:border-color 0.2s,background 0.2s;
 }
 .vmt-logo-wrap:hover{border-color:rgba(226,0,0,0.3);background:rgba(226,0,0,0.04);}
-.vmt-svg-logo{height:36px;width:auto;flex-shrink:0;object-fit:contain;}
+/* Inline SVG logo for VistaMindTech */
+.vmt-svg-logo{width:22px;height:22px;flex-shrink:0;}
 .vmt-brand-name{
   font-family:var(--font-d);font-size:0.9rem;font-weight:800;
   color:var(--white);letter-spacing:0.06em;
@@ -523,8 +523,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   letter-spacing:0.08em;text-transform:uppercase;font-weight:500;
   white-space:nowrap;
 }
-/* Inline SVG logo for VistaMindTech */
-<img src="vistamindtech.png" alt="VistaMindTech — Your Digital Partner" class="vmt-svg-logo" loading="lazy"/>
+
 /* ══ MOBILE NAV ══════════════════════════════ */
 .mob-nav{display:none;position:fixed;bottom:0;width:100%;z-index:200;background:rgba(16,16,16,0.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:10px 0 16px;justify-content:space-around;}
 .mob-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:0.65rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;transition:color 0.2s;-webkit-tap-highlight-color:transparent;}
