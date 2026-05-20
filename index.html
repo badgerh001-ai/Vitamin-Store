@@ -46,6 +46,41 @@ a{text-decoration:none;color:inherit;}
 ::-webkit-scrollbar-track{background:var(--dark);}
 ::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px;}
 
+/* ══ SCROLL PROGRESS BAR ══════════════════════ */
+#scroll-progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--red-dark),var(--red),#ff6b6b);
+  z-index:9999;transition:width 0.1s linear;
+  box-shadow:0 0 8px rgba(226,0,0,0.6);
+}
+
+/* ══ BACK TO TOP ══════════════════════════════ */
+#back-to-top{
+  position:fixed;right:20px;bottom:148px;z-index:196;
+  width:42px;height:42px;
+  background:rgba(24,24,24,0.95);
+  border:1px solid rgba(226,0,0,0.3);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  color:var(--red);font-size:1rem;cursor:pointer;
+  opacity:0;pointer-events:none;
+  transition:opacity 0.3s,transform 0.3s,background 0.2s;
+  box-shadow:0 4px 16px rgba(0,0,0,0.4);
+  backdrop-filter:blur(12px);
+}
+#back-to-top.show{opacity:1;pointer-events:auto;}
+#back-to-top:hover{background:var(--red);color:#fff;transform:translateY(-3px);}
+@media(max-width:768px){#back-to-top{bottom:200px;right:14px;width:38px;height:38px;}}
+
+/* ══ RIPPLE EFFECT ═══════════════════════════ */
+.ripple-host{position:relative;overflow:hidden;}
+.ripple{
+  position:absolute;border-radius:50%;
+  background:rgba(255,255,255,0.25);
+  transform:scale(0);animation:rippleAnim 0.55s linear;
+  pointer-events:none;
+}
+@keyframes rippleAnim{to{transform:scale(4);opacity:0;}}
+
 /* ══ NAV ══════════════════════════════════════ */
 nav{
   position:fixed;top:0;width:100%;z-index:200;
@@ -87,6 +122,7 @@ nav.scrolled{background:rgba(8,8,8,0.98);}
   background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1800&q=80');
   background-size:cover;background-position:center;
   filter:brightness(0.18);z-index:0;
+  will-change:transform;
 }
 .hero-overlay{
   position:absolute;inset:0;z-index:1;
@@ -120,6 +156,15 @@ nav.scrolled{background:rgba(8,8,8,0.98);}
   padding:6px 18px;border-radius:30px;margin-bottom:20px;
   animation:fadeUp 0.7s ease 0.2s both;
 }
+/* Pulse dot on badge */
+.hero-badge::before{
+  content:'';display:inline-block;width:6px;height:6px;
+  background:var(--red);border-radius:50%;
+  animation:pulseDot 1.5s ease-in-out infinite;
+  margin-right:4px;
+}
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(0.6);}}
+
 .hero h1{
   font-family:var(--font-d);
   font-size:clamp(3.2rem,10vw,6.8rem);
@@ -144,11 +189,15 @@ nav.scrolled{background:rgba(8,8,8,0.98);}
   padding:15px 32px;border-radius:8px;
   font-family:var(--font-b);font-weight:700;font-size:0.95rem;
   cursor:pointer;border:none;transition:all 0.22s ease;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
 }
 .btn-red{background:var(--red);color:#fff;box-shadow:0 6px 24px var(--red-glow);}
 .btn-red:hover{background:#c00;transform:translateY(-2px);box-shadow:0 12px 32px var(--red-glow);}
+.btn-red:active{transform:translateY(0) scale(0.97);}
 .btn-ghost{background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.18);color:var(--text);backdrop-filter:blur(6px);}
 .btn-ghost:hover{border-color:var(--red);color:var(--red);}
+.btn-ghost:active{transform:scale(0.97);}
 
 .hero-products{
   display:flex;gap:14px;justify-content:center;flex-wrap:nowrap;
@@ -174,7 +223,12 @@ nav.scrolled{background:rgba(8,8,8,0.98);}
 }
 .stat-item{flex:1;padding:20px 24px;text-align:center;border-right:1px solid rgba(255,255,255,0.07);}
 .stat-item:last-child{border-right:none;}
-.stat-num{font-family:var(--font-d);font-size:2.2rem;font-weight:900;color:var(--red);line-height:1;}
+.stat-num{
+  font-family:var(--font-d);font-size:2.2rem;font-weight:900;
+  color:var(--red);line-height:1;
+  transition:transform 0.3s;
+}
+.stat-item:hover .stat-num{transform:scale(1.08);}
 .stat-label{font-size:0.78rem;color:var(--muted);margin-top:4px;font-weight:500;}
 .hero-divider{position:absolute;bottom:0;left:0;right:0;height:80px;background:linear-gradient(to bottom,transparent,var(--dark));z-index:3;}
 
@@ -203,112 +257,45 @@ section{padding:80px 20px;}
 .brand-pill i{color:var(--red);font-size:0.7rem;}
 .brand-pill:hover{color:var(--white);}
 
-/* ══════════════════════════════════════════════════════════
-   WHY CHOOSE US
-   ══════════════════════════════════════════════════════════ */
-#why { background: var(--dark); padding: 80px 20px; }
-.why-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+/* ══ WHY CHOOSE US ════════════════════════════ */
+#why{background:var(--dark);padding:80px 20px;}
+.why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+.why-card{
+  background:var(--surface);border-radius:var(--r-md);
+  border:1px solid rgba(226,0,0,0.15);overflow:hidden;
+  display:flex;flex-direction:column;
+  transition:transform 0.35s ease,box-shadow 0.35s ease,border-color 0.35s ease;
+  cursor:default;
 }
-.why-card {
-  background: var(--surface);
-  border-radius: var(--r-md);
-  border: 1px solid rgba(226, 0, 0, 0.15);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
-  cursor: default;
+.why-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 24px 50px rgba(0,0,0,0.6),0 0 0 1px rgba(226,0,0,0.3);
+  border-color:rgba(226,0,0,0.5);
 }
-.why-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 24px 50px rgba(0,0,0,0.6), 0 0 0 1px rgba(226,0,0,0.3);
-  border-color: rgba(226,0,0,0.5);
+.why-card-img-wrap{width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--black);position:relative;}
+.why-card-img-wrap img{width:100%;height:100%;object-fit:contain;display:block;transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1);}
+.why-card:hover .why-card-img-wrap img{transform:scale(1.04);}
+.why-card-content{padding:30px 28px;display:flex;flex-direction:column;gap:10px;flex:1;}
+.why-card-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(226,0,0,0.12);color:var(--red);
+  border:1px solid rgba(226,0,0,0.25);
+  font-family:var(--font-d);font-size:0.72rem;font-weight:800;
+  letter-spacing:0.12em;text-transform:uppercase;
+  padding:5px 12px;border-radius:30px;align-self:flex-start;margin-bottom:6px;
+  transition:background 0.3s,color 0.3s;
 }
-.why-card-img-wrap {
-  width: 100%;
-  aspect-ratio: 4/3;
-  overflow: hidden;
-  background: var(--black);
-  position: relative;
-}
-.why-card-img-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  display: block;
-  transition: transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
-}
-.why-card:hover .why-card-img-wrap img {
-  transform: scale(1.04);
-}
-.why-card-content {
-  padding: 30px 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  flex: 1;
-}
-.why-card-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(226, 0, 0, 0.12);
-  color: var(--red);
-  border: 1px solid rgba(226, 0, 0, 0.25);
-  font-family: var(--font-d);
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 5px 12px;
-  border-radius: 30px;
-  align-self: flex-start;
-  margin-bottom: 6px;
-  transition: background 0.3s, color 0.3s;
-}
-.why-card:hover .why-card-pill {
-  background: var(--red);
-  color: #fff;
-}
-.why-card-title {
-  font-family: var(--font-d);
-  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
-  font-weight: 900;
-  color: var(--white);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  line-height: 1.1;
-}
-.why-card-desc {
-  font-size: 0.9rem;
-  color: rgba(240, 240, 240, 0.75);
-  line-height: 1.6;
-}
+.why-card:hover .why-card-pill{background:var(--red);color:#fff;}
+.why-card-title{font-family:var(--font-d);font-size:clamp(1.4rem,2.5vw,1.8rem);font-weight:900;color:var(--white);text-transform:uppercase;letter-spacing:0.02em;line-height:1.1;}
+.why-card-desc{font-size:0.9rem;color:rgba(240,240,240,0.75);line-height:1.6;}
 
-/* ══════════════════════════════════════════════════════════
-   OWNER / TEAM SECTION
-   ══════════════════════════════════════════════════════════ */
+/* ══ OWNER ════════════════════════════════════ */
 #owner{background:var(--black);padding:80px 20px;}
-.owner-wrap{
-  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;
-  max-width:1100px;margin:0 auto;
-}
+.owner-wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:0 auto;}
 .owner-img-col{position:relative;}
-.owner-img-frame{
-  position:relative;border-radius:var(--r-lg);overflow:hidden;
-  border:1px solid rgba(226,0,0,0.2);
-}
-.owner-img-frame img{
-  width:100%;height:480px;object-fit:cover;
-  filter:brightness(0.8) contrast(1.1) saturate(0.85);display:block;
-}
-.owner-img-frame::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(8,8,8,0.75) 0%,transparent 55%);
-}
+.owner-img-frame{position:relative;border-radius:var(--r-lg);overflow:hidden;border:1px solid rgba(226,0,0,0.2);}
+.owner-img-frame img{width:100%;height:480px;object-fit:cover;filter:brightness(0.8) contrast(1.1) saturate(0.85);display:block;}
+.owner-img-frame::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.75) 0%,transparent 55%);}
 .owner-badge-float{
   position:absolute;bottom:24px;left:24px;z-index:2;
   background:var(--red);color:#fff;
@@ -317,16 +304,8 @@ section{padding:80px 20px;}
   padding:10px 18px;border-radius:8px;
   box-shadow:0 8px 28px rgba(226,0,0,0.4);
 }
-.owner-accent-box{
-  position:absolute;top:-18px;right:-18px;
-  width:90px;height:90px;
-  border:2px solid rgba(226,0,0,0.25);border-radius:var(--r-md);z-index:-1;
-}
-.owner-accent-box2{
-  position:absolute;bottom:-18px;left:-18px;
-  width:60px;height:60px;
-  background:rgba(226,0,0,0.08);border-radius:var(--r-sm);z-index:-1;
-}
+.owner-accent-box{position:absolute;top:-18px;right:-18px;width:90px;height:90px;border:2px solid rgba(226,0,0,0.25);border-radius:var(--r-md);z-index:-1;}
+.owner-accent-box2{position:absolute;bottom:-18px;left:-18px;width:60px;height:60px;background:rgba(226,0,0,0.08);border-radius:var(--r-sm);z-index:-1;}
 .owner-intro{font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:10px;}
 .owner-name{font-family:var(--font-d);font-size:clamp(2.8rem,6vw,4.2rem);font-weight:900;color:var(--white);line-height:0.95;text-transform:uppercase;letter-spacing:0.01em;margin-bottom:6px;}
 .owner-title{font-size:0.9rem;color:var(--muted);font-weight:500;letter-spacing:0.05em;margin-bottom:22px;}
@@ -339,97 +318,39 @@ section{padding:80px 20px;}
 .owner-wa-btn{display:inline-flex;align-items:center;gap:9px;background:var(--red);color:#fff;padding:13px 28px;border-radius:8px;font-weight:700;font-size:0.92rem;box-shadow:0 6px 20px var(--red-glow);transition:all 0.22s;}
 .owner-wa-btn:hover{background:#c00;transform:translateY(-2px);box-shadow:0 10px 28px var(--red-glow);}
 
-/* ══════════════════════════════════════════════════════════
-   EXPERT ADVISORS
-   ══════════════════════════════════════════════════════════ */
+/* ══ TEAM ══════════════════════════════════════ */
 #team{background:var(--dark);padding:80px 20px;}
-.team-intro-row{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  gap:24px;margin-bottom:52px;flex-wrap:wrap;
-}
+.team-intro-row{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:52px;flex-wrap:wrap;}
 .team-intro-right{font-size:0.88rem;color:var(--muted);max-width:360px;line-height:1.7;text-align:right;}
-
-/* ══ EXPERT CARDS — Rebuilt: Image top, Content bottom ══ */
-.experts-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-  margin-bottom:40px;
-}
+.experts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:40px;}
 .expert-card{
-  position:relative;
-  background:var(--surface);
-  border-radius:var(--r-md);
-  border:1px solid rgba(226,0,0,0.15);
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  cursor:default;
+  position:relative;background:var(--surface);border-radius:var(--r-md);
+  border:1px solid rgba(226,0,0,0.15);overflow:hidden;
+  display:flex;flex-direction:column;cursor:default;
   transition:transform 0.35s ease,box-shadow 0.35s ease,border-color 0.35s ease;
 }
-.expert-card:hover{
-  transform:translateY(-8px);
-  box-shadow:0 24px 50px rgba(0,0,0,0.6),0 0 0 1px rgba(226,0,0,0.3);
-  border-color:rgba(226,0,0,0.5);
-}
-.expert-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--red-dark),var(--red));
-  transform:scaleX(0);transform-origin:left;
-  transition:transform 0.35s ease;z-index:4;
-}
+.expert-card:hover{transform:translateY(-8px);box-shadow:0 24px 50px rgba(0,0,0,0.6),0 0 0 1px rgba(226,0,0,0.3);border-color:rgba(226,0,0,0.5);}
+.expert-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red-dark),var(--red));transform:scaleX(0);transform-origin:left;transition:transform 0.35s ease;z-index:4;}
 .expert-card:hover::before{transform:scaleX(1);}
-.expert-img-wrap{
-  width:100%;
-  aspect-ratio:4/3;
-  overflow:hidden;
-  background:var(--black);
-}
-.expert-img-wrap img{
-  width:100%;
-  height:100%;
-  object-fit:contain;
-  display:block;
-  transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
-}
+.expert-img-wrap{width:100%;aspect-ratio:4/3;overflow:hidden;background:var(--black);}
+.expert-img-wrap img{width:100%;height:100%;object-fit:contain;display:block;transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1);}
 .expert-card:hover .expert-img-wrap img{transform:scale(1.04);}
-.expert-content{
-  padding:22px 20px;
-  display:flex;
-  flex-direction:column;
-  gap:8px;
-  flex:1;
-}
+.expert-content{padding:22px 20px;display:flex;flex-direction:column;gap:8px;flex:1;}
 .expert-specialty{
   display:inline-flex;align-items:center;gap:6px;
   background:rgba(226,0,0,0.12);color:var(--red);
   border:1px solid rgba(226,0,0,0.25);
   font-family:var(--font-d);font-size:0.7rem;font-weight:800;
   letter-spacing:0.12em;text-transform:uppercase;
-  padding:5px 12px;border-radius:30px;
-  align-self:flex-start;margin-bottom:2px;
+  padding:5px 12px;border-radius:30px;align-self:flex-start;margin-bottom:2px;
   transition:background 0.3s,color 0.3s;
 }
 .expert-card:hover .expert-specialty{background:var(--red);color:#fff;}
-.expert-role{
-  font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;
-  color:rgba(226,0,0,0.85);font-weight:700;
-}
-.expert-name{
-  font-family:var(--font-d);font-size:clamp(1.35rem,2.2vw,1.75rem);
-  font-weight:900;color:var(--white);text-transform:uppercase;
-  letter-spacing:0.02em;line-height:1.05;
-}
-.expert-desc{
-  font-size:0.85rem;color:rgba(240,240,240,0.72);line-height:1.65;
-}
+.expert-role{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:rgba(226,0,0,0.85);font-weight:700;}
+.expert-name{font-family:var(--font-d);font-size:clamp(1.35rem,2.2vw,1.75rem);font-weight:900;color:var(--white);text-transform:uppercase;letter-spacing:0.02em;line-height:1.05;}
+.expert-desc{font-size:0.85rem;color:rgba(240,240,240,0.72);line-height:1.65;}
 .expert-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:4px;}
-.expert-tag{
-  font-size:0.65rem;padding:4px 10px;
-  background:rgba(226,0,0,0.07);
-  border:1px solid rgba(226,0,0,0.15);
-  border-radius:20px;color:rgba(240,240,240,0.65);font-weight:500;
-}
+.expert-tag{font-size:0.65rem;padding:4px 10px;background:rgba(226,0,0,0.07);border:1px solid rgba(226,0,0,0.15);border-radius:20px;color:rgba(240,240,240,0.65);font-weight:500;}
 
 /* Consultation CTA banner */
 .consult-banner{
@@ -438,17 +359,9 @@ section{padding:80px 20px;}
   display:flex;align-items:center;justify-content:space-between;
   gap:28px;flex-wrap:wrap;position:relative;overflow:hidden;
 }
-.consult-banner::before{
-  content:'';position:absolute;width:300px;height:300px;
-  background:radial-gradient(circle,rgba(226,0,0,0.08) 0%,transparent 70%);
-  right:-60px;top:-60px;pointer-events:none;
-}
+.consult-banner::before{content:'';position:absolute;width:300px;height:300px;background:radial-gradient(circle,rgba(226,0,0,0.08) 0%,transparent 70%);right:-60px;top:-60px;pointer-events:none;}
 .consult-left{display:flex;align-items:center;gap:24px;flex:1;min-width:240px;}
-.consult-big-icon{
-  font-size:3rem;width:72px;height:72px;
-  background:rgba(226,0,0,0.12);border:1.5px solid rgba(226,0,0,0.3);
-  border-radius:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
-}
+.consult-big-icon{font-size:3rem;width:72px;height:72px;background:rgba(226,0,0,0.12);border:1.5px solid rgba(226,0,0,0.3);border-radius:18px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .consult-title{font-family:var(--font-d);font-size:1.7rem;font-weight:900;color:var(--white);text-transform:uppercase;letter-spacing:0.03em;line-height:1.05;}
 .consult-sub{font-size:0.85rem;color:var(--muted);margin-top:6px;max-width:380px;line-height:1.6;}
 .consult-right{display:flex;flex-direction:column;gap:10px;align-items:flex-start;}
@@ -459,16 +372,19 @@ section{padding:80px 20px;}
   font-weight:700;font-size:0.9rem;
   box-shadow:0 4px 18px var(--red-glow);
   transition:all 0.22s;white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;
 }
 .consult-btn:hover{background:#c00;transform:translateY(-2px);box-shadow:0 8px 24px var(--red-glow);}
+.consult-btn:active{transform:scale(0.97);}
 .consult-note{font-size:0.75rem;color:var(--muted);display:flex;align-items:center;gap:5px;}
 .consult-note i{color:var(--red);font-size:0.65rem;}
 
 /* ══ CATEGORIES ══════════════════════════════ */
 #categories{background:var(--black);}
 .cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-.cat-card{border-radius:var(--r-md);overflow:hidden;position:relative;cursor:pointer;aspect-ratio:3/4;transition:transform 0.3s,box-shadow 0.3s;border:1px solid var(--border);}
+.cat-card{border-radius:var(--r-md);overflow:hidden;position:relative;cursor:pointer;aspect-ratio:3/4;transition:transform 0.3s,box-shadow 0.3s;border:1px solid var(--border);-webkit-tap-highlight-color:transparent;}
 .cat-card:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,0.5);}
+.cat-card:active{transform:scale(0.97);}
 .cat-card-img{width:100%;height:100%;object-fit:cover;transition:transform 0.4s;position:absolute;inset:0;}
 .cat-card:hover .cat-card-img{transform:scale(1.08);}
 .cat-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.96) 0%,rgba(8,8,8,0.3) 60%,transparent 100%);transition:background 0.3s;}
@@ -484,17 +400,32 @@ section{padding:80px 20px;}
 /* ══ GALLERY ══════════════════════════════════ */
 #gallery{background:var(--dark);}
 .gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-top:20px;}
-.gallery-item{position:relative;overflow:hidden;border-radius:var(--r-md);border:1px solid var(--border);aspect-ratio:4/5;background:var(--card);cursor:pointer;}
+.gallery-item{position:relative;overflow:hidden;border-radius:var(--r-md);border:1px solid var(--border);aspect-ratio:4/5;background:var(--card);cursor:pointer;-webkit-tap-highlight-color:transparent;}
 .gallery-item img,.gallery-item video{width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;display:block;pointer-events:none;}
 .gallery-item:hover img,.gallery-item:hover video{transform:scale(1.08);}
 .gallery-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(8,8,8,0.5),transparent);opacity:0;transition:opacity 0.3s;}
 .gallery-item:hover .gallery-overlay{opacity:1;}
 .play-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:3rem;color:rgba(255,255,255,0.85);text-shadow:0 2px 12px rgba(0,0,0,0.5);pointer-events:none;opacity:0.8;transition:opacity 0.3s,transform 0.3s;}
 .gallery-item:hover .play-icon{opacity:1;transform:translate(-50%,-50%) scale(1.12);}
-.lightbox{display:none;position:fixed;z-index:999;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.92);backdrop-filter:blur(10px);justify-content:center;align-items:center;}
+
+/* ══ LIGHTBOX + SWIPE ════════════════════════ */
+.lightbox{display:none;position:fixed;z-index:999;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,0.92);backdrop-filter:blur(10px);justify-content:center;align-items:center;touch-action:pan-y;}
 .lightbox-content{max-width:90%;max-height:90%;border-radius:var(--r-md);box-shadow:0 0 40px rgba(0,0,0,0.5);}
-.close-btn{position:absolute;top:20px;right:30px;color:var(--white);font-size:40px;font-weight:bold;cursor:pointer;transition:color 0.3s;z-index:1000;}
+.close-btn{position:absolute;top:20px;right:30px;color:var(--white);font-size:40px;font-weight:bold;cursor:pointer;transition:color 0.3s;z-index:1000;-webkit-tap-highlight-color:transparent;}
 .close-btn:hover{color:var(--red);}
+/* Swipe hint arrows in lightbox */
+.lb-nav{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+  color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;transition:background 0.2s;z-index:1001;
+  backdrop-filter:blur(6px);
+}
+.lb-nav:hover{background:var(--red);}
+.lb-prev{left:16px;}
+.lb-next{right:16px;}
+@media(max-width:768px){.lb-nav{display:none;}}
 
 /* ══ BRANCHES ══════════════════════════════════ */
 #branches{background:var(--black);}
@@ -514,7 +445,7 @@ section{padding:80px 20px;}
 .branch-row i{color:var(--red);width:16px;flex-shrink:0;margin-top:2px;}
 .branch-row a{color:var(--text);transition:color 0.2s;}
 .branch-row a:hover{color:var(--red);}
-.branch-wa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;background:rgba(226,0,0,0.08);border:1px solid rgba(226,0,0,0.2);border-radius:8px;color:var(--red);font-weight:700;font-size:0.9rem;transition:all 0.2s;}
+.branch-wa{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;background:rgba(226,0,0,0.08);border:1px solid rgba(226,0,0,0.2);border-radius:8px;color:var(--red);font-weight:700;font-size:0.9rem;transition:all 0.2s;-webkit-tap-highlight-color:transparent;}
 .branch-wa:hover{background:var(--red);color:#fff;}
 
 /* ══ CTA SECTION ══════════════════════════════ */
@@ -558,14 +489,49 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
 .footer-policy a{font-size:0.78rem;color:var(--muted2);transition:color 0.2s;}
 .footer-policy a:hover{color:var(--red);}
 
+/* ══ VISTAMINDTECH CREDIT ════════════════════ */
+.vmt-credit{
+  max-width:1100px;margin:20px auto 0;
+  padding-top:20px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  flex-wrap:wrap;
+}
+.vmt-credit-text{
+  font-size:0.75rem;color:var(--muted2);
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;
+}
+.vmt-credit-text span{color:var(--muted);}
+.vmt-logo-wrap{
+  display:flex;align-items:center;gap:7px;
+  padding:5px 12px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.07);
+  border-radius:6px;
+  transition:border-color 0.2s,background 0.2s;
+}
+.vmt-logo-wrap:hover{border-color:rgba(226,0,0,0.3);background:rgba(226,0,0,0.04);}
+/* Inline SVG logo for VistaMindTech */
+.vmt-svg-logo{width:22px;height:22px;flex-shrink:0;}
+.vmt-brand-name{
+  font-family:var(--font-d);font-size:0.9rem;font-weight:800;
+  color:var(--white);letter-spacing:0.06em;
+  line-height:1;
+}
+.vmt-brand-name em{color:var(--red);font-style:normal;}
+.vmt-tagline{
+  font-size:0.62rem;color:var(--muted2);
+  letter-spacing:0.08em;text-transform:uppercase;font-weight:500;
+  white-space:nowrap;
+}
+
 /* ══ MOBILE NAV ══════════════════════════════ */
 .mob-nav{display:none;position:fixed;bottom:0;width:100%;z-index:200;background:rgba(16,16,16,0.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:10px 0 16px;justify-content:space-around;}
-.mob-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:0.65rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;transition:color 0.2s;}
+.mob-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:0.65rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;transition:color 0.2s;-webkit-tap-highlight-color:transparent;}
 .mob-nav a i{font-size:1.1rem;}
 .mob-nav a.active,.mob-nav a:hover{color:var(--red);}
 
 /* ══ FLOATING WA ══════════════════════════════ */
-.wa-float{position:fixed;right:20px;bottom:80px;z-index:198;width:56px;height:56px;background:#25D366;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,0.4);animation:waPulse 2.5s infinite;transition:transform 0.2s;}
+.wa-float{position:fixed;right:20px;bottom:80px;z-index:198;width:56px;height:56px;background:#25D366;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,0.4);animation:waPulse 2.5s infinite;transition:transform 0.2s;-webkit-tap-highlight-color:transparent;}
 .wa-float:hover{transform:scale(1.1);}
 @keyframes waPulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.5);}70%{box-shadow:0 0 0 18px rgba(37,211,102,0);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}
 
@@ -578,6 +544,16 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
 .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.6s ease,transform 0.6s ease;}
 .reveal.on{opacity:1;transform:none;}
 .reveal.d1{transition-delay:0.1s;}.reveal.d2{transition-delay:0.2s;}.reveal.d3{transition-delay:0.3s;}.reveal.d4{transition-delay:0.4s;}
+
+/* ══ TOUCH ACTIVE STATES (mobile feel) ═══════ */
+@media(hover:none){
+  .cat-card:active{transform:scale(0.96);}
+  .btn:active{transform:scale(0.95);}
+  .branch-wa:active{background:var(--red);color:#fff;}
+  .gallery-item:active{opacity:0.85;}
+  /* Show cat-cta on mobile always */
+  .cat-cta{opacity:1;transform:translateY(0);}
+}
 
 /* ══ RESPONSIVE ══════════════════════════════ */
 @media(max-width:1024px){
@@ -614,6 +590,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   .consult-right{align-items:stretch;width:100%;}
   .consult-btn{justify-content:center;}
   .experts-grid{grid-template-columns:repeat(2,1fr);}
+  .vmt-credit{margin-top:16px;padding-top:16px;}
 }
 @media(max-width:480px){
   .cat-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
@@ -625,12 +602,19 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   .experts-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
   .consult-left{flex-direction:column;align-items:flex-start;gap:14px;}
   .why-card-img-wrap{aspect-ratio:4/3;}
+  .vmt-credit-text{font-size:0.7rem;}
 }
 </style>
 </head>
 <body>
 
-<a href="https://wa.me/919949531515?text=Hi%2C%20I%20visited%20your%20website%20and%20want%20to%20enquire%20about%20supplements." class="wa-float" target="_blank" aria-label="WhatsApp">
+<!-- ══ SCROLL PROGRESS ══ -->
+<div id="scroll-progress"></div>
+
+<!-- ══ BACK TO TOP ══════ -->
+<button id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+
+<a href="https://wa.me/919949531515?text=Hi%2C%20I%20visited%20your%20website%20and%20want%20to%20enquire%20about%20supplements." class="wa-float ripple-host" target="_blank" aria-label="WhatsApp">
   <i class="fab fa-whatsapp"></i>
 </a>
 <div class="talk-bar">
@@ -652,7 +636,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
     <a href="#branches">Branches</a>
     <a href="#cta-section">Contact</a>
   </div>
-  <a href="https://wa.me/919949531515?text=Hi%2C%20I%20want%20a%20free%20supplement%20consultation." class="nav-cta" target="_blank">
+  <a href="https://wa.me/919949531515?text=Hi%2C%20I%20want%20a%20free%20supplement%20consultation." class="nav-cta ripple-host" target="_blank">
     <i class="fab fa-whatsapp"></i> WhatsApp Us
   </a>
 </nav>
@@ -665,20 +649,21 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   <a href="#cta-section"><i class="fas fa-phone"></i>Contact</a>
 </div>
 
+<!-- ══ HERO ══ -->
 <section class="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-grid"></div>
   <div class="hero-inner">
     <img src="vitaminstore.png" alt="Vitamin Store" class="hero-logo"/>
-    <div class="hero-badge"><i class="fas fa-star"></i> Andhra Pradesh's Trusted Supplement Store</div>
+    <div class="hero-badge">Andhra Pradesh's Trusted Supplement Store</div>
     <h1>Fuel Your<br/><span class="red">Ambition.</span></h1>
-    <p class="hero-sub">Anantapur's #1 destination for 100% genuine sports nutrition, supplements & health products. 100+ premium brands. Two stores. Home delivery.</p>
+    <p class="hero-sub">Anantapur's #1 destination for 100% genuine sports nutrition, supplements &amp; health products. 100+ premium brands. Two stores. Home delivery.</p>
     <div class="hero-btns">
-      <a href="https://wa.me/919949531515?text=Hi%2C%20I%20want%20supplement%20recommendations%20for%20my%20fitness%20goal." class="btn btn-red" target="_blank">
+      <a href="https://wa.me/919949531515?text=Hi%2C%20I%20want%20supplement%20recommendations%20for%20my%20fitness%20goal." class="btn btn-red ripple-host" target="_blank">
         <i class="fab fa-whatsapp"></i> Get Free Advice
       </a>
-      <a href="products.html" class="btn btn-ghost">
+      <a href="products.html" class="btn btn-ghost ripple-host">
         <i class="fas fa-box-open"></i> Browse Products
       </a>
     </div>
@@ -691,15 +676,16 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
       <img class="hero-prod-img" src="https://img2.hkrtcdn.com/40251/prd_4025001-HK-Vitals-Fat-Burner-with-Caffeine-L-Carnitine-Garcinia-60-tablets-Unflavoured_o.jpg" alt="HK Vitals Fat Burner" loading="lazy"/>
     </div>
     <div class="hero-stats">
-      <div class="stat-item"><div class="stat-num">100+</div><div class="stat-label">Premium Brands</div></div>
-      <div class="stat-item"><div class="stat-num">5+</div><div class="stat-label">Expert Advisors</div></div>
-      <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Stores in Anantapur</div></div>
-      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Genuine Products</div></div>
+      <div class="stat-item"><div class="stat-num" data-count="100" data-suffix="+">0</div><div class="stat-label">Premium Brands</div></div>
+      <div class="stat-item"><div class="stat-num" data-count="5" data-suffix="+">0</div><div class="stat-label">Expert Advisors</div></div>
+      <div class="stat-item"><div class="stat-num" data-count="2" data-suffix="">0</div><div class="stat-label">Stores in Anantapur</div></div>
+      <div class="stat-item"><div class="stat-num" data-count="100" data-suffix="%">0</div><div class="stat-label">Genuine Products</div></div>
     </div>
   </div>
   <div class="hero-divider"></div>
 </section>
 
+<!-- ══ BRANDS MARQUEE ══ -->
 <div class="brands-strip">
   <div class="marquee-track">
     <div class="brand-pill"><i class="fas fa-circle"></i>Optimum Nutrition</div>
@@ -735,6 +721,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   </div>
 </div>
 
+<!-- ══ WHY CHOOSE US ══ -->
 <section id="why">
   <div class="container">
     <div class="sec-header reveal">
@@ -743,7 +730,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
       <p class="sec-sub">We don't just sell supplements — we help you achieve your fitness goals with the right products.</p>
     </div>
     <div class="why-grid">
-
       <div class="why-card reveal">
         <div class="why-card-img-wrap">
           <img src="genuine.png" alt="100% Genuine Products" loading="lazy"/>
@@ -754,7 +740,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           <p class="why-card-desc">Every product is authenticated and quality-verified. Zero fakes, zero compromises — always.</p>
         </div>
       </div>
-
       <div class="why-card reveal d1">
         <div class="why-card-img-wrap">
           <img src="bestprices.png" alt="Best Prices Guaranteed" loading="lazy"/>
@@ -765,7 +750,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           <p class="why-card-desc">Competitive pricing ensures maximum value for your hard-earned money. Price match guaranteed.</p>
         </div>
       </div>
-
       <div class="why-card reveal d2">
         <div class="why-card-img-wrap">
           <img src="expertguidence.png" alt="Expert Guidance" loading="lazy"/>
@@ -776,7 +760,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           <p class="why-card-desc">Our specialists provide trusted advice and personalized supplement stacks for your goal.</p>
         </div>
       </div>
-
       <div class="why-card reveal d3">
         <div class="why-card-img-wrap">
           <img src="homedelivery.png" alt="Home Delivery Anantapur" loading="lazy"/>
@@ -787,18 +770,18 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           <p class="why-card-desc">Fast, reliable delivery across Anantapur — right to your doorstep, same day when possible.</p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
 
+<!-- ══ OWNER ══ -->
 <section id="owner">
   <div class="owner-wrap">
     <div class="owner-img-col reveal">
       <div class="owner-accent-box"></div>
       <div class="owner-img-frame">
         <img src="FIROZ..jpg" alt="Firoz — Founder, Vitamin Store" loading="lazy"/>
-        <div class="owner-badge-float"><i class="fas fa-dumbbell"></i> &nbsp;Founder & Owner</div>
+        <div class="owner-badge-float"><i class="fas fa-dumbbell"></i> &nbsp;Founder &amp; Owner</div>
       </div>
       <div class="owner-accent-box2"></div>
     </div>
@@ -807,20 +790,21 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
       <div class="owner-name">Firoz</div>
       <div class="owner-title">Founder &amp; Owner &mdash; Vitamin Store &amp; Muscle Tools India</div>
       <p class="owner-bio">
-        Firoz isn't just a store owner; he is a veteran gym trainer with over a decade of in-the-trenches experience. After 10+ years of transforming bodies and testing sports nutrition firsthand, he built Vitamin Store to cut through the industry noise. He curates every shelf with an elite trainer's uncompromising standard—bringing Anantapur athletes 100% genuine supplements, zero fluff, and real results.
+        Firoz isn't just a store owner; he is a veteran gym trainer with over a decade of in-the-trenches experience. After 10+ years of transforming bodies and testing sports nutrition firsthand, he built Vitamin Store to cut through the industry noise. He curates every shelf with an elite trainer's uncompromising standard — bringing Anantapur athletes 100% genuine supplements, zero fluff, and real results.
       </p>
       <div class="owner-stats-row">
-        <div class="owner-stat"><div class="owner-stat-num">5+</div><div class="owner-stat-lbl">Expert Advisors</div></div>
-        <div class="owner-stat"><div class="owner-stat-num">100+</div><div class="owner-stat-lbl">Brands Stocked</div></div>
-        <div class="owner-stat"><div class="owner-stat-num">2</div><div class="owner-stat-lbl">Store Locations</div></div>
+        <div class="owner-stat"><div class="owner-stat-num" data-count="5" data-suffix="+">0</div><div class="owner-stat-lbl">Expert Advisors</div></div>
+        <div class="owner-stat"><div class="owner-stat-num" data-count="100" data-suffix="+">0</div><div class="owner-stat-lbl">Brands Stocked</div></div>
+        <div class="owner-stat"><div class="owner-stat-num" data-count="2" data-suffix="">0</div><div class="owner-stat-lbl">Store Locations</div></div>
       </div>
-      <a href="https://wa.me/919949531515?text=Hi%20Firoz%2C%20I%20want%20a%20free%20supplement%20consultation." class="owner-wa-btn" target="_blank">
+      <a href="https://wa.me/919949531515?text=Hi%20Firoz%2C%20I%20want%20a%20free%20supplement%20consultation." class="owner-wa-btn ripple-host" target="_blank">
         <i class="fab fa-whatsapp"></i> Talk Directly to Firoz
       </a>
     </div>
   </div>
 </section>
 
+<!-- ══ EXPERT ADVISORS ══ -->
 <section id="team">
   <div class="container">
     <div class="team-intro-row reveal">
@@ -832,17 +816,15 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
         Not sure what to take? Our team of 5+ certified nutrition advisors is available on call — ready to guide you to the right supplement stack for your goal.
       </div>
     </div>
-
     <div class="experts-grid">
-
       <div class="expert-card reveal">
         <div class="expert-img-wrap">
           <img src="Assets/massstrength.png" alt="Mass & Strength Expert" loading="lazy"/>
         </div>
         <div class="expert-content">
           <div class="expert-specialty"><i class="fas fa-dumbbell"></i> Muscle Building</div>
-          <div class="expert-role">Bulking & Mass Gain</div>
-          <div class="expert-name">Mass & Strength</div>
+          <div class="expert-role">Bulking &amp; Mass Gain</div>
+          <div class="expert-name">Mass &amp; Strength</div>
           <p class="expert-desc">Expert advice on whey protein, mass gainers, creatine, and calorie-surplus stacks to pack on lean muscle faster.</p>
           <div class="expert-tags">
             <span class="expert-tag">Whey Protein</span>
@@ -851,15 +833,14 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           </div>
         </div>
       </div>
-
       <div class="expert-card reveal d1">
         <div class="expert-img-wrap">
           <img src="Assets/leanshred.png" alt="Lean & Shred Expert" loading="lazy"/>
         </div>
         <div class="expert-content">
           <div class="expert-specialty"><i class="fas fa-fire"></i> Fat Loss</div>
-          <div class="expert-role">Cutting & Shredding</div>
-          <div class="expert-name">Lean & Shred</div>
+          <div class="expert-role">Cutting &amp; Shredding</div>
+          <div class="expert-name">Lean &amp; Shred</div>
           <p class="expert-desc">Science-backed guidance on fat burners, thermogenics, and cutting stacks that preserve muscle while dropping body fat.</p>
           <div class="expert-tags">
             <span class="expert-tag">Fat Burners</span>
@@ -868,15 +849,14 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           </div>
         </div>
       </div>
-
       <div class="expert-card reveal d2">
         <div class="expert-img-wrap">
           <img src="Assets/performrecover.png" alt="Perform & Recover Expert" loading="lazy"/>
         </div>
         <div class="expert-content">
           <div class="expert-specialty"><i class="fas fa-bolt"></i> Performance</div>
-          <div class="expert-role">Energy & Endurance</div>
-          <div class="expert-name">Perform & Recover</div>
+          <div class="expert-role">Energy &amp; Endurance</div>
+          <div class="expert-name">Perform &amp; Recover</div>
           <p class="expert-desc">Pre-workout, BCAA, and amino acid recommendations so you hit every session harder and recover faster.</p>
           <div class="expert-tags">
             <span class="expert-tag">Pre-Workout</span>
@@ -885,7 +865,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           </div>
         </div>
       </div>
-
       <div class="expert-card reveal d3">
         <div class="expert-img-wrap">
           <img src="Assets/vitaminhealth.png" alt="Vitamins & Health Expert" loading="lazy"/>
@@ -893,18 +872,16 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
         <div class="expert-content">
           <div class="expert-specialty"><i class="fas fa-heartbeat"></i> Wellness</div>
           <div class="expert-role">Daily Wellness</div>
-          <div class="expert-name">Vitamins & Health</div>
+          <div class="expert-name">Vitamins &amp; Health</div>
           <p class="expert-desc">From multivitamins to omega-3 and immunity boosters — daily health supplements for long-term wellbeing.</p>
           <div class="expert-tags">
             <span class="expert-tag">Multivitamins</span>
             <span class="expert-tag">Omega-3</span>
-            <span class="expert-tag">Zinc & Magnesium</span>
+            <span class="expert-tag">Zinc &amp; Magnesium</span>
           </div>
         </div>
       </div>
-
     </div>
-
     <div class="consult-banner reveal">
       <div class="consult-left">
         <div class="consult-big-icon">📞</div>
@@ -914,10 +891,10 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
         </div>
       </div>
       <div class="consult-right">
-        <a href="https://wa.me/919949531515?text=Hi%2C%20I%20need%20expert%20supplement%20advice%20for%20my%20fitness%20goal." class="consult-btn" target="_blank">
+        <a href="https://wa.me/919949531515?text=Hi%2C%20I%20need%20expert%20supplement%20advice%20for%20my%20fitness%20goal." class="consult-btn ripple-host" target="_blank">
           <i class="fab fa-whatsapp"></i> Get Free Advice on WhatsApp
         </a>
-        <a href="tel:+919949531515" class="consult-btn" style="background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.18);color:var(--text);box-shadow:none;">
+        <a href="tel:+919949531515" class="consult-btn ripple-host" style="background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.18);color:var(--text);box-shadow:none;">
           <i class="fas fa-phone"></i> Call: +91 99495 31515
         </a>
         <div class="consult-note"><i class="fas fa-circle"></i> 100% free — no pressure, no upsell</div>
@@ -926,6 +903,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   </div>
 </section>
 
+<!-- ══ CATEGORIES ══ -->
 <section id="categories">
   <div class="container">
     <div class="sec-header reveal">
@@ -934,17 +912,17 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
       <p class="sec-sub">100+ products across all major supplement categories — all genuine, all in stock.</p>
     </div>
     <div class="cat-grid">
-      <div class="cat-card reveal" data-action="wa-enquiry" data-category="Whey Protein">
+      <div class="cat-card reveal ripple-host" data-action="wa-enquiry" data-category="Whey Protein">
         <img class="cat-card-img" src="https://www.optimumnutrition.co.in/cdn/shop/files/748927065725_1_e4cd4d22-bde2-4538-9b43-c261ab1b24c8.jpg?v=1773663774" alt="Whey Protein" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-flask"></i></div>
           <h3>Whey Protein</h3>
-          <p>Isolate, Concentrate & Blends</p>
+          <p>Isolate, Concentrate &amp; Blends</p>
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal d1" data-action="wa-enquiry" data-category="Mass Gainer">
+      <div class="cat-card reveal d1 ripple-host" data-action="wa-enquiry" data-category="Mass Gainer">
         <img class="cat-card-img" src="https://img6.hkrtcdn.com/37800/prd_3779965-MuscleBlaze-Super-Gainer-XXL-Weight-Gainer-6.6-lb-Chocolate_o.jpg" alt="Mass Gainer" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
@@ -954,62 +932,62 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal d2" data-action="wa-enquiry" data-category="Pre-Workout">
+      <div class="cat-card reveal d2 ripple-host" data-action="wa-enquiry" data-category="Pre-Workout">
         <img class="cat-card-img" src="https://cdn.nutrabay.com/wp-content/uploads/2021/09/NB-CEL-1003-11-01-340x340.jpg" alt="Pre-Workout" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-bolt"></i></div>
           <h3>Pre-Workout</h3>
-          <p>Energy, focus & pump</p>
+          <p>Energy, focus &amp; pump</p>
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal d3" data-action="wa-enquiry" data-category="BCAA & Amino Acids">
+      <div class="cat-card reveal d3 ripple-host" data-action="wa-enquiry" data-category="BCAA & Amino Acids">
         <img class="cat-card-img" src="https://www.clickoncare.com/cdn/shop/files/1_d3a644a1-f137-4b5b-906b-e58a23e132ef.jpg?v=1715007593" alt="BCAA" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-atom"></i></div>
-          <h3>BCAA & Aminos</h3>
-          <p>Recovery & endurance</p>
+          <h3>BCAA &amp; Aminos</h3>
+          <p>Recovery &amp; endurance</p>
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal" data-action="wa-enquiry" data-category="Creatine">
+      <div class="cat-card reveal ripple-host" data-action="wa-enquiry" data-category="Creatine">
         <img class="cat-card-img" src="https://asitisnutrition.com/cdn/shop/files/AS-IT-IS_One_Creatine_RPD_100g_front-min_1_af50ae47-5137-4792-893e-797e4a30d8b2_1200x1200.jpg?v=1771217123" alt="Creatine" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-fire-alt"></i></div>
           <h3>Creatine</h3>
-          <p>Strength & power output</p>
+          <p>Strength &amp; power output</p>
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal d1" data-action="wa-enquiry" data-category="Fat Burners">
+      <div class="cat-card reveal d1 ripple-host" data-action="wa-enquiry" data-category="Fat Burners">
         <img class="cat-card-img" src="https://img2.hkrtcdn.com/40251/prd_4025001-HK-Vitals-Fat-Burner-with-Caffeine-L-Carnitine-Garcinia-60-tablets-Unflavoured_o.jpg" alt="Fat Burners" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-burn"></i></div>
           <h3>Fat Burners</h3>
-          <p>Weight loss & thermogenics</p>
+          <p>Weight loss &amp; thermogenics</p>
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal d2" data-action="wa-enquiry" data-category="Vitamins & Minerals">
+      <div class="cat-card reveal d2 ripple-host" data-action="wa-enquiry" data-category="Vitamins & Minerals">
         <img class="cat-card-img" src="https://wellbeingnutrition.com/cdn/shop/files/dailygreens_packof2.jpg?v=1750065146" alt="Vitamins & Minerals" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-capsules"></i></div>
-          <h3>Vitamins & Minerals</h3>
-          <p>Daily health & immunity</p>
+          <h3>Vitamins &amp; Minerals</h3>
+          <p>Daily health &amp; immunity</p>
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
       </div>
-      <div class="cat-card reveal d3" data-action="wa-enquiry" data-category="Gym Accessories & Protein Bars">
+      <div class="cat-card reveal d3 ripple-host" data-action="wa-enquiry" data-category="Gym Accessories & Protein Bars">
         <img class="cat-card-img" src="https://cdn2.nutrabay.com/uploads/product/featured_image/product-986-featured_image-RiteBite_Max_Protein_Daily_Choco_Almond_Bar.jpg" alt="Protein Bars & Accessories" loading="lazy"/>
         <div class="cat-card-overlay"></div>
         <div class="cat-card-content">
           <div class="cat-card-icon"><i class="fas fa-shopping-bag"></i></div>
-          <h3>Accessories & Snacks</h3>
+          <h3>Accessories &amp; Snacks</h3>
           <p>Bars, shakers, gym gear</p>
           <div class="cat-cta">Enquire <i class="fas fa-arrow-right"></i></div>
         </div>
@@ -1018,6 +996,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   </div>
 </section>
 
+<!-- ══ GALLERY ══ -->
 <section id="gallery">
   <div class="container">
     <div class="sec-header reveal">
@@ -1026,30 +1005,31 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
       <p class="sec-sub">Take a look inside our stores and check out some of our top products.</p>
     </div>
     <div class="gallery-grid">
-      <div class="gallery-item reveal" data-action="open-lightbox" data-lb-type="video" data-lb-src="vitaminstore.mp4">
+      <div class="gallery-item reveal" data-action="open-lightbox" data-lb-index="0" data-lb-type="video" data-lb-src="vitaminstore.mp4">
         <video src="vitaminstore.mp4" autoplay loop muted playsinline></video>
         <div class="gallery-overlay"></div>
         <i class="fas fa-play-circle play-icon"></i>
       </div>
-      <div class="gallery-item reveal d1" data-action="open-lightbox" data-lb-type="image" data-lb-src="vitaminimg1.jpeg">
+      <div class="gallery-item reveal d1" data-action="open-lightbox" data-lb-index="1" data-lb-type="image" data-lb-src="vitaminimg1.jpeg">
         <img src="vitaminimg1.jpeg" alt="Vitamin Store" loading="lazy"/>
         <div class="gallery-overlay"></div>
       </div>
-      <div class="gallery-item reveal d2" data-action="open-lightbox" data-lb-type="video" data-lb-src="vitaminstore1.mp4">
+      <div class="gallery-item reveal d2" data-action="open-lightbox" data-lb-index="2" data-lb-type="video" data-lb-src="vitaminstore1.mp4">
         <video src="vitaminstore1.mp4" autoplay loop muted playsinline></video>
         <div class="gallery-overlay"></div>
         <i class="fas fa-play-circle play-icon"></i>
       </div>
-      <div class="gallery-item reveal d3" data-action="open-lightbox" data-lb-type="image" data-lb-src="vitaminimg2.jpeg">
-        <img src="vitaminimg2.jpegs.jpeg" alt="Vitamin Store" loading="lazy"/>
+      <!-- BUG FIX: was "vitaminimg2.jpegs.jpeg" — corrected to "vitaminimg2.jpeg" -->
+      <div class="gallery-item reveal d3" data-action="open-lightbox" data-lb-index="3" data-lb-type="image" data-lb-src="vitaminimg2.jpeg">
+        <img src="vitaminimg2.jpeg" alt="Vitamin Store" loading="lazy"/>
         <div class="gallery-overlay"></div>
       </div>
-      <div class="gallery-item reveal" data-action="open-lightbox" data-lb-type="video" data-lb-src="vitaminstore3.mp4">
+      <div class="gallery-item reveal" data-action="open-lightbox" data-lb-index="4" data-lb-type="video" data-lb-src="vitaminstore3.mp4">
         <video src="vitaminstore3.mp4" autoplay loop muted playsinline></video>
         <div class="gallery-overlay"></div>
         <i class="fas fa-play-circle play-icon"></i>
       </div>
-      <div class="gallery-item reveal d1" data-action="open-lightbox" data-lb-type="image" data-lb-src="vitaminimg3.jpeg">
+      <div class="gallery-item reveal d1" data-action="open-lightbox" data-lb-index="5" data-lb-type="image" data-lb-src="vitaminimg3.jpeg">
         <img src="vitaminimg3.jpeg" alt="Vitamin Store" loading="lazy"/>
         <div class="gallery-overlay"></div>
       </div>
@@ -1057,11 +1037,15 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   </div>
 </section>
 
-<div id="lightbox" class="lightbox">
-  <span class="close-btn" id="lightbox-close">&times;</span>
+<!-- ══ LIGHTBOX ══ -->
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true">
+  <span class="close-btn" id="lightbox-close" aria-label="Close">&times;</span>
+  <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
+  <button class="lb-nav lb-next" id="lb-next" aria-label="Next"><i class="fas fa-chevron-right"></i></button>
   <div id="lightbox-container"></div>
 </div>
 
+<!-- ══ BRANCHES ══ -->
 <section id="branches">
   <div class="container">
     <div class="sec-header reveal">
@@ -1086,7 +1070,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
             <div class="branch-row"><i class="fab fa-whatsapp"></i><a href="https://wa.me/919949531515" target="_blank">Chat on WhatsApp</a></div>
             <div class="branch-row"><i class="fas fa-clock"></i><span>Mon – Sat: 9:00 AM – 9:30 PM<br/>Sunday: 10:00 AM – 8:00 PM</span></div>
           </div>
-          <a href="https://wa.me/919949531515?text=Hi%2C%20I%20want%20to%20enquire%20about%20supplements%20at%20your%20main%20store." class="branch-wa" target="_blank">
+          <a href="https://wa.me/919949531515?text=Hi%2C%20I%20want%20to%20enquire%20about%20supplements%20at%20your%20main%20store." class="branch-wa ripple-host" target="_blank">
             <i class="fab fa-whatsapp"></i> WhatsApp This Branch
           </a>
         </div>
@@ -1107,7 +1091,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
             <div class="branch-row"><i class="fab fa-whatsapp"></i><a href="https://wa.me/919885103717" target="_blank">Chat on WhatsApp</a></div>
             <div class="branch-row"><i class="fas fa-tag"></i><span>Andhra Pradesh Distributor — MAXN</span></div>
           </div>
-          <a href="https://wa.me/919885103717?text=Hi%2C%20I%20want%20to%20enquire%20about%20supplements%20at%20your%20branch." class="branch-wa" target="_blank">
+          <a href="https://wa.me/919885103717?text=Hi%2C%20I%20want%20to%20enquire%20about%20supplements%20at%20your%20branch." class="branch-wa ripple-host" target="_blank">
             <i class="fab fa-whatsapp"></i> WhatsApp This Branch
           </a>
         </div>
@@ -1116,6 +1100,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   </div>
 </section>
 
+<!-- ══ CTA ══ -->
 <section id="cta-section">
   <div class="container reveal">
     <div class="cta-box">
@@ -1126,10 +1111,10 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
         <div class="sec-title">Not Sure What to Take?</div>
         <p class="cta-sub">Tell us your fitness goal — Firoz and our team of 5+ expert advisors will recommend the right supplement stack for you. Free advice, no pressure.</p>
         <div class="cta-btns">
-          <a href="https://wa.me/919949531515?text=Hi%2C%20I%20need%20free%20supplement%20advice%20for%20my%20fitness%20goal." class="btn btn-red" target="_blank">
+          <a href="https://wa.me/919949531515?text=Hi%2C%20I%20need%20free%20supplement%20advice%20for%20my%20fitness%20goal." class="btn btn-red ripple-host" target="_blank">
             <i class="fab fa-whatsapp"></i> Get Free Consultation
           </a>
-          <a href="https://www.instagram.com/vitamin.1515" class="btn btn-ghost" target="_blank">
+          <a href="https://www.instagram.com/vitamin.1515" class="btn btn-ghost ripple-host" target="_blank">
             <i class="fab fa-instagram"></i> Follow on Instagram
           </a>
         </div>
@@ -1144,6 +1129,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   </div>
 </section>
 
+<!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-grid">
     <div>
@@ -1172,7 +1158,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
     <div>
       <div class="footer-col-title">Legal</div>
       <div class="footer-links">
-        <a href="terms.html">Terms & Conditions</a>
+        <a href="terms.html">Terms &amp; Conditions</a>
         <a href="privacy.html">Privacy Policy</a>
         <a href="refund.html">Refund Policy</a>
       </div>
@@ -1188,6 +1174,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
       </div>
     </div>
   </div>
+
   <div class="footer-bottom">
     <div class="footer-copy">&copy; 2026 <span>Vitamin Store</span> &mdash; Founded by Firoz. All rights reserved.</div>
     <div class="footer-policy">
@@ -1196,17 +1183,196 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
       <a href="refund.html">Refunds</a>
     </div>
   </div>
+
+  <!-- ══ VISTAMINDTECH CREDIT ══ -->
+  <div class="vmt-credit">
+    <div class="vmt-credit-text">
+      <span>Designed &amp; Developed by</span>
+      <a href="https://vistamindtech.com" target="_blank" rel="noopener" class="vmt-logo-wrap" aria-label="VistaMindTech — Your Digital Partner">
+        <!-- VistaMindTech SVG Logo -->
+        <svg class="vmt-svg-logo" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="40" height="40" rx="8" fill="#E20000" fill-opacity="0.12"/>
+          <rect x="0.5" y="0.5" width="39" height="39" rx="7.5" stroke="#E20000" stroke-opacity="0.4"/>
+          <!-- V shape -->
+          <path d="M7 11L13.5 27H15L20 14.5" stroke="#E20000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- M shape -->
+          <path d="M20 14.5L25 27L30 14.5" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M22.5 20.5L27.5 20.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+          <!-- Tech dot accent -->
+          <circle cx="33" cy="11" r="2.5" fill="#E20000"/>
+        </svg>
+        <div>
+          <div class="vmt-brand-name">Vista<em>Mind</em>Tech</div>
+          <div class="vmt-tagline">Your Digital Partner</div>
+        </div>
+      </a>
+    </div>
+  </div>
 </footer>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
 
-  const APP_CONFIG = {
-    whatsappPrimary: "919949531515"
-  };
+  /* ══════════════════════════════════════════
+     CONFIG
+  ══════════════════════════════════════════ */
+  const APP_CONFIG = { whatsappPrimary: "919949531515" };
 
+  /* ══════════════════════════════════════════
+     SCROLL PROGRESS BAR
+  ══════════════════════════════════════════ */
+  const progressBar = document.getElementById('scroll-progress');
+  const backToTop   = document.getElementById('back-to-top');
+
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total    = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (scrolled / total * 100) + '%';
+
+    // Nav style
+    document.getElementById('mainNav').classList.toggle('scrolled', scrolled > 40);
+
+    // Back to top visibility
+    backToTop.classList.toggle('show', scrolled > 400);
+  }, { passive: true });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ══════════════════════════════════════════
+     PARALLAX — Hero background (desktop only)
+  ══════════════════════════════════════════ */
+  const heroBg = document.getElementById('heroBg');
+  if (window.innerWidth > 900 && heroBg) {
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      if (y < window.innerHeight) {
+        heroBg.style.transform = `translateY(${y * 0.25}px)`;
+      }
+    }, { passive: true });
+  }
+
+  /* ══════════════════════════════════════════
+     RIPPLE EFFECT
+  ══════════════════════════════════════════ */
+  document.addEventListener('pointerdown', (e) => {
+    const host = e.target.closest('.ripple-host');
+    if (!host) return;
+    const rect   = host.getBoundingClientRect();
+    const size   = Math.max(rect.width, rect.height) * 2;
+    const x      = e.clientX - rect.left - size / 2;
+    const y      = e.clientY - rect.top  - size / 2;
+    const ripple = document.createElement('span');
+    ripple.className = 'ripple';
+    ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px;`;
+    host.appendChild(ripple);
+    ripple.addEventListener('animationend', () => ripple.remove());
+  });
+
+  /* ══════════════════════════════════════════
+     NUMBER COUNTER ANIMATION
+  ══════════════════════════════════════════ */
+  function animateCounter(el) {
+    const target = parseInt(el.getAttribute('data-count'), 10);
+    const suffix = el.getAttribute('data-suffix') || '';
+    const duration = 1200;
+    const start    = performance.now();
+    const easeOut  = t => 1 - Math.pow(1 - t, 3);
+
+    function step(now) {
+      const elapsed  = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const current  = Math.round(easeOut(progress) * target);
+      el.textContent = current + suffix;
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+  /* ══════════════════════════════════════════
+     GALLERY LIGHTBOX + SWIPE
+  ══════════════════════════════════════════ */
+  const lb          = document.getElementById('lightbox');
+  const lbContainer = document.getElementById('lightbox-container');
+  const lbPrev      = document.getElementById('lb-prev');
+  const lbNext      = document.getElementById('lb-next');
+
+  // Build gallery items array
+  const galleryItems = [];
+  document.querySelectorAll('[data-action="open-lightbox"]').forEach(el => {
+    galleryItems.push({
+      type: el.getAttribute('data-lb-type'),
+      src:  el.getAttribute('data-lb-src'),
+    });
+  });
+
+  let currentLbIndex = 0;
+
+  function openLightbox(index) {
+    currentLbIndex = index;
+    renderLightbox();
+    lb.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.style.display = 'none';
+    lbContainer.innerHTML = '';
+    document.body.style.overflow = '';
+  }
+
+  function renderLightbox() {
+    const item = galleryItems[currentLbIndex];
+    if (!item) return;
+    lbContainer.innerHTML = item.type === 'video'
+      ? `<video src="${item.src}" class="lightbox-content" autoplay controls playsinline></video>`
+      : `<img src="${item.src}" class="lightbox-content" alt="Gallery View"/>`;
+  }
+
+  function lbNavigate(dir) {
+    currentLbIndex = (currentLbIndex + dir + galleryItems.length) % galleryItems.length;
+    renderLightbox();
+  }
+
+  lbPrev.addEventListener('click', (e) => { e.stopPropagation(); lbNavigate(-1); });
+  lbNext.addEventListener('click', (e) => { e.stopPropagation(); lbNavigate(1); });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (lb.style.display !== 'flex') return;
+    if (e.key === 'ArrowLeft')  lbNavigate(-1);
+    if (e.key === 'ArrowRight') lbNavigate(1);
+    if (e.key === 'Escape')     closeLightbox();
+  });
+
+  // Touch swipe on lightbox
+  let lbTouchStartX = 0;
+  lb.addEventListener('touchstart', (e) => { lbTouchStartX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener('touchend', (e) => {
+    const delta = lbTouchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 50) lbNavigate(delta > 0 ? 1 : -1);
+  }, { passive: true });
+
+  lbContainer.addEventListener('click', (e) => e.stopPropagation());
+
+  /* ══════════════════════════════════════════
+     UNIFIED EVENT DELEGATION
+  ══════════════════════════════════════════ */
   document.addEventListener('click', (e) => {
-    
+
+    // WA enquiry from category cards
     const waTrigger = e.target.closest('[data-action="wa-enquiry"]');
     if (waTrigger) {
       const category = waTrigger.getAttribute('data-category');
@@ -1215,59 +1381,43 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    // Gallery lightbox
     const lbTrigger = e.target.closest('[data-action="open-lightbox"]');
     if (lbTrigger) {
-      const type = lbTrigger.getAttribute('data-lb-type');
-      const src = lbTrigger.getAttribute('data-lb-src');
-      openLightbox(type, src);
+      const index = parseInt(lbTrigger.getAttribute('data-lb-index'), 10);
+      openLightbox(index);
       return;
     }
 
-    if (e.target.id === 'lightbox' || e.target.id === 'lightbox-close') {
+    // Close lightbox on backdrop or X
+    if ((e.target === lb || e.target.id === 'lightbox-close') && lb.style.display === 'flex') {
       closeLightbox();
     }
   });
 
-  const lb = document.getElementById('lightbox');
-  const lbContainer = document.getElementById('lightbox-container');
-
-  function openLightbox(type, src) {
-    lbContainer.innerHTML = type === 'video'
-      ? `<video src="${src}" class="lightbox-content" autoplay controls></video>`
-      : `<img src="${src}" class="lightbox-content" alt="Gallery View"/>`;
-    lb.style.display = 'flex';
-  }
-
-  function closeLightbox() {
-    lb.style.display = 'none';
-    lbContainer.innerHTML = '';
-  }
-
-  lbContainer.addEventListener('click', (e) => {
-    e.stopPropagation();
-  });
-
-  window.addEventListener('scroll', () => {
-    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 40);
-  });
-
+  /* ══════════════════════════════════════════
+     MOBILE NAV — Active state
+  ══════════════════════════════════════════ */
   document.querySelectorAll('.mob-nav a').forEach(a => {
-    a.addEventListener('click', function() {
+    a.addEventListener('click', function () {
       document.querySelectorAll('.mob-nav a').forEach(x => x.classList.remove('active'));
       this.classList.add('active');
     });
   });
 
-  const obs = new IntersectionObserver(entries => {
+  /* ══════════════════════════════════════════
+     REVEAL ON SCROLL
+  ══════════════════════════════════════════ */
+  const revealObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('on');
-        obs.unobserve(e.target);
+        revealObs.unobserve(e.target);
       }
     });
   }, { threshold: 0.1 });
 
-  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
 });
 </script>
