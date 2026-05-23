@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<title>Buy Supplements in Anantapur | Whey Protein, Mass Gainer &amp; More — Vitamin Store</title>
-<meta name="description" content="Shop 35+ genuine supplements in Anantapur. Whey Protein, Mass Gainer, Pre-Workout, BCAA, Creatine &amp; more from ON, MuscleBlaze, GNC, C4. Home delivery. Buy via WhatsApp: +91 99495 31515."/>
+<title>Buy Supplements in Anantapur | Whey Protein, Mass Gainer & More — Vitamin Store</title>
+<meta name="description" content="Shop 35+ genuine supplements in Anantapur. Whey Protein, Mass Gainer, Pre-Workout, BCAA, Creatine & more from ON, MuscleBlaze, GNC, C4. Home delivery. Buy via WhatsApp: +91 99495 31515."/>
 <meta name="keywords" content="buy whey protein anantapur, buy mass gainer anantapur, buy pre-workout anantapur, MuscleBlaze anantapur, Optimum Nutrition anantapur, GNC anantapur, C4 pre-workout anantapur, creatine anantapur, bcaa anantapur, supplement store anantapur"/>
 <meta name="robots" content="index, follow"/>
 <link rel="canonical" href="https://vitaminstore.in/products.html"/>
 <meta property="og:type" content="website"/>
 <meta property="og:title" content="Supplements in Anantapur — Vitamin Store Products"/>
-<meta property="og:description" content="100% genuine supplements. Whey Protein, Mass Gainer, Pre-Workout &amp; more. Buy on WhatsApp. Home delivery in Anantapur."/>
+<meta property="og:description" content="100% genuine supplements. Whey Protein, Mass Gainer, Pre-Workout & more. Buy on WhatsApp. Home delivery in Anantapur."/>
 <meta property="og:url" content="https://vitaminstore.in/products.html"/>
 <meta property="og:image" content="vitaminstore.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
@@ -25,13 +25,13 @@
     {"@type":"ListItem","position":1,"name":"Home","item":"https://vitaminstore.in"},
     {"@type":"ListItem","position":2,"name":"Products","item":"https://vitaminstore.in/products.html"}
   ]},
-  "provider":{"@type":"LocalBusiness","name":"Vitamin Store — Supplement &amp; More","telephone":"+919949531515",
+  "provider":{"@type":"LocalBusiness","name":"Vitamin Store — Supplement & More","telephone":"+919949531515",
     "address":{"@type":"PostalAddress","streetAddress":"80 Feet Rd, opp. SR Grand Hotel, Ram Nagar, Maruthi Nagar","addressLocality":"Anantapur","addressRegion":"Andhra Pradesh","postalCode":"515001","addressCountry":"IN"}}
 }
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&amp;family=DM+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
 <style>
@@ -98,6 +98,14 @@ nav{position:fixed;top:0;width:100%;z-index:200;height:66px;padding:0 24px;displ
 .filter-count{font-size:0.8rem;color:var(--muted);white-space:nowrap;margin-left:auto;}
 .filter-count span{color:var(--red);font-weight:700;font-family:var(--font-d);font-size:1rem;}
 
+/* VIEW SWITCHER */
+.view-switcher{max-width:1200px;margin:0 auto;padding:10px 24px 0;display:flex;align-items:center;gap:8px;}
+.view-btn{display:flex;align-items:center;gap:7px;padding:7px 16px;border-radius:6px;font-size:0.8rem;font-weight:600;border:1px solid var(--border);color:var(--muted);cursor:pointer;white-space:nowrap;transition:all 0.2s;background:transparent;font-family:var(--font-b);}
+.view-btn i{font-size:0.8rem;}
+.view-btn:hover{border-color:rgba(226,0,0,0.35);color:var(--text);}
+.view-btn.active{background:var(--red);border-color:var(--red);color:#fff;}
+.view-label{font-size:0.72rem;color:var(--muted);margin-left:auto;white-space:nowrap;}
+
 /* ACTIVE FILTER CHIPS */
 .active-filters{max-width:1200px;margin:0 auto;padding:0 24px 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .active-filters:empty{display:none;}
@@ -121,14 +129,28 @@ nav{position:fixed;top:0;width:100%;z-index:200;height:66px;padding:0 24px;displ
 /* PRODUCTS SECTION */
 .products-section{max-width:1200px;margin:0 auto;padding:28px 24px 40px;}
 
-/* ── BRAND GROUP LAYOUT ─────────────────────────────── */
+/* ── BRAND GROUP LAYOUT ── */
 .products-grid{display:flex;flex-direction:column;gap:36px;}
 .brand-group{display:flex;flex-direction:column;gap:0;}
 .brand-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.05);}
+.brand-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;letter-spacing:0.04em;}
 .brand-name-tag{font-family:var(--font-d);font-size:1.05rem;font-weight:900;color:var(--white);text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;}
 .brand-prod-count{font-size:0.68rem;color:var(--muted);white-space:nowrap;background:var(--surface);padding:2px 9px;border-radius:20px;border:1px solid var(--border);flex-shrink:0;}
 .brand-line{flex:1;height:1px;background:var(--border);}
-.brand-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+
+/* ── GRID MODES ── */
+.brand-grid{display:grid;gap:16px;}
+.brand-grid.grid-4{grid-template-columns:repeat(4,1fr);}
+.brand-grid.grid-3{grid-template-columns:repeat(3,1fr);}
+.brand-grid.grid-2{grid-template-columns:repeat(2,1fr);}
+
+/* CATEGORY GROUP */
+.cat-group{margin-bottom:36px;}
+.cat-group-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.05);}
+.cat-group-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;}
+.cat-group-name{font-family:var(--font-d);font-size:1.05rem;font-weight:900;color:var(--white);text-transform:uppercase;letter-spacing:0.06em;}
+.cat-group-count{font-size:0.68rem;color:var(--muted);background:var(--surface);padding:2px 9px;border-radius:20px;border:1px solid var(--border);}
+.cat-group-line{flex:1;height:1px;background:var(--border);}
 
 /* PRODUCT CARD */
 .prod-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;display:flex;flex-direction:column;transition:transform 0.22s,box-shadow 0.22s,border-color 0.22s;position:relative;}
@@ -163,7 +185,7 @@ nav{position:fixed;top:0;width:100%;z-index:200;height:66px;padding:0 24px;displ
 .prod-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:2px;}
 .prod-protein-tag{font-size:0.72rem;background:rgba(226,0,0,0.1);border:1px solid rgba(226,0,0,0.2);color:var(--red);padding:2px 8px;border-radius:4px;font-weight:700;}
 
-/* ── FLAVOUR SWATCHES ──────────────────────────────── */
+/* FLAVOUR SWATCHES */
 .prod-selector-block{margin-top:8px;display:flex;flex-direction:column;gap:5px;}
 .prod-selector-label{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);font-weight:700;display:flex;align-items:center;gap:5px;}
 .selected-name{color:var(--text);text-transform:none;letter-spacing:0;font-weight:500;font-size:0.68rem;max-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -172,7 +194,7 @@ nav{position:fixed;top:0;width:100%;z-index:200;height:66px;padding:0 24px;displ
 .flav-swatch:hover{transform:scale(1.25);border-color:rgba(255,255,255,0.5);}
 .flav-swatch.active{border-color:var(--white)!important;box-shadow:0 0 0 2px var(--red);transform:scale(1.12);}
 
-/* ── WEIGHT PILLS ──────────────────────────────────── */
+/* WEIGHT PILLS */
 .weight-pills{display:flex;flex-wrap:wrap;gap:5px;}
 .weight-pill{padding:3px 8px;border-radius:5px;font-size:0.67rem;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.15s;font-family:var(--font-b);line-height:1.4;}
 .weight-pill:not(:disabled):hover{border-color:rgba(226,0,0,0.4);color:var(--text);}
@@ -243,8 +265,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
 .footer-links-r a:hover{color:var(--red);}
 
 /* RESPONSIVE */
-@media(max-width:1100px){.brand-grid{grid-template-columns:repeat(3,1fr);}}
-@media(max-width:900px){.brand-grid{grid-template-columns:repeat(2,1fr);gap:12px;}.nav-links{display:none;}}
+@media(max-width:1100px){.brand-grid.grid-4{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:900px){.brand-grid.grid-4,.brand-grid.grid-3{grid-template-columns:repeat(2,1fr);gap:12px;}.nav-links{display:none;}}
 @media(max-width:768px){
   nav{padding:0 16px;}.mob-nav{display:flex;}.talk-bar{display:block;}
   .wa-float{bottom:134px;right:14px;}footer{padding-bottom:140px;}
@@ -254,9 +276,10 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
   .accessories-section{padding:0 12px 80px;}
   .brand-grid{gap:10px;}.filter-count{display:none;}
   .brand-header{flex-wrap:wrap;gap:8px;}.brand-line{display:none;}
+  .view-switcher{padding:10px 16px 0;}.view-label{display:none;}
 }
 @media(max-width:480px){
-  .brand-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .brand-grid.grid-4,.brand-grid.grid-3,.brand-grid.grid-2{grid-template-columns:repeat(2,1fr);gap:8px;}
   .prod-body{padding:10px 10px 12px;}.prod-name{font-size:0.88rem;}
   .stock-toggle span{display:none;}
   .flav-swatch{width:16px;height:16px;}
@@ -337,6 +360,15 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
       <div class="filter-count">Showing <span id="prodCount">0</span> products</div>
     </div>
   </div>
+
+  <!-- VIEW SWITCHER -->
+  <div class="view-switcher">
+    <button class="view-btn active" id="vbtn-brand" onclick="switchView('brand')"><i class="fas fa-building"></i> By Brand</button>
+    <button class="view-btn" id="vbtn-cat" onclick="switchView('cat')"><i class="fas fa-th-large"></i> By Category</button>
+    <button class="view-btn" id="vbtn-all" onclick="switchView('all')"><i class="fas fa-th"></i> All Products</button>
+    <span class="view-label" id="viewLabel">Grouped by brand</span>
+  </div>
+
   <div class="active-filters" id="activeFilters"></div>
   <div class="cat-tabs-wrap">
     <div class="cat-tabs" id="catTabs">
@@ -396,28 +428,8 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
 </footer>
 
 <script>
-/* ================================================================
-   PRODUCT CATALOG
-   Structure per product:
-     id       — unique slug
-     cat      — category key
-     brand    — company / brand name (used for grouping header)
-     name     — product name
-     protein  — protein per serving (or '—')
-     featured — bool, shows Popular badge & sorts first
-     icon     — FontAwesome class for placeholder
-     gradient — CSS gradient for image placeholder background
-     img      — paste your image URL/path here; '' = shows gradient placeholder
-     flavours — array of flavour strings (use ['—'] if N/A)
-     weights  — array of {size, inStock} objects
-================================================================ */
 const PRODUCTS = [
-
-  /* ══════════════════════════════════════════════════
-     WHEY PROTEIN
-  ══════════════════════════════════════════════════ */
-
-  /* ── Optimum Nutrition ── */
+  /* ══ WHEY PROTEIN ══ */
   {
     id:'on-gold-standard-whey', cat:'whey', brand:'Optimum Nutrition',
     name:'Gold Standard 100% Whey', protein:'24g', featured:true,
@@ -426,14 +438,10 @@ const PRODUCTS = [
     img:'Assets/ongoldstandard.jpg',
     flavours:['Double Rich Chocolate','Vanilla Ice Cream'],
     weights:[
-      {size:'907 g',   inStock:true},
-      {size:'1.7 kg',  inStock:true},
-      {size:'2.27 kg', inStock:true},
-      {size:'4 kg',    inStock:true}
+      {size:'907 g',inStock:true},{size:'1.7 kg',inStock:true},
+      {size:'2.27 kg',inStock:true},{size:'4 kg',inStock:true}
     ]
   },
-
-  /* ── MuscleBlaze ── */
   {
     id:'mb-biozyme-perf-whey', cat:'whey', brand:'MuscleBlaze',
     name:'Biozyme Performance Whey', protein:'25g', featured:true,
@@ -441,11 +449,7 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
     img:'https://img8.hkrtcdn.com/39078/prd_3907787-MuscleBlaze-Biozyme-Performance-Whey-4.4-lb-Rich-Chocolate_o.jpg',
     flavours:['Hazel Nut Chocolate','Magical Mango','Rich Chocolate','Blue Tokai Coffee'],
-    weights:[
-      {size:'1 kg', inStock:true},
-      {size:'2 kg', inStock:true},
-      {size:'4 kg', inStock:true}
-    ]
+    weights:[{size:'1 kg',inStock:true},{size:'2 kg',inStock:true},{size:'4 kg',inStock:true}]
   },
   {
     id:'mb-iso-zero', cat:'whey', brand:'MuscleBlaze',
@@ -454,11 +458,7 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
     img:'https://img4.hkrtcdn.com/35591/prd_3559023-MuscleBlaze-Biozyme-IsoZero-4.4-lb-Low-Carb-Ice-Cream-Chocolate_o.jpg',
     flavours:['Ice Cream Chocolate','Cookies & Cream','Swiss Chocolate'],
-    weights:[
-      {size:'1 kg', inStock:true},
-      {size:'2 kg', inStock:true},
-      {size:'4 kg', inStock:true}
-    ]
+    weights:[{size:'1 kg',inStock:true},{size:'2 kg',inStock:true},{size:'4 kg',inStock:true}]
   },
   {
     id:'mb-biozyme-whey-pr', cat:'whey', brand:'MuscleBlaze',
@@ -467,11 +467,7 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
     img:'Assets/mbgoldwhey.jpg',
     flavours:['Molten Chocolate Cake','Chocolate Fudge','Cookies & Cream'],
-    weights:[
-      {size:'1 kg', inStock:true},
-      {size:'2 kg', inStock:true},
-      {size:'4 kg', inStock:true}
-    ]
+    weights:[{size:'1 kg',inStock:true},{size:'2 kg',inStock:true},{size:'4 kg',inStock:true}]
   },
   {
     id:'mb-gold-100-whey', cat:'whey', brand:'MuscleBlaze',
@@ -480,14 +476,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
     img:'Assets/mbgoldwhey.jpg',
     flavours:['Rich Chocolate','Mango','Chocolate Hazelnut'],
-    weights:[
-      {size:'1 kg', inStock:true},
-      {size:'2 kg', inStock:true},
-      {size:'4 kg', inStock:true}
-    ]
+    weights:[{size:'1 kg',inStock:true},{size:'2 kg',inStock:true},{size:'4 kg',inStock:true}]
   },
-
-  /* ── GNC ── */
   {
     id:'gnc-pp-100-whey', cat:'whey', brand:'GNC',
     name:'Pro Performance 100% Whey', protein:'24g', featured:false,
@@ -495,11 +485,7 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',
     img:'Assets/gncpro.jpeg',
     flavours:['Chocolate Supreme','Café Mocha','Kesar Pista','Vanilla Cream','Cookies & Cream'],
-    weights:[
-      {size:'907 g',   inStock:true},
-      {size:'1.81 kg', inStock:true},
-      {size:'4 kg',    inStock:true}
-    ]
+    weights:[{size:'907 g',inStock:true},{size:'1.81 kg',inStock:true},{size:'4 kg',inStock:true}]
   },
   {
     id:'gnc-pure-isolate', cat:'whey', brand:'GNC',
@@ -508,13 +494,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',
     img:'Assets/gncpro.jpeg',
     flavours:['Chocolate Frosting','Vanilla'],
-    weights:[
-      {size:'907 g',   inStock:true},
-      {size:'1.81 kg', inStock:true}
-    ]
+    weights:[{size:'907 g',inStock:true},{size:'1.81 kg',inStock:true}]
   },
-
-  /* ── RUN ── */
   {
     id:'run-whey-pro', cat:'whey', brand:'RUN',
     name:'Whey Pro', protein:'—', featured:false,
@@ -522,18 +503,10 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#4a0000 0%,#880022 60%,#BB0033 100%)',
     img:'Assets/wheypro.jpg',
     flavours:['Pistachio','Coffee','Rich Chocolate','Birthday Cake','Tiramisu'],
-    weights:[
-      {size:'1 kg',    inStock:true},
-      {size:'1.81 kg', inStock:true}
-    ]
+    weights:[{size:'1 kg',inStock:true},{size:'1.81 kg',inStock:true}]
   },
 
-
-  /* ══════════════════════════════════════════════════
-     MASS GAINER
-  ══════════════════════════════════════════════════ */
-
-  /* ── MuscleBlaze ── */
+  /* ══ MASS GAINER ══ */
   {
     id:'mb-super-mass-gainer', cat:'mass', brand:'MuscleBlaze',
     name:'Super Mass Gainer', protein:'15g', featured:true,
@@ -541,19 +514,10 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#5a2600 0%,#CC5500 60%,#FF7700 100%)',
     img:'https://img6.hkrtcdn.com/37800/prd_3779965-MuscleBlaze-Super-Gainer-XXL-Weight-Gainer-6.6-lb-Chocolate_o.jpg',
     flavours:['Chocolate','Cookies & Cream'],
-    weights:[
-      {size:'1 kg', inStock:true},
-      {size:'3 kg', inStock:true},
-      {size:'5 kg', inStock:true}
-    ]
+    weights:[{size:'1 kg',inStock:true},{size:'3 kg',inStock:true},{size:'5 kg',inStock:true}]
   },
 
-
-  /* ══════════════════════════════════════════════════
-     PRE-WORKOUT
-  ══════════════════════════════════════════════════ */
-
-  /* ── Cellucor ── */
+  /* ══ PRE-WORKOUT ══ */
   {
     id:'cellucor-c4-original', cat:'preworkout', brand:'Cellucor',
     name:'C4 Original Pre-Workout', protein:'—', featured:true,
@@ -561,13 +525,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#7B1F00 0%,#CC3300 60%,#FF4400 100%)',
     img:'Assets/C4OriginalPreWorkout.jpg',
     flavours:['Fruit Punch','Pineapple'],
-    weights:[
-      {size:'195g (30 Servings)', inStock:true},
-      {size:'390g (60 Servings)', inStock:true}
-    ]
+    weights:[{size:'195g (30 Servings)',inStock:true},{size:'390g (60 Servings)',inStock:true}]
   },
-
-  /* ── Insane Labz ── */
   {
     id:'insane-labz-psychotic', cat:'preworkout', brand:'Insane Labz',
     name:'Psychotic Pre-Workout', protein:'—', featured:true,
@@ -575,12 +534,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#1A0033 0%,#440088 60%,#7700CC 100%)',
     img:'',
     flavours:['Fruit Punch','Cherry'],
-    weights:[
-      {size:'220g', inStock:true}
-    ]
+    weights:[{size:'220g',inStock:true}]
   },
-
-  /* ── Vertical Labs ── */
   {
     id:'vertical-labs-murphy', cat:'preworkout', brand:'Vertical Labs',
     name:'Murphy Pre-Workout', protein:'—', featured:false,
@@ -588,12 +543,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#002200 0%,#004400 60%,#006600 100%)',
     img:'',
     flavours:['—'],
-    weights:[
-      {size:'—', inStock:true}
-    ]
+    weights:[{size:'—',inStock:true}]
   },
-
-  /* ── C9 Nutrition ── */
   {
     id:'c9-ring-master', cat:'preworkout', brand:'C9 Nutrition',
     name:'Ring Master Pre-Workout', protein:'—', featured:false,
@@ -601,12 +552,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#2A2200 0%,#554400 60%,#776600 100%)',
     img:'',
     flavours:['—'],
-    weights:[
-      {size:'—', inStock:true}
-    ]
+    weights:[{size:'—',inStock:true}]
   },
-
-  /* ── BlackBeast ── */
   {
     id:'blackbeast-big-daddy-inferno', cat:'preworkout', brand:'BlackBeast',
     name:'The Big Daddy Inferno Pre-Workout', protein:'—', featured:true,
@@ -614,12 +561,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#1A0000 0%,#500000 60%,#880000 100%)',
     img:'',
     flavours:['Black Magic'],
-    weights:[
-      {size:'300g (50 Servings)', inStock:true}
-    ]
+    weights:[{size:'300g (50 Servings)',inStock:true}]
   },
-
-  /* ── Muscle Harvest ── */
   {
     id:'muscle-harvest-boss', cat:'preworkout', brand:'Muscle Harvest',
     name:'Boss Pre-Workout', protein:'—', featured:false,
@@ -627,12 +570,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#1A0033 0%,#330066 60%,#550099 100%)',
     img:'',
     flavours:['Black Grapes'],
-    weights:[
-      {size:'350g (~30 Servings)', inStock:true}
-    ]
+    weights:[{size:'350g (~30 Servings)',inStock:true}]
   },
-
-  /* ── Outlast Labz ── */
   {
     id:'outlast-relentless-trigger-max', cat:'preworkout', brand:'Outlast Labz',
     name:'Relentless Trigger Max Pre-Workout', protein:'—', featured:false,
@@ -640,12 +579,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#003333 0%,#006666 60%,#009999 100%)',
     img:'',
     flavours:['Mixed Fruit'],
-    weights:[
-      {size:'30 Servings', inStock:true}
-    ]
+    weights:[{size:'30 Servings',inStock:true}]
   },
-
-  /* ── Kevin Levrone ── */
   {
     id:'kevin-levrone-scatterbrain', cat:'preworkout', brand:'Kevin Levrone',
     name:'Scatterbrain Pre-Workout', protein:'—', featured:true,
@@ -653,10 +588,7 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#2A1A00 0%,#664400 60%,#AA7700 100%)',
     img:'',
     flavours:['Fruit Massage'],
-    weights:[
-      {size:'270g (30 Servings)', inStock:true},
-      {size:'270g (60 Servings)', inStock:true}
-    ]
+    weights:[{size:'270g (30 Servings)',inStock:true},{size:'270g (60 Servings)',inStock:true}]
   },
   {
     id:'kevin-levrone-shaaboom-pump', cat:'preworkout', brand:'Kevin Levrone',
@@ -665,12 +597,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#2A1A00 0%,#664400 60%,#AA7700 100%)',
     img:'',
     flavours:['Watermelon'],
-    weights:[
-      {size:'385g', inStock:true}
-    ]
+    weights:[{size:'385g',inStock:true}]
   },
-
-  /* ── Optimum Nutrition (Pre-Workout) ── */
   {
     id:'on-gold-standard-preworkout', cat:'preworkout', brand:'Optimum Nutrition',
     name:'Gold Standard Pre-Workout', protein:'—', featured:true,
@@ -678,12 +606,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)',
     img:'',
     flavours:['Fruit Punch'],
-    weights:[
-      {size:'142.5g (15 Sachets)', inStock:true}
-    ]
+    weights:[{size:'142.5g (15 Sachets)',inStock:true}]
   },
-
-  /* ── RAW Nutrition ── */
   {
     id:'raw-bum-essential', cat:'preworkout', brand:'RAW Nutrition',
     name:'BUM Essential Pre-Workout', protein:'—', featured:true,
@@ -691,12 +615,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#1A1A1A 0%,#333333 60%,#555555 100%)',
     img:'',
     flavours:['Sour Watermelon'],
-    weights:[
-      {size:'405g (30 Servings)', inStock:true}
-    ]
+    weights:[{size:'405g (30 Servings)',inStock:true}]
   },
-
-  /* ── Rising Labs ── */
   {
     id:'rising-labs-overkill', cat:'preworkout', brand:'Rising Labs',
     name:'Overkill Pre-Workout', protein:'—', featured:false,
@@ -704,12 +624,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#330000 0%,#880000 60%,#CC2200 100%)',
     img:'',
     flavours:['Chili Mango'],
-    weights:[
-      {size:'336g (30 Servings)', inStock:true}
-    ]
+    weights:[{size:'336g (30 Servings)',inStock:true}]
   },
-
-  /* ── QNT ── */
   {
     id:'qnt-hydra-vol', cat:'preworkout', brand:'QNT',
     name:'Hydra Vol Pre-Workout', protein:'—', featured:false,
@@ -717,12 +633,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#002244 0%,#004488 60%,#0066CC 100%)',
     img:'',
     flavours:['Fruit Punch'],
-    weights:[
-      {size:'30 Servings', inStock:true}
-    ]
+    weights:[{size:'30 Servings',inStock:true}]
   },
-
-  /* ── Scoop of Truth ── */
   {
     id:'sot-super-human', cat:'preworkout', brand:'Scoop of Truth',
     name:'Super Human High Stim Pre-Workout', protein:'—', featured:true,
@@ -730,12 +642,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#001133 0%,#002266 60%,#0033AA 100%)',
     img:'',
     flavours:['Citrus Blast'],
-    weights:[
-      {size:'180g (30 Servings)', inStock:true}
-    ]
+    weights:[{size:'180g (30 Servings)',inStock:true}]
   },
-
-  /* ── Americanz Muscles ── */
   {
     id:'americanz-frenzy', cat:'preworkout', brand:'Americanz Muscles',
     name:'Frenzy Pre-Workout', protein:'—', featured:false,
@@ -743,12 +651,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#330011 0%,#880033 60%,#CC0044 100%)',
     img:'',
     flavours:['Gummy Candy'],
-    weights:[
-      {size:'245g (35 Days)', inStock:true}
-    ]
+    weights:[{size:'245g (35 Days)',inStock:true}]
   },
-
-  /* ── Buck Up Nutrition ── */
   {
     id:'buckup-crackhead', cat:'preworkout', brand:'Buck Up Nutrition',
     name:'Crackhead Pre-Workout', protein:'—', featured:false,
@@ -756,12 +660,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#001133 0%,#0033AA 60%,#0055FF 100%)',
     img:'',
     flavours:['Blue Lagoon (Electric)'],
-    weights:[
-      {size:'—', inStock:true}
-    ]
+    weights:[{size:'—',inStock:true}]
   },
-
-  /* ── Wellversed ── */
   {
     id:'wellversed-dynamite', cat:'preworkout', brand:'Wellversed',
     name:'Dynamite Pre-Workout Original', protein:'—', featured:false,
@@ -769,12 +669,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#001A33 0%,#003388 60%,#0055CC 100%)',
     img:'',
     flavours:['Fruit Blast'],
-    weights:[
-      {size:'210g (15 Servings)', inStock:true}
-    ]
+    weights:[{size:'210g (15 Servings)',inStock:true}]
   },
-
-  /* ── ProManiax ── */
   {
     id:'promanix-blood-lock', cat:'preworkout', brand:'ProManiax',
     name:'Blood Lock Stim Loaded Pre-Workout', protein:'—', featured:false,
@@ -782,12 +678,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#330000 0%,#660000 60%,#990000 100%)',
     img:'',
     flavours:['Cotton Candy'],
-    weights:[
-      {size:'60 Servings', inStock:true}
-    ]
+    weights:[{size:'60 Servings',inStock:true}]
   },
-
-  /* ── Wrath X ── */
   {
     id:'wrath-x-preworkout', cat:'preworkout', brand:'Wrath X',
     name:'Wrath X Pre-Workout', protein:'—', featured:false,
@@ -795,12 +687,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#1A1A1A 0%,#2A2A2A 60%,#404040 100%)',
     img:'',
     flavours:['—'],
-    weights:[
-      {size:'510g', inStock:true}
-    ]
+    weights:[{size:'510g',inStock:true}]
   },
-
-  /* ── MegaSupps ── */
   {
     id:'megasupps-disaster-pump', cat:'preworkout', brand:'MegaSupps',
     name:'Disaster Mega Pump Pre-Workout', protein:'—', featured:false,
@@ -808,12 +696,8 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#2A0044 0%,#550088 60%,#7700BB 100%)',
     img:'',
     flavours:['Brazilian Orange'],
-    weights:[
-      {size:'420g (30 Scoops)', inStock:true}
-    ]
+    weights:[{size:'420g (30 Scoops)',inStock:true}]
   },
-
-  /* ── Sacred Beast ── */
   {
     id:'sacred-beast-wild-wild-west', cat:'preworkout', brand:'Sacred Beast',
     name:'Wild Wild West Pre-Workout', protein:'—', featured:false,
@@ -821,17 +705,10 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#2A1500 0%,#664400 60%,#994400 100%)',
     img:'',
     flavours:['Watermelon'],
-    weights:[
-      {size:'400g', inStock:true}
-    ]
+    weights:[{size:'400g',inStock:true}]
   },
 
-
-  /* ══════════════════════════════════════════════════
-     BCAA & AMINO ACIDS
-  ══════════════════════════════════════════════════ */
-
-  /* ── Fast&Up ── */
+  /* ══ BCAA & AMINOS ══ */
   {
     id:'fastup-bcaa', cat:'bcaa', brand:'Fast&Up',
     name:'BCAA 2:1:1', protein:'7.5g BCAAs', featured:true,
@@ -839,17 +716,10 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#003366 0%,#005599 60%,#0077CC 100%)',
     img:'Assets/fastupbcca.png',
     flavours:['Watermelon'],
-    weights:[
-      {size:'250g (30 Servings)', inStock:true}
-    ]
+    weights:[{size:'250g (30 Servings)',inStock:true}]
   },
 
-
-  /* ══════════════════════════════════════════════════
-     CREATINE
-  ══════════════════════════════════════════════════ */
-
-  /* ── AS-IT-IS Nutrition ── */
+  /* ══ CREATINE ══ */
   {
     id:'asitis-creatine', cat:'creatine', brand:'AS-IT-IS Nutrition',
     name:'Creatine Monohydrate', protein:'—', featured:true,
@@ -857,17 +727,10 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#3D1560 0%,#6622AA 60%,#8833CC 100%)',
     img:'Assets/creatinemonohydrate.jpg',
     flavours:['Unflavoured'],
-    weights:[
-      {size:'500g (166 Servings)', inStock:true}
-    ]
+    weights:[{size:'500g (166 Servings)',inStock:true}]
   },
 
-
-  /* ══════════════════════════════════════════════════
-     FAT BURNERS
-  ══════════════════════════════════════════════════ */
-
-  /* ── HealthKart ── */
+  /* ══ FAT BURNERS ══ */
   {
     id:'hk-fat-burner', cat:'fatburner', brand:'HealthKart',
     name:'HK Vitals Fat Burner', protein:'—', featured:true,
@@ -875,17 +738,10 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#005522 0%,#008833 60%,#00AA44 100%)',
     img:'https://img2.hkrtcdn.com/40251/prd_4025001-HK-Vitals-Fat-Burner-with-Caffeine-L-Carnitine-Garcinia-60-tablets-Unflavoured_o.jpg',
     flavours:['Capsules'],
-    weights:[
-      {size:'90 Capsules', inStock:true}
-    ]
+    weights:[{size:'90 Capsules',inStock:true}]
   },
 
-
-  /* ══════════════════════════════════════════════════
-     VITAMINS & MINERALS
-  ══════════════════════════════════════════════════ */
-
-  /* ── Wellbeing Nutrition ── */
+  /* ══ VITAMINS ══ */
   {
     id:'wellbeing-daily-greens', cat:'vitamins', brand:'Wellbeing Nutrition',
     name:'Daily Greens', protein:'—', featured:true,
@@ -893,17 +749,10 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#005550 0%,#008877 60%,#00B8A9 100%)',
     img:'Assets/DailyGreens.jpg',
     flavours:['Lemon Ginger'],
-    weights:[
-      {size:'60 Effervescent Tablets', inStock:true}
-    ]
+    weights:[{size:'60 Effervescent Tablets',inStock:true}]
   },
 
-
-  /* ══════════════════════════════════════════════════
-     PROTEIN BARS
-  ══════════════════════════════════════════════════ */
-
-  /* ── RiteBite Max Protein ── */
+  /* ══ PROTEIN BARS ══ */
   {
     id:'ritebite-max-protein', cat:'bars', brand:'RiteBite Max Protein',
     name:'Max Protein Active Bar', protein:'20g/bar', featured:true,
@@ -911,15 +760,10 @@ const PRODUCTS = [
     gradient:'linear-gradient(135deg,#6B3A00 0%,#CC7700 60%,#F5A623 100%)',
     img:'Assets/ritebite.jpeg',
     flavours:['Choco Almond'],
-    weights:[
-      {size:'Pack of 6 (67g each)', inStock:true}
-    ]
+    weights:[{size:'Pack of 6 (67g each)',inStock:true}]
   },
 
-
-  /* ══════════════════════════════════════════════════
-     COMING SOON PLACEHOLDERS
-  ══════════════════════════════════════════════════ */
+  /* ══ COMING SOON PLACEHOLDERS ══ */
   {id:'cs-health',    cat:'health',    brand:'',name:'',flavours:[],weights:[],protein:'',featured:false,icon:'fas fa-heartbeat',  gradient:'',img:null,comingSoon:true},
   {id:'cs-snacks',    cat:'snacks',    brand:'',name:'',flavours:[],weights:[],protein:'',featured:false,icon:'fas fa-apple-alt',  gradient:'',img:null,comingSoon:true},
   {id:'cs-oats',      cat:'oats',      brand:'',name:'',flavours:[],weights:[],protein:'',featured:false,icon:'fas fa-seedling',   gradient:'',img:null,comingSoon:true},
@@ -928,9 +772,6 @@ const PRODUCTS = [
   {id:'cs-chocolates',cat:'chocolates',brand:'',name:'',flavours:[],weights:[],protein:'',featured:false,icon:'fas fa-candy-cane', gradient:'',img:null,comingSoon:true}
 ];
 
-/* ================================================================
-   CATEGORY METADATA
-================================================================ */
 const CAT_META = {
   all:       {label:'All Products',        icon:'fas fa-th'},
   whey:      {label:'Whey Protein',        icon:'fas fa-flask'},
@@ -949,21 +790,49 @@ const CAT_META = {
   chocolates:{label:'Imported Chocolates', icon:'fas fa-candy-cane'}
 };
 
-/* ================================================================
-   STATE
-================================================================ */
-let currentCat = 'all', searchQuery = '', sortMode = 'featured', stockOnly = false;
-const cardState = {}; /* {id: {flavIdx, weightIdx}} */
+/* Brand avatar colors */
+const BRAND_COLORS = {
+  'Optimum Nutrition':  {bg:'rgba(200,0,0,0.18)', color:'#FF6666'},
+  'MuscleBlaze':        {bg:'rgba(0,80,200,0.18)', color:'#6699FF'},
+  'GNC':                {bg:'rgba(40,40,180,0.18)', color:'#8888FF'},
+  'RUN':                {bg:'rgba(180,0,40,0.18)', color:'#FF6680'},
+  'Cellucor':           {bg:'rgba(200,80,0,0.18)', color:'#FFAA66'},
+  'Insane Labz':        {bg:'rgba(100,0,180,0.18)', color:'#CC88FF'},
+  'BlackBeast':         {bg:'rgba(60,60,60,0.3)', color:'#AAAAAA'},
+  'Kevin Levrone':      {bg:'rgba(180,120,0,0.18)', color:'#FFCC66'},
+  'RAW Nutrition':      {bg:'rgba(60,60,60,0.3)', color:'#BBBBBB'},
+  'Scoop of Truth':     {bg:'rgba(0,40,160,0.18)', color:'#6688FF'},
+  'Fast&Up':            {bg:'rgba(0,100,200,0.18)', color:'#55AAFF'},
+  'AS-IT-IS Nutrition': {bg:'rgba(100,20,180,0.18)', color:'#BB88FF'},
+  'HealthKart':         {bg:'rgba(0,140,60,0.18)', color:'#55CC88'},
+  'Wellbeing Nutrition':{bg:'rgba(0,130,130,0.18)', color:'#44CCCC'},
+  'RiteBite Max Protein':{bg:'rgba(180,60,100,0.18)', color:'#FF88AA'},
+};
 
-/* ================================================================
-   FLAVOUR → COLOR MAP
-================================================================ */
+/* ── STATE ── */
+let currentCat = 'all', searchQuery = '', sortMode = 'featured', stockOnly = false;
+let currentView = 'brand'; /* 'brand' | 'cat' | 'all' */
+const cardState = {};
+
+/* ── VIEW SWITCHER ── */
+const VIEW_LABELS = {brand:'Grouped by brand', cat:'Grouped by category', all:'All products flat grid'};
+function switchView(v) {
+  currentView = v;
+  ['brand','cat','all'].forEach(function(id){
+    document.getElementById('vbtn-' + id).classList.toggle('active', id === v);
+  });
+  var lbl = document.getElementById('viewLabel');
+  if (lbl) lbl.textContent = VIEW_LABELS[v] || '';
+  renderGrid();
+}
+
+/* ── FLAVOUR COLOR MAP ── */
 function getFlavourColor(f) {
   f = (f || '').toLowerCase();
   if (f === '—' || f === '') return '#555555';
   if (f.includes('double rich choc') || f.includes('molten chocolate')) return '#2A0D00';
-  if (f.includes('chocolate frosting') || f.includes('swiss chocolate'))  return '#5A3010';
-  if (f.includes('chocolate hazelnut') || f.includes('hazel nut'))        return '#7A4E2D';
+  if (f.includes('chocolate frosting') || f.includes('swiss chocolate')) return '#5A3010';
+  if (f.includes('chocolate hazelnut') || f.includes('hazel nut'))      return '#7A4E2D';
   if (f.includes('choco almond'))  return '#5D3A1A';
   if (f.includes('chocolate') || f.includes('choco')) return '#4A2000';
   if (f.includes('cookies') || f.includes('cookie'))  return '#6B4C30';
@@ -996,27 +865,21 @@ function getFlavourColor(f) {
   return '#616161';
 }
 
-/* ================================================================
-   WA MESSAGE BUILDER  (updates dynamically on selection)
-================================================================ */
 function buildWaMsg(p, flavour, size) {
-  const flav = (flavour && flavour !== '—') ? `\nFlavour: ${flavour}` : '';
-  const sz   = (size   && size   !== '—') ? `\nSize: ${size}`       : '';
+  var flav = (flavour && flavour !== '—') ? '\nFlavour: ' + flavour : '';
+  var sz   = (size   && size   !== '—') ? '\nSize: ' + size       : '';
   return 'https://wa.me/919949531515?text=' +
-    encodeURIComponent(`Hi, I want to buy *${p.brand} ${p.name}*${flav}${sz}\nPlease confirm availability and price.`);
+    encodeURIComponent('Hi, I want to buy *' + p.brand + ' ' + p.name + '*' + flav + sz + '\nPlease confirm availability and price.');
 }
 
-/* ================================================================
-   INTERACTIVE SELECTORS
-================================================================ */
 function selectFlavour(id, idx) {
   if (!cardState[id]) cardState[id] = {flavIdx:0, weightIdx:0};
   cardState[id].flavIdx = idx;
-  document.querySelectorAll('#fswatches-' + id + ' .flav-swatch').forEach((el, i) => {
+  document.querySelectorAll('#fswatches-' + id + ' .flav-swatch').forEach(function(el, i){
     el.classList.toggle('active', i === idx);
   });
-  const p = PRODUCTS.find(x => x.id === id);
-  const nameEl = document.getElementById('fsel-' + id);
+  var p = PRODUCTS.find(function(x){return x.id === id;});
+  var nameEl = document.getElementById('fsel-' + id);
   if (nameEl && p) nameEl.textContent = p.flavours[idx] || '';
   updateCTA(id);
 }
@@ -1024,47 +887,38 @@ function selectFlavour(id, idx) {
 function selectWeight(id, idx) {
   if (!cardState[id]) cardState[id] = {flavIdx:0, weightIdx:0};
   cardState[id].weightIdx = idx;
-  document.querySelectorAll('#wpills-' + id + ' .weight-pill').forEach((el, i) => {
+  document.querySelectorAll('#wpills-' + id + ' .weight-pill').forEach(function(el, i){
     el.classList.toggle('active', i === idx);
   });
   updateCTA(id);
 }
 
 function updateCTA(id) {
-  const p = PRODUCTS.find(x => x.id === id);
+  var p = PRODUCTS.find(function(x){return x.id === id;});
   if (!p) return;
-  const state   = cardState[id] || {flavIdx:0, weightIdx:0};
-  const flavour = (p.flavours && p.flavours[state.flavIdx]) || '—';
-  const wObj    = (p.weights  && p.weights[state.weightIdx]) || (p.weights && p.weights[0]) || {};
-  const ctaEl   = document.getElementById('cta-' + id);
+  var state   = cardState[id] || {flavIdx:0, weightIdx:0};
+  var flavour = (p.flavours && p.flavours[state.flavIdx]) || '—';
+  var wObj    = (p.weights  && p.weights[state.weightIdx]) || (p.weights && p.weights[0]) || {};
+  var ctaEl   = document.getElementById('cta-' + id);
   if (ctaEl) ctaEl.href = buildWaMsg(p, flavour, wObj.size || '—');
 }
 
-/* ================================================================
-   IMG ERROR FALLBACK
-================================================================ */
 function imgError(el, id) {
   el.style.display = 'none';
-  const ph = document.getElementById('ph-' + id);
+  var ph = document.getElementById('ph-' + id);
   if (ph) ph.classList.add('show');
 }
 
-/* ================================================================
-   PROTEIN PARSER  (for sort)
-================================================================ */
 function parseProtein(p) {
   if (!p.protein || p.protein === '—') return 0;
-  const m = p.protein.match(/(\d+(\.\d+)?)/);
+  var m = p.protein.match(/(\d+(\.\d+)?)/);
   return m ? parseFloat(m[1]) : 0;
 }
 
-/* ================================================================
-   CARD RENDERER
-================================================================ */
+/* ── CARD RENDERER ── */
 function renderCard(p) {
-  /* ── Coming Soon ── */
   if (p.comingSoon) {
-    const cat = CAT_META[p.cat] || {};
+    var cat = CAT_META[p.cat] || {};
     return '<div class="coming-card">' +
       '<i class="' + (cat.icon || p.icon) + '"></i>' +
       '<div class="coming-title">' + (cat.label || p.cat) + '</div>' +
@@ -1073,21 +927,18 @@ function renderCard(p) {
       '<i class="fab fa-whatsapp"></i> Ask on WhatsApp</a></div>';
   }
 
-  /* ── Stock check ── */
-  const hasStock = p.weights && p.weights.some(function(w){return w.inStock;});
-  const defaultWIdx = (function(){
+  var hasStock = p.weights && p.weights.some(function(w){return w.inStock;});
+  var defaultWIdx = (function(){
     if (!p.weights) return 0;
-    const idx = p.weights.findIndex(function(w){return w.inStock;});
+    var idx = p.weights.findIndex(function(w){return w.inStock;});
     return idx >= 0 ? idx : 0;
   })();
-  const defaultFlavour = (p.flavours && p.flavours[0]) || '—';
-  const defaultSize    = (p.weights  && p.weights[defaultWIdx]) ? p.weights[defaultWIdx].size : '—';
+  var defaultFlavour = (p.flavours && p.flavours[0]) || '—';
+  var defaultSize    = (p.weights  && p.weights[defaultWIdx]) ? p.weights[defaultWIdx].size : '—';
 
-  /* init state */
   if (!cardState[p.id]) cardState[p.id] = {flavIdx:0, weightIdx:defaultWIdx};
 
-  /* ── Flavour swatches ── */
-  const hasRealFlavours = p.flavours && p.flavours.length > 0 && p.flavours[0] !== '—';
+  var hasRealFlavours = p.flavours && p.flavours.length > 0 && p.flavours[0] !== '—';
   var flavHtml = '';
   if (hasRealFlavours) {
     var swatchBtns = p.flavours.map(function(f, i){
@@ -1102,8 +953,7 @@ function renderCard(p) {
       '</div>';
   }
 
-  /* ── Weight pills ── */
-  const hasRealWeights = p.weights && p.weights.length > 0 && !(p.weights.length === 1 && p.weights[0].size === '—');
+  var hasRealWeights = p.weights && p.weights.length > 0 && !(p.weights.length === 1 && p.weights[0].size === '—');
   var weightHtml = '';
   if (hasRealWeights) {
     var pills = p.weights.map(function(w, i){
@@ -1120,7 +970,6 @@ function renderCard(p) {
       '</div>';
   }
 
-  /* ── Image section ── */
   var proteinPH = (p.protein && p.protein !== '—') ? '<div class="placeholder-protein">' + p.protein + '</div>' : '';
   var imgHtml;
   if (p.img) {
@@ -1136,16 +985,14 @@ function renderCard(p) {
       '</div>';
   }
 
-  /* ── Badges ── */
   var featBadge = p.featured ? '<div class="badge-stack"><span class="badge badge-featured">\u2B50 Popular</span></div>' : '';
   var oosOverlay = !hasStock ? '<div class="oos-overlay"><div class="oos-tag">Out of Stock</div></div>' : '';
   var proteinTag = (p.protein && p.protein !== '—') ? '<span class="prod-protein-tag">' + p.protein + '</span>' : '';
 
-  /* ── CTA ── */
-  var ctaHref = buildWaMsg(p, defaultFlavour, defaultSize);
-  var ctaIcon = hasStock ? 'fab fa-whatsapp' : 'fas fa-clock';
-  var ctaLabel= hasStock ? 'Buy on WhatsApp' : 'Notify Me';
-  var ctaCls  = 'prod-cta' + (!hasStock ? ' disabled' : '');
+  var ctaHref  = buildWaMsg(p, defaultFlavour, defaultSize);
+  var ctaIcon  = hasStock ? 'fab fa-whatsapp' : 'fas fa-clock';
+  var ctaLabel = hasStock ? 'Buy on WhatsApp' : 'Notify Me';
+  var ctaCls   = 'prod-cta' + (!hasStock ? ' disabled' : '');
 
   return '<div class="prod-card" id="card-' + p.id + '" itemscope itemtype="https://schema.org/Product">' +
     '<meta itemprop="name" content="' + p.brand + ' ' + p.name + '"/>' +
@@ -1168,10 +1015,8 @@ function renderCard(p) {
   '</div>';
 }
 
-/* ================================================================
-   FILTER / SORT
-================================================================ */
-const REAL_PRODUCTS = PRODUCTS.filter(function(p){return !p.comingSoon;});
+/* ── FILTER / SORT ── */
+var REAL_PRODUCTS = PRODUCTS.filter(function(p){return !p.comingSoon;});
 
 function getFiltered() {
   var list = currentCat === 'all'
@@ -1207,27 +1052,117 @@ function getFiltered() {
         return bS - aS;
       });
       break;
-    default: /* featured */
+    default:
       list.sort(function(a,b){return (b.featured?1:0)-(a.featured?1:0);});
   }
-
   return list;
 }
 
-/* ================================================================
-   GRID RENDERER  (brand-grouped)
-================================================================ */
+/* ── GRID SIZE helper ── */
+function gridClass(count) {
+  if (count >= 4) return 'grid-4';
+  if (count === 3) return 'grid-3';
+  return 'grid-2';
+}
+
+/* ── BRAND INITIALS ── */
+function brandInitials(name) {
+  return name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+}
+
+/* ── RENDER: BY BRAND ── */
+function renderBrandView(list) {
+  var brandOrder = [], byBrand = {};
+  list.forEach(function(p){
+    var b = p.brand || 'Other';
+    if (!byBrand[b]) { byBrand[b] = []; brandOrder.push(b); }
+    byBrand[b].push(p);
+  });
+
+  var html = '';
+  brandOrder.forEach(function(brand){
+    var prods = byBrand[brand];
+    var col   = BRAND_COLORS[brand] || {bg:'rgba(80,80,80,0.18)', color:'#AAAAAA'};
+    var cls   = gridClass(prods.length);
+    html += '<div class="brand-group">' +
+      '<div class="brand-header">' +
+        '<div class="brand-avatar" style="background:' + col.bg + ';color:' + col.color + '">' + brandInitials(brand) + '</div>' +
+        '<span class="brand-name-tag">' + brand + '</span>' +
+        '<span class="brand-prod-count">' + prods.length + ' product' + (prods.length > 1 ? 's' : '') + '</span>' +
+        '<div class="brand-line"></div>' +
+      '</div>' +
+      '<div class="brand-grid ' + cls + '">' + prods.map(renderCard).join('') + '</div>' +
+    '</div>';
+  });
+
+  /* append coming-soon for filtered category */
+  if (currentCat !== 'all') {
+    var csCard = PRODUCTS.find(function(p){return p.comingSoon && p.cat === currentCat;});
+    if (csCard) html += '<div class="brand-group"><div class="brand-grid grid-2">' + renderCard(csCard) + '</div></div>';
+  }
+  return html;
+}
+
+/* ── RENDER: BY CATEGORY ── */
+function renderCatView(list) {
+  var catOrder = [], byCat = {};
+  list.forEach(function(p){
+    var c = p.cat || 'other';
+    if (!byCat[c]) { byCat[c] = []; catOrder.push(c); }
+    byCat[c].push(p);
+  });
+
+  /* respect CAT_META order when in 'all' mode */
+  if (currentCat === 'all') {
+    var metaOrder = Object.keys(CAT_META).filter(function(k){return k !== 'all';});
+    catOrder.sort(function(a,b){return metaOrder.indexOf(a) - metaOrder.indexOf(b);});
+  }
+
+  var html = '';
+  catOrder.forEach(function(cat){
+    var prods = byCat[cat];
+    var meta  = CAT_META[cat] || {label: cat, icon:'fas fa-box'};
+    var cls   = gridClass(prods.length);
+    html += '<div class="cat-group">' +
+      '<div class="cat-group-header">' +
+        '<div class="cat-group-icon" style="background:rgba(226,0,0,0.1);border:1px solid rgba(226,0,0,0.2);color:var(--red);">' +
+          '<i class="' + meta.icon + '"></i>' +
+        '</div>' +
+        '<span class="cat-group-name">' + meta.label + '</span>' +
+        '<span class="cat-group-count">' + prods.length + '</span>' +
+        '<div class="cat-group-line"></div>' +
+      '</div>' +
+      '<div class="brand-grid ' + cls + '">' + prods.map(renderCard).join('') + '</div>' +
+    '</div>';
+  });
+
+  if (currentCat !== 'all') {
+    var csCard = PRODUCTS.find(function(p){return p.comingSoon && p.cat === currentCat;});
+    if (csCard) html += '<div class="cat-group"><div class="brand-grid grid-2">' + renderCard(csCard) + '</div></div>';
+  }
+  return html;
+}
+
+/* ── RENDER: ALL FLAT ── */
+function renderAllView(list) {
+  var cls = gridClass(Math.min(list.length, 4));
+  var html = '<div class="brand-group"><div class="brand-grid ' + cls + '">' + list.map(renderCard).join('') + '</div></div>';
+  if (currentCat !== 'all') {
+    var csCard = PRODUCTS.find(function(p){return p.comingSoon && p.cat === currentCat;});
+    if (csCard) html += '<div class="brand-group"><div class="brand-grid grid-2">' + renderCard(csCard) + '</div></div>';
+  }
+  return html;
+}
+
+/* ── MAIN RENDER ── */
 function renderGrid() {
   var grid = document.getElementById('productsGrid');
   var list = getFiltered();
 
-  /* empty state */
   if (list.length === 0) {
-    var cs = (currentCat !== 'all')
-      ? PRODUCTS.find(function(p){return p.comingSoon && p.cat === currentCat;})
-      : null;
-    if (cs) {
-      grid.innerHTML = '<div class="brand-group"><div class="brand-grid">' + renderCard(cs) + '</div></div>';
+    var csCard = (currentCat !== 'all') ? PRODUCTS.find(function(p){return p.comingSoon && p.cat === currentCat;}) : null;
+    if (csCard) {
+      grid.innerHTML = '<div class="brand-group"><div class="brand-grid grid-2">' + renderCard(csCard) + '</div></div>';
       document.getElementById('prodCount').textContent = '0';
       return;
     }
@@ -1241,44 +1176,14 @@ function renderGrid() {
     return;
   }
 
-  /* group by brand, preserving sort order */
-  var brandOrder = [];
-  var byBrand = {};
-  list.forEach(function(p) {
-    var b = p.brand || 'Other';
-    if (!byBrand[b]) { byBrand[b] = []; brandOrder.push(b); }
-    byBrand[b].push(p);
-  });
+  if (currentView === 'brand')    grid.innerHTML = renderBrandView(list);
+  else if (currentView === 'cat') grid.innerHTML = renderCatView(list);
+  else                            grid.innerHTML = renderAllView(list);
 
-  var html = '';
-  brandOrder.forEach(function(brand) {
-    var prods = byBrand[brand];
-    var countLabel = prods.length + ' product' + (prods.length > 1 ? 's' : '');
-    html += '<div class="brand-group">' +
-      '<div class="brand-header">' +
-        '<span class="brand-name-tag">' + brand + '</span>' +
-        '<span class="brand-prod-count">' + countLabel + '</span>' +
-        '<div class="brand-line"></div>' +
-      '</div>' +
-      '<div class="brand-grid">' + prods.map(renderCard).join('') + '</div>' +
-    '</div>';
-  });
-
-  /* append coming-soon card for specific category tabs */
-  if (currentCat !== 'all') {
-    var csCard = PRODUCTS.find(function(p){return p.comingSoon && p.cat === currentCat;});
-    if (csCard) {
-      html += '<div class="brand-group"><div class="brand-grid">' + renderCard(csCard) + '</div></div>';
-    }
-  }
-
-  grid.innerHTML = html;
   document.getElementById('prodCount').textContent = list.length;
 }
 
-/* ================================================================
-   FILTER UI HELPERS
-================================================================ */
+/* ── FILTER UI ── */
 function updateFilterChips() {
   var wrap  = document.getElementById('activeFilters');
   var chips = [];
@@ -1293,7 +1198,7 @@ function updateFilterChips() {
 }
 
 function updateCounts() {
-  Object.keys(CAT_META).forEach(function(c) {
+  Object.keys(CAT_META).forEach(function(c){
     var el = document.getElementById('count-' + c);
     if (!el) return;
     var count = c === 'all'
@@ -1324,7 +1229,7 @@ function toggleStockFilter() {
 
 function clearSearch()  { searchQuery = ''; document.getElementById('searchInput').value = ''; renderGrid(); updateFilterChips(); }
 function resetSort()    { sortMode = 'featured'; document.getElementById('sortSelect').value = 'featured'; renderGrid(); updateFilterChips(); }
-function clearAll()     {
+function clearAll() {
   searchQuery = ''; stockOnly = false; sortMode = 'featured';
   document.getElementById('searchInput').value = '';
   document.getElementById('sortSelect').value  = 'featured';
@@ -1333,7 +1238,6 @@ function clearAll()     {
   updateFilterChips();
 }
 
-/* ── Event Listeners ── */
 document.getElementById('searchInput').addEventListener('input', function(e){
   searchQuery = e.target.value.trim();
   renderGrid();
@@ -1345,13 +1249,11 @@ document.getElementById('sortSelect').addEventListener('change', function(e){
   updateFilterChips();
 });
 
-/* ── URL hash category deep-link ── */
 (function(){
   var hash = window.location.hash.replace('#', '');
   if (hash && CAT_META[hash]) filterCat(hash);
 })();
 
-/* ── Init ── */
 updateCounts();
 renderGrid();
 updateFilterChips();
