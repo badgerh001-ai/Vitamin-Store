@@ -42,6 +42,7 @@
   --muted:#888888;--muted2:#555555;
   --font-d:'Barlow Condensed',sans-serif;--font-b:'DM Sans',sans-serif;
   --r-sm:8px;--r-md:14px;--r-lg:20px;
+  --nav-h:66px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
@@ -52,8 +53,8 @@ a{text-decoration:none;color:inherit;}
 ::-webkit-scrollbar-track{background:var(--dark);}
 ::-webkit-scrollbar-thumb{background:var(--red);border-radius:3px;}
 
-/* NAV */
-nav{position:fixed;top:0;width:100%;z-index:200;height:66px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,0.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
+/* ── NAV ── */
+nav{position:fixed;top:0;width:100%;z-index:200;height:var(--nav-h);padding:0 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,8,0.97);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);}
 .nav-brand{display:flex;align-items:center;gap:10px;}
 .nav-logo{width:44px;height:44px;object-fit:contain;filter:drop-shadow(0 0 8px var(--red-glow));}
 .nav-name{font-family:var(--font-d);font-size:1.35rem;font-weight:800;letter-spacing:0.04em;color:var(--white);line-height:1;}
@@ -65,31 +66,43 @@ nav{position:fixed;top:0;width:100%;z-index:200;height:66px;padding:0 24px;displ
 .nav-cta{background:var(--red);color:var(--white)!important;padding:9px 20px;border-radius:6px;font-weight:700!important;font-size:0.85rem!important;display:flex;align-items:center;gap:7px;transition:background 0.2s,box-shadow 0.2s;box-shadow:0 4px 16px var(--red-glow);}
 .nav-cta:hover{background:#c00!important;box-shadow:0 8px 24px var(--red-glow)!important;}
 
-/* PAGE HERO */
-.page-hero{margin-top:66px;min-height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:48px 24px;position:relative;overflow:hidden;background:linear-gradient(160deg,#0a0000,var(--dark));border-bottom:1px solid var(--border);}
+/* ── PAGE HERO ── */
+.page-hero{margin-top:var(--nav-h);min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px;position:relative;overflow:hidden;background:linear-gradient(160deg,#0a0000,var(--dark));border-bottom:1px solid var(--border);}
 .page-hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1600&q=60') center/cover no-repeat;opacity:0.06;}
 .page-hero::after{content:'';position:absolute;width:500px;height:500px;background:radial-gradient(circle,rgba(226,0,0,0.15) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
 .hero-inner{position:relative;z-index:2;}
 .page-label{font-size:0.7rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);font-weight:700;margin-bottom:8px;}
-.page-title{font-family:var(--font-d);font-size:clamp(2.2rem,6vw,3.5rem);font-weight:900;color:var(--white);text-transform:uppercase;line-height:1;}
-.page-sub{font-size:0.88rem;color:var(--muted);margin-top:10px;line-height:1.6;}
+.page-title{font-family:var(--font-d);font-size:clamp(2rem,6vw,3.2rem);font-weight:900;color:var(--white);text-transform:uppercase;line-height:1;}
+.page-sub{font-size:0.85rem;color:var(--muted);margin-top:10px;line-height:1.6;}
 
-/* ADVICE BAR */
+/* ── ADVICE BAR ── */
 .advice-bar{background:rgba(226,0,0,0.08);border-bottom:1px solid rgba(226,0,0,0.15);padding:10px 24px;text-align:center;}
 .advice-bar a{font-size:0.83rem;color:var(--text);display:inline-flex;align-items:center;gap:8px;font-weight:500;}
 .advice-bar a i{color:var(--red);}
 .advice-bar a span{color:var(--red);font-weight:700;text-decoration:underline;text-decoration-color:rgba(226,0,0,0.4);}
 
-/* FILTER BAR */
-.filter-bar{position:sticky;top:66px;z-index:100;background:rgba(14,14,14,0.99);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.filter-top{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:14px 24px;flex-wrap:wrap;}
+/* ── LEVEL HEADER (BREADCRUMB) ── */
+.level-header{position:sticky;top:var(--nav-h);z-index:99;background:rgba(12,12,12,0.98);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:none;}
+.level-header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:11px 24px;min-height:50px;}
+.back-btn{display:inline-flex;align-items:center;gap:7px;padding:7px 14px;background:var(--surface);border:1px solid var(--border);border-radius:7px;color:var(--muted);font-size:0.8rem;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;font-family:var(--font-b);flex-shrink:0;}
+.back-btn:hover{border-color:rgba(226,0,0,0.4);color:var(--text);}
+.bc-divider{width:1px;height:20px;background:var(--border);flex-shrink:0;}
+.breadcrumb{display:flex;align-items:center;gap:7px;flex-wrap:wrap;min-width:0;}
+.bc-item{font-size:0.82rem;color:var(--muted);cursor:pointer;transition:color 0.2s;white-space:nowrap;font-weight:500;}
+.bc-item:hover{color:var(--red);}
+.bc-item.active{color:var(--text);cursor:default;font-weight:600;}
+.bc-sep{color:var(--muted2);font-size:0.65rem;flex-shrink:0;}
+
+/* ── FILTER BAR (L3 only) ── */
+.filter-bar{position:sticky;top:116px;z-index:98;background:rgba(14,14,14,0.99);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:none;}
+.filter-top{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:12px 24px;flex-wrap:wrap;}
 .search-wrap{flex:1;min-width:200px;position:relative;}
 .search-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.85rem;pointer-events:none;}
 .search-input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px 10px 38px;color:var(--text);font-family:var(--font-b);font-size:0.88rem;outline:none;transition:border-color 0.2s;}
 .search-input:focus{border-color:rgba(226,0,0,0.4);}
 .search-input::placeholder{color:var(--muted2);}
 .filter-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
-.sort-select{background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:var(--font-b);font-size:0.82rem;padding:10px 12px;border-radius:8px;outline:none;cursor:pointer;white-space:nowrap;min-width:170px;}
+.sort-select{background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:var(--font-b);font-size:0.82rem;padding:10px 12px;border-radius:8px;outline:none;cursor:pointer;white-space:nowrap;min-width:160px;}
 .sort-select:focus{border-color:rgba(226,0,0,0.4);}
 .stock-toggle{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-family:var(--font-b);font-size:0.82rem;padding:8px 14px;border-radius:8px;cursor:pointer;white-space:nowrap;transition:all 0.2s;user-select:none;}
 .stock-toggle .toggle-dot{width:14px;height:14px;border-radius:50%;background:var(--muted2);transition:background 0.2s;flex-shrink:0;}
@@ -97,16 +110,6 @@ nav{position:fixed;top:0;width:100%;z-index:200;height:66px;padding:0 24px;displ
 .stock-toggle.on .toggle-dot{background:#00cc66;}
 .filter-count{font-size:0.8rem;color:var(--muted);white-space:nowrap;margin-left:auto;}
 .filter-count span{color:var(--red);font-weight:700;font-family:var(--font-d);font-size:1rem;}
-
-/* VIEW SWITCHER */
-.view-switcher{max-width:1200px;margin:0 auto;padding:10px 24px 0;display:flex;align-items:center;gap:8px;}
-.view-btn{display:flex;align-items:center;gap:7px;padding:7px 16px;border-radius:6px;font-size:0.8rem;font-weight:600;border:1px solid var(--border);color:var(--muted);cursor:pointer;white-space:nowrap;transition:all 0.2s;background:transparent;font-family:var(--font-b);}
-.view-btn i{font-size:0.8rem;}
-.view-btn:hover{border-color:rgba(226,0,0,0.35);color:var(--text);}
-.view-btn.active{background:var(--red);border-color:var(--red);color:#fff;}
-.view-label{font-size:0.72rem;color:var(--muted);margin-left:auto;white-space:nowrap;}
-
-/* ACTIVE FILTER CHIPS */
 .active-filters{max-width:1200px;margin:0 auto;padding:0 24px 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .active-filters:empty{display:none;}
 .filter-chip{display:inline-flex;align-items:center;gap:5px;background:rgba(226,0,0,0.1);border:1px solid rgba(226,0,0,0.25);color:var(--red);font-size:0.75rem;font-weight:600;padding:3px 10px;border-radius:20px;cursor:pointer;transition:all 0.2s;}
@@ -115,100 +118,101 @@ nav{position:fixed;top:0;width:100%;z-index:200;height:66px;padding:0 24px;displ
 .clear-all-btn{font-size:0.75rem;color:var(--muted);cursor:pointer;text-decoration:underline;text-decoration-color:rgba(255,255,255,0.2);transition:color 0.2s;}
 .clear-all-btn:hover{color:var(--red);}
 
-/* CATEGORY TABS */
-.cat-tabs-wrap{max-width:1200px;margin:0 auto;padding:0 24px 14px;overflow-x:auto;scrollbar-width:none;}
-.cat-tabs-wrap::-webkit-scrollbar{display:none;}
-.cat-tabs{display:flex;gap:7px;width:max-content;}
-.cat-tab{display:flex;align-items:center;gap:7px;padding:7px 14px;border-radius:30px;font-size:0.8rem;font-weight:600;border:1.5px solid var(--border);color:var(--muted);cursor:pointer;white-space:nowrap;transition:all 0.2s;background:transparent;font-family:var(--font-b);}
-.cat-tab i{font-size:0.75rem;}
-.cat-tab:hover{border-color:rgba(226,0,0,0.35);color:var(--text);}
-.cat-tab.active{background:var(--red);border-color:var(--red);color:#fff;}
-.tab-count{background:rgba(255,255,255,0.15);color:inherit;padding:1px 7px;border-radius:10px;font-size:0.7rem;font-weight:700;}
-.cat-tab.active .tab-count{background:rgba(255,255,255,0.25);}
+/* ── MAIN SECTION ── */
+.products-section{max-width:1200px;margin:0 auto;padding:28px 24px 48px;}
 
-/* PRODUCTS SECTION */
-.products-section{max-width:1200px;margin:0 auto;padding:28px 24px 40px;}
+/* ── LEVEL 1: BRAND GRID ── */
+.brands-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.brand-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:20px 18px 16px;display:flex;flex-direction:column;gap:14px;cursor:pointer;transition:transform 0.22s,box-shadow 0.22s,border-color 0.22s;position:relative;overflow:hidden;}
+.brand-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:transparent;transition:background 0.22s;}
+.brand-card:hover{transform:translateY(-5px);border-color:rgba(226,0,0,0.3);box-shadow:0 16px 48px rgba(0,0,0,0.5);}
+.brand-card:hover::after{background:var(--red);}
+.brand-card-top{display:flex;align-items:center;gap:13px;}
+.brand-card-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:1rem;font-weight:900;letter-spacing:0.04em;flex-shrink:0;line-height:1;}
+.brand-card-name{font-family:var(--font-d);font-size:1.1rem;font-weight:900;color:var(--white);text-transform:uppercase;letter-spacing:0.03em;line-height:1.2;}
+.brand-cats-row{display:flex;flex-wrap:wrap;gap:5px;min-height:22px;}
+.brand-cat-pill{font-size:0.62rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,0.04);border:1px solid var(--border);padding:2px 8px;border-radius:20px;white-space:nowrap;}
+.brand-card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:4px;}
+.bc-prod-count{font-size:0.75rem;color:var(--muted);font-weight:500;}
+.bc-prod-count strong{color:var(--red);font-family:var(--font-d);font-size:1.15rem;font-weight:900;margin-right:2px;}
+.brand-arrow{width:30px;height:30px;border-radius:50%;background:rgba(226,0,0,0.08);border:1px solid rgba(226,0,0,0.2);display:flex;align-items:center;justify-content:center;color:var(--red);font-size:0.75rem;transition:all 0.2s;flex-shrink:0;}
+.brand-card:hover .brand-arrow{background:var(--red);color:#fff;border-color:var(--red);}
 
-/* ── BRAND GROUP LAYOUT ── */
-.products-grid{display:flex;flex-direction:column;gap:36px;}
-.brand-group{display:flex;flex-direction:column;gap:0;}
-.brand-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.05);}
-.brand-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;letter-spacing:0.04em;}
-.brand-name-tag{font-family:var(--font-d);font-size:1.05rem;font-weight:900;color:var(--white);text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;}
-.brand-prod-count{font-size:0.68rem;color:var(--muted);white-space:nowrap;background:var(--surface);padding:2px 9px;border-radius:20px;border:1px solid var(--border);flex-shrink:0;}
-.brand-line{flex:1;height:1px;background:var(--border);}
+/* ── LEVEL 2: CATEGORY GRID ── */
+.cats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+.cat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);padding:32px 16px 24px;display:flex;flex-direction:column;align-items:center;gap:14px;cursor:pointer;transition:transform 0.22s,box-shadow 0.22s,border-color 0.22s;text-align:center;position:relative;overflow:hidden;}
+.cat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:transparent;transition:background 0.22s;}
+.cat-card:hover{transform:translateY(-5px);border-color:rgba(226,0,0,0.3);box-shadow:0 16px 48px rgba(0,0,0,0.5);}
+.cat-card:hover::after{background:var(--red);}
+.cat-card-icon{width:62px;height:62px;border-radius:16px;background:rgba(226,0,0,0.1);border:1px solid rgba(226,0,0,0.2);display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:var(--red);transition:all 0.22s;}
+.cat-card:hover .cat-card-icon{background:var(--red);color:#fff;border-color:var(--red);box-shadow:0 8px 24px var(--red-glow);}
+.cat-card-name{font-family:var(--font-d);font-size:1.1rem;font-weight:900;color:var(--white);text-transform:uppercase;letter-spacing:0.04em;line-height:1.2;}
+.cat-card-count{font-size:0.75rem;color:var(--muted);font-weight:500;background:var(--surface);border:1px solid var(--border);padding:2px 10px;border-radius:20px;}
 
-/* ── GRID MODES ── */
-.brand-grid{display:grid;gap:16px;}
-.brand-grid.grid-4{grid-template-columns:repeat(4,1fr);}
-.brand-grid.grid-3{grid-template-columns:repeat(3,1fr);}
-.brand-grid.grid-2{grid-template-columns:repeat(2,1fr);}
+/* ── PRODUCT GRID (L3) ── */
+.prod-grid{display:grid;gap:14px;}
+.prod-grid.g4{grid-template-columns:repeat(4,1fr);}
+.prod-grid.g3{grid-template-columns:repeat(3,1fr);}
+.prod-grid.g2{grid-template-columns:repeat(2,1fr);}
+.prod-grid.g1{grid-template-columns:1fr;}
 
-/* CATEGORY GROUP */
-.cat-group{margin-bottom:36px;}
-.cat-group-header{display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,0.05);}
-.cat-group-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.95rem;flex-shrink:0;}
-.cat-group-name{font-family:var(--font-d);font-size:1.05rem;font-weight:900;color:var(--white);text-transform:uppercase;letter-spacing:0.06em;}
-.cat-group-count{font-size:0.68rem;color:var(--muted);background:var(--surface);padding:2px 9px;border-radius:20px;border:1px solid var(--border);}
-.cat-group-line{flex:1;height:1px;background:var(--border);}
-
-/* PRODUCT CARD */
+/* ── PRODUCT CARD ── */
 .prod-card{background:var(--card);border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;display:flex;flex-direction:column;transition:transform 0.22s,box-shadow 0.22s,border-color 0.22s;position:relative;}
 .prod-card:hover{transform:translateY(-5px);border-color:rgba(226,0,0,0.3);box-shadow:0 16px 48px rgba(0,0,0,0.5),0 0 0 1px rgba(226,0,0,0.08);}
 
 /* CARD IMAGE */
 .prod-img-wrap{aspect-ratio:1/1;position:relative;overflow:hidden;flex-shrink:0;background:#ffffff;}
-.prod-img-real{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:16px;transition:transform 0.35s ease;background:#ffffff;}
+.prod-img-real{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:14px;transition:transform 0.35s ease;background:#ffffff;}
 .prod-card:hover .prod-img-real{transform:scale(1.07);}
-.prod-img-placeholder{position:absolute;inset:0;width:100%;height:100%;display:none;flex-direction:column;align-items:center;justify-content:center;gap:10px;}
+.prod-img-placeholder{position:absolute;inset:0;width:100%;height:100%;display:none;flex-direction:column;align-items:center;justify-content:center;gap:6px;overflow:hidden;}
 .prod-img-placeholder.show{display:flex;}
 .prod-img-placeholder::before{content:'';position:absolute;inset:0;background:inherit;opacity:0.15;filter:blur(40px);}
-.prod-img-placeholder i{font-size:2.8rem;opacity:0.85;color:rgba(255,255,255,0.95);position:relative;z-index:1;filter:drop-shadow(0 2px 12px rgba(0,0,0,0.4));}
-.placeholder-brand-txt{font-family:var(--font-d);font-size:0.75rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.7);position:relative;z-index:1;}
-.placeholder-protein{font-family:var(--font-d);font-size:1.1rem;font-weight:900;color:rgba(255,255,255,0.9);position:relative;z-index:1;letter-spacing:0.05em;}
+.prod-img-placeholder i{font-size:2rem;opacity:0.85;color:rgba(255,255,255,0.95);position:relative;z-index:1;filter:drop-shadow(0 2px 8px rgba(0,0,0,0.4));}
+.placeholder-brand-txt{font-family:var(--font-d);font-size:0.68rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.7);position:relative;z-index:1;max-width:90%;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.placeholder-protein{font-family:var(--font-d);font-size:0.9rem;font-weight:900;color:rgba(255,255,255,0.9);position:relative;z-index:1;letter-spacing:0.05em;}
 
-/* OUT OF STOCK */
+/* OOS OVERLAY */
 .oos-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;z-index:3;}
 .oos-tag{background:rgba(0,0,0,0.8);color:var(--muted);font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:5px 14px;border-radius:4px;border:1px solid rgba(255,255,255,0.15);}
 
 /* BADGES */
 .prod-badge-row{position:absolute;top:10px;left:10px;right:10px;display:flex;align-items:flex-start;justify-content:space-between;gap:6px;z-index:2;pointer-events:none;}
-.badge{padding:3px 9px;border-radius:20px;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;white-space:nowrap;}
-.badge-brand{background:rgba(0,0,0,0.72);color:#fff;backdrop-filter:blur(4px);}
+.badge{padding:3px 9px;border-radius:20px;font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;}
+.badge-brand{background:rgba(0,0,0,0.72);color:#fff;backdrop-filter:blur(4px);max-width:120px;overflow:hidden;text-overflow:ellipsis;}
 .badge-featured{background:rgba(255,140,0,0.95);color:#fff;}
 .badge-stack{display:flex;flex-direction:column;gap:4px;align-items:flex-end;}
 
 /* CARD BODY */
-.prod-body{padding:14px 14px 16px;display:flex;flex-direction:column;flex:1;gap:0;}
-.prod-brand-tag{font-size:0.68rem;color:var(--red);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:3px;}
-.prod-name{font-family:var(--font-d);font-size:1rem;font-weight:800;color:var(--white);line-height:1.2;text-transform:uppercase;letter-spacing:0.01em;margin-bottom:5px;}
+.prod-body{padding:12px 12px 14px;display:flex;flex-direction:column;flex:1;gap:0;}
+.prod-brand-tag{font-size:0.65rem;color:var(--red);font-weight:700;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2px;}
+.prod-name{font-family:var(--font-d);font-size:0.95rem;font-weight:800;color:var(--white);line-height:1.2;text-transform:uppercase;letter-spacing:0.01em;margin-bottom:4px;}
 .prod-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:2px;}
-.prod-protein-tag{font-size:0.72rem;background:rgba(226,0,0,0.1);border:1px solid rgba(226,0,0,0.2);color:var(--red);padding:2px 8px;border-radius:4px;font-weight:700;}
+.prod-protein-tag{font-size:0.68rem;background:rgba(226,0,0,0.1);border:1px solid rgba(226,0,0,0.2);color:var(--red);padding:2px 7px;border-radius:4px;font-weight:700;}
 
 /* FLAVOUR SWATCHES */
 .prod-selector-block{margin-top:8px;display:flex;flex-direction:column;gap:5px;}
 .prod-selector-label{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);font-weight:700;display:flex;align-items:center;gap:5px;}
-.selected-name{color:var(--text);text-transform:none;letter-spacing:0;font-weight:500;font-size:0.68rem;max-width:140px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.selected-name{color:var(--text);text-transform:none;letter-spacing:0;font-weight:500;font-size:0.66rem;max-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .flav-swatches{display:flex;flex-wrap:wrap;gap:5px;}
-.flav-swatch{width:19px;height:19px;border-radius:50%;border:2px solid rgba(255,255,255,0.12);cursor:pointer;transition:all 0.18s;padding:0;flex-shrink:0;outline:none;}
+.flav-swatch{width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,0.12);cursor:pointer;transition:all 0.18s;padding:0;flex-shrink:0;outline:none;}
 .flav-swatch:hover{transform:scale(1.25);border-color:rgba(255,255,255,0.5);}
 .flav-swatch.active{border-color:var(--white)!important;box-shadow:0 0 0 2px var(--red);transform:scale(1.12);}
 
 /* WEIGHT PILLS */
-.weight-pills{display:flex;flex-wrap:wrap;gap:5px;}
-.weight-pill{padding:3px 8px;border-radius:5px;font-size:0.67rem;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.15s;font-family:var(--font-b);line-height:1.4;}
+.weight-pills{display:flex;flex-wrap:wrap;gap:4px;}
+.weight-pill{padding:3px 7px;border-radius:5px;font-size:0.63rem;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.15s;font-family:var(--font-b);line-height:1.4;}
 .weight-pill:not(:disabled):hover{border-color:rgba(226,0,0,0.4);color:var(--text);}
 .weight-pill.active{background:rgba(226,0,0,0.1);border-color:var(--red);color:var(--red);}
 .weight-pill.oos{opacity:0.35;cursor:not-allowed;text-decoration:line-through;}
 
 /* CALL FOR PRICE */
-.call-for-price{display:inline-flex;align-items:center;gap:7px;margin-top:10px;padding:6px 12px;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);font-size:0.78rem;color:var(--muted);font-weight:600;letter-spacing:0.03em;}
-.call-for-price i{color:var(--red);font-size:0.8rem;}
+.call-for-price{display:inline-flex;align-items:center;gap:7px;margin-top:10px;padding:6px 10px;border-radius:6px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);font-size:0.74rem;color:var(--muted);font-weight:600;letter-spacing:0.02em;}
+.call-for-price i{color:var(--red);font-size:0.78rem;}
 
 /* BUY BUTTON */
-.prod-cta{margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 14px;border-radius:8px;background:rgba(226,0,0,0.08);border:1px solid rgba(226,0,0,0.22);color:var(--red);font-size:0.85rem;font-weight:700;cursor:pointer;transition:all 0.2s;width:100%;text-align:center;font-family:var(--font-b);}
+.prod-cta{margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:8px;background:rgba(226,0,0,0.08);border:1px solid rgba(226,0,0,0.22);color:var(--red);font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.2s;width:100%;text-align:center;font-family:var(--font-b);}
 .prod-cta:hover{background:var(--red);color:#fff;border-color:var(--red);}
-.prod-cta i{font-size:1rem;}
+.prod-cta i{font-size:0.95rem;}
 .prod-cta.disabled{opacity:0.45;pointer-events:none;cursor:not-allowed;}
 
 /* EMPTY STATE */
@@ -219,13 +223,7 @@ nav{position:fixed;top:0;width:100%;z-index:200;height:66px;padding:0 24px;displ
 .empty-wa{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;background:var(--red);color:#fff;font-weight:700;font-size:0.9rem;cursor:pointer;transition:background 0.2s;margin-top:8px;}
 .empty-wa:hover{background:#c00;}
 
-/* COMING SOON card */
-.coming-card{background:var(--card);border:1px dashed rgba(255,255,255,0.1);border-radius:var(--r-md);padding:40px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0.7;}
-.coming-card i{font-size:2rem;color:var(--muted2);}
-.coming-title{font-family:var(--font-d);font-size:1rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;}
-.coming-sub{font-size:0.78rem;color:var(--muted2);}
-
-/* ACCESSORIES SECTION */
+/* ── ACCESSORIES SECTION ── */
 .accessories-section{max-width:1200px;margin:0 auto;padding:0 24px 80px;}
 .section-divider{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
 .section-divider::before,.section-divider::after{content:'';flex:1;height:1px;background:var(--border);}
@@ -240,22 +238,22 @@ nav{position:fixed;top:0;width:100%;z-index:200;height:66px;padding:0 24px;displ
 .coming-soon-banner a.banner-wa{margin-top:6px;display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:8px;background:rgba(226,0,0,0.08);border:1px solid rgba(226,0,0,0.22);color:var(--red);font-size:0.85rem;font-weight:700;transition:all 0.2s;}
 .coming-soon-banner a.banner-wa:hover{background:var(--red);color:#fff;}
 
-/* FLOATING WA */
+/* ── FLOATING WA ── */
 .wa-float{position:fixed;right:20px;bottom:80px;z-index:198;width:56px;height:56px;background:#25D366;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 4px 20px rgba(37,211,102,0.4);animation:waPulse 2.5s infinite;transition:transform 0.2s;}
 .wa-float:hover{transform:scale(1.1);}
 @keyframes waPulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,0.5);}70%{box-shadow:0 0 0 18px rgba(37,211,102,0);}100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}}
 
-/* TALK BAR */
+/* ── TALK BAR ── */
 .talk-bar{display:none;position:fixed;bottom:62px;left:0;right:0;background:var(--red);z-index:197;padding:10px 16px;text-align:center;}
 .talk-bar a{color:#fff;font-weight:800;font-size:0.95rem;display:flex;align-items:center;justify-content:center;gap:8px;}
 
-/* MOBILE NAV */
+/* ── MOBILE NAV ── */
 .mob-nav{display:none;position:fixed;bottom:0;width:100%;z-index:200;background:rgba(16,16,16,0.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:10px 0 16px;justify-content:space-around;}
 .mob-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:0.65rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;transition:color 0.2s;}
 .mob-nav a i{font-size:1.1rem;}
 .mob-nav a.active,.mob-nav a:hover{color:var(--red);}
 
-/* FOOTER */
+/* ── FOOTER ── */
 footer{background:var(--surface);border-top:1px solid var(--border);padding:36px 24px 24px;}
 .footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
 .footer-copy{font-size:0.8rem;color:var(--muted2);}
@@ -264,40 +262,68 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
 .footer-links-r a{font-size:0.78rem;color:var(--muted2);transition:color 0.2s;}
 .footer-links-r a:hover{color:var(--red);}
 
-/* RESPONSIVE */
-@media(max-width:1100px){.brand-grid.grid-4{grid-template-columns:repeat(3,1fr);}}
-@media(max-width:900px){.brand-grid.grid-4,.brand-grid.grid-3{grid-template-columns:repeat(2,1fr);gap:12px;}.nav-links{display:none;}}
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){
+  .brands-grid,.cats-grid{grid-template-columns:repeat(3,1fr);}
+  .prod-grid.g4{grid-template-columns:repeat(3,1fr);}
+}
+@media(max-width:900px){
+  .brands-grid,.cats-grid{grid-template-columns:repeat(2,1fr);}
+  .prod-grid.g4,.prod-grid.g3{grid-template-columns:repeat(2,1fr);}
+  .nav-links{display:none;}
+}
 @media(max-width:768px){
-  nav{padding:0 16px;}.mob-nav{display:flex;}.talk-bar{display:block;}
-  .wa-float{bottom:134px;right:14px;}footer{padding-bottom:140px;}
-  .filter-top{padding:10px 16px;gap:8px;}.filter-controls{width:100%;}
-  .sort-select{flex:1;min-width:0;}.cat-tabs-wrap{padding:0 16px 12px;}
-  .active-filters{padding:0 16px 10px;}.products-section{padding:16px 12px 40px;}
-  .accessories-section{padding:0 12px 80px;}
-  .brand-grid{gap:10px;}.filter-count{display:none;}
-  .brand-header{flex-wrap:wrap;gap:8px;}.brand-line{display:none;}
-  .view-switcher{padding:10px 16px 0;}.view-label{display:none;}
+  nav{padding:0 16px;}
+  .mob-nav{display:flex;}
+  .talk-bar{display:block;}
+  .wa-float{bottom:134px;right:14px;}
+  footer{padding-bottom:140px;}
+  .filter-top{padding:10px 16px;gap:8px;}
+  .filter-controls{width:100%;}
+  .sort-select{flex:1;min-width:0;}
+  .active-filters{padding:0 16px 10px;}
+  .products-section{padding:16px 14px 40px;}
+  .accessories-section{padding:0 14px 80px;}
+  .level-header-inner{padding:11px 16px;}
+  .filter-count{display:none;}
+  .brands-grid{gap:10px;}
+  .cats-grid{gap:10px;}
+  .prod-grid{gap:10px;}
 }
 @media(max-width:480px){
-  .brand-grid.grid-4,.brand-grid.grid-3,.brand-grid.grid-2{grid-template-columns:repeat(2,1fr);gap:8px;}
-  .prod-body{padding:10px 10px 12px;}.prod-name{font-size:0.88rem;}
+  .brands-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .cats-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .prod-grid.g4,.prod-grid.g3,.prod-grid.g2{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .brand-card{padding:14px 12px 12px;}
+  .brand-card-avatar{width:42px;height:42px;font-size:0.85rem;}
+  .brand-card-name{font-size:0.95rem;}
+  .cat-card{padding:22px 12px 18px;}
+  .cat-card-icon{width:50px;height:50px;font-size:1.2rem;}
+  .cat-card-name{font-size:0.95rem;}
+  .prod-body{padding:9px 9px 11px;}
+  .prod-name{font-size:0.85rem;}
   .stock-toggle span{display:none;}
   .flav-swatch{width:16px;height:16px;}
-  .weight-pill{font-size:0.62rem;padding:2px 6px;}
+  .weight-pill{font-size:0.6rem;padding:2px 5px;}
+  .bc-item{font-size:0.75rem;}
 }
 </style>
 </head>
 <body>
 
+<!-- FLOATING WA -->
 <a href="https://wa.me/919949531515?text=Hi%2C%20I%20want%20to%20enquire%20about%20supplements." class="wa-float" target="_blank" aria-label="WhatsApp">
   <i class="fab fa-whatsapp"></i>
 </a>
+
+<!-- TALK BAR (mobile) -->
 <div class="talk-bar">
   <a href="https://wa.me/919949531515?text=Hi%2C%20I%20need%20help%20choosing%20the%20right%20supplement." target="_blank">
     <i class="fab fa-whatsapp"></i> Not sure what to buy? Get Free Advice
   </a>
 </div>
 
+<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-brand">
     <img src="vitaminstore.png" alt="Vitamin Store Logo" class="nav-logo"/>
@@ -315,6 +341,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
   </a>
 </nav>
 
+<!-- MOBILE NAV -->
 <div class="mob-nav">
   <a href="index.html"><i class="fas fa-home"></i>Home</a>
   <a href="products.html" class="active"><i class="fas fa-box-open"></i>Products</a>
@@ -323,14 +350,16 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
   <a href="index.html#cta-section"><i class="fas fa-phone"></i>Contact</a>
 </div>
 
+<!-- PAGE HERO -->
 <div class="page-hero">
   <div class="hero-inner">
-    <div class="page-label">100% Genuine · 100+ Brands · Home Delivery</div>
+    <div class="page-label">100% Genuine &middot; 100+ Brands &middot; Home Delivery</div>
     <div class="page-title">Our Product Range</div>
-    <p class="page-sub">Whey Protein &nbsp;·&nbsp; Mass Gainer &nbsp;·&nbsp; Pre-Workout &nbsp;·&nbsp; BCAA &nbsp;·&nbsp; Creatine &nbsp;·&nbsp; Healthy Snacks &amp; More</p>
+    <p class="page-sub">Whey Protein &nbsp;&middot;&nbsp; Mass Gainer &nbsp;&middot;&nbsp; Pre-Workout &nbsp;&middot;&nbsp; BCAA &nbsp;&middot;&nbsp; Creatine &nbsp;&middot;&nbsp; Healthy Snacks &amp; More</p>
   </div>
 </div>
 
+<!-- ADVICE BAR -->
 <div class="advice-bar">
   <a href="https://wa.me/919949531515?text=Hi%2C%20I%20need%20help%20choosing%20the%20right%20supplement%20for%20my%20goal." target="_blank">
     <i class="fab fa-whatsapp"></i>
@@ -338,17 +367,21 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
   </a>
 </div>
 
+<!-- LEVEL HEADER (Breadcrumb + Back) — shown on L2 & L3 -->
+<div class="level-header" id="levelHeader">
+  <div class="level-header-inner" id="levelHeaderInner"></div>
+</div>
+
+<!-- FILTER BAR — shown on L3 only -->
 <div class="filter-bar" id="filterBar">
   <div class="filter-top">
     <div class="search-wrap">
       <i class="fas fa-search"></i>
-      <input class="search-input" id="searchInput" type="text" placeholder="Search product, brand, flavour..."/>
+      <input class="search-input" id="searchInput" type="text" placeholder="Search product, flavour, size..."/>
     </div>
     <div class="filter-controls">
       <select class="sort-select" id="sortSelect">
         <option value="featured">&#11088; Featured First</option>
-        <option value="brand_az">Brand A &rarr; Z</option>
-        <option value="brand_za">Brand Z &rarr; A</option>
         <option value="name_az">Name A &rarr; Z</option>
         <option value="protein_hl">Protein: High &rarr; Low</option>
         <option value="instock">In Stock First</option>
@@ -360,41 +393,15 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
       <div class="filter-count">Showing <span id="prodCount">0</span> products</div>
     </div>
   </div>
-
-  <!-- VIEW SWITCHER -->
-  <div class="view-switcher">
-    <button class="view-btn active" id="vbtn-brand" onclick="switchView('brand')"><i class="fas fa-building"></i> By Brand</button>
-    <button class="view-btn" id="vbtn-cat" onclick="switchView('cat')"><i class="fas fa-th-large"></i> By Category</button>
-    <button class="view-btn" id="vbtn-all" onclick="switchView('all')"><i class="fas fa-th"></i> All Products</button>
-    <span class="view-label" id="viewLabel">Grouped by brand</span>
-  </div>
-
   <div class="active-filters" id="activeFilters"></div>
-  <div class="cat-tabs-wrap">
-    <div class="cat-tabs" id="catTabs">
-      <button class="cat-tab active" data-cat="all" onclick="filterCat('all')"><i class="fas fa-th"></i> All Products <span class="tab-count" id="count-all">0</span></button>
-      <button class="cat-tab" data-cat="whey" onclick="filterCat('whey')"><i class="fas fa-flask"></i> Whey Protein <span class="tab-count" id="count-whey">0</span></button>
-      <button class="cat-tab" data-cat="mass" onclick="filterCat('mass')"><i class="fas fa-dumbbell"></i> Mass Gainer <span class="tab-count" id="count-mass">0</span></button>
-      <button class="cat-tab" data-cat="preworkout" onclick="filterCat('preworkout')"><i class="fas fa-bolt"></i> Pre-Workout <span class="tab-count" id="count-preworkout">0</span></button>
-      <button class="cat-tab" data-cat="bcaa" onclick="filterCat('bcaa')"><i class="fas fa-atom"></i> BCAA &amp; Aminos <span class="tab-count" id="count-bcaa">0</span></button>
-      <button class="cat-tab" data-cat="creatine" onclick="filterCat('creatine')"><i class="fas fa-fire-alt"></i> Creatine <span class="tab-count" id="count-creatine">0</span></button>
-      <button class="cat-tab" data-cat="fatburner" onclick="filterCat('fatburner')"><i class="fas fa-burn"></i> Fat Burners <span class="tab-count" id="count-fatburner">0</span></button>
-      <button class="cat-tab" data-cat="vitamins" onclick="filterCat('vitamins')"><i class="fas fa-capsules"></i> Vitamins <span class="tab-count" id="count-vitamins">0</span></button>
-      <button class="cat-tab" data-cat="bars" onclick="filterCat('bars')"><i class="fas fa-cookie-bite"></i> Protein Bars <span class="tab-count" id="count-bars">0</span></button>
-      <button class="cat-tab" data-cat="snacks" onclick="filterCat('snacks')"><i class="fas fa-apple-alt"></i> Healthy Snacks <span class="tab-count" id="count-snacks">0</span></button>
-      <button class="cat-tab" data-cat="oats" onclick="filterCat('oats')"><i class="fas fa-seedling"></i> Oats &amp; Muesli <span class="tab-count" id="count-oats">0</span></button>
-      <button class="cat-tab" data-cat="peanuts" onclick="filterCat('peanuts')"><i class="fas fa-egg"></i> Peanuts &amp; Granola <span class="tab-count" id="count-peanuts">0</span></button>
-      <button class="cat-tab" data-cat="health" onclick="filterCat('health')"><i class="fas fa-heartbeat"></i> Health &amp; Immunity <span class="tab-count" id="count-health">0</span></button>
-      <button class="cat-tab" data-cat="herbal" onclick="filterCat('herbal')"><i class="fas fa-leaf"></i> Ayurvedic <span class="tab-count" id="count-herbal">0</span></button>
-      <button class="cat-tab" data-cat="chocolates" onclick="filterCat('chocolates')"><i class="fas fa-candy-cane"></i> Imported Choc <span class="tab-count" id="count-chocolates">0</span></button>
-    </div>
-  </div>
 </div>
 
+<!-- MAIN CONTENT AREA -->
 <div class="products-section">
-  <div class="products-grid" id="productsGrid"></div>
+  <div id="mainGrid"></div>
 </div>
 
+<!-- ACCESSORIES — shown on L1 only -->
 <div class="accessories-section" id="accessoriesSection">
   <div class="section-divider">
     <div class="section-title-wrap">
@@ -415,6 +422,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
   </div>
 </div>
 
+<!-- FOOTER -->
 <footer>
   <div class="footer-bottom">
     <div class="footer-copy">&copy; 2026 <span>Vitamin Store</span> &mdash; Supplement &amp; More. All rights reserved.</div>
@@ -428,351 +436,63 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
 </footer>
 
 <script>
-const PRODUCTS = [
+/* ════════════════════════════════════════
+   DATA
+════════════════════════════════════════ */
+var PRODUCTS = [
   /* ══ WHEY PROTEIN ══ */
-  {
-    id:'on-gold-standard-whey', cat:'whey', brand:'Optimum Nutrition',
-    name:'Gold Standard 100% Whey', protein:'24g', featured:true,
-    icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)',
-    img:'Assets/ongoldstandard.jpg',
-    flavours:['Double Rich Chocolate','Vanilla Ice Cream'],
-    weights:[
-      {size:'907 g',inStock:true},{size:'1.7 kg',inStock:true},
-      {size:'2.27 kg',inStock:true},{size:'4 kg',inStock:true}
-    ]
-  },
-  {
-    id:'mb-biozyme-perf-whey', cat:'whey', brand:'MuscleBlaze',
-    name:'Biozyme Performance Whey', protein:'25g', featured:true,
-    icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
-    img:'https://img8.hkrtcdn.com/39078/prd_3907787-MuscleBlaze-Biozyme-Performance-Whey-4.4-lb-Rich-Chocolate_o.jpg',
-    flavours:['Hazel Nut Chocolate','Magical Mango','Rich Chocolate','Blue Tokai Coffee'],
-    weights:[{size:'1 kg',inStock:true},{size:'2 kg',inStock:true},{size:'4 kg',inStock:true}]
-  },
-  {
-    id:'mb-iso-zero', cat:'whey', brand:'MuscleBlaze',
-    name:'ISO Zero', protein:'27g', featured:true,
-    icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
-    img:'https://img4.hkrtcdn.com/35591/prd_3559023-MuscleBlaze-Biozyme-IsoZero-4.4-lb-Low-Carb-Ice-Cream-Chocolate_o.jpg',
-    flavours:['Ice Cream Chocolate','Cookies & Cream','Swiss Chocolate'],
-    weights:[{size:'1 kg',inStock:true},{size:'2 kg',inStock:true},{size:'4 kg',inStock:true}]
-  },
-  {
-    id:'mb-biozyme-whey-pr', cat:'whey', brand:'MuscleBlaze',
-    name:'Biozyme Whey PR', protein:'30g', featured:false,
-    icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
-    img:'Assets/mbgoldwhey.jpg',
-    flavours:['Molten Chocolate Cake','Chocolate Fudge','Cookies & Cream'],
-    weights:[{size:'1 kg',inStock:true},{size:'2 kg',inStock:true},{size:'4 kg',inStock:true}]
-  },
-  {
-    id:'mb-gold-100-whey', cat:'whey', brand:'MuscleBlaze',
-    name:'Gold 100% Whey', protein:'27g', featured:false,
-    icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',
-    img:'Assets/mbgoldwhey.jpg',
-    flavours:['Rich Chocolate','Mango','Chocolate Hazelnut'],
-    weights:[{size:'1 kg',inStock:true},{size:'2 kg',inStock:true},{size:'4 kg',inStock:true}]
-  },
-  {
-    id:'gnc-pp-100-whey', cat:'whey', brand:'GNC',
-    name:'Pro Performance 100% Whey', protein:'24g', featured:false,
-    icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',
-    img:'Assets/gncpro.jpeg',
-    flavours:['Chocolate Supreme','Café Mocha','Kesar Pista','Vanilla Cream','Cookies & Cream'],
-    weights:[{size:'907 g',inStock:true},{size:'1.81 kg',inStock:true},{size:'4 kg',inStock:true}]
-  },
-  {
-    id:'gnc-pure-isolate', cat:'whey', brand:'GNC',
-    name:'Pure Isolate', protein:'25g', featured:false,
-    icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',
-    img:'Assets/gncpro.jpeg',
-    flavours:['Chocolate Frosting','Vanilla'],
-    weights:[{size:'907 g',inStock:true},{size:'1.81 kg',inStock:true}]
-  },
-  {
-    id:'run-whey-pro', cat:'whey', brand:'RUN',
-    name:'Whey Pro', protein:'—', featured:false,
-    icon:'fas fa-flask',
-    gradient:'linear-gradient(135deg,#4a0000 0%,#880022 60%,#BB0033 100%)',
-    img:'Assets/wheypro.jpg',
-    flavours:['Pistachio','Coffee','Rich Chocolate','Birthday Cake','Tiramisu'],
-    weights:[{size:'1 kg',inStock:true},{size:'1.81 kg',inStock:true}]
-  },
+  {id:'on-gold-standard-whey',cat:'whey',brand:'Optimum Nutrition',name:'Gold Standard 100% Whey',protein:'24g',featured:true,icon:'fas fa-flask',gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)',img:'Assets/ongoldstandard.jpg',flavours:['Double Rich Chocolate','Vanilla Ice Cream'],weights:[{size:'907 g',inStock:true},{size:'1.7 kg',inStock:true},{size:'2.27 kg',inStock:true},{size:'4 kg',inStock:true}]},
+  {id:'mb-biozyme-perf-whey',cat:'whey',brand:'MuscleBlaze',name:'Biozyme Performance Whey',protein:'25g',featured:true,icon:'fas fa-flask',gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',img:'https://img8.hkrtcdn.com/39078/prd_3907787-MuscleBlaze-Biozyme-Performance-Whey-4.4-lb-Rich-Chocolate_o.jpg',flavours:['Hazel Nut Chocolate','Magical Mango','Rich Chocolate','Blue Tokai Coffee'],weights:[{size:'1 kg',inStock:true},{size:'2 kg',inStock:true},{size:'4 kg',inStock:true}]},
+  {id:'mb-iso-zero',cat:'whey',brand:'MuscleBlaze',name:'ISO Zero',protein:'27g',featured:true,icon:'fas fa-flask',gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',img:'https://img4.hkrtcdn.com/35591/prd_3559023-MuscleBlaze-Biozyme-IsoZero-4.4-lb-Low-Carb-Ice-Cream-Chocolate_o.jpg',flavours:['Ice Cream Chocolate','Cookies & Cream','Swiss Chocolate'],weights:[{size:'1 kg',inStock:true},{size:'2 kg',inStock:true},{size:'4 kg',inStock:true}]},
+  {id:'mb-biozyme-whey-pr',cat:'whey',brand:'MuscleBlaze',name:'Biozyme Whey PR',protein:'30g',featured:false,icon:'fas fa-flask',gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',img:'Assets/mbgoldwhey.jpg',flavours:['Molten Chocolate Cake','Chocolate Fudge','Cookies & Cream'],weights:[{size:'1 kg',inStock:true},{size:'2 kg',inStock:true},{size:'4 kg',inStock:true}]},
+  {id:'mb-gold-100-whey',cat:'whey',brand:'MuscleBlaze',name:'Gold 100% Whey',protein:'27g',featured:false,icon:'fas fa-flask',gradient:'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)',img:'Assets/mbgoldwhey.jpg',flavours:['Rich Chocolate','Mango','Chocolate Hazelnut'],weights:[{size:'1 kg',inStock:true},{size:'2 kg',inStock:true},{size:'4 kg',inStock:true}]},
+  {id:'gnc-pp-100-whey',cat:'whey',brand:'GNC',name:'Pro Performance 100% Whey',protein:'24g',featured:false,icon:'fas fa-flask',gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',img:'Assets/gncpro.jpeg',flavours:['Chocolate Supreme','Café Mocha','Kesar Pista','Vanilla Cream','Cookies & Cream'],weights:[{size:'907 g',inStock:true},{size:'1.81 kg',inStock:true},{size:'4 kg',inStock:true}]},
+  {id:'gnc-pure-isolate',cat:'whey',brand:'GNC',name:'Pure Isolate',protein:'25g',featured:false,icon:'fas fa-flask',gradient:'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)',img:'Assets/gncpro.jpeg',flavours:['Chocolate Frosting','Vanilla'],weights:[{size:'907 g',inStock:true},{size:'1.81 kg',inStock:true}]},
+  {id:'run-whey-pro',cat:'whey',brand:'RUN',name:'Whey Pro',protein:'—',featured:false,icon:'fas fa-flask',gradient:'linear-gradient(135deg,#4a0000 0%,#880022 60%,#BB0033 100%)',img:'Assets/wheypro.jpg',flavours:['Pistachio','Coffee','Rich Chocolate','Birthday Cake','Tiramisu'],weights:[{size:'1 kg',inStock:true},{size:'1.81 kg',inStock:true}]},
 
   /* ══ MASS GAINER ══ */
-  {
-    id:'mb-super-mass-gainer', cat:'mass', brand:'MuscleBlaze',
-    name:'Super Mass Gainer', protein:'15g', featured:true,
-    icon:'fas fa-dumbbell',
-    gradient:'linear-gradient(135deg,#5a2600 0%,#CC5500 60%,#FF7700 100%)',
-    img:'https://img6.hkrtcdn.com/37800/prd_3779965-MuscleBlaze-Super-Gainer-XXL-Weight-Gainer-6.6-lb-Chocolate_o.jpg',
-    flavours:['Chocolate','Cookies & Cream'],
-    weights:[{size:'1 kg',inStock:true},{size:'3 kg',inStock:true},{size:'5 kg',inStock:true}]
-  },
+  {id:'mb-super-mass-gainer',cat:'mass',brand:'MuscleBlaze',name:'Super Mass Gainer',protein:'15g',featured:true,icon:'fas fa-dumbbell',gradient:'linear-gradient(135deg,#5a2600 0%,#CC5500 60%,#FF7700 100%)',img:'https://img6.hkrtcdn.com/37800/prd_3779965-MuscleBlaze-Super-Gainer-XXL-Weight-Gainer-6.6-lb-Chocolate_o.jpg',flavours:['Chocolate','Cookies & Cream'],weights:[{size:'1 kg',inStock:true},{size:'3 kg',inStock:true},{size:'5 kg',inStock:true}]},
 
   /* ══ PRE-WORKOUT ══ */
-  {
-    id:'cellucor-c4-original', cat:'preworkout', brand:'Cellucor',
-    name:'C4 Original Pre-Workout', protein:'—', featured:true,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#7B1F00 0%,#CC3300 60%,#FF4400 100%)',
-    img:'Assets/C4OriginalPreWorkout.jpg',
-    flavours:['Fruit Punch','Pineapple'],
-    weights:[{size:'195g (30 Servings)',inStock:true},{size:'390g (60 Servings)',inStock:true}]
-  },
-  {
-    id:'insane-labz-psychotic', cat:'preworkout', brand:'Insane Labz',
-    name:'Psychotic Pre-Workout', protein:'—', featured:true,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#1A0033 0%,#440088 60%,#7700CC 100%)',
-    img:'',
-    flavours:['Fruit Punch','Cherry'],
-    weights:[{size:'220g',inStock:true}]
-  },
-  {
-    id:'vertical-labs-murphy', cat:'preworkout', brand:'Vertical Labs',
-    name:'Murphy Pre-Workout', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#002200 0%,#004400 60%,#006600 100%)',
-    img:'',
-    flavours:['—'],
-    weights:[{size:'—',inStock:true}]
-  },
-  {
-    id:'c9-ring-master', cat:'preworkout', brand:'C9 Nutrition',
-    name:'Ring Master Pre-Workout', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#2A2200 0%,#554400 60%,#776600 100%)',
-    img:'',
-    flavours:['—'],
-    weights:[{size:'—',inStock:true}]
-  },
-  {
-    id:'blackbeast-big-daddy-inferno', cat:'preworkout', brand:'BlackBeast',
-    name:'The Big Daddy Inferno Pre-Workout', protein:'—', featured:true,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#1A0000 0%,#500000 60%,#880000 100%)',
-    img:'',
-    flavours:['Black Magic'],
-    weights:[{size:'300g (50 Servings)',inStock:true}]
-  },
-  {
-    id:'muscle-harvest-boss', cat:'preworkout', brand:'Muscle Harvest',
-    name:'Boss Pre-Workout', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#1A0033 0%,#330066 60%,#550099 100%)',
-    img:'',
-    flavours:['Black Grapes'],
-    weights:[{size:'350g (~30 Servings)',inStock:true}]
-  },
-  {
-    id:'outlast-relentless-trigger-max', cat:'preworkout', brand:'Outlast Labz',
-    name:'Relentless Trigger Max Pre-Workout', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#003333 0%,#006666 60%,#009999 100%)',
-    img:'',
-    flavours:['Mixed Fruit'],
-    weights:[{size:'30 Servings',inStock:true}]
-  },
-  {
-    id:'kevin-levrone-scatterbrain', cat:'preworkout', brand:'Kevin Levrone',
-    name:'Scatterbrain Pre-Workout', protein:'—', featured:true,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#2A1A00 0%,#664400 60%,#AA7700 100%)',
-    img:'',
-    flavours:['Fruit Massage'],
-    weights:[{size:'270g (30 Servings)',inStock:true},{size:'270g (60 Servings)',inStock:true}]
-  },
-  {
-    id:'kevin-levrone-shaaboom-pump', cat:'preworkout', brand:'Kevin Levrone',
-    name:'Shaaboom Pump Pre-Workout', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#2A1A00 0%,#664400 60%,#AA7700 100%)',
-    img:'',
-    flavours:['Watermelon'],
-    weights:[{size:'385g',inStock:true}]
-  },
-  {
-    id:'on-gold-standard-preworkout', cat:'preworkout', brand:'Optimum Nutrition',
-    name:'Gold Standard Pre-Workout', protein:'—', featured:true,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)',
-    img:'',
-    flavours:['Fruit Punch'],
-    weights:[{size:'142.5g (15 Sachets)',inStock:true}]
-  },
-  {
-    id:'raw-bum-essential', cat:'preworkout', brand:'RAW Nutrition',
-    name:'BUM Essential Pre-Workout', protein:'—', featured:true,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#1A1A1A 0%,#333333 60%,#555555 100%)',
-    img:'',
-    flavours:['Sour Watermelon'],
-    weights:[{size:'405g (30 Servings)',inStock:true}]
-  },
-  {
-    id:'rising-labs-overkill', cat:'preworkout', brand:'Rising Labs',
-    name:'Overkill Pre-Workout', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#330000 0%,#880000 60%,#CC2200 100%)',
-    img:'',
-    flavours:['Chili Mango'],
-    weights:[{size:'336g (30 Servings)',inStock:true}]
-  },
-  {
-    id:'qnt-hydra-vol', cat:'preworkout', brand:'QNT',
-    name:'Hydra Vol Pre-Workout', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#002244 0%,#004488 60%,#0066CC 100%)',
-    img:'',
-    flavours:['Fruit Punch'],
-    weights:[{size:'30 Servings',inStock:true}]
-  },
-  {
-    id:'sot-super-human', cat:'preworkout', brand:'Scoop of Truth',
-    name:'Super Human High Stim Pre-Workout', protein:'—', featured:true,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#001133 0%,#002266 60%,#0033AA 100%)',
-    img:'',
-    flavours:['Citrus Blast'],
-    weights:[{size:'180g (30 Servings)',inStock:true}]
-  },
-  {
-    id:'americanz-frenzy', cat:'preworkout', brand:'Americanz Muscles',
-    name:'Frenzy Pre-Workout', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#330011 0%,#880033 60%,#CC0044 100%)',
-    img:'',
-    flavours:['Gummy Candy'],
-    weights:[{size:'245g (35 Days)',inStock:true}]
-  },
-  {
-    id:'buckup-crackhead', cat:'preworkout', brand:'Buck Up Nutrition',
-    name:'Crackhead Pre-Workout', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#001133 0%,#0033AA 60%,#0055FF 100%)',
-    img:'',
-    flavours:['Blue Lagoon (Electric)'],
-    weights:[{size:'—',inStock:true}]
-  },
-  {
-    id:'wellversed-dynamite', cat:'preworkout', brand:'Wellversed',
-    name:'Dynamite Pre-Workout Original', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#001A33 0%,#003388 60%,#0055CC 100%)',
-    img:'',
-    flavours:['Fruit Blast'],
-    weights:[{size:'210g (15 Servings)',inStock:true}]
-  },
-  {
-    id:'promanix-blood-lock', cat:'preworkout', brand:'ProManiax',
-    name:'Blood Lock Stim Loaded Pre-Workout', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#330000 0%,#660000 60%,#990000 100%)',
-    img:'',
-    flavours:['Cotton Candy'],
-    weights:[{size:'60 Servings',inStock:true}]
-  },
-  {
-    id:'wrath-x-preworkout', cat:'preworkout', brand:'Wrath X',
-    name:'Wrath X Pre-Workout', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#1A1A1A 0%,#2A2A2A 60%,#404040 100%)',
-    img:'',
-    flavours:['—'],
-    weights:[{size:'510g',inStock:true}]
-  },
-  {
-    id:'megasupps-disaster-pump', cat:'preworkout', brand:'MegaSupps',
-    name:'Disaster Mega Pump Pre-Workout', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#2A0044 0%,#550088 60%,#7700BB 100%)',
-    img:'',
-    flavours:['Brazilian Orange'],
-    weights:[{size:'420g (30 Scoops)',inStock:true}]
-  },
-  {
-    id:'sacred-beast-wild-wild-west', cat:'preworkout', brand:'Sacred Beast',
-    name:'Wild Wild West Pre-Workout', protein:'—', featured:false,
-    icon:'fas fa-bolt',
-    gradient:'linear-gradient(135deg,#2A1500 0%,#664400 60%,#994400 100%)',
-    img:'',
-    flavours:['Watermelon'],
-    weights:[{size:'400g',inStock:true}]
-  },
+  {id:'cellucor-c4-original',cat:'preworkout',brand:'Cellucor',name:'C4 Original Pre-Workout',protein:'—',featured:true,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#7B1F00 0%,#CC3300 60%,#FF4400 100%)',img:'Assets/C4OriginalPreWorkout.jpg',flavours:['Fruit Punch','Pineapple'],weights:[{size:'195g (30 Servings)',inStock:true},{size:'390g (60 Servings)',inStock:true}]},
+  {id:'insane-labz-psychotic',cat:'preworkout',brand:'Insane Labz',name:'Psychotic Pre-Workout',protein:'—',featured:true,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#1A0033 0%,#440088 60%,#7700CC 100%)',img:'',flavours:['Fruit Punch','Cherry'],weights:[{size:'220g',inStock:true}]},
+  {id:'vertical-labs-murphy',cat:'preworkout',brand:'Vertical Labs',name:'Murphy Pre-Workout',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#002200 0%,#004400 60%,#006600 100%)',img:'',flavours:['—'],weights:[{size:'—',inStock:true}]},
+  {id:'c9-ring-master',cat:'preworkout',brand:'C9 Nutrition',name:'Ring Master Pre-Workout',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#2A2200 0%,#554400 60%,#776600 100%)',img:'',flavours:['—'],weights:[{size:'—',inStock:true}]},
+  {id:'blackbeast-big-daddy-inferno',cat:'preworkout',brand:'BlackBeast',name:'The Big Daddy Inferno Pre-Workout',protein:'—',featured:true,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#1A0000 0%,#500000 60%,#880000 100%)',img:'',flavours:['Black Magic'],weights:[{size:'300g (50 Servings)',inStock:true}]},
+  {id:'muscle-harvest-boss',cat:'preworkout',brand:'Muscle Harvest',name:'Boss Pre-Workout',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#1A0033 0%,#330066 60%,#550099 100%)',img:'',flavours:['Black Grapes'],weights:[{size:'350g (~30 Servings)',inStock:true}]},
+  {id:'outlast-relentless-trigger-max',cat:'preworkout',brand:'Outlast Labz',name:'Relentless Trigger Max Pre-Workout',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#003333 0%,#006666 60%,#009999 100%)',img:'',flavours:['Mixed Fruit'],weights:[{size:'30 Servings',inStock:true}]},
+  {id:'kevin-levrone-scatterbrain',cat:'preworkout',brand:'Kevin Levrone',name:'Scatterbrain Pre-Workout',protein:'—',featured:true,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#2A1A00 0%,#664400 60%,#AA7700 100%)',img:'',flavours:['Fruit Massage'],weights:[{size:'270g (30 Servings)',inStock:true},{size:'270g (60 Servings)',inStock:true}]},
+  {id:'kevin-levrone-shaaboom-pump',cat:'preworkout',brand:'Kevin Levrone',name:'Shaaboom Pump Pre-Workout',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#2A1A00 0%,#664400 60%,#AA7700 100%)',img:'',flavours:['Watermelon'],weights:[{size:'385g',inStock:true}]},
+  {id:'on-gold-standard-preworkout',cat:'preworkout',brand:'Optimum Nutrition',name:'Gold Standard Pre-Workout',protein:'—',featured:true,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#7B0000 0%,#CC0000 60%,#FF2200 100%)',img:'',flavours:['Fruit Punch'],weights:[{size:'142.5g (15 Sachets)',inStock:true}]},
+  {id:'raw-bum-essential',cat:'preworkout',brand:'RAW Nutrition',name:'BUM Essential Pre-Workout',protein:'—',featured:true,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#1A1A1A 0%,#333333 60%,#555555 100%)',img:'',flavours:['Sour Watermelon'],weights:[{size:'405g (30 Servings)',inStock:true}]},
+  {id:'rising-labs-overkill',cat:'preworkout',brand:'Rising Labs',name:'Overkill Pre-Workout',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#330000 0%,#880000 60%,#CC2200 100%)',img:'',flavours:['Chili Mango'],weights:[{size:'336g (30 Servings)',inStock:true}]},
+  {id:'qnt-hydra-vol',cat:'preworkout',brand:'QNT',name:'Hydra Vol Pre-Workout',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#002244 0%,#004488 60%,#0066CC 100%)',img:'',flavours:['Fruit Punch'],weights:[{size:'30 Servings',inStock:true}]},
+  {id:'sot-super-human',cat:'preworkout',brand:'Scoop of Truth',name:'Super Human High Stim Pre-Workout',protein:'—',featured:true,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#001133 0%,#002266 60%,#0033AA 100%)',img:'',flavours:['Citrus Blast'],weights:[{size:'180g (30 Servings)',inStock:true}]},
+  {id:'americanz-frenzy',cat:'preworkout',brand:'Americanz Muscles',name:'Frenzy Pre-Workout',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#330011 0%,#880033 60%,#CC0044 100%)',img:'',flavours:['Gummy Candy'],weights:[{size:'245g (35 Days)',inStock:true}]},
+  {id:'buckup-crackhead',cat:'preworkout',brand:'Buck Up Nutrition',name:'Crackhead Pre-Workout',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#001133 0%,#0033AA 60%,#0055FF 100%)',img:'',flavours:['Blue Lagoon (Electric)'],weights:[{size:'—',inStock:true}]},
+  {id:'wellversed-dynamite',cat:'preworkout',brand:'Wellversed',name:'Dynamite Pre-Workout Original',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#001A33 0%,#003388 60%,#0055CC 100%)',img:'',flavours:['Fruit Blast'],weights:[{size:'210g (15 Servings)',inStock:true}]},
+  {id:'promanix-blood-lock',cat:'preworkout',brand:'ProManiax',name:'Blood Lock Stim Loaded Pre-Workout',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#330000 0%,#660000 60%,#990000 100%)',img:'',flavours:['Cotton Candy'],weights:[{size:'60 Servings',inStock:true}]},
+  {id:'wrath-x-preworkout',cat:'preworkout',brand:'Wrath X',name:'Wrath X Pre-Workout',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#1A1A1A 0%,#2A2A2A 60%,#404040 100%)',img:'',flavours:['—'],weights:[{size:'510g',inStock:true}]},
+  {id:'megasupps-disaster-pump',cat:'preworkout',brand:'MegaSupps',name:'Disaster Mega Pump Pre-Workout',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#2A0044 0%,#550088 60%,#7700BB 100%)',img:'',flavours:['Brazilian Orange'],weights:[{size:'420g (30 Scoops)',inStock:true}]},
+  {id:'sacred-beast-wild-wild-west',cat:'preworkout',brand:'Sacred Beast',name:'Wild Wild West Pre-Workout',protein:'—',featured:false,icon:'fas fa-bolt',gradient:'linear-gradient(135deg,#2A1500 0%,#664400 60%,#994400 100%)',img:'',flavours:['Watermelon'],weights:[{size:'400g',inStock:true}]},
 
   /* ══ BCAA & AMINOS ══ */
-  {
-    id:'fastup-bcaa', cat:'bcaa', brand:'Fast&Up',
-    name:'BCAA 2:1:1', protein:'7.5g BCAAs', featured:true,
-    icon:'fas fa-atom',
-    gradient:'linear-gradient(135deg,#003366 0%,#005599 60%,#0077CC 100%)',
-    img:'Assets/fastupbcca.png',
-    flavours:['Watermelon'],
-    weights:[{size:'250g (30 Servings)',inStock:true}]
-  },
+  {id:'fastup-bcaa',cat:'bcaa',brand:'Fast&Up',name:'BCAA 2:1:1',protein:'7.5g BCAAs',featured:true,icon:'fas fa-atom',gradient:'linear-gradient(135deg,#003366 0%,#005599 60%,#0077CC 100%)',img:'Assets/fastupbcca.png',flavours:['Watermelon'],weights:[{size:'250g (30 Servings)',inStock:true}]},
 
   /* ══ CREATINE ══ */
-  {
-    id:'asitis-creatine', cat:'creatine', brand:'AS-IT-IS Nutrition',
-    name:'Creatine Monohydrate', protein:'—', featured:true,
-    icon:'fas fa-fire-alt',
-    gradient:'linear-gradient(135deg,#3D1560 0%,#6622AA 60%,#8833CC 100%)',
-    img:'Assets/creatinemonohydrate.jpg',
-    flavours:['Unflavoured'],
-    weights:[{size:'500g (166 Servings)',inStock:true}]
-  },
+  {id:'asitis-creatine',cat:'creatine',brand:'AS-IT-IS Nutrition',name:'Creatine Monohydrate',protein:'—',featured:true,icon:'fas fa-fire-alt',gradient:'linear-gradient(135deg,#3D1560 0%,#6622AA 60%,#8833CC 100%)',img:'Assets/creatinemonohydrate.jpg',flavours:['Unflavoured'],weights:[{size:'500g (166 Servings)',inStock:true}]},
 
   /* ══ FAT BURNERS ══ */
-  {
-    id:'hk-fat-burner', cat:'fatburner', brand:'HealthKart',
-    name:'HK Vitals Fat Burner', protein:'—', featured:true,
-    icon:'fas fa-burn',
-    gradient:'linear-gradient(135deg,#005522 0%,#008833 60%,#00AA44 100%)',
-    img:'https://img2.hkrtcdn.com/40251/prd_4025001-HK-Vitals-Fat-Burner-with-Caffeine-L-Carnitine-Garcinia-60-tablets-Unflavoured_o.jpg',
-    flavours:['Capsules'],
-    weights:[{size:'90 Capsules',inStock:true}]
-  },
+  {id:'hk-fat-burner',cat:'fatburner',brand:'HealthKart',name:'HK Vitals Fat Burner',protein:'—',featured:true,icon:'fas fa-burn',gradient:'linear-gradient(135deg,#005522 0%,#008833 60%,#00AA44 100%)',img:'https://img2.hkrtcdn.com/40251/prd_4025001-HK-Vitals-Fat-Burner-with-Caffeine-L-Carnitine-Garcinia-60-tablets-Unflavoured_o.jpg',flavours:['Capsules'],weights:[{size:'90 Capsules',inStock:true}]},
 
   /* ══ VITAMINS ══ */
-  {
-    id:'wellbeing-daily-greens', cat:'vitamins', brand:'Wellbeing Nutrition',
-    name:'Daily Greens', protein:'—', featured:true,
-    icon:'fas fa-capsules',
-    gradient:'linear-gradient(135deg,#005550 0%,#008877 60%,#00B8A9 100%)',
-    img:'Assets/DailyGreens.jpg',
-    flavours:['Lemon Ginger'],
-    weights:[{size:'60 Effervescent Tablets',inStock:true}]
-  },
+  {id:'wellbeing-daily-greens',cat:'vitamins',brand:'Wellbeing Nutrition',name:'Daily Greens',protein:'—',featured:true,icon:'fas fa-capsules',gradient:'linear-gradient(135deg,#005550 0%,#008877 60%,#00B8A9 100%)',img:'Assets/DailyGreens.jpg',flavours:['Lemon Ginger'],weights:[{size:'60 Effervescent Tablets',inStock:true}]},
 
   /* ══ PROTEIN BARS ══ */
-  {
-    id:'ritebite-max-protein', cat:'bars', brand:'RiteBite Max Protein',
-    name:'Max Protein Active Bar', protein:'20g/bar', featured:true,
-    icon:'fas fa-cookie-bite',
-    gradient:'linear-gradient(135deg,#6B3A00 0%,#CC7700 60%,#F5A623 100%)',
-    img:'Assets/ritebite.jpeg',
-    flavours:['Choco Almond'],
-    weights:[{size:'Pack of 6 (67g each)',inStock:true}]
-  },
-
-  /* ══ COMING SOON PLACEHOLDERS ══ */
-  {id:'cs-health',    cat:'health',    brand:'',name:'',flavours:[],weights:[],protein:'',featured:false,icon:'fas fa-heartbeat',  gradient:'',img:null,comingSoon:true},
-  {id:'cs-snacks',    cat:'snacks',    brand:'',name:'',flavours:[],weights:[],protein:'',featured:false,icon:'fas fa-apple-alt',  gradient:'',img:null,comingSoon:true},
-  {id:'cs-oats',      cat:'oats',      brand:'',name:'',flavours:[],weights:[],protein:'',featured:false,icon:'fas fa-seedling',   gradient:'',img:null,comingSoon:true},
-  {id:'cs-peanuts',   cat:'peanuts',   brand:'',name:'',flavours:[],weights:[],protein:'',featured:false,icon:'fas fa-egg',        gradient:'',img:null,comingSoon:true},
-  {id:'cs-herbal',    cat:'herbal',    brand:'',name:'',flavours:[],weights:[],protein:'',featured:false,icon:'fas fa-leaf',       gradient:'',img:null,comingSoon:true},
-  {id:'cs-chocolates',cat:'chocolates',brand:'',name:'',flavours:[],weights:[],protein:'',featured:false,icon:'fas fa-candy-cane', gradient:'',img:null,comingSoon:true}
+  {id:'ritebite-max-protein',cat:'bars',brand:'RiteBite Max Protein',name:'Max Protein Active Bar',protein:'20g/bar',featured:true,icon:'fas fa-cookie-bite',gradient:'linear-gradient(135deg,#6B3A00 0%,#CC7700 60%,#F5A623 100%)',img:'Assets/ritebite.jpeg',flavours:['Choco Almond'],weights:[{size:'Pack of 6 (67g each)',inStock:true}]}
 ];
 
-const CAT_META = {
+var CAT_META = {
   all:       {label:'All Products',        icon:'fas fa-th'},
   whey:      {label:'Whey Protein',        icon:'fas fa-flask'},
   mass:      {label:'Mass Gainer',         icon:'fas fa-dumbbell'},
@@ -790,473 +510,555 @@ const CAT_META = {
   chocolates:{label:'Imported Chocolates', icon:'fas fa-candy-cane'}
 };
 
-/* Brand avatar colors */
-const BRAND_COLORS = {
-  'Optimum Nutrition':  {bg:'rgba(200,0,0,0.18)', color:'#FF6666'},
-  'MuscleBlaze':        {bg:'rgba(0,80,200,0.18)', color:'#6699FF'},
+var BRAND_COLORS = {
+  'Optimum Nutrition':  {bg:'rgba(200,0,0,0.18)',   color:'#FF6666'},
+  'MuscleBlaze':        {bg:'rgba(0,80,200,0.18)',  color:'#6699FF'},
   'GNC':                {bg:'rgba(40,40,180,0.18)', color:'#8888FF'},
-  'RUN':                {bg:'rgba(180,0,40,0.18)', color:'#FF6680'},
-  'Cellucor':           {bg:'rgba(200,80,0,0.18)', color:'#FFAA66'},
+  'RUN':                {bg:'rgba(180,0,40,0.18)',  color:'#FF6680'},
+  'Cellucor':           {bg:'rgba(200,80,0,0.18)',  color:'#FFAA66'},
   'Insane Labz':        {bg:'rgba(100,0,180,0.18)', color:'#CC88FF'},
-  'BlackBeast':         {bg:'rgba(60,60,60,0.3)', color:'#AAAAAA'},
+  'BlackBeast':         {bg:'rgba(60,60,60,0.30)',  color:'#AAAAAA'},
   'Kevin Levrone':      {bg:'rgba(180,120,0,0.18)', color:'#FFCC66'},
-  'RAW Nutrition':      {bg:'rgba(60,60,60,0.3)', color:'#BBBBBB'},
-  'Scoop of Truth':     {bg:'rgba(0,40,160,0.18)', color:'#6688FF'},
+  'RAW Nutrition':      {bg:'rgba(60,60,60,0.30)',  color:'#BBBBBB'},
+  'Scoop of Truth':     {bg:'rgba(0,40,160,0.18)',  color:'#6688FF'},
   'Fast&Up':            {bg:'rgba(0,100,200,0.18)', color:'#55AAFF'},
-  'AS-IT-IS Nutrition': {bg:'rgba(100,20,180,0.18)', color:'#BB88FF'},
-  'HealthKart':         {bg:'rgba(0,140,60,0.18)', color:'#55CC88'},
+  'AS-IT-IS Nutrition': {bg:'rgba(100,20,180,0.18)',color:'#BB88FF'},
+  'HealthKart':         {bg:'rgba(0,140,60,0.18)',  color:'#55CC88'},
   'Wellbeing Nutrition':{bg:'rgba(0,130,130,0.18)', color:'#44CCCC'},
-  'RiteBite Max Protein':{bg:'rgba(180,60,100,0.18)', color:'#FF88AA'},
+  'RiteBite Max Protein':{bg:'rgba(180,60,100,0.18)',color:'#FF88AA'},
+  'Vertical Labs':      {bg:'rgba(0,80,0,0.18)',    color:'#66CC66'},
+  'C9 Nutrition':       {bg:'rgba(80,70,0,0.18)',   color:'#CCBB44'},
+  'Muscle Harvest':     {bg:'rgba(80,0,120,0.18)',  color:'#BB66FF'},
+  'Outlast Labz':       {bg:'rgba(0,80,80,0.18)',   color:'#44CCCC'},
+  'Americanz Muscles':  {bg:'rgba(140,0,40,0.18)',  color:'#FF6688'},
+  'Buck Up Nutrition':  {bg:'rgba(0,40,140,0.18)',  color:'#6699FF'},
+  'Wellversed':         {bg:'rgba(0,40,100,0.18)',  color:'#5588CC'},
+  'ProManiax':          {bg:'rgba(100,0,0,0.18)',   color:'#FF5555'},
+  'Wrath X':            {bg:'rgba(40,40,40,0.30)',  color:'#999999'},
+  'MegaSupps':          {bg:'rgba(60,0,100,0.18)',  color:'#BB55FF'},
+  'Sacred Beast':       {bg:'rgba(100,60,0,0.18)',  color:'#FFAA44'},
+  'Rising Labs':        {bg:'rgba(120,0,0,0.18)',   color:'#FF4444'},
+  'QNT':                {bg:'rgba(0,40,100,0.18)',  color:'#5599FF'}
 };
 
-/* ── STATE ── */
-let currentCat = 'all', searchQuery = '', sortMode = 'featured', stockOnly = false;
-let currentView = 'brand'; /* 'brand' | 'cat' | 'all' */
-const cardState = {};
+/* ════════════════════════════════════════
+   STATE
+════════════════════════════════════════ */
+var appState = {level:1, brand:null, cat:null, search:'', sort:'featured', stockOnly:false};
+var cardState = {};
 
-/* ── VIEW SWITCHER ── */
-const VIEW_LABELS = {brand:'Grouped by brand', cat:'Grouped by category', all:'All products flat grid'};
-function switchView(v) {
-  currentView = v;
-  ['brand','cat','all'].forEach(function(id){
-    document.getElementById('vbtn-' + id).classList.toggle('active', id === v);
-  });
-  var lbl = document.getElementById('viewLabel');
-  if (lbl) lbl.textContent = VIEW_LABELS[v] || '';
-  renderGrid();
+/* ════════════════════════════════════════
+   UTILS
+════════════════════════════════════════ */
+function slugify(str){
+  return (str||'').toLowerCase().replace(/[\s&+]+/g,'-').replace(/[^a-z0-9-]/g,'').replace(/-+/g,'-').replace(/^-|-$/g,'');
 }
 
-/* ── FLAVOUR COLOR MAP ── */
-function getFlavourColor(f) {
-  f = (f || '').toLowerCase();
-  if (f === '—' || f === '') return '#555555';
-  if (f.includes('double rich choc') || f.includes('molten chocolate')) return '#2A0D00';
-  if (f.includes('chocolate frosting') || f.includes('swiss chocolate')) return '#5A3010';
-  if (f.includes('chocolate hazelnut') || f.includes('hazel nut'))      return '#7A4E2D';
-  if (f.includes('choco almond'))  return '#5D3A1A';
-  if (f.includes('chocolate') || f.includes('choco')) return '#4A2000';
-  if (f.includes('cookies') || f.includes('cookie'))  return '#6B4C30';
-  if (f.includes('vanilla'))       return '#F0CB7A';
-  if (f.includes('mango'))         return '#FFB300';
-  if (f.includes('magical mango')) return '#FF9800';
-  if (f.includes('coffee') || f.includes('mocha') || f.includes('café') || f.includes('cafe')) return '#4E342E';
-  if (f.includes('tiramisu'))      return '#C4A882';
-  if (f.includes('pistachio') || f.includes('pista')) return '#8DB600';
-  if (f.includes('kesar'))         return '#FF8F00';
-  if (f.includes('sour watermelon')) return '#00897B';
-  if (f.includes('watermelon'))    return '#FF4D6D';
-  if (f.includes('cherry'))        return '#C62828';
-  if (f.includes('fruit punch'))   return '#FF4444';
-  if (f.includes('fruit massage') || f.includes('fruit blast') || f.includes('mixed fruit')) return '#FF6633';
-  if (f.includes('citrus'))        return '#FDD835';
-  if (f.includes('lemon ginger') || f.includes('lemon')) return '#F9A825';
-  if (f.includes('chili mango'))   return '#DD2C00';
-  if (f.includes('brazilian orange') || f.includes('orange')) return '#FF6D00';
-  if (f.includes('blue lagoon') || f.includes('blue')) return '#0277BD';
-  if (f.includes('black grapes') || f.includes('grape')) return '#6A1B9A';
-  if (f.includes('black magic'))   return '#111111';
-  if (f.includes('cotton candy'))  return '#F48FB1';
-  if (f.includes('gummy candy') || f.includes('gummy')) return '#EC407A';
-  if (f.includes('birthday cake')) return '#FF80AB';
-  if (f.includes('ice cream'))     return '#E8D5A3';
-  if (f.includes('rich chocolate')) return '#3D1C02';
-  if (f.includes('unflavoured'))   return '#78909C';
-  if (f.includes('capsule'))       return '#90A4AE';
+function getBrandFromSlug(slug){
+  return getUniqueBrands().find(function(b){return slugify(b)===slug;})||null;
+}
+
+function getUniqueBrands(){
+  var seen={}, out=[];
+  PRODUCTS.forEach(function(p){if(p.brand&&!seen[p.brand]){seen[p.brand]=true;out.push(p.brand);}});
+  return out;
+}
+
+function brandInitials(name){
+  return name.split(' ').slice(0,2).map(function(w){return w[0]||'';}).join('').toUpperCase();
+}
+
+function parseProtein(p){
+  if(!p.protein||p.protein==='—')return 0;
+  var m=p.protein.match(/(\d+(\.\d+)?)/);
+  return m?parseFloat(m[1]):0;
+}
+
+function getFlavourColor(f){
+  f=(f||'').toLowerCase();
+  if(f==='—'||f==='')return '#555555';
+  if(f.includes('double rich choc')||f.includes('molten chocolate'))return '#2A0D00';
+  if(f.includes('chocolate frosting')||f.includes('swiss chocolate'))return '#5A3010';
+  if(f.includes('chocolate hazelnut')||f.includes('hazel nut'))return '#7A4E2D';
+  if(f.includes('choco almond'))return '#5D3A1A';
+  if(f.includes('chocolate')||f.includes('choco'))return '#4A2000';
+  if(f.includes('cookies')||f.includes('cookie'))return '#6B4C30';
+  if(f.includes('vanilla'))return '#F0CB7A';
+  if(f.includes('magical mango')||f.includes('mango'))return '#FFB300';
+  if(f.includes('coffee')||f.includes('mocha')||f.includes('café')||f.includes('cafe'))return '#4E342E';
+  if(f.includes('tiramisu'))return '#C4A882';
+  if(f.includes('pistachio')||f.includes('pista'))return '#8DB600';
+  if(f.includes('kesar'))return '#FF8F00';
+  if(f.includes('sour watermelon'))return '#00897B';
+  if(f.includes('watermelon'))return '#FF4D6D';
+  if(f.includes('cherry'))return '#C62828';
+  if(f.includes('fruit punch'))return '#FF4444';
+  if(f.includes('fruit massage')||f.includes('fruit blast')||f.includes('mixed fruit'))return '#FF6633';
+  if(f.includes('citrus'))return '#FDD835';
+  if(f.includes('lemon ginger')||f.includes('lemon'))return '#F9A825';
+  if(f.includes('chili mango'))return '#DD2C00';
+  if(f.includes('brazilian orange')||f.includes('orange'))return '#FF6D00';
+  if(f.includes('blue lagoon')||f.includes('blue'))return '#0277BD';
+  if(f.includes('black grapes')||f.includes('grape'))return '#6A1B9A';
+  if(f.includes('black magic'))return '#111111';
+  if(f.includes('cotton candy'))return '#F48FB1';
+  if(f.includes('gummy candy')||f.includes('gummy'))return '#EC407A';
+  if(f.includes('birthday cake'))return '#FF80AB';
+  if(f.includes('ice cream'))return '#E8D5A3';
+  if(f.includes('rich chocolate'))return '#3D1C02';
+  if(f.includes('unflavoured'))return '#78909C';
+  if(f.includes('capsule'))return '#90A4AE';
   return '#616161';
 }
 
-function buildWaMsg(p, flavour, size) {
-  var flav = (flavour && flavour !== '—') ? '\nFlavour: ' + flavour : '';
-  var sz   = (size   && size   !== '—') ? '\nSize: ' + size       : '';
-  return 'https://wa.me/919949531515?text=' +
-    encodeURIComponent('Hi, I want to buy *' + p.brand + ' ' + p.name + '*' + flav + sz + '\nPlease confirm availability and price.');
+function buildWaMsg(p,flavour,size){
+  var flav=(flavour&&flavour!=='—')?'\nFlavour: '+flavour:'';
+  var sz=(size&&size!=='—')?'\nSize: '+size:'';
+  return 'https://wa.me/919949531515?text='+encodeURIComponent('Hi, I want to buy *'+p.brand+' '+p.name+'*'+flav+sz+'\nPlease confirm availability and price.');
 }
 
-function selectFlavour(id, idx) {
-  if (!cardState[id]) cardState[id] = {flavIdx:0, weightIdx:0};
-  cardState[id].flavIdx = idx;
-  document.querySelectorAll('#fswatches-' + id + ' .flav-swatch').forEach(function(el, i){
-    el.classList.toggle('active', i === idx);
-  });
-  var p = PRODUCTS.find(function(x){return x.id === id;});
-  var nameEl = document.getElementById('fsel-' + id);
-  if (nameEl && p) nameEl.textContent = p.flavours[idx] || '';
-  updateCTA(id);
-}
-
-function selectWeight(id, idx) {
-  if (!cardState[id]) cardState[id] = {flavIdx:0, weightIdx:0};
-  cardState[id].weightIdx = idx;
-  document.querySelectorAll('#wpills-' + id + ' .weight-pill').forEach(function(el, i){
-    el.classList.toggle('active', i === idx);
-  });
-  updateCTA(id);
-}
-
-function updateCTA(id) {
-  var p = PRODUCTS.find(function(x){return x.id === id;});
-  if (!p) return;
-  var state   = cardState[id] || {flavIdx:0, weightIdx:0};
-  var flavour = (p.flavours && p.flavours[state.flavIdx]) || '—';
-  var wObj    = (p.weights  && p.weights[state.weightIdx]) || (p.weights && p.weights[0]) || {};
-  var ctaEl   = document.getElementById('cta-' + id);
-  if (ctaEl) ctaEl.href = buildWaMsg(p, flavour, wObj.size || '—');
-}
-
-function imgError(el, id) {
-  el.style.display = 'none';
-  var ph = document.getElementById('ph-' + id);
-  if (ph) ph.classList.add('show');
-}
-
-function parseProtein(p) {
-  if (!p.protein || p.protein === '—') return 0;
-  var m = p.protein.match(/(\d+(\.\d+)?)/);
-  return m ? parseFloat(m[1]) : 0;
-}
-
-/* ── CARD RENDERER ── */
-function renderCard(p) {
-  if (p.comingSoon) {
-    var cat = CAT_META[p.cat] || {};
-    return '<div class="coming-card">' +
-      '<i class="' + (cat.icon || p.icon) + '"></i>' +
-      '<div class="coming-title">' + (cat.label || p.cat) + '</div>' +
-      '<div class="coming-sub">We\'re adding products soon!</div>' +
-      '<a href="https://wa.me/919949531515?text=Hi%2C%20I%20want%20to%20know%20about%20' + encodeURIComponent(cat.label || '') + '%20products." target="_blank" style="font-size:0.78rem;color:var(--red);font-weight:700;margin-top:6px;display:flex;align-items:center;gap:5px;">' +
-      '<i class="fab fa-whatsapp"></i> Ask on WhatsApp</a></div>';
+/* ════════════════════════════════════════
+   ROUTER
+════════════════════════════════════════ */
+function navigate(brand, cat){
+  /* If brand has only 1 category, skip Level 2 */
+  if(brand && !cat){
+    var brandProds = PRODUCTS.filter(function(p){return p.brand===brand;});
+    var cats = [];
+    var seenCat = {};
+    brandProds.forEach(function(p){if(!seenCat[p.cat]){seenCat[p.cat]=true;cats.push(p.cat);}});
+    if(cats.length===1){cat=cats[0];}
   }
 
-  var hasStock = p.weights && p.weights.some(function(w){return w.inStock;});
-  var defaultWIdx = (function(){
-    if (!p.weights) return 0;
-    var idx = p.weights.findIndex(function(w){return w.inStock;});
-    return idx >= 0 ? idx : 0;
-  })();
-  var defaultFlavour = (p.flavours && p.flavours[0]) || '—';
-  var defaultSize    = (p.weights  && p.weights[defaultWIdx]) ? p.weights[defaultWIdx].size : '—';
+  var hash;
+  if(!brand){hash='#/';}
+  else if(!cat){hash='#/'+slugify(brand);}
+  else{hash='#/'+slugify(brand)+'/'+cat;}
 
-  if (!cardState[p.id]) cardState[p.id] = {flavIdx:0, weightIdx:defaultWIdx};
-
-  var hasRealFlavours = p.flavours && p.flavours.length > 0 && p.flavours[0] !== '—';
-  var flavHtml = '';
-  if (hasRealFlavours) {
-    var swatchBtns = p.flavours.map(function(f, i){
-      return '<button class="flav-swatch' + (i === 0 ? ' active' : '') + '" ' +
-        'style="background:' + getFlavourColor(f) + '" ' +
-        'title="' + f + '" ' +
-        'onclick="selectFlavour(\'' + p.id + '\',' + i + ')"></button>';
-    }).join('');
-    flavHtml = '<div class="prod-selector-block">' +
-      '<div class="prod-selector-label">Flavour &nbsp;<span class="selected-name" id="fsel-' + p.id + '">' + defaultFlavour + '</span></div>' +
-      '<div class="flav-swatches" id="fswatches-' + p.id + '">' + swatchBtns + '</div>' +
-      '</div>';
-  }
-
-  var hasRealWeights = p.weights && p.weights.length > 0 && !(p.weights.length === 1 && p.weights[0].size === '—');
-  var weightHtml = '';
-  if (hasRealWeights) {
-    var pills = p.weights.map(function(w, i){
-      var cls = 'weight-pill';
-      if (i === defaultWIdx) cls += ' active';
-      if (!w.inStock) cls += ' oos';
-      var click = w.inStock ? 'onclick="selectWeight(\'' + p.id + '\',' + i + ')"' : '';
-      var dis   = w.inStock ? '' : 'disabled';
-      return '<button class="' + cls + '" ' + click + ' ' + dis + '>' + w.size + '</button>';
-    }).join('');
-    weightHtml = '<div class="prod-selector-block">' +
-      '<div class="prod-selector-label">Size / Weight</div>' +
-      '<div class="weight-pills" id="wpills-' + p.id + '">' + pills + '</div>' +
-      '</div>';
-  }
-
-  var proteinPH = (p.protein && p.protein !== '—') ? '<div class="placeholder-protein">' + p.protein + '</div>' : '';
-  var imgHtml;
-  if (p.img) {
-    imgHtml = '<img class="prod-img-real" src="' + p.img + '" alt="' + p.brand + ' ' + p.name + '" loading="lazy" onerror="imgError(this,\'' + p.id + '\')"/>' +
-      '<div class="prod-img-placeholder" id="ph-' + p.id + '" style="background:' + p.gradient + '">' +
-        '<i class="' + (p.icon || 'fas fa-flask') + '"></i>' +
-        '<div class="placeholder-brand-txt">' + p.brand + '</div>' + proteinPH +
-      '</div>';
+  if(window.location.hash===hash){
+    doRender(brand,cat);
   } else {
-    imgHtml = '<div class="prod-img-placeholder show" id="ph-' + p.id + '" style="background:' + p.gradient + '">' +
-      '<i class="' + (p.icon || 'fas fa-flask') + '"></i>' +
-      '<div class="placeholder-brand-txt">' + p.brand + '</div>' + proteinPH +
-      '</div>';
+    window.location.hash=hash;
+    /* hashchange will call parseAndRender */
   }
-
-  var featBadge = p.featured ? '<div class="badge-stack"><span class="badge badge-featured">\u2B50 Popular</span></div>' : '';
-  var oosOverlay = !hasStock ? '<div class="oos-overlay"><div class="oos-tag">Out of Stock</div></div>' : '';
-  var proteinTag = (p.protein && p.protein !== '—') ? '<span class="prod-protein-tag">' + p.protein + '</span>' : '';
-
-  var ctaHref  = buildWaMsg(p, defaultFlavour, defaultSize);
-  var ctaIcon  = hasStock ? 'fab fa-whatsapp' : 'fas fa-clock';
-  var ctaLabel = hasStock ? 'Buy on WhatsApp' : 'Notify Me';
-  var ctaCls   = 'prod-cta' + (!hasStock ? ' disabled' : '');
-
-  return '<div class="prod-card" id="card-' + p.id + '" itemscope itemtype="https://schema.org/Product">' +
-    '<meta itemprop="name" content="' + p.brand + ' ' + p.name + '"/>' +
-    '<meta itemprop="brand" content="' + p.brand + '"/>' +
-    '<div class="prod-img-wrap">' + imgHtml + oosOverlay +
-      '<div class="prod-badge-row"><span class="badge badge-brand">' + p.brand + '</span>' + featBadge + '</div>' +
-    '</div>' +
-    '<div class="prod-body">' +
-      '<div class="prod-brand-tag">' + p.brand + '</div>' +
-      '<div class="prod-name">' + p.name + '</div>' +
-      (proteinTag ? '<div class="prod-meta">' + proteinTag + '</div>' : '') +
-      flavHtml +
-      weightHtml +
-      '<div class="call-for-price"><i class="fab fa-whatsapp"></i> WhatsApp or Call for Price</div>' +
-      '<a href="' + ctaHref + '" class="' + ctaCls + '" id="cta-' + p.id + '"' +
-        (hasStock ? ' target="_blank"' : '') + ' rel="noopener">' +
-        '<i class="' + ctaIcon + '"></i> ' + ctaLabel +
-      '</a>' +
-    '</div>' +
-  '</div>';
 }
 
-/* ── FILTER / SORT ── */
-var REAL_PRODUCTS = PRODUCTS.filter(function(p){return !p.comingSoon;});
+function navigateToL1(){navigate(null,null);}
+function navigateToL2(){navigate(appState.brand,null);}
 
-function getFiltered() {
-  var list = currentCat === 'all'
-    ? REAL_PRODUCTS.slice()
-    : REAL_PRODUCTS.filter(function(p){return p.cat === currentCat;});
+function parseAndRender(){
+  var raw=window.location.hash.replace(/^#\/?/,'');
+  var parts=raw?raw.split('/').filter(Boolean):[];
 
-  if (stockOnly) {
-    list = list.filter(function(p){
-      return p.weights && p.weights.some(function(w){return w.inStock;});
+  var brand=null, cat=null;
+  if(parts.length>=1){
+    brand=getBrandFromSlug(parts[0]);
+    if(brand&&parts.length>=2&&CAT_META[parts[1]]){
+      cat=parts[1];
+    }
+  }
+
+  /* Reset filters on level/brand/cat change */
+  if(appState.brand!==brand||appState.cat!==cat){
+    appState.search='';
+    appState.sort='featured';
+    appState.stockOnly=false;
+  }
+
+  doRender(brand,cat);
+}
+
+function doRender(brand,cat){
+  appState.brand=brand;
+  appState.cat=cat;
+  appState.level=!brand?1:!cat?2:3;
+  render();
+}
+
+window.addEventListener('hashchange', parseAndRender);
+
+/* ════════════════════════════════════════
+   RENDER ORCHESTRATOR
+════════════════════════════════════════ */
+function render(){
+  updateLevelHeader();
+  updateFilterBar();
+  updateAccessories();
+  updateStickyTop();
+
+  if(appState.level===1)renderBrandGrid();
+  else if(appState.level===2)renderCatGrid();
+  else renderProductGrid();
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function updateStickyTop(){
+  var lh=document.getElementById('levelHeader');
+  var fb=document.getElementById('filterBar');
+  if(!lh||!fb)return;
+  setTimeout(function(){
+    var lhH=lh.style.display!=='none'?lh.offsetHeight:0;
+    fb.style.top=(66+lhH)+'px';
+  },10);
+}
+
+function updateLevelHeader(){
+  var lh=document.getElementById('levelHeader');
+  var inner=document.getElementById('levelHeaderInner');
+  if(appState.level===1){lh.style.display='none';return;}
+  lh.style.display='block';
+
+  var html='<button class="back-btn" onclick="history.back()"><i class="fas fa-arrow-left"></i> Back</button>';
+  html+='<div class="bc-divider"></div>';
+  html+='<div class="breadcrumb">';
+  html+='<span class="bc-item" onclick="navigateToL1()">All Brands</span>';
+
+  if(appState.level>=2&&appState.brand){
+    html+='<span class="bc-sep"><i class="fas fa-chevron-right"></i></span>';
+    if(appState.level===2){
+      html+='<span class="bc-item active">'+escHtml(appState.brand)+'</span>';
+    } else {
+      html+='<span class="bc-item" onclick="navigateToL2()">'+escHtml(appState.brand)+'</span>';
+    }
+  }
+
+  if(appState.level===3&&appState.cat){
+    var meta=CAT_META[appState.cat]||{};
+    html+='<span class="bc-sep"><i class="fas fa-chevron-right"></i></span>';
+    html+='<span class="bc-item active">'+(meta.label||appState.cat)+'</span>';
+  }
+  html+='</div>';
+  inner.innerHTML=html;
+}
+
+function updateFilterBar(){
+  var fb=document.getElementById('filterBar');
+  fb.style.display=appState.level===3?'block':'none';
+  if(appState.level===3){
+    document.getElementById('searchInput').value=appState.search||'';
+    document.getElementById('sortSelect').value=appState.sort||'featured';
+    document.getElementById('stockToggle').classList.toggle('on',!!appState.stockOnly);
+    updateFilterChips();
+  }
+}
+
+function updateAccessories(){
+  var acc=document.getElementById('accessoriesSection');
+  acc.style.display=appState.level===1?'block':'none';
+}
+
+/* ════════════════════════════════════════
+   LEVEL 1: BRAND GRID
+════════════════════════════════════════ */
+function renderBrandGrid(){
+  var grid=document.getElementById('mainGrid');
+  var brands=getUniqueBrands();
+
+  var html='<div class="brands-grid">';
+  brands.forEach(function(brand){
+    var prods=PRODUCTS.filter(function(p){return p.brand===brand;});
+    var catSeen={}, cats=[];
+    prods.forEach(function(p){if(!catSeen[p.cat]){catSeen[p.cat]=true;cats.push(p.cat);}});
+
+    var col=BRAND_COLORS[brand]||{bg:'rgba(80,80,80,0.18)',color:'#AAAAAA'};
+    var initials=brandInitials(brand);
+
+    var catPills=cats.slice(0,3).map(function(c){
+      var m=CAT_META[c]||{};
+      return '<span class="brand-cat-pill">'+(m.label||c)+'</span>';
+    }).join('');
+    if(cats.length>3)catPills+='<span class="brand-cat-pill">+'+(cats.length-3)+' more</span>';
+
+    html+=
+      '<div class="brand-card" data-brand="'+escAttr(brand)+'" onclick="handleBrandClick(this)">'+
+        '<div class="brand-card-top">'+
+          '<div class="brand-card-avatar" style="background:'+col.bg+';color:'+col.color+'">'+initials+'</div>'+
+          '<div class="brand-card-name">'+escHtml(brand)+'</div>'+
+        '</div>'+
+        '<div class="brand-cats-row">'+catPills+'</div>'+
+        '<div class="brand-card-footer">'+
+          '<div class="bc-prod-count"><strong>'+prods.length+'</strong>product'+(prods.length>1?'s':'')+'</div>'+
+          '<div class="brand-arrow"><i class="fas fa-chevron-right"></i></div>'+
+        '</div>'+
+      '</div>';
+  });
+  html+='</div>';
+  grid.innerHTML=html;
+}
+
+function handleBrandClick(el){
+  navigate(el.dataset.brand, null);
+}
+
+/* ════════════════════════════════════════
+   LEVEL 2: CATEGORY GRID
+════════════════════════════════════════ */
+function renderCatGrid(){
+  var grid=document.getElementById('mainGrid');
+  var prods=PRODUCTS.filter(function(p){return p.brand===appState.brand;});
+  var catSeen={}, cats=[];
+  prods.forEach(function(p){if(!catSeen[p.cat]){catSeen[p.cat]=true;cats.push(p.cat);}});
+
+  /* Order cats by CAT_META key order */
+  var metaOrder=Object.keys(CAT_META).filter(function(k){return k!=='all';});
+  cats.sort(function(a,b){return metaOrder.indexOf(a)-metaOrder.indexOf(b);});
+
+  var html='<div class="cats-grid">';
+  cats.forEach(function(cat){
+    var catProds=prods.filter(function(p){return p.cat===cat;});
+    var meta=CAT_META[cat]||{label:cat,icon:'fas fa-box'};
+    html+=
+      '<div class="cat-card" data-brand="'+escAttr(appState.brand)+'" data-cat="'+cat+'" onclick="handleCatClick(this)">'+
+        '<div class="cat-card-icon"><i class="'+meta.icon+'"></i></div>'+
+        '<div class="cat-card-name">'+meta.label+'</div>'+
+        '<div class="cat-card-count">'+catProds.length+' product'+(catProds.length>1?'s':'')+'</div>'+
+      '</div>';
+  });
+  html+='</div>';
+  grid.innerHTML=html;
+}
+
+function handleCatClick(el){
+  navigate(el.dataset.brand, el.dataset.cat);
+}
+
+/* ════════════════════════════════════════
+   LEVEL 3: PRODUCT GRID
+════════════════════════════════════════ */
+function getL3Products(){
+  var list=PRODUCTS.filter(function(p){
+    return p.brand===appState.brand && p.cat===appState.cat;
+  });
+
+  if(appState.stockOnly){
+    list=list.filter(function(p){
+      return p.weights&&p.weights.some(function(w){return w.inStock;});
     });
   }
 
-  if (searchQuery) {
-    var q = searchQuery.toLowerCase();
-    list = list.filter(function(p){
-      return p.name.toLowerCase().includes(q) ||
-             p.brand.toLowerCase().includes(q) ||
-             (p.flavours || []).some(function(f){return f.toLowerCase().includes(q);}) ||
-             (p.weights  || []).some(function(w){return w.size.toLowerCase().includes(q);}) ||
-             p.cat.toLowerCase().includes(q);
+  if(appState.search){
+    var q=appState.search.toLowerCase();
+    list=list.filter(function(p){
+      return p.name.toLowerCase().includes(q)||
+             (p.flavours||[]).some(function(f){return f.toLowerCase().includes(q);})||
+             (p.weights||[]).some(function(w){return w.size.toLowerCase().includes(q);});
     });
   }
 
-  switch (sortMode) {
-    case 'brand_az':   list.sort(function(a,b){return a.brand.localeCompare(b.brand);}); break;
-    case 'brand_za':   list.sort(function(a,b){return b.brand.localeCompare(a.brand);}); break;
+  switch(appState.sort){
     case 'name_az':    list.sort(function(a,b){return a.name.localeCompare(b.name);}); break;
     case 'protein_hl': list.sort(function(a,b){return parseProtein(b)-parseProtein(a);}); break;
     case 'instock':
       list.sort(function(a,b){
-        var aS = (a.weights && a.weights.some(function(w){return w.inStock;})) ? 1 : 0;
-        var bS = (b.weights && b.weights.some(function(w){return w.inStock;})) ? 1 : 0;
-        return bS - aS;
-      });
-      break;
-    default:
-      list.sort(function(a,b){return (b.featured?1:0)-(a.featured?1:0);});
+        var aS=(a.weights&&a.weights.some(function(w){return w.inStock;}))?1:0;
+        var bS=(b.weights&&b.weights.some(function(w){return w.inStock;}))?1:0;
+        return bS-aS;
+      }); break;
+    default: list.sort(function(a,b){return (b.featured?1:0)-(a.featured?1:0);});
   }
   return list;
 }
 
-/* ── GRID SIZE helper ── */
-function gridClass(count) {
-  if (count >= 4) return 'grid-4';
-  if (count === 3) return 'grid-3';
-  return 'grid-2';
-}
+function renderProductGrid(){
+  var grid=document.getElementById('mainGrid');
+  var list=getL3Products();
+  var cntEl=document.getElementById('prodCount');
+  if(cntEl)cntEl.textContent=list.length;
 
-/* ── BRAND INITIALS ── */
-function brandInitials(name) {
-  return name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
-}
-
-/* ── RENDER: BY BRAND ── */
-function renderBrandView(list) {
-  var brandOrder = [], byBrand = {};
-  list.forEach(function(p){
-    var b = p.brand || 'Other';
-    if (!byBrand[b]) { byBrand[b] = []; brandOrder.push(b); }
-    byBrand[b].push(p);
-  });
-
-  var html = '';
-  brandOrder.forEach(function(brand){
-    var prods = byBrand[brand];
-    var col   = BRAND_COLORS[brand] || {bg:'rgba(80,80,80,0.18)', color:'#AAAAAA'};
-    var cls   = gridClass(prods.length);
-    html += '<div class="brand-group">' +
-      '<div class="brand-header">' +
-        '<div class="brand-avatar" style="background:' + col.bg + ';color:' + col.color + '">' + brandInitials(brand) + '</div>' +
-        '<span class="brand-name-tag">' + brand + '</span>' +
-        '<span class="brand-prod-count">' + prods.length + ' product' + (prods.length > 1 ? 's' : '') + '</span>' +
-        '<div class="brand-line"></div>' +
-      '</div>' +
-      '<div class="brand-grid ' + cls + '">' + prods.map(renderCard).join('') + '</div>' +
-    '</div>';
-  });
-
-  /* append coming-soon for filtered category */
-  if (currentCat !== 'all') {
-    var csCard = PRODUCTS.find(function(p){return p.comingSoon && p.cat === currentCat;});
-    if (csCard) html += '<div class="brand-group"><div class="brand-grid grid-2">' + renderCard(csCard) + '</div></div>';
-  }
-  return html;
-}
-
-/* ── RENDER: BY CATEGORY ── */
-function renderCatView(list) {
-  var catOrder = [], byCat = {};
-  list.forEach(function(p){
-    var c = p.cat || 'other';
-    if (!byCat[c]) { byCat[c] = []; catOrder.push(c); }
-    byCat[c].push(p);
-  });
-
-  /* respect CAT_META order when in 'all' mode */
-  if (currentCat === 'all') {
-    var metaOrder = Object.keys(CAT_META).filter(function(k){return k !== 'all';});
-    catOrder.sort(function(a,b){return metaOrder.indexOf(a) - metaOrder.indexOf(b);});
-  }
-
-  var html = '';
-  catOrder.forEach(function(cat){
-    var prods = byCat[cat];
-    var meta  = CAT_META[cat] || {label: cat, icon:'fas fa-box'};
-    var cls   = gridClass(prods.length);
-    html += '<div class="cat-group">' +
-      '<div class="cat-group-header">' +
-        '<div class="cat-group-icon" style="background:rgba(226,0,0,0.1);border:1px solid rgba(226,0,0,0.2);color:var(--red);">' +
-          '<i class="' + meta.icon + '"></i>' +
-        '</div>' +
-        '<span class="cat-group-name">' + meta.label + '</span>' +
-        '<span class="cat-group-count">' + prods.length + '</span>' +
-        '<div class="cat-group-line"></div>' +
-      '</div>' +
-      '<div class="brand-grid ' + cls + '">' + prods.map(renderCard).join('') + '</div>' +
-    '</div>';
-  });
-
-  if (currentCat !== 'all') {
-    var csCard = PRODUCTS.find(function(p){return p.comingSoon && p.cat === currentCat;});
-    if (csCard) html += '<div class="cat-group"><div class="brand-grid grid-2">' + renderCard(csCard) + '</div></div>';
-  }
-  return html;
-}
-
-/* ── RENDER: ALL FLAT ── */
-function renderAllView(list) {
-  var cls = gridClass(Math.min(list.length, 4));
-  var html = '<div class="brand-group"><div class="brand-grid ' + cls + '">' + list.map(renderCard).join('') + '</div></div>';
-  if (currentCat !== 'all') {
-    var csCard = PRODUCTS.find(function(p){return p.comingSoon && p.cat === currentCat;});
-    if (csCard) html += '<div class="brand-group"><div class="brand-grid grid-2">' + renderCard(csCard) + '</div></div>';
-  }
-  return html;
-}
-
-/* ── MAIN RENDER ── */
-function renderGrid() {
-  var grid = document.getElementById('productsGrid');
-  var list = getFiltered();
-
-  if (list.length === 0) {
-    var csCard = (currentCat !== 'all') ? PRODUCTS.find(function(p){return p.comingSoon && p.cat === currentCat;}) : null;
-    if (csCard) {
-      grid.innerHTML = '<div class="brand-group"><div class="brand-grid grid-2">' + renderCard(csCard) + '</div></div>';
-      document.getElementById('prodCount').textContent = '0';
-      return;
-    }
-    grid.innerHTML = '<div class="empty-state">' +
-      '<div class="empty-icon"><i class="fas fa-search"></i></div>' +
-      '<div class="empty-title">No Products Found</div>' +
-      '<div class="empty-sub">Try a different search term or category.<br/>Or ask us directly on WhatsApp!</div>' +
-      '<a href="https://wa.me/919949531515?text=Hi%2C%20I%20am%20looking%20for%20a%20specific%20supplement%20and%20could%20not%20find%20it." class="empty-wa" target="_blank">' +
-      '<i class="fab fa-whatsapp"></i> Ask on WhatsApp</a></div>';
-    document.getElementById('prodCount').textContent = '0';
+  if(list.length===0){
+    grid.innerHTML=
+      '<div class="empty-state">'+
+        '<div class="empty-icon"><i class="fas fa-search"></i></div>'+
+        '<div class="empty-title">No Products Found</div>'+
+        '<div class="empty-sub">Try a different search or filter.<br/>Or ask us on WhatsApp!</div>'+
+        '<a href="https://wa.me/919949531515?text=Hi%2C%20I%20am%20looking%20for%20a%20supplement." class="empty-wa" target="_blank">'+
+        '<i class="fab fa-whatsapp"></i> Ask on WhatsApp</a>'+
+      '</div>';
     return;
   }
 
-  if (currentView === 'brand')    grid.innerHTML = renderBrandView(list);
-  else if (currentView === 'cat') grid.innerHTML = renderCatView(list);
-  else                            grid.innerHTML = renderAllView(list);
-
-  document.getElementById('prodCount').textContent = list.length;
+  var cls=list.length>=4?'g4':list.length===3?'g3':'g2';
+  grid.innerHTML='<div class="prod-grid '+cls+'">'+list.map(renderCard).join('')+'</div>';
 }
 
-/* ── FILTER UI ── */
-function updateFilterChips() {
-  var wrap  = document.getElementById('activeFilters');
-  var chips = [];
-  if (searchQuery) chips.push('<span class="filter-chip" onclick="clearSearch()"><i class="fas fa-times"></i> "' + searchQuery + '"</span>');
-  if (stockOnly)   chips.push('<span class="filter-chip" onclick="toggleStockFilter()"><i class="fas fa-times"></i> In Stock Only</span>');
-  if (sortMode !== 'featured') {
-    var labels = {brand_az:'Brand A→Z',brand_za:'Brand Z→A',name_az:'Name A→Z',protein_hl:'Protein High→Low',instock:'In Stock First'};
-    chips.push('<span class="filter-chip" onclick="resetSort()"><i class="fas fa-times"></i> ' + labels[sortMode] + '</span>');
+/* ════════════════════════════════════════
+   PRODUCT CARD RENDERER
+════════════════════════════════════════ */
+function renderCard(p){
+  var hasStock=p.weights&&p.weights.some(function(w){return w.inStock;});
+  var defaultWIdx=(function(){
+    if(!p.weights)return 0;
+    var idx=p.weights.findIndex(function(w){return w.inStock;});
+    return idx>=0?idx:0;
+  })();
+  var defaultFlavour=(p.flavours&&p.flavours[0])||'—';
+  var defaultSize=(p.weights&&p.weights[defaultWIdx])?p.weights[defaultWIdx].size:'—';
+
+  if(!cardState[p.id])cardState[p.id]={flavIdx:0,weightIdx:defaultWIdx};
+
+  var hasRealFlavours=p.flavours&&p.flavours.length>0&&p.flavours[0]!=='—';
+  var flavHtml='';
+  if(hasRealFlavours){
+    var swatchBtns=p.flavours.map(function(f,i){
+      return '<button class="flav-swatch'+(i===0?' active':'')+'" style="background:'+getFlavourColor(f)+'" title="'+escAttr(f)+'" onclick="selectFlavour(\''+p.id+'\','+i+')"></button>';
+    }).join('');
+    flavHtml='<div class="prod-selector-block">'+
+      '<div class="prod-selector-label">Flavour &nbsp;<span class="selected-name" id="fsel-'+p.id+'">'+escHtml(defaultFlavour)+'</span></div>'+
+      '<div class="flav-swatches" id="fswatches-'+p.id+'">'+swatchBtns+'</div>'+
+      '</div>';
   }
-  if (chips.length > 1) chips.push('<span class="clear-all-btn" onclick="clearAll()">Clear All</span>');
-  wrap.innerHTML = chips.join('');
-}
 
-function updateCounts() {
-  Object.keys(CAT_META).forEach(function(c){
-    var el = document.getElementById('count-' + c);
-    if (!el) return;
-    var count = c === 'all'
-      ? REAL_PRODUCTS.length
-      : REAL_PRODUCTS.filter(function(p){return p.cat === c;}).length;
-    el.textContent = count || '';
-  });
-}
-
-function filterCat(cat) {
-  currentCat = cat;
-  document.querySelectorAll('.cat-tab').forEach(function(t){
-    t.classList.toggle('active', t.dataset.cat === cat);
-  });
-  renderGrid();
-  updateFilterChips();
-  if (window.innerWidth < 768) {
-    document.getElementById('filterBar').scrollIntoView({behavior:'smooth', block:'start'});
+  var hasRealWeights=p.weights&&p.weights.length>0&&!(p.weights.length===1&&p.weights[0].size==='—');
+  var weightHtml='';
+  if(hasRealWeights){
+    var pills=p.weights.map(function(w,i){
+      var cls='weight-pill';
+      if(i===defaultWIdx)cls+=' active';
+      if(!w.inStock)cls+=' oos';
+      var click=w.inStock?'onclick="selectWeight(\''+p.id+'\','+i+')"':'';
+      var dis=w.inStock?'':'disabled';
+      return '<button class="'+cls+'" '+click+' '+dis+'>'+escHtml(w.size)+'</button>';
+    }).join('');
+    weightHtml='<div class="prod-selector-block">'+
+      '<div class="prod-selector-label">Size / Weight</div>'+
+      '<div class="weight-pills" id="wpills-'+p.id+'">'+pills+'</div>'+
+      '</div>';
   }
+
+  var proteinPH=(p.protein&&p.protein!=='—')?'<div class="placeholder-protein">'+p.protein+'</div>':'';
+  var imgHtml;
+  if(p.img){
+    imgHtml='<img class="prod-img-real" src="'+p.img+'" alt="'+escAttr(p.brand+' '+p.name)+'" loading="lazy" onerror="imgError(this,\''+p.id+'\')"/>'+
+      '<div class="prod-img-placeholder" id="ph-'+p.id+'" style="background:'+p.gradient+'">'+
+        '<i class="'+(p.icon||'fas fa-flask')+'"></i>'+
+        '<div class="placeholder-brand-txt">'+escHtml(p.brand)+'</div>'+proteinPH+
+      '</div>';
+  } else {
+    imgHtml='<div class="prod-img-placeholder show" id="ph-'+p.id+'" style="background:'+p.gradient+'">'+
+      '<i class="'+(p.icon||'fas fa-flask')+'"></i>'+
+      '<div class="placeholder-brand-txt">'+escHtml(p.brand)+'</div>'+proteinPH+
+      '</div>';
+  }
+
+  var featBadge=p.featured?'<div class="badge-stack"><span class="badge badge-featured">\u2B50 Popular</span></div>':'';
+  var oosOverlay=!hasStock?'<div class="oos-overlay"><div class="oos-tag">Out of Stock</div></div>':'';
+  var proteinTag=(p.protein&&p.protein!=='—')?'<span class="prod-protein-tag">'+p.protein+'</span>':'';
+
+  var ctaHref=buildWaMsg(p,defaultFlavour,defaultSize);
+  var ctaIcon=hasStock?'fab fa-whatsapp':'fas fa-clock';
+  var ctaLabel=hasStock?'Buy on WhatsApp':'Notify Me';
+  var ctaCls='prod-cta'+(!hasStock?' disabled':'');
+
+  return '<div class="prod-card" id="card-'+p.id+'" itemscope itemtype="https://schema.org/Product">'+
+    '<meta itemprop="name" content="'+escAttr(p.brand+' '+p.name)+'"/>'+
+    '<meta itemprop="brand" content="'+escAttr(p.brand)+'"/>'+
+    '<div class="prod-img-wrap">'+imgHtml+oosOverlay+
+      '<div class="prod-badge-row"><span class="badge badge-brand">'+escHtml(p.brand)+'</span>'+featBadge+'</div>'+
+    '</div>'+
+    '<div class="prod-body">'+
+      '<div class="prod-brand-tag">'+escHtml(p.brand)+'</div>'+
+      '<div class="prod-name">'+escHtml(p.name)+'</div>'+
+      (proteinTag?'<div class="prod-meta">'+proteinTag+'</div>':'')+
+      flavHtml+
+      weightHtml+
+      '<div class="call-for-price"><i class="fab fa-whatsapp"></i> WhatsApp or Call for Price</div>'+
+      '<a href="'+ctaHref+'" class="'+ctaCls+'" id="cta-'+p.id+'"'+(hasStock?' target="_blank"':'')+' rel="noopener">'+
+        '<i class="'+ctaIcon+'"></i> '+ctaLabel+
+      '</a>'+
+    '</div>'+
+  '</div>';
 }
 
-function toggleStockFilter() {
-  stockOnly = !stockOnly;
-  document.getElementById('stockToggle').classList.toggle('on', stockOnly);
-  renderGrid();
-  updateFilterChips();
+/* ════════════════════════════════════════
+   CARD INTERACTIONS
+════════════════════════════════════════ */
+function selectFlavour(id,idx){
+  if(!cardState[id])cardState[id]={flavIdx:0,weightIdx:0};
+  cardState[id].flavIdx=idx;
+  document.querySelectorAll('#fswatches-'+id+' .flav-swatch').forEach(function(el,i){
+    el.classList.toggle('active',i===idx);
+  });
+  var p=PRODUCTS.find(function(x){return x.id===id;});
+  var nameEl=document.getElementById('fsel-'+id);
+  if(nameEl&&p)nameEl.textContent=p.flavours[idx]||'';
+  updateCTA(id);
 }
 
-function clearSearch()  { searchQuery = ''; document.getElementById('searchInput').value = ''; renderGrid(); updateFilterChips(); }
-function resetSort()    { sortMode = 'featured'; document.getElementById('sortSelect').value = 'featured'; renderGrid(); updateFilterChips(); }
-function clearAll() {
-  searchQuery = ''; stockOnly = false; sortMode = 'featured';
-  document.getElementById('searchInput').value = '';
-  document.getElementById('sortSelect').value  = 'featured';
-  document.getElementById('stockToggle').classList.remove('on');
-  renderGrid();
-  updateFilterChips();
+function selectWeight(id,idx){
+  if(!cardState[id])cardState[id]={flavIdx:0,weightIdx:0};
+  cardState[id].weightIdx=idx;
+  document.querySelectorAll('#wpills-'+id+' .weight-pill').forEach(function(el,i){
+    el.classList.toggle('active',i===idx);
+  });
+  updateCTA(id);
 }
 
-document.getElementById('searchInput').addEventListener('input', function(e){
-  searchQuery = e.target.value.trim();
-  renderGrid();
+function updateCTA(id){
+  var p=PRODUCTS.find(function(x){return x.id===id;});
+  if(!p)return;
+  var state=cardState[id]||{flavIdx:0,weightIdx:0};
+  var flavour=(p.flavours&&p.flavours[state.flavIdx])||'—';
+  var wObj=(p.weights&&p.weights[state.weightIdx])||(p.weights&&p.weights[0])||{};
+  var ctaEl=document.getElementById('cta-'+id);
+  if(ctaEl)ctaEl.href=buildWaMsg(p,flavour,wObj.size||'—');
+}
+
+function imgError(el,id){
+  el.style.display='none';
+  var ph=document.getElementById('ph-'+id);
+  if(ph)ph.classList.add('show');
+}
+
+/* ════════════════════════════════════════
+   L3 FILTER CONTROLS
+════════════════════════════════════════ */
+function updateFilterChips(){
+  var wrap=document.getElementById('activeFilters');
+  if(!wrap)return;
+  var chips=[];
+  if(appState.search)chips.push('<span class="filter-chip" onclick="clearSearch()"><i class="fas fa-times"></i> "'+escHtml(appState.search)+'"</span>');
+  if(appState.stockOnly)chips.push('<span class="filter-chip" onclick="toggleStockFilter()"><i class="fas fa-times"></i> In Stock Only</span>');
+  if(appState.sort&&appState.sort!=='featured'){
+    var labels={name_az:'Name A\u2192Z',protein_hl:'Protein High\u2192Low',instock:'In Stock First'};
+    chips.push('<span class="filter-chip" onclick="resetSort()"><i class="fas fa-times"></i> '+(labels[appState.sort]||'')+'</span>');
+  }
+  if(chips.length>1)chips.push('<span class="clear-all-btn" onclick="clearAllFilters()">Clear All</span>');
+  wrap.innerHTML=chips.join('');
+}
+
+function clearSearch(){appState.search='';document.getElementById('searchInput').value='';renderProductGrid();updateFilterChips();}
+function resetSort(){appState.sort='featured';document.getElementById('sortSelect').value='featured';renderProductGrid();updateFilterChips();}
+function toggleStockFilter(){appState.stockOnly=!appState.stockOnly;document.getElementById('stockToggle').classList.toggle('on',appState.stockOnly);renderProductGrid();updateFilterChips();}
+function clearAllFilters(){appState.search='';appState.sort='featured';appState.stockOnly=false;document.getElementById('searchInput').value='';document.getElementById('sortSelect').value='featured';document.getElementById('stockToggle').classList.remove('on');renderProductGrid();updateFilterChips();}
+
+document.getElementById('searchInput').addEventListener('input',function(e){
+  if(appState.level!==3)return;
+  appState.search=e.target.value.trim();
+  renderProductGrid();
   updateFilterChips();
 });
-document.getElementById('sortSelect').addEventListener('change', function(e){
-  sortMode = e.target.value;
-  renderGrid();
+document.getElementById('sortSelect').addEventListener('change',function(e){
+  if(appState.level!==3)return;
+  appState.sort=e.target.value;
+  renderProductGrid();
   updateFilterChips();
 });
 
-(function(){
-  var hash = window.location.hash.replace('#', '');
-  if (hash && CAT_META[hash]) filterCat(hash);
-})();
+/* ════════════════════════════════════════
+   ESCAPE HELPERS
+════════════════════════════════════════ */
+function escHtml(s){
+  return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function escAttr(s){
+  return (s||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
 
-updateCounts();
-renderGrid();
-updateFilterChips();
+/* ════════════════════════════════════════
+   INIT
+════════════════════════════════════════ */
+parseAndRender();
 </script>
 </body>
 </html>
