@@ -489,41 +489,29 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
 .footer-policy a{font-size:0.78rem;color:var(--muted2);transition:color 0.2s;}
 .footer-policy a:hover{color:var(--red);}
 
-/* ══ VISTAMINDTECH CREDIT ════════════════════ */
-.vmt-credit{
-  max-width:1100px;margin:20px auto 0;
-  padding-top:20px;border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  flex-wrap:wrap;
-}
-.vmt-credit-text{
-  font-size:0.75rem;color:var(--muted2);
-  display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center;
-}
-.vmt-credit-text span{color:var(--muted);}
-.vmt-logo-wrap{
-  display:flex;align-items:center;gap:7px;
-  padding:5px 12px;
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(255,255,255,0.07);
-  border-radius:6px;
-  transition:border-color 0.2s,background 0.2s;
-}
-.vmt-logo-wrap:hover{border-color:rgba(226,0,0,0.3);background:rgba(226,0,0,0.04);}
-/* Inline SVG logo for VistaMindTech */
-.vmt-svg-logo{width:22px;height:22px;flex-shrink:0;}
-.vmt-brand-name{
-  font-family:var(--font-d);font-size:0.9rem;font-weight:800;
-  color:var(--white);letter-spacing:0.06em;
-  line-height:1;
-}
-.vmt-brand-name em{color:var(--red);font-style:normal;}
-.vmt-tagline{
-  font-size:0.62rem;color:var(--muted2);
-  letter-spacing:0.08em;text-transform:uppercase;font-weight:500;
-  white-space:nowrap;
-}
-
+<!-- ══ VISIONMATRIX TECH CREDIT ══ -->
+  <div class="vmt-credit">
+    <div class="vmt-credit-text">
+      <span>Designed &amp; Developed by</span>
+      <a href="https://visionmatrixtech.com" target="_blank" rel="noopener noreferrer"
+         class="vmt-logo-wrap" aria-label="VisionMatrix Tech — Your Digital Partner">
+        <img src="visionmatrix.png" width="24" height="24"
+             alt="VisionMatrix Tech"
+             style="border-radius:5px;flex-shrink:0;"/>
+        <div>
+          <div class="vmt-brand-name">
+            <span style="background:linear-gradient(90deg,#00E5FF,#00C853);
+                         -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                         background-clip:text;">Vision</span>
+            <span style="color:#FFFFFF;-webkit-text-fill-color:#FFFFFF;">Matrix</span>
+            <span style="color:#00E5FF;-webkit-text-fill-color:#00E5FF;
+                         margin-left:3px;">Tech</span>
+          </div>
+          <div class="vmt-tagline">Your Digital Partner</div>
+        </div>
+      </a>
+    </div>
+  </div>
 /* ══ MOBILE NAV ══════════════════════════════ */
 .mob-nav{display:none;position:fixed;bottom:0;width:100%;z-index:200;background:rgba(16,16,16,0.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:10px 0 16px;justify-content:space-around;}
 .mob-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:0.65rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;transition:color 0.2s;-webkit-tap-highlight-color:transparent;}
@@ -1184,29 +1172,29 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
     </div>
   </div>
 
-  <!-- ══ VISTAMINDTECH CREDIT ══ -->
+  <!-- ══ VISIONMATRIX TECH CREDIT ══ -->
   <div class="vmt-credit">
     <div class="vmt-credit-text">
       <span>Designed &amp; Developed by</span>
-      <a href="https://vistamindtech.com" target="_blank" rel="noopener" class="vmt-logo-wrap" aria-label="VistaMindTech — Your Digital Partner">
-        <!-- VistaMindTech SVG Logo -->
-        <svg class="vmt-svg-logo" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="40" height="40" rx="8" fill="#E20000" fill-opacity="0.12"/>
-          <rect x="0.5" y="0.5" width="39" height="39" rx="7.5" stroke="#E20000" stroke-opacity="0.4"/>
-          <!-- V shape -->
-          <path d="M7 11L13.5 27H15L20 14.5" stroke="#E20000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <!-- M shape -->
-          <path d="M20 14.5L25 27L30 14.5" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M22.5 20.5L27.5 20.5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
-          <!-- Tech dot accent -->
-          <circle cx="33" cy="11" r="2.5" fill="#E20000"/>
-        </svg>
+      <a href="https://visionmatrixtech.com" target="_blank" rel="noopener noreferrer"
+         class="vmt-logo-wrap" aria-label="VisionMatrix Tech — Your Digital Partner">
+        <img src="visionmatrix.png" width="24" height="24"
+             alt="VisionMatrix Tech"
+             style="border-radius:5px;flex-shrink:0;"/>
         <div>
-          <div class="vmt-brand-name">Vista<em>Mind</em>Tech</div>
+          <div class="vmt-brand-name">
+            <span style="background:linear-gradient(90deg,#00E5FF,#00C853);
+                         -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+                         background-clip:text;">Vision</span>
+            <span style="color:#FFFFFF;-webkit-text-fill-color:#FFFFFF;">Matrix</span>
+            <span style="color:#00E5FF;-webkit-text-fill-color:#00E5FF;
+                         margin-left:3px;">Tech</span>
+          </div>
           <div class="vmt-tagline">Your Digital Partner</div>
         </div>
       </a>
     </div>
+  </div>
   </div>
 </footer>
 
