@@ -675,6 +675,34 @@ var PRODUCTS = [
     flavours: ['Orange', 'Strawberry'],
     weights: [{size: '500ml', inStock: true}]
   },
+  {
+    id: 'ultimate-nutrition-iso-sensation-93', cat: 'whey', brand: 'Ultimate Nutrition', name: 'ISO Sensation 93', protein: '30g', featured: false, icon: 'fas fa-flask',
+    gradient: 'linear-gradient(135deg,#7B5C00 0%,#CCA300 60%,#FFD700 100%)', 
+    img: '',
+    flavours: ['Chocolate Fudge'],
+    weights: [{size: '5 lb (2.27 kg)', inStock: true}]
+  },
+  {
+    id: 'exalt-the-isolation', cat: 'whey', brand: 'Exalt', name: 'The Isolation', protein: '25g', featured: false, icon: 'fas fa-flask',
+    gradient: 'linear-gradient(135deg,#222222 0%,#444444 60%,#666666 100%)', 
+    img: '',
+    flavours: ['Chocolate'],
+    weights: [{size: '2 lb (907g)', inStock: true}]
+  },
+  {
+    id: 'americanz-professional-iso-hydro', cat: 'whey', brand: 'Americanz Muscles', name: 'Professional ISO Hydro', protein: '27g', featured: false, icon: 'fas fa-flask',
+    gradient: 'linear-gradient(135deg,#1A0000 0%,#500000 60%,#880000 100%)', 
+    img: '',
+    flavours: ['Birthday Cake with Sprinkles'],
+    weights: [{size: '2 lb (900g)', inStock: true}]
+  },
+  {
+    id: 'dymatize-iso100', cat: 'whey', brand: 'Dymatize', name: 'ISO100', protein: '25g', featured: false, icon: 'fas fa-flask',
+    gradient: 'linear-gradient(135deg,#003388 0%,#0055CC 60%,#0077FF 100%)', 
+    img: '',
+    flavours: ['Gourmet Chocolate'],
+    weights: [{size: '5 lb (2.3 kg)', inStock: true}]
+  },
 
 
   /* ══ PRE-WORKOUT ══ */
@@ -783,6 +811,13 @@ var PRODUCTS = [
     flavours: ['—'],
     weights: [{size: '60 Servings', inStock: true}]
   },
+  {
+    id: 'prosupps-hyde-nightmare', cat: 'preworkout', brand: 'ProSupps', name: 'Hyde Nightmare', protein: '—', featured: false, icon: 'fas fa-bolt',
+    gradient: 'linear-gradient(135deg,#7B1F00 0%,#CC3300 60%,#FF4400 100%)', 
+    img: '',
+    flavours: ['Orange Screamsicle'],
+    weights: [{size: '396g', inStock: true}]
+  },
 
 
   /* ══ BCAA & AMINOS ══ */
@@ -824,7 +859,7 @@ var PRODUCTS = [
   {
     id: 'cellucor-c4-aminos', cat: 'bcaa', brand: 'Cellucor', name: 'C4 Energy & Aminos', protein: '—', featured: false, icon: 'fas fa-atom',
     gradient: 'linear-gradient(135deg,#7B1F00 0%,#CC3300 60%,#FF4400 100%)', 
-    img: 'https://cdn.nutrabay.com/wp-content/uploads/2021/09/NB-CEL-1003-11-01.jpg', // Placeholder C4 image
+    img: 'https://cdn.nutrabay.com/wp-content/uploads/2021/09/NB-CEL-1003-11-01.jpg', 
     flavours: ['—'],
     weights: [{size: '—', inStock: true}]
   },
@@ -1022,7 +1057,7 @@ var PRODUCTS = [
   {
     id: 'gnc-mega-men-one-daily', cat: 'vitamins', brand: 'GNC', name: 'Mega Men One Daily', protein: '—', featured: false, icon: 'fas fa-capsules',
     gradient: 'linear-gradient(135deg,#1a1a7e 0%,#2828B8 60%,#4444DD 100%)', 
-    img: 'https://guardian.in/cdn/shop/files/80200840_1.jpg', // Placeholder GNC image
+    img: 'https://guardian.in/cdn/shop/files/80200840_1.jpg', 
     flavours: ['Unflavored'],
     weights: [{size: '60 Tablets', inStock: true}]
   },
@@ -1054,6 +1089,13 @@ var PRODUCTS = [
     flavours: ['Unflavored'],
     weights: [{size: '60 Tablets (60mg)', inStock: true}]
   },
+  {
+    id: 'myogenetix-myodrol-hsp', cat: 'vitamins', brand: 'Myogenetix', name: 'MyoDrol HSP', protein: '—', featured: false, icon: 'fas fa-capsules',
+    gradient: 'linear-gradient(135deg,#111111 0%,#333333 60%,#555555 100%)', 
+    img: '',
+    flavours: ['Unflavored'],
+    weights: [{size: '30 Caplets', inStock: true}]
+  },
 
 
   /* ══ PROTEIN BARS ══ */
@@ -1081,7 +1123,7 @@ var PRODUCTS = [
   {
     id: 'max-protein-bar-cookies', cat: 'bars', brand: 'RiteBite Max Protein', name: 'Protein Bar', protein: '22g', featured: false, icon: 'fas fa-cookie-bite',
     gradient: 'linear-gradient(135deg,#6B3A00 0%,#CC7700 60%,#F5A623 100%)', 
-    img: 'https://cdn2.nutrabay.com/uploads/product/featured_image/product-987-featured_image-RiteBite_Max_Protein_Active_Choco_Fudge_Bar.jpg', // Active bar image placeholder
+    img: 'https://cdn2.nutrabay.com/uploads/product/featured_image/product-987-featured_image-RiteBite_Max_Protein_Active_Choco_Fudge_Bar.jpg', 
     flavours: ['Cookies & Cream'],
     weights: [{size: '1 Bar', inStock: true}]
   },
@@ -1154,7 +1196,7 @@ var PRODUCTS = [
   {
     id: 'hk-vitals-veg-collagen', cat: 'health', brand: 'HK Vitals', name: 'Veg Collagen', protein: '—', featured: false, icon: 'fas fa-heartbeat',
     gradient: 'linear-gradient(135deg,#222222 0%,#444444 60%,#666666 100%)', 
-    img: 'https://img10.hkrtcdn.com/14461/prd_1446059-HK-Vitals-Skin-Radiance-Collagen-by-HealthKart-200-g-Orange_o.jpg', // Placeholder HK Vitals image
+    img: 'https://img10.hkrtcdn.com/14461/prd_1446059-HK-Vitals-Skin-Radiance-Collagen-by-HealthKart-200-g-Orange_o.jpg', 
     flavours: ['Mixed Fruit'],
     weights: [{size: '200g', inStock: true}]
   },
@@ -1244,7 +1286,12 @@ var BRAND_COLORS = {
   'MegaSupps':          {bg:'rgba(60,0,100,0.18)',  color:'#BB55FF'},
   'Sacred Beast':       {bg:'rgba(100,60,0,0.18)',  color:'#FFAA44'},
   'Rising Labs':        {bg:'rgba(120,0,0,0.18)',   color:'#FF4444'},
-  'QNT':                {bg:'rgba(0,40,100,0.18)',  color:'#5599FF'}
+  'QNT':                {bg:'rgba(0,40,100,0.18)',  color:'#5599FF'},
+  'Myogenetix':         {bg:'rgba(40,40,40,0.30)',  color:'#AAAAAA'},
+  'ProSupps':           {bg:'rgba(200,40,0,0.18)',  color:'#FF5522'},
+  'Ultimate Nutrition': {bg:'rgba(180,140,0,0.18)', color:'#FFDD44'},
+  'Exalt':              {bg:'rgba(100,100,100,0.18)',color:'#DDDDDD'},
+  'Dymatize':           {bg:'rgba(0,80,200,0.18)',  color:'#66AAFF'}
 };
 
 /* ════════════════════════════════════════
@@ -1300,7 +1347,7 @@ function getFlavourColor(f){
   if(f.includes('cherry'))return '#C62828';
   if(f.includes('fruit punch'))return '#FF4444';
   if(f.includes('fruit massage')||f.includes('fruit blast')||f.includes('mixed fruit'))return '#FF6633';
-  if(f.includes('citrus'))return '#FDD835';
+  if(f.includes('citrus')||f.includes('orange screamsicle'))return '#FDD835';
   if(f.includes('lemon ginger')||f.includes('lemon'))return '#F9A825';
   if(f.includes('chili mango'))return '#DD2C00';
   if(f.includes('brazilian orange')||f.includes('orange'))return '#FF6D00';
