@@ -231,6 +231,35 @@ nav{position:fixed;top:0;width:100%;z-index:200;height:var(--nav-h);padding:0 24
 /* ── BRAND LOGO ── */
 .brand-logo-img{width:100%;height:100%;object-fit:contain;border-radius:50%;padding:4px;}
 
+
+/* ── BRAND CARD BANNER IMAGE ── */
+.brand-card-banner{width:calc(100% + 36px);margin:-20px -18px 10px;height:130px;overflow:hidden;border-radius:var(--r-md) var(--r-md) 0 0;background:var(--surface);flex-shrink:0;}
+.brand-card-banner img{width:100%;height:100%;object-fit:cover;transition:transform 0.3s;}
+.brand-card:hover .brand-card-banner img{transform:scale(1.06);}
+.brand-card-banner-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:2rem;font-weight:900;opacity:0.25;color:var(--white);}
+
+/* ── CATEGORY CARD FULL IMAGE ── */
+.cat-card-img-full{width:calc(100% + 32px);margin:-32px -16px 0;height:140px;overflow:hidden;border-radius:var(--r-md) var(--r-md) 0 0;background:#ffffff;flex-shrink:0;margin-bottom:12px;}
+.cat-card-img-full img{width:100%;height:100%;object-fit:contain;padding:10px;background:#fff;transition:transform 0.3s;}
+.cat-card:hover .cat-card-img-full img{transform:scale(1.06);}
+
+/* ── GLOBAL SEARCH BAR (Level 1) ── */
+.global-search-bar{max-width:1200px;margin:0 auto 20px;padding:0 24px;}
+.global-search-wrap{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.global-search-input-wrap{flex:1;min-width:220px;position:relative;}
+.global-search-input-wrap i{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.85rem;}
+.global-search-input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:11px 14px 11px 38px;color:var(--text);font-family:var(--font-b);font-size:0.9rem;outline:none;transition:border-color 0.2s;}
+.global-search-input:focus{border-color:rgba(226,0,0,0.4);}
+.global-search-input::placeholder{color:var(--muted2);}
+.cat-filter-pills{display:flex;gap:6px;flex-wrap:wrap;}
+.cat-filter-pill{padding:7px 14px;border-radius:20px;font-size:0.75rem;font-weight:700;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.15s;font-family:var(--font-b);white-space:nowrap;}
+.cat-filter-pill:hover{border-color:rgba(226,0,0,0.4);color:var(--text);}
+.cat-filter-pill.active{background:var(--red);border-color:var(--red);color:#fff;}
+.global-sort{background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:var(--font-b);font-size:0.82rem;padding:10px 12px;border-radius:8px;outline:none;cursor:pointer;}
+.global-sort:focus{border-color:rgba(226,0,0,0.4);}
+.global-results-count{font-size:0.8rem;color:var(--muted);padding:0 24px;max-width:1200px;margin:0 auto 12px;}
+.global-results-count span{color:var(--red);font-weight:700;font-family:var(--font-d);font-size:1rem;}
+
 /* ── ACCESSORIES SECTION ── */
 .accessories-section{max-width:1200px;margin:0 auto;padding:0 24px 80px;}
 .section-divider{display:flex;align-items:center;gap:16px;margin-bottom:24px;}
@@ -367,6 +396,25 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
     <i class="fab fa-whatsapp"></i>
     Not sure which product suits your goal? &nbsp;<span>Get free advice on WhatsApp &rarr;</span>
   </a>
+</div>
+
+
+<div id="globalSearchBar" style="display:none;">
+  <div class="global-search-bar">
+    <div class="global-search-wrap">
+      <div class="global-search-input-wrap">
+        <i class="fas fa-search"></i>
+        <input class="global-search-input" id="globalSearchInput" type="text" placeholder="Search any product, brand, category..."/>
+      </div>
+      <select class="global-sort" id="globalSort">
+        <option value="featured">⭐ Featured First</option>
+        <option value="name_az">Name A → Z</option>
+        <option value="instock">In Stock First</option>
+      </select>
+    </div>
+    <div class="cat-filter-pills" id="catFilterPills" style="margin-top:10px;"></div>
+  </div>
+  <div class="global-results-count" id="globalResultsCount" style="display:none;">Showing <span id="globalCount">0</span> products</div>
 </div>
 
 <div class="level-header" id="levelHeader">
@@ -1497,8 +1545,12 @@ function render(){
   updateFilterBar();
   updateAccessories();
   updateStickyTop();
+  updateGlobalSearch();
 
-  if(appState.level===1)renderBrandGrid();
+  if(appState.level===1){
+    if(globalSearchState.active){renderGlobalResults();}
+    else{renderBrandGrid();}
+  }
   else if(appState.level===2)renderCatGrid();
   else renderProductGrid();
 
@@ -1574,6 +1626,11 @@ function renderBrandGrid(){
     var col=BRAND_COLORS[brand]||{bg:'rgba(80,80,80,0.18)',color:'#AAAAAA'};
     var initials=brandInitials(brand);
     var logoUrl=(typeof BRAND_LOGOS!=='undefined'&&BRAND_LOGOS[brand])||'';
+    // Pick first product image for banner
+    var bannerProd=prods.find(function(p){return p.img&&p.img!=='';});
+    var bannerHtml=bannerProd
+      ? ('<div class="brand-card-banner"><img src="'+bannerProd.img+'" alt="'+escAttr(brand)+'" loading="lazy" onerror="this.style.display=\'none\'"/></div>')
+      : ('<div class="brand-card-banner"><div class="brand-card-banner-placeholder">'+initials+'</div></div>');
     var catPills=cats.slice(0,3).map(function(c){
       var m=CAT_META[c]||{};
       return '<span class="brand-cat-pill">'+(m.label||c)+'</span>';
@@ -1582,9 +1639,10 @@ function renderBrandGrid(){
     var avatarInner=logoUrl
       ? ('<img class="brand-logo-img" src="'+logoUrl+'" alt="'+escAttr(brand)+'" loading="lazy" onerror="this.style.display=\'none\'"/>')
       : initials;
-    var avatarBg=logoUrl?'rgba(255,255,255,0.08)':col.bg;
+    var avatarBg=logoUrl?'rgba(255,255,255,0.10)':col.bg;
     html+=
       '<div class="brand-card" data-brand="'+escAttr(brand)+'" onclick="handleBrandClick(this)">'+
+        bannerHtml+
         '<div class="brand-card-top">'+
           '<div class="brand-card-avatar" style="background:'+avatarBg+';color:'+col.color+'">'+avatarInner+'</div>'+
           '<div class="brand-card-name">'+escHtml(brand)+'</div>'+
@@ -1620,7 +1678,7 @@ function renderCatGrid(){
     var meta=CAT_META[cat]||{label:cat,icon:'fas fa-box'};
     var repProd=catProds.find(function(p){return p.img&&p.img!=='';});
     var imgHtml=repProd
-      ? ('<div class="cat-card-img-wrap"><img src="'+repProd.img+'" alt="'+escAttr(meta.label)+'" loading="lazy" onerror="this.style.display=\'none\'"/></div>')
+      ? ('<div class="cat-card-img-full"><img src="'+repProd.img+'" alt="'+escAttr(meta.label)+'" loading="lazy" onerror="this.style.display=\'none\'"/></div>')
       : ('<div class="cat-card-icon"><i class="'+meta.icon+'"></i></div>');
     html+=
       '<div class="cat-card" data-brand="'+escAttr(appState.brand)+'" data-cat="'+cat+'" onclick="handleCatClick(this)">'+
@@ -1868,6 +1926,93 @@ function escHtml(s){
 function escAttr(s){
   return (s||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
+
+
+/* ════════════════════════════════════════
+   GLOBAL SEARCH (Level 1)
+════════════════════════════════════════ */
+var globalSearchState = {active:false, query:'', cat:'all', sort:'featured'};
+
+function updateGlobalSearch(){
+  var bar = document.getElementById('globalSearchBar');
+  var gsInp = document.getElementById('globalSearchInput');
+  if(!bar) return;
+  if(appState.level===1){
+    bar.style.display='block';
+    if(gsInp) gsInp.value = globalSearchState.query;
+    buildCatPills();
+  } else {
+    bar.style.display='none';
+  }
+}
+
+function buildCatPills(){
+  var wrap = document.getElementById('catFilterPills');
+  if(!wrap) return;
+  var cats = ['all','whey','preworkout','bcaa','creatine','fatburner','vitamins','bars','health','herbal'];
+  var labels = {all:'All',whey:'Whey',preworkout:'Pre-Workout',bcaa:'BCAA',creatine:'Creatine',fatburner:'Fat Burners',vitamins:'Vitamins',bars:'Protein Bars',health:'Health',herbal:'Herbal'};
+  wrap.innerHTML = cats.map(function(c){
+    var active = globalSearchState.cat===c?'active':'';
+    return '<button class="cat-filter-pill '+active+'" onclick="setCatFilter(''+c+'')">'+labels[c]+'</button>';
+  }).join('');
+}
+
+function setCatFilter(cat){
+  globalSearchState.cat=cat;
+  globalSearchState.active=!!(globalSearchState.query||cat!=='all');
+  render();
+}
+
+function renderGlobalResults(){
+  var grid=document.getElementById('mainGrid');
+  var q=globalSearchState.query.toLowerCase();
+  var list=PRODUCTS.filter(function(p){
+    var matchQ=!q||(p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q)||(p.flavours||[]).some(function(f){return f.toLowerCase().includes(q);}));
+    var matchC=globalSearchState.cat==='all'||p.cat===globalSearchState.cat;
+    return matchQ&&matchC;
+  });
+
+  if(globalSearchState.sort==='name_az') list.sort(function(a,b){return a.name.localeCompare(b.name);});
+  else if(globalSearchState.sort==='instock') list.sort(function(a,b){
+    var aS=a.weights&&a.weights.some(function(w){return w.inStock;})?1:0;
+    var bS=b.weights&&b.weights.some(function(w){return w.inStock;})?1:0;
+    return bS-aS;
+  });
+  else list.sort(function(a,b){return (b.featured?1:0)-(a.featured?1:0);});
+
+  var cnt=document.getElementById('globalCount');
+  var cntWrap=document.getElementById('globalResultsCount');
+  if(cnt)cnt.textContent=list.length;
+  if(cntWrap)cntWrap.style.display='block';
+
+  if(list.length===0){
+    grid.innerHTML='<div class="empty-state"><div class="empty-icon"><i class="fas fa-search"></i></div><div class="empty-title">No Products Found</div><div class="empty-sub">Try different keywords.</div></div>';
+    return;
+  }
+  var cls=list.length>=4?'g4':list.length===3?'g3':'g2';
+  grid.innerHTML='<div class="prod-grid '+cls+'">'+list.map(renderCard).join('')+'</div>';
+}
+
+/* Event listeners for global search */
+document.addEventListener('DOMContentLoaded', function(){
+  var inp = document.getElementById('globalSearchInput');
+  if(inp){
+    inp.addEventListener('input', function(e){
+      globalSearchState.query=e.target.value.trim();
+      globalSearchState.active=!!(globalSearchState.query||globalSearchState.cat!=='all');
+      var cnt=document.getElementById('globalResultsCount');
+      if(!globalSearchState.active&&cnt)cnt.style.display='none';
+      render();
+    });
+  }
+  var srt = document.getElementById('globalSort');
+  if(srt){
+    srt.addEventListener('change', function(e){
+      globalSearchState.sort=e.target.value;
+      if(globalSearchState.active) render();
+    });
+  }
+});
 
 /* ════════════════════════════════════════
    INIT
