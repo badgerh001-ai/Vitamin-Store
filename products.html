@@ -1566,27 +1566,27 @@ function updateAccessories(){
 function renderBrandGrid(){
   var grid=document.getElementById('mainGrid');
   var brands=getUniqueBrands();
-
   var html='<div class="brands-grid">';
   brands.forEach(function(brand){
     var prods=PRODUCTS.filter(function(p){return p.brand===brand;});
     var catSeen={}, cats=[];
     prods.forEach(function(p){if(!catSeen[p.cat]){catSeen[p.cat]=true;cats.push(p.cat);}});
-
     var col=BRAND_COLORS[brand]||{bg:'rgba(80,80,80,0.18)',color:'#AAAAAA'};
     var initials=brandInitials(brand);
     var logoUrl=(typeof BRAND_LOGOS!=='undefined'&&BRAND_LOGOS[brand])||'';
-
     var catPills=cats.slice(0,3).map(function(c){
       var m=CAT_META[c]||{};
       return '<span class="brand-cat-pill">'+(m.label||c)+'</span>';
     }).join('');
     if(cats.length>3)catPills+='<span class="brand-cat-pill">+'+(cats.length-3)+' more</span>';
-
+    var avatarInner=logoUrl
+      ? ('<img class="brand-logo-img" src="'+logoUrl+'" alt="'+escAttr(brand)+'" loading="lazy" onerror="this.style.display=\'none\'"/>')
+      : initials;
+    var avatarBg=logoUrl?'rgba(255,255,255,0.08)':col.bg;
     html+=
       '<div class="brand-card" data-brand="'+escAttr(brand)+'" onclick="handleBrandClick(this)">'+
         '<div class="brand-card-top">'+
-          '<div class="brand-card-avatar" style="background:'+(logoUrl?'rgba(255,255,255,0.08)':col.bg)+';color:'+col.color+'">'+(logoUrl?'<img class="brand-logo-img" src="'+logoUrl+'" alt="'+escAttr(brand)+'" loading="lazy" onerror="this.parentNode.style.background=\'rgba(80,80,80,0.18)\';this.outerHTML=\''+initials+'\'"/>':initials)+'</div>'+
+          '<div class="brand-card-avatar" style="background:'+avatarBg+';color:'+col.color+'">'+avatarInner+'</div>'+
           '<div class="brand-card-name">'+escHtml(brand)+'</div>'+
         '</div>'+
         '<div class="brand-cats-row">'+catPills+'</div>'+
@@ -1612,18 +1612,16 @@ function renderCatGrid(){
   var prods=PRODUCTS.filter(function(p){return p.brand===appState.brand;});
   var catSeen={}, cats=[];
   prods.forEach(function(p){if(!catSeen[p.cat]){catSeen[p.cat]=true;cats.push(p.cat);}});
-
   var metaOrder=Object.keys(CAT_META).filter(function(k){return k!=='all';});
   cats.sort(function(a,b){return metaOrder.indexOf(a)-metaOrder.indexOf(b);});
-
   var html='<div class="cats-grid">';
   cats.forEach(function(cat){
     var catProds=prods.filter(function(p){return p.cat===cat;});
     var meta=CAT_META[cat]||{label:cat,icon:'fas fa-box'};
     var repProd=catProds.find(function(p){return p.img&&p.img!=='';});
     var imgHtml=repProd
-      ? '<div class="cat-card-img-wrap"><img src="'+repProd.img+'" alt="'+escAttr(meta.label)+'" loading="lazy" onerror="this.style.display='none'"/></div>'
-      : '<div class="cat-card-icon"><i class="'+meta.icon+'"></i></div>';
+      ? ('<div class="cat-card-img-wrap"><img src="'+repProd.img+'" alt="'+escAttr(meta.label)+'" loading="lazy" onerror="this.style.display=\'none\'"/></div>')
+      : ('<div class="cat-card-icon"><i class="'+meta.icon+'"></i></div>');
     html+=
       '<div class="cat-card" data-brand="'+escAttr(appState.brand)+'" data-cat="'+cat+'" onclick="handleCatClick(this)">'+
         imgHtml+
