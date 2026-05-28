@@ -1622,7 +1622,7 @@ function renderCatGrid(){
     var meta=CAT_META[cat]||{label:cat,icon:'fas fa-box'};
     var repProd=catProds.find(function(p){return p.img&&p.img!=='';});
     var imgHtml=repProd
-      ? '<div class="cat-card-img-wrap"><img src="'+repProd.img+'" alt="'+escAttr(meta.label)+'" loading="lazy" onerror="this.parentNode.outerHTML='<div class=\"cat-card-icon\"><i class=\"'+meta.icon+'\"></i></div>'"/></div>'
+      ? '<div class="cat-card-img-wrap"><img src="'+repProd.img+'" alt="'+escAttr(meta.label)+'" loading="lazy" onerror="this.style.display='none'"/></div>'
       : '<div class="cat-card-icon"><i class="'+meta.icon+'"></i></div>';
     html+=
       '<div class="cat-card" data-brand="'+escAttr(appState.brand)+'" data-cat="'+cat+'" onclick="handleCatClick(this)">'+
