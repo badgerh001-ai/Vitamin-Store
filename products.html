@@ -1629,7 +1629,7 @@ function renderBrandGrid(){
     // Pick first product image for banner
     var bannerProd=prods.find(function(p){return p.img&&p.img!=='';});
     var bannerHtml=bannerProd
-      ? ('<div class="brand-card-banner"><img src="'+bannerProd.img+'" alt="'+escAttr(brand)+'" loading="lazy" onerror="this.style.display=\'none\'"/></div>')
+      ? ('<div class="brand-card-banner"><img src="'+bannerProd.img+'" alt="'+escAttr(brand)+'" loading="lazy" onerror="this.style.display='none'"/></div>')
       : ('<div class="brand-card-banner"><div class="brand-card-banner-placeholder">'+initials+'</div></div>');
     var catPills=cats.slice(0,3).map(function(c){
       var m=CAT_META[c]||{};
@@ -1637,7 +1637,7 @@ function renderBrandGrid(){
     }).join('');
     if(cats.length>3)catPills+='<span class="brand-cat-pill">+'+(cats.length-3)+' more</span>';
     var avatarInner=logoUrl
-      ? ('<img class="brand-logo-img" src="'+logoUrl+'" alt="'+escAttr(brand)+'" loading="lazy" onerror="this.style.display=\'none\'"/>')
+      ? ('<img class="brand-logo-img" src="'+logoUrl+'" alt="'+escAttr(brand)+'" loading="lazy" onerror="this.style.display='none'"/>')
       : initials;
     var avatarBg=logoUrl?'rgba(255,255,255,0.10)':col.bg;
     html+=
@@ -1678,7 +1678,7 @@ function renderCatGrid(){
     var meta=CAT_META[cat]||{label:cat,icon:'fas fa-box'};
     var repProd=catProds.find(function(p){return p.img&&p.img!=='';});
     var imgHtml=repProd
-      ? ('<div class="cat-card-img-full"><img src="'+repProd.img+'" alt="'+escAttr(meta.label)+'" loading="lazy" onerror="this.style.display=\'none\'"/></div>')
+      ? ('<div class="cat-card-img-full"><img src="'+repProd.img+'" alt="'+escAttr(meta.label)+'" loading="lazy" onerror="this.style.display='none'"/></div>')
       : ('<div class="cat-card-icon"><i class="'+meta.icon+'"></i></div>');
     html+=
       '<div class="cat-card" data-brand="'+escAttr(appState.brand)+'" data-cat="'+cat+'" onclick="handleCatClick(this)">'+
