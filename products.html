@@ -2017,14 +2017,19 @@ function updateGlobalSearch(){
 }
 
 function buildCatPills(){
-  var wrap = document.getElementById('catFilterPills');
-  if(!wrap) return;
-  var cats = ['all','whey','preworkout','bcaa','creatine','fatburner','vitamins','bars','health','herbal'];
-  var labels = {all:'All',whey:'Whey',preworkout:'Pre-Workout',bcaa:'BCAA',creatine:'Creatine',fatburner:'Fat Burners',vitamins:'Vitamins',bars:'Protein Bars',health:'Health',herbal:'Herbal'};
-  wrap.innerHTML = cats.map(function(c){
-    var active = globalSearchState.cat===c?'active':'';
-    return '<button class="cat-filter-pill '+active+'" onclick="setCatFilter(\"'+c+'\")">'+labels[c]+'</button>';
-  }).join('');
+  var wrap=document.getElementById('catFilterPills');
+  if(!wrap)return;
+  wrap.innerHTML='';
+  var cats=['all','whey','preworkout','bcaa','creatine','fatburner','vitamins','bars','health','herbal'];
+  var labels={all:'All',whey:'Whey',preworkout:'Pre-Workout',bcaa:'BCAA',creatine:'Creatine',fatburner:'Fat Burners',vitamins:'Vitamins',bars:'Protein Bars',health:'Health',herbal:'Herbal'};
+  cats.forEach(function(c){
+    var btn=document.createElement('button');
+    btn.className='cat-filter-pill'+(globalSearchState.cat===c?' active':'');
+    btn.textContent=labels[c];
+    btn.setAttribute('data-cat',c);
+    btn.addEventListener('click',function(){setCatFilter(this.getAttribute('data-cat'));});
+    wrap.appendChild(btn);
+  });
 }
 
 function setCatFilter(cat){
