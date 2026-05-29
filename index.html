@@ -338,34 +338,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
 .mob-nav a i{font-size:1.1rem;}
 .mob-nav a.active,.mob-nav a:hover{color:var(--red);}
 
-/* ── WHATSAPP FLOAT — CENTERED ── */
-.wa-float{
-  position:fixed;
-  left:50%;
-  transform:translateX(-50%);
-  bottom:90px;
-  z-index:198;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  background:#25D366;
-  color:#fff;
-  border-radius:50px;
-  padding:13px 24px;
-  font-size:0.95rem;
-  font-weight:700;
-  font-family:var(--font-b);
-  white-space:nowrap;
-  box-shadow:0 6px 28px rgba(37,211,102,0.5);
-  animation:waPulse 2.5s infinite;
-  transition:transform 0.2s,box-shadow 0.2s;
-  -webkit-tap-highlight-color:transparent;
-}
-.wa-float i{font-size:1.3rem;}
-.wa-float:hover{transform:translateX(-50%) translateY(-3px);box-shadow:0 10px 36px rgba(37,211,102,0.6);}
-.wa-float:active{transform:translateX(-50%) scale(0.96);}
-@keyframes waPulse{
-  0%{box-shadow:0 0 0 0 rgba(37,211,102,0.5);}
   70%{box-shadow:0 0 0 18px rgba(37,211,102,0);}
   100%{box-shadow:0 0 0 0 rgba(37,211,102,0);}
 }
@@ -410,12 +382,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   #team{padding:60px 16px;}
   .mob-nav{display:flex;}
   .talk-bar{display:block;}
-  /* WA button on mobile: center, above talk bar */
-  .wa-float{
-    bottom:130px;
-    font-size:0.88rem;
-    padding:11px 20px;
-  }
   footer{padding-bottom:140px;}
   .hero-stats{flex-wrap:wrap;}
   .hero-stats .stat-item{flex:1 0 33%;}
@@ -441,10 +407,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   .experts-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
   .consult-left{flex-direction:column;align-items:flex-start;gap:14px;}
   .why-card-img-wrap{aspect-ratio:4/3;}
-  /* On smallest screens show icon-only WA button */
-  .wa-float .wa-text{display:none;}
-  .wa-float{border-radius:50%;width:58px;height:58px;padding:0;justify-content:center;}
-  .wa-float i{font-size:1.6rem;}
 }
 </style>
 </head>
@@ -479,12 +441,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
 
 <div id="scroll-progress"></div>
 <button id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
-
-<!-- ── WHATSAPP CENTERED FLOATING BUTTON ── -->
-<a href="https://wa.me/919949531515?text=Hi%2C%20I%20visited%20your%20website%20and%20want%20to%20enquire%20about%20supplements." class="wa-float ripple-host" target="_blank" aria-label="WhatsApp">
-  <i class="fab fa-whatsapp"></i>
-  <span class="wa-text">Chat With Us — Free Advice</span>
-</a>
 
 <div class="talk-bar">
   <a href="https://wa.me/919949531515?text=Hi%2C%20I%20visited%20your%20website%20and%20want%20to%20enquire%20about%20supplements." target="_blank">
