@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ryan — Vitamin Store Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+:root{
+  --red:#E20000;--red-dark:#A80000;
+  --black:#080808;--dark:#0F0F0F;--surface:#181818;--card:#1E1E1E;--card2:#252525;
+  --border:rgba(255,255,255,0.07);--white:#FFFFFF;--text:#F0F0F0;--muted:#888;--muted2:#444;
+  --green:#25D366;--green-dark:#1DA851;
+  --font-d:'Barlow Condensed',sans-serif;--font-b:'DM Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html,body{height:100%;font-family:var(--font-b);background:var(--black);color:var(--text);overflow:hidden;}
+.chat-wrap{display:flex;flex-direction:column;height:100vh;max-width:480px;margin:0 auto;background:var(--dark);}
+.chat-header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 18px;display:flex;align-items:center;gap:14px;flex-shrink:0;position:relative;}
+.chat-header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--red),transparent);}
+.ryan-avatar{width:52px;height:52px;border-radius:50%;overflow:hidden;flex-shrink:0;position:relative;border:2px solid #E20000;background:#fff;}
+.ryan-avatar img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.ryan-avatar::after{content:'';position:absolute;bottom:1px;right:1px;width:11px;height:11px;background:#00e676;border-radius:50%;border:2px solid var(--surface);z-index:2;}
+.ryan-name{font-family:var(--font-d);font-size:1.15rem;font-weight:900;color:var(--white);letter-spacing:0.04em;line-height:1;}
+.ryan-sub{font-size:0.72rem;color:var(--muted);margin-top:2px;}
+.ryan-online{font-size:0.68rem;color:#00e676;font-weight:600;margin-top:2px;display:flex;align-items:center;gap:4px;}
+.ryan-online::before{content:'';width:5px;height:5px;background:#00e676;border-radius:50%;display:inline-block;}
+.header-wa{margin-left:auto;background:var(--green);color:#fff;border:none;border-radius:10px;padding:9px 14px;font-family:var(--font-b);font-size:0.78rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;transition:background 0.2s;flex-shrink:0;}
+.header-wa:hover{background:var(--green-dark);}
+.store-strip{background:rgba(226,0,0,0.08);border-bottom:1px solid rgba(226,0,0,0.12);padding:6px 18px;font-size:0.7rem;color:var(--muted);display:flex;align-items:center;overflow:hidden;flex-shrink:0;}
+.strip-scroll{display:flex;gap:20px;animation:stripMove 30s linear infinite;width:max-content;}
+.strip-scroll span{white-space:nowrap;}
+.strip-scroll i{color:var(--red);font-size:0.65rem;margin-right:4px;}
+@keyframes stripMove{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.msgs-area{flex:1;overflow-y:auto;padding:18px 14px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth;}
+.msgs-area::-webkit-scrollbar{width:4px;}
+.msgs-area::-webkit-scrollbar-thumb{background:var(--muted2);border-radius:2px;}
+.msg-row{display:flex;gap:8px;align-items:flex-end;animation:msgIn 0.25s ease;}
+@keyframes msgIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.msg-row.user{flex-direction:row-reverse;}
+.msg-avatar{width:30px;height:30px;border-radius:50%;overflow:hidden;background:#fff;border:1.5px solid #E20000;flex-shrink:0;align-self:flex-end;}
+.msg-avatar img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.bubble{max-width:84%;padding:10px 14px;border-radius:16px;font-size:0.875rem;line-height:1.6;}
+.bubble.bot{background:var(--card);border:1px solid var(--border);color:var(--text);border-bottom-left-radius:4px;}
+.bubble.user{background:var(--red);color:#fff;border-bottom-right-radius:4px;}
+.bubble strong{color:var(--white);}
+.bubble em{color:#aaa;font-style:italic;}
+.tag{display:inline-block;background:rgba(226,0,0,0.12);border:1px solid rgba(226,0,0,0.2);color:var(--red);font-size:0.63rem;font-weight:700;padding:1px 7px;border-radius:10px;margin:1px 2px;text-transform:uppercase;letter-spacing:0.04em;}
+.gtag{display:inline-block;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.2);color:#25D366;font-size:0.63rem;font-weight:700;padding:1px 7px;border-radius:10px;margin:1px 2px;}
+.wtag{display:inline-block;background:rgba(255,160,0,0.12);border:1px solid rgba(255,160,0,0.25);color:#FFA000;font-size:0.63rem;font-weight:700;padding:1px 7px;border-radius:10px;margin:1px 2px;}
+.wa-btn{display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;padding:8px 14px;border-radius:8px;font-size:0.8rem;font-weight:700;margin-top:8px;cursor:pointer;border:none;font-family:var(--font-b);}
+.msg-time{font-size:0.6rem;color:var(--muted);margin-top:3px;}
+.msg-time.user{text-align:right;}
+.typing-row{display:flex;gap:8px;align-items:flex-end;}
+.typing-bubble{background:var(--card);border:1px solid var(--border);padding:12px 16px;border-radius:16px;border-bottom-left-radius:4px;display:flex;gap:4px;align-items:center;}
+.dot{width:7px;height:7px;background:var(--muted);border-radius:50%;animation:blink 1.2s infinite;}
+.dot:nth-child(2){animation-delay:0.2s;}.dot:nth-child(3){animation-delay:0.4s;}
+@keyframes blink{0%,80%,100%{opacity:0.3;transform:scale(0.8);}40%{opacity:1;transform:scale(1);}}
+.date-div{text-align:center;font-size:0.65rem;color:var(--muted2);letter-spacing:0.08em;text-transform:uppercase;padding:4px 0;position:relative;}
+.date-div::before,.date-div::after{content:'';position:absolute;top:50%;width:30%;height:1px;background:var(--border);}
+.date-div::before{left:0;}.date-div::after{right:0;}
+.qr-area{padding:8px 14px 6px;display:flex;gap:6px;flex-wrap:wrap;flex-shrink:0;min-height:44px;background:var(--dark);border-top:1px solid var(--border);}
+.qr{background:var(--card);border:1px solid var(--border);color:var(--text);font-family:var(--font-b);font-size:0.73rem;font-weight:600;padding:6px 11px;border-radius:20px;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.qr:hover{border-color:rgba(226,0,0,0.5);color:var(--red);}
+.qr.g{border-color:rgba(37,211,102,0.3);color:#25D366;}
+.qr.g:hover{background:rgba(37,211,102,0.1);}
+.qr.b{border-color:rgba(100,150,255,0.3);color:#7BA7FF;}
+.input-area{padding:10px 14px 16px;background:var(--surface);border-top:1px solid var(--border);display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.input-box{flex:1;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:11px 16px;color:var(--text);font-family:var(--font-b);font-size:0.9rem;outline:none;transition:border-color 0.2s;resize:none;max-height:100px;line-height:1.4;}
+.input-box:focus{border-color:rgba(226,0,0,0.4);}
+.input-box::placeholder{color:var(--muted2);}
+.send-btn{width:44px;height:44px;border-radius:12px;background:var(--red);border:none;color:#fff;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.send-btn:hover{background:#A80000;}
+.send-btn:disabled{opacity:0.4;cursor:not-allowed;}
+@media(min-width:481px){body{background:#0A0A0A;}.chat-wrap{border-left:1px solid var(--border);border-right:1px solid var(--border);}}
+@media(max-width:480px){.msgs-area{padding:14px 10px;}.qr-area{padding:6px 10px;}.input-area{padding:8px 10px 12px;}}
+</style>
+</head>
+<body>
+<div class="chat-wrap">
+<div class="chat-header">
+  <div class="ryan-avatar"><img src="ryan.jpg" alt="Ryan" /></div>
+  <div>
+    <div class="ryan-name">RYAN</div>
+    <div class="ryan-sub">Vitamin Store — Smart Assistant</div>
+    <div class="ryan-online">Online now</div>
+  </div>
+  <button class="header-wa" onclick="openWA()"><i class="fab fa-whatsapp"></i> WhatsApp</button>
+</div>
+<div class="store-strip">
+  <div class="strip-scroll">
+    <span><i class="fas fa-map-marker-alt"></i>80 Feet Rd, Ram Nagar, Anantapur</span>
+    <span><i class="fas fa-clock"></i>Mon–Sat 9AM–9:30PM | Sun 10AM–8PM</span>
+    <span><i class="fas fa-shield-alt"></i>100% Genuine Products</span>
+    <span><i class="fas fa-motorcycle"></i>Rs.20 Delivery | 2hrs in Anantapur</span>
+    <span><i class="fas fa-phone"></i>+91 99495 31515</span>
+    <span><i class="fas fa-map-marker-alt"></i>80 Feet Rd, Ram Nagar, Anantapur</span>
+    <span><i class="fas fa-clock"></i>Mon–Sat 9AM–9:30PM | Sun 10AM–8PM</span>
+    <span><i class="fas fa-shield-alt"></i>100% Genuine Products</span>
+    <span><i class="fas fa-motorcycle"></i>Rs.20 Delivery | 2hrs in Anantapur</span>
+    <span><i class="fas fa-phone"></i>+91 99495 31515</span>
+  </div>
+</div>
+<div class="msgs-area" id="msgsArea"></div>
+<div class="qr-area" id="qrArea"></div>
+<div class="input-area">
+  <textarea class="input-box" id="inputBox" placeholder="Ask Ryan about any supplement..." rows="1"></textarea>
+  <button class="send-btn" id="sendBtn" onclick="handleSend()"><i class="fas fa-paper-plane"></i></button>
+</div>
+</div>
+<script>
+
+const INTENTS=[
+{id:'greeting',p:['hi','hello','hey','hii','heyy','good morning','good afternoon','good evening','hai','wassup','sup','yo','namaste','start','ryan'],
+ r:["Hey! I'm <strong>Ryan</strong>, your Vitamin Store guide.<br><br>I can help with:<br>• <strong>Why you need</strong> protein, vitamins, supplements<br>• <strong>Side effects</strong> of every supplement<br>• <strong>How to use</strong> — dosage, timing, stacking<br>• <strong>Products & Brands</strong> we stock (30+)<br>• <strong>Your goal</strong> — I'll recommend your stack<br><br>What would you like to know? <b>Ask me anything!</b>",
+   "Hey! Ryan here — Vitamin Store's assistant. I know A to Z about every supplement we sell. What's on your mind?"]},
+
+{id:'why_supplements',p:['why take supplements','why supplements','why do we need supplements','need supplements','should i take supplements','are supplements necessary','importance of supplements','purpose of supplements'],
+ r:["<strong>Why Take Supplements? Honest Answer</strong><br><br><b>In an ideal world — food covers everything.</b> In reality:<br><br>🍽️ <strong>Modern diet gaps</strong> — busy schedules, processed food, skipped meals make it hard to hit daily targets<br><br>💪 <strong>Higher demands for active people</strong> — if you exercise, protein and micronutrient needs go up significantly<br><br>🌞 <strong>Real deficiencies</strong> — 80% of Indians are Vitamin D deficient. Most people lack B12, Omega-3, Zinc even with decent diet<br><br>⏱️ <strong>Convenience</strong> — 1 protein shake gives 25g protein in 60 seconds. Getting that from food alone takes time and money<br><br><span class='wtag'>Supplements are NOT magic pills</span><br>Diet + Training + Sleep come first. Supplements fill the gaps. Think of them as nutritional insurance."]},
+
+{id:'why_protein',p:['why protein','why take protein','importance of protein','protein kyu','role of protein','what does protein do','protein function','protein benefits','why whey'],
+ r:["<strong>Why Protein is Non-Negotiable</strong><br><br>Protein is the <strong>building block of life</strong>. Your muscles, organs, skin, hair, nails, enzymes, and hormones — all made of protein.<br><br><b>What protein does:</b><br>💪 Builds and repairs muscle after workouts<br>🧬 Makes enzymes, hormones (insulin, growth hormone)<br>🛡️ Powers your immune system (antibodies are proteins)<br>💇 Supports hair, skin, and nail health (collagen = protein)<br>⚖️ Best macronutrient for staying full and managing weight<br><br><b>How much do you need per day?</b><br>• Sedentary adult: 0.8g per kg body weight<br>• Active gym-goer: 1.6–2.2g per kg<br>• 70kg gym person needs: <strong>112–154g protein/day</strong><br><br>Hard to get from food alone? That's exactly where whey protein helps!"]},
+
+{id:'why_vitamins',p:['why vitamins','why take vitamins','why multivitamin','importance of vitamins','vitamin kyu','do we need vitamins','vitamin benefits','role of vitamins'],
+ r:["<strong>Why Vitamins and Minerals Matter</strong><br><br>Your body is a machine. Vitamins and minerals are the oil, coolant, and spark plugs — you don't see the work but without them, everything breaks down.<br><br><b>Key vitamins and what they do:</b><br><br>☀️ <strong>Vitamin D3</strong> — bone health, immunity, testosterone, mood. 80% of Indians are deficient!<br>🍊 <strong>Vitamin C</strong> — immunity, collagen, antioxidant<br>⚡ <strong>Vitamin B12</strong> — energy, nerve function, red blood cells. Vegetarians are often deficient<br>❤️ <strong>Omega-3</strong> — heart, brain, anti-inflammation, joints<br>🦷 <strong>Zinc</strong> — testosterone, immunity, skin<br><br><b>Why not just eat vegetables?</b><br>Modern soil is nutrient-depleted. Cooking destroys vitamins. A good multivitamin fills ALL gaps with one tablet daily."]},
+
+{id:'what_is_whey',p:['what is whey','what is whey protein','whey protein kya hai','explain whey','types of whey','whey concentrate','whey isolate','whey hydrolysate','difference between whey'],
+ r:["<strong>What is Whey Protein?</strong><br><br>When milk makes cheese, it separates into curds and liquid. That liquid = <strong>whey</strong>. Dried and processed = whey protein powder.<br><br><b>3 Types of Whey:</b><br><br>1️⃣ <strong>Whey Concentrate (WPC)</strong><br>• 70–80% protein, some lactose and fat<br>• Affordable, great taste<br>• Best for: beginners, budget-conscious<br><br>2️⃣ <strong>Whey Isolate (WPI)</strong><br>• 90%+ protein, very low lactose and fat<br>• Faster absorption<br>• Best for: lactose intolerant, cutting phase<br>• <span class='tag'>Dymatize ISO100</span> <span class='tag'>Wellbeing Isolate</span> <span class='tag'>GNC AMP Isolate</span><br><br>3️⃣ <strong>Whey Hydrolysate</strong><br>• Pre-digested, fastest absorption<br>• Most expensive<br>• Best for: post-surgery recovery"]},
+
+{id:'how_to_use_whey',p:['how to use whey','how to take whey','when to take whey protein','whey protein timing','how to make protein shake','how many scoops','water or milk','dosage whey','protein shake kaise'],
+ r:["<strong>How to Use Whey Protein — Complete Guide</strong><br><br><b>Dosage:</b><br>• 1 scoop = 25–30g powder = 20–25g protein<br>• Most people: <strong>1 scoop, 1–2 times daily</strong><br><br><b>Best Time:</b><br>⏰ <strong>Post-workout</strong> — within 30–60 mins (best time)<br>☀️ <strong>Morning</strong> — if you train fasted<br>🕐 <strong>Anytime</strong> — when you're short on daily protein<br><br><b>How to Mix:</b><br>💧 <strong>Water</strong> — fewer calories, faster absorption, good for cutting<br>🥛 <strong>Milk</strong> — more protein, better taste, good for bulking<br>• Use 200–250ml per scoop, shake for 30 seconds<br><br><b>Pro Tips:</b><br>✅ Consistency beats perfect timing — just take it daily<br>✅ Count food protein + shake = total daily protein<br>✅ Drink enough water throughout the day"]},
+
+{id:'side_effects_whey',p:['side effects whey','whey protein side effects','protein powder side effects','is whey safe','whey harmful','protein powder harmful','protein side effect','is protein safe','protein nuksaan'],
+ r:["<strong>Whey Protein Side Effects — Honest Answer</strong><br><br><b>Mild side effects (manageable):</b><br>🫧 <strong>Bloating and gas</strong> — caused by lactose in concentrate. Fix: switch to <span class='tag'>Isolate</span> (zero lactose)<br>🤢 <strong>Nausea</strong> — on empty stomach. Fix: take with water or small meal<br>🚽 <strong>Loose stools</strong> — too much at once or lactose issue. Try isolate, start with half scoop<br><br><b>MYTHS vs FACTS:</b><br><br><span class='wtag'>MYTH</span> Protein damages kidneys<br><span class='gtag'>FACT</span> Only risky with existing kidney disease. 100+ studies confirm no damage in healthy people<br><br><span class='wtag'>MYTH</span> Protein causes hair loss<br><span class='gtag'>FACT</span> No direct link. Hair loss is genetic or hormonal. Genuine branded whey has no hormones<br><br><span class='wtag'>MYTH</span> Protein makes you fat<br><span class='gtag'>FACT</span> Protein is hardest to store as fat. Excess total calories cause fat gain, not protein<br><br><span class='wtag'>MYTH</span> Steroids hain<br><span class='gtag'>FACT</span> Genuine whey is pure dried milk protein. Zero hormones, zero steroids"]},
+
+{id:'what_is_preworkout',p:['what is pre workout','preworkout kya hai','explain pre workout','pre workout ingredients','what is c4','what is in pre workout'],
+ r:["<strong>What is Pre-Workout?</strong><br><br>A supplement taken 20–30 mins before training to boost <strong>energy, focus, strength, and endurance</strong>.<br><br><b>Key Ingredients and what they do:</b><br><br>☕ <strong>Caffeine (150–300mg)</strong> — the main stimulant. Alertness, less fatigue, better performance<br>🔴 <strong>Beta-Alanine</strong> — delays muscle fatigue. Causes tingling/itching — this is NORMAL and harmless!<br>💉 <strong>Citrulline Malate</strong> — increases nitric oxide = better blood flow = bigger pump<br>🔥 <strong>Creatine (in some)</strong> — immediate strength boost<br><br><b>Top pre-workouts at Vitamin Store:</b><br><span class='tag'>C4 Original</span> best for beginners, 60 servings<br><span class='tag'>Insane Labz Psychotic</span> high stimulant, experienced users<br><span class='tag'>MuscleBlaze Wrath X</span> 510g, very popular<br><span class='tag'>ON Gold Standard Pre-Workout</span> clean formula<br><span class='tag'>Redcon1 Total War</span> advanced<br><span class='tag'>Rising Labs Mongrel</span> 60 servings"]},
+
+{id:'how_to_use_preworkout',p:['how to use pre workout','when to take pre workout','preworkout kaise le','pre workout timing','pre workout dosage','how to take c4','how much pre workout'],
+ r:["<strong>How to Use Pre-Workout — The Right Way</strong><br><br>⏰ Take <strong>20–30 minutes before</strong> your workout<br>🌙 <strong>Never after 4–5 PM</strong> — caffeine stays 4–6 hours, will destroy sleep!<br><br><b>Dosage:</b><br>• Beginner: start with <strong>half a scoop</strong> to test tolerance<br>• Regular: 1 full scoop as per label<br>• Never exceed recommended dose — more is NOT better<br><br><b>Mixing:</b><br>• 150–200ml cold water only (NOT milk — slows absorption)<br>• Drink quickly and get moving!<br><br><b>Rules:</b><br>✅ Light stomach or 1–2 hrs after a meal<br>✅ Drink 2–3 glasses water before and during workout<br>✅ Take a 1-week break every 4–6 weeks to reset caffeine tolerance<br>❌ Don't combine with energy drinks<br>❌ Don't take if you have heart issues or high BP<br><br>The tingling from Beta-Alanine is 100% normal and harmless!"]},
+
+{id:'side_effects_preworkout',p:['side effects pre workout','pre workout side effects','pre workout harmful','is pre workout safe','pre workout nuksaan','c4 side effects','psychotic side effects'],
+ r:["<strong>Pre-Workout Side Effects — Full Picture</strong><br><br><b>Common (usually manageable):</b><br>😬 <strong>Tingling/itching skin</strong> — Beta-Alanine. Normal, harmless, goes in 20 mins<br>😰 <strong>Jitteriness</strong> — too much caffeine. Fix: use half scoop or lower-caffeine option<br>💓 <strong>Increased heart rate</strong> — normal at moderate doses<br>😴 <strong>Sleep disruption</strong> — most common complaint. Never take after 4–5 PM<br>🤢 <strong>Nausea</strong> — from empty stomach. Have a small snack first<br><br><b>WHO SHOULD AVOID pre-workout:</b><br><span class='wtag'>Heart conditions or high BP</span><br><span class='wtag'>Pregnant or breastfeeding</span><br><span class='wtag'>Under 18 years old</span><br><span class='wtag'>Caffeine sensitive</span><br><span class='wtag'>Anxiety disorders</span><br><br>For first-timers: <span class='tag'>C4 Original</span> is the most moderate and globally trusted option to start with."]},
+
+{id:'what_is_creatine',p:['what is creatine','creatine kya hai','explain creatine','how does creatine work','creatine benefits','creatine what does it do'],
+ r:["<strong>What is Creatine?</strong><br><br>One of the <strong>most studied supplements ever</strong> — safe, effective, proven.<br><br>Your body naturally makes creatine. It's also in red meat. Supplementing tops up what's in your muscles.<br><br><b>How it works:</b><br>Muscles use ATP for energy. When ATP runs out, you fatigue. Creatine helps <strong>regenerate ATP faster</strong> = more reps, heavier lifts, longer sprints.<br><br><b>Proven benefits (500+ studies):</b><br>💪 Increases strength by 5–15%<br>🏋️ Increases muscle mass over time<br>⚡ Improves high-intensity performance<br>🧠 May improve brain function and memory<br>🔄 Speeds up recovery<br><br><b>Available at Vitamin Store:</b><br><span class='tag'>GNC</span> Pro Performance Creatine — 250g, Fruit Punch<br><span class='tag'>Wellcore</span> Micronised Creatine — 250g<br><span class='tag'>C9 Nutrition</span> Micronised Creatine — 250g<br><span class='tag'>Dexter Jackson</span> Micronized Creatine — 250g"]},
+
+{id:'how_to_use_creatine',p:['how to use creatine','how to take creatine','creatine kaise le','creatine timing','creatine dosage','when to take creatine','loading phase','loading creatine','creatine cycle'],
+ r:["<strong>How to Use Creatine — Complete Guide</strong><br><br><b>Simple Method (Recommended):</b><br>• <strong>3–5g daily</strong> — workout days AND rest days<br>• Take with water anytime — timing matters less than consistency<br>• Results start in 2–4 weeks<br><br><b>Loading Phase (Optional, faster):</b><br>• Week 1: 20g daily (4 x 5g spread through day)<br>• Week 2+: 3–5g daily (maintenance)<br>• Gets results in 1 week vs 4 weeks<br><br><b>Mixing:</b><br>• Mix in water, juice, or protein shake<br>• Virtually tasteless — just stir or shake<br><br><b>Rules:</b><br>✅ Drink plenty of water — creatine pulls water into muscle cells<br>✅ Take every day without gaps<br>❌ Don't stack with alcohol<br><br><b>Weight gain note:</b><br>First 1–2 weeks: 1–2kg gain — this is water going INTO muscle cells. It's GOOD. Muscles look fuller and work better!"]},
+
+{id:'side_effects_creatine',p:['creatine side effects','is creatine safe','creatine harmful','creatine kidney','creatine nuksaan','creatine safe or not','does creatine damage kidneys','creatine problem'],
+ r:["<strong>Creatine Safety — The Truth</strong><br><br><b>Most studied supplement in history. Overwhelmingly safe.</b><br><br><b>Real side effects (minor):</b><br>💧 <strong>Water retention</strong> — muscles hold more water inside cells. Beneficial — makes muscles fuller. Not bloating.<br>⚖️ <strong>Weight gain of 1–3kg</strong> initially — water inside muscle. Normal.<br>🤢 <strong>Stomach discomfort</strong> — if taken in large doses at once. Stick to 3–5g per serving.<br><br><b>MYTHS vs FACTS:</b><br><br><span class='wtag'>MYTH</span> Creatine damages kidneys<br><span class='gtag'>FACT</span> Dozens of long-term studies show NO kidney damage in healthy people. It raises creatinine slightly — NOT the same as damage.<br><br><span class='wtag'>MYTH</span> Creatine is a steroid<br><span class='gtag'>FACT</span> Creatine is a natural compound found in meat. Not a hormone, not a steroid.<br><br><span class='wtag'>MYTH</span> Need to cycle creatine<br><span class='gtag'>FACT</span> Cycling optional. Many athletes take it year-round safely.<br><br>⚠️ Only caution: existing kidney or liver disease — consult doctor first"]},
+
+{id:'what_is_bcaa',p:['what is bcaa','bcaa kya hai','explain bcaa','what are amino acids','eaa vs bcaa','leucine isoleucine valine','why bcaa','bcaa benefits'],
+ r:["<strong>What are BCAAs?</strong><br><br>BCAA = <strong>Branched-Chain Amino Acids</strong><br>Three essential amino acids: <strong>Leucine, Isoleucine, Valine</strong><br>Your body cannot make them — must come from food or supplements.<br><br><b>What each one does:</b><br>🔧 <strong>Leucine</strong> — directly triggers muscle protein synthesis (muscle building signal)<br>⚡ <strong>Isoleucine</strong> — energy production, glucose uptake into muscles<br>🛡️ <strong>Valine</strong> — reduces fatigue, supports recovery<br><br><b>Key Benefits:</b><br>💪 Reduce muscle soreness after training<br>🏃 Delay fatigue during long workouts<br>🛡️ Prevent muscle breakdown while cutting or fasting<br>📊 Improve endurance<br><br><b>EAA vs BCAA:</b><br>BCAA = 3 amino acids | EAA = all 9 essential amino acids<br>If you eat enough protein daily, BCAAs are optional. EAAs are more complete."]},
+
+{id:'how_to_use_bcaa',p:['how to use bcaa','when to take bcaa','bcaa kaise le','bcaa timing','bcaa dosage','intra workout'],
+ r:["<strong>How to Use BCAAs</strong><br><br><b>Dosage:</b> 5–10g per serving<br><br><b>Best Timing:</b><br>⏰ <strong>During workout (intra-workout)</strong> — sip throughout for best anti-fatigue effect<br>💪 <strong>Post-workout</strong> — kicks off recovery<br>🌅 <strong>Fasted morning cardio</strong> — prevents muscle breakdown<br><br><b>How to take:</b><br>• Mix 1 scoop in 400–500ml water, sip throughout workout<br>• BCAAs are well flavoured — they taste good!<br><br><b>Do you need BCAAs if you take Whey?</b><br>If you eat sufficient protein daily — BCAAs are optional. But useful for:<br>• Fasted training<br>• Long sessions (90+ mins)<br>• Cutting phase (prevent muscle loss)<br><br><b>Available:</b><br><span class='tag'>Trueforma</span> Armed BCAA — Lemon-Lime (30 servings)<br><span class='tag'>C9 Nutrition</span> BCAA-EAA — Fruit Punch<br><span class='tag'>Aquatein</span> Amino Water — 500ml ready to drink"]},
+
+{id:'side_effects_bcaa',p:['bcaa side effects','amino acid side effects','is bcaa safe','bcaa harmful','bcaa nuksaan'],
+ r:["<strong>BCAA Side Effects</strong><br><br>BCAAs are among the <strong>safest supplements</strong> available.<br><br><b>Very rare, mild side effects:</b><br>🤢 <strong>Nausea</strong> — only on completely empty stomach. Take with water during workout.<br>😣 <strong>Mild digestive discomfort</strong> — rare, usually from artificial sweeteners in some formulas<br><br><b>Safe for:</b><br><span class='gtag'>Healthy adults at recommended doses</span><br><span class='gtag'>No organ damage at normal usage</span><br><br><b>Caution for:</b><br>⚠️ Maple Syrup Urine Disease (MSUD) — rare metabolic disorder, must avoid<br>⚠️ Pre-surgery — consult doctor<br><br>For the vast majority of people: completely safe."]},
+
+{id:'what_is_lcarnitine',p:['what is l carnitine','l carnitine kya hai','explain l carnitine','carnitine benefits','l carnitine weight loss','how does l carnitine work','what is fat burner','fat burner kya hai'],
+ r:["<strong>What is L-Carnitine?</strong><br><br>L-Carnitine is a natural amino acid derivative made in your liver and kidneys. Also found in red meat.<br><br><b>How it works:</b><br>Acts like a <strong>shuttle bus</strong> — carries fatty acids FROM bloodstream INTO mitochondria (cell's powerhouse), where they're burned as fuel.<br><br>More L-Carnitine = more fat available for energy = better fat burning<br><br><b>Benefits:</b><br>🔥 Enhances fat metabolism — especially during cardio<br>⚡ Increases energy levels<br>🏃 Improves exercise performance and endurance<br>💪 May reduce muscle soreness<br>❤️ Heart health benefits<br><br><span class='wtag'>NOT a magic fat melter</span><br>Works BEST when combined with cardio + calorie deficit + consistency over 4–8 weeks<br><br><b>Available:</b><br><span class='tag'>Carbamide Forte</span> L-Carnitine Tartrate 1000 — 150g<br><span class='tag'>Ronnie Coleman</span> L-Carnitine XS 3000<br><span class='tag'>Kevin Levrone</span> L-Carnitine 3000<br><span class='tag'>Jack's Nutrition</span> L-Carnitine liquid — 473ml"]},
+
+{id:'how_to_use_fatburner',p:['how to use l carnitine','when to take l carnitine','l carnitine kaise le','fat burner dosage','l carnitine before cardio'],
+ r:["<strong>How to Use L-Carnitine</strong><br><br><b>Dosage:</b> 500mg – 2000mg per day<br><br><b>Best Timing:</b><br>🏃 <strong>30–60 minutes before cardio</strong> — ideal. L-Carnitine needs to be in your blood when burning fat.<br>☀️ <strong>Morning on empty stomach</strong> — if you do morning cardio<br><br><b>How to take:</b><br>• Liquid: measure dose, drink directly or mix in water<br>• Powder/tablet: with a glass of water<br>• Avoid at night — can cause energy spikes<br><br><b>For best results:</b><br>✅ L-Carnitine + 30+ mins cardio<br>✅ Calorie deficit<br>✅ Consistent for 4–6 weeks minimum<br>❌ Without exercise = very little effect<br><br><b>Killer stack:</b> L-Carnitine + C4 Pre-Workout + 45 mins cardio = powerful fat burning combination"]},
+
+{id:'side_effects_fatburner',p:['l carnitine side effects','fat burner side effects','is l carnitine safe','carnitine harmful','fat burner nuksaan'],
+ r:["<strong>L-Carnitine Side Effects</strong><br><br>Generally very safe at normal doses.<br><br><b>Mild possible side effects:</b><br>🤢 <strong>Nausea</strong> — with liquid forms or high doses. Take with food.<br>🐟 <strong>Fishy body odour</strong> — at very high doses (4g+). Rare at normal 1–2g.<br>🏃 <strong>Restlessness</strong> — slight energy increase in some people. Don't take at night.<br>😣 <strong>Digestive upset</strong> — in sensitive individuals. Start with lower dose.<br><br>Safe for most healthy adults at 500–2000mg per day.<br><br><b>Caution:</b><br>⚠️ On thyroid medication or blood thinners — consult doctor<br>⚠️ Pregnant or breastfeeding — consult doctor"]},
+
+{id:'vitamin_d3',p:['vitamin d3','vitamin d','vitamin d benefits','why vitamin d','vitamin d deficiency','sun vitamin'],
+ r:["<strong>Vitamin D3 — Most Important Vitamin in India</strong><br><br><b>Why most Indians are deficient despite sunlight:</b><br>Dark skin reduces UV absorption. Office jobs = minimal sun. Clothing covers skin.<br><br><b>What Vitamin D3 does:</b><br>🦴 <strong>Bone and teeth health</strong> — absorbs calcium and phosphorus<br>🛡️ <strong>Immunity</strong> — D3 receptors on every immune cell<br>💪 <strong>Muscle function</strong> — deficiency causes weakness<br>😴 <strong>Mood and sleep</strong> — affects serotonin<br>🧪 <strong>Testosterone support</strong> — linked to testosterone levels in men<br><br><b>Symptoms of deficiency:</b> Fatigue, bone pain, frequent illness, muscle weakness<br><br><b>Dosage:</b> 1000–4000 IU daily<br><br><b>Available:</b><br><span class='tag'>Wellbeing Nutrition</span> Melts Natural Vitamin D3 — oral strip, most bioavailable!<br><span class='tag'>Carbamide Forte</span> Vitamin D3 + K2 Gummies (D3+K2 together is best — K2 directs calcium to bones)"]},
+
+{id:'omega3',p:['omega 3','omega-3','fish oil','fish oil benefits','omega 3 benefits','why fish oil','fatty acids'],
+ r:["<strong>Omega-3 / Fish Oil — Your Body Needs This!</strong><br><br>Essential fatty acids your body CANNOT produce. Must come from food or supplements.<br><br><b>3 main types:</b><br>• <strong>EPA</strong> — anti-inflammatory, heart health, mood<br>• <strong>DHA</strong> — brain health, eye function<br>• <strong>ALA</strong> — plant-based, partially converts to EPA/DHA<br><br><b>Benefits:</b><br>❤️ Heart health — reduces triglycerides and blood pressure<br>🧠 Brain function — DHA is 60% of your brain's fatty acids<br>🦴 Joint health — reduces inflammation and stiffness<br>😊 Mood and mental health — EPA helps with depression<br>💪 Muscle recovery — anti-inflammatory reduces soreness<br>👁️ Eye health<br><br><b>How to use:</b> 1–3g EPA+DHA daily with meals<br><b>Side effects:</b> Fishy burps (take with food, refrigerate), mild blood thinning at high doses<br><br><b>Available:</b> <span class='tag'>Wellbeing Nutrition</span> Slow Triple Strength Omega-3, <span class='tag'>Carbamide Forte</span> Triple Strength Fish Oil, <span class='tag'>ON</span> Fish Oil"]},
+
+{id:'ashwagandha_benefits',p:['ashwagandha','ashwagandha benefits','why ashwagandha','what is ashwagandha','stress supplement','adaptogen','natural testosterone','ashwagandha side effects'],
+ r:["<strong>Ashwagandha — India's Most Powerful Herb</strong><br><br>An ancient ayurvedic adaptogen that helps the body resist stress. One of the most studied herbs globally.<br><br><b>Proven Benefits:</b><br>😌 <strong>Stress reduction</strong> — reduces cortisol by up to 30% in studies<br>😴 <strong>Sleep quality</strong> — significantly improves deep sleep<br>💪 <strong>Testosterone and strength</strong> — increases testosterone in men, improves gym strength<br>🧠 <strong>Focus and memory</strong> — neuroprotective effects<br>🏃 <strong>Athletic performance</strong> — improves VO2 max<br><br><b>How to use:</b><br>• 300–600mg per day<br>• Best at night with warm milk — helps sleep<br>• Takes 4–8 weeks to feel full benefits<br><br><b>Side effects:</b> Mild sleepiness, rare digestive upset<br><b>Caution:</b> Thyroid conditions, autoimmune disease, pregnancy — consult doctor<br><br><b>Available:</b> <span class='tag'>Carbamide Forte</span> Ashwagandha 600 — 60 Tablets"]},
+
+{id:'collagen_benefits',p:['collagen','what is collagen','collagen benefits','marine collagen','collagen for skin','why collagen','collagen supplement'],
+ r:["<strong>Collagen — Your Body's Structural Protein</strong><br><br>Most abundant protein in your body — makes up skin, joints, tendons, hair, nails, gut lining.<br><br><b>After age 25, collagen production drops 1% every year.</b> By 35, you've lost 25%. This is why skin sags, joints ache, hair thins.<br><br><b>Benefits:</b><br>✨ Skin elasticity — reduces wrinkles, improves glow<br>🦴 Joint health — cushions joints, reduces pain<br>💪 Supports lean muscle<br>💅 Stronger hair and nails<br>🫁 Gut lining support<br><br><b>Types:</b><br>• <strong>Marine Collagen</strong> — from fish, best absorbed, Type 1 (skin and hair)<br>• <strong>Bovine Collagen</strong> — from cows, Type 1 and 3 (joints and gut)<br>• <strong>Multi-Collagen</strong> — Types 1, 2, 3, 5, 10 combined<br><br><b>How to use:</b> 5–10g daily, mix in water or any drink<br><br><b>Available:</b> <span class='tag'>Wellbeing Nutrition</span> Marine Collagen, Glow Collagen | <span class='tag'>Carbamide Forte</span> Multi Collagen | <span class='tag'>HK Vitals</span> Veg Collagen"]},
+
+{id:'protein_kidney',p:['protein kidney','does protein damage kidney','kidney damage protein','whey and kidney','creatine kidney'],
+ r:["<strong>Does Protein Damage Your Kidneys?</strong><br><br><strong>NO — for healthy people.</strong><br><br>Hundreds of peer-reviewed studies confirm high protein intake does NOT damage kidneys in healthy individuals.<br><br>Your kidneys process protein — that's their job. Healthy kidneys handle this perfectly.<br><br><span class='wtag'>Only an issue if</span> you already have chronic kidney disease (CKD). In that case, consult your nephrologist.<br><br><b>What actually IS bad for kidneys:</b><br>• Uncontrolled high blood pressure<br>• Uncontrolled diabetes<br>• Excessive alcohol<br>• Dehydration<br>• NSAIDs (painkillers) taken regularly<br><br>Take protein supplements, drink plenty of water, get annual checkups. You will be fine!"]},
+
+{id:'protein_hair',p:['protein hair loss','does protein cause hair loss','whey hair loss','hair fall protein','hair fall supplement'],
+ r:["<strong>Does Protein Cause Hair Loss?</strong><br><br><strong>Genuine whey protein does NOT cause hair loss.</strong><br><br><b>Why this myth exists:</b><br>Cheap, adulterated proteins sometimes contain added hormones (DHEA, testosterone boosters) that CAN trigger hair loss in genetically predisposed people.<br><br><b>The real cause of hair loss:</b><br>🧬 Primarily genetic (DHT sensitivity) — if your father has hair loss, you're at risk regardless of diet<br>🩺 Also: thyroid issues, iron deficiency, stress, crash dieting<br><br><b>How to protect yourself:</b><br>✅ Buy 100% genuine branded protein — exactly what we sell<br>✅ Avoid cheap, unbranded proteins from unknown sources<br>✅ Protein is actually ESSENTIAL for hair — keratin (hair protein) is made from dietary protein<br><br>At Vitamin Store, every product is verified genuine. No adulterated supplements here!"]},
+
+{id:'women_supplements',p:['protein for women','can women take protein','female protein','supplements for women','woman protein','girl gym','female supplements','women whey'],
+ r:["<strong>Supplements for Women — Everything You Need to Know</strong><br><br><b>Can women take whey protein?</b><br><span class='gtag'>ABSOLUTELY YES</span> Protein is not 'for men'. Every human body needs protein.<br><br><b>Common concern:</b><br>Q: Will protein make me bulky?<br>A: NO. Women have 10–20x less testosterone than men. Building huge muscles requires years + very high calories + specific programming. A scoop of protein won't make you bulky!<br><br><b>Recommended stack for women:</b><br>1. Whey Protein or Plant Protein — post-workout<br>2. <span class='tag'>Carbamide Forte</span> Multivitamin 43-in-1 for Women<br>3. <span class='tag'>Wellbeing Nutrition</span> Melts Vital Iron — women need more iron<br>4. Calcium + D3 — women have higher osteoporosis risk<br>5. Omega-3 — hormonal balance, skin, heart<br>6. Collagen — skin, hair, joints<br><br><b>Best protein for women:</b><br><span class='tag'>Wellbeing Nutrition</span> 100% Whey Isolate — clean, low-fat<br><span class='tag'>Wellbeing Nutrition</span> Superfood Plant Protein — vegan option"]},
+
+{id:'teen_supplements',p:['protein for teenagers','supplements for teens','teen gym','under 18 supplement','can 16 year old','teenager supplement','16 year protein','17 year whey'],
+ r:["<strong>Supplements for Teenagers — Honest Advice</strong><br><br>For teens under 18, food and training should come FIRST.<br><br><b>Generally OK for teens (16–17+):</b><br>✅ <strong>Whey Protein</strong> — equivalent to milk and eggs. Safe as a food supplement, not a replacement<br>✅ <strong>Multivitamin</strong> — very beneficial during growth years<br>✅ <strong>Omega-3</strong> — great for brain development and school focus<br><br><b>Teens should AVOID:</b><br><span class='wtag'>Pre-Workout</span> — high caffeine is NOT recommended under 18. Still developing cardiovascular and nervous system.<br><span class='wtag'>Fat Burners / Stimulants</span><br><span class='wtag'>Testosterone boosters</span><br><span class='wtag'>Creatine</span> — generally not recommended under 18<br><br>At 16–17: focus on clean food, sleep, and consistent training. After 18, explore the full range."]},
+
+{id:'without_workout',p:['without workout supplement','supplement bina gym','protein without exercise','no gym supplement'],
+ r:["<strong>Can You Take Supplements Without Working Out?</strong><br><br><b>Whey Protein without workout:</b><br>Yes, it's food — just extra protein. But without exercise, protein won't build muscle — it adds calories only.<br><br><b>Pre-Workout without workout:</b><br><span class='wtag'>Don't do this</span> Pre-workout raises heart rate and BP. You need to exercise to use that energy. Without it: jitters, anxiety, pounding heart.<br><br><b>Creatine without workout:</b><br>May slightly benefit brain function, but muscle benefits require exercise stimulus.<br><br><b>Vitamins, Omega-3, Collagen, Ashwagandha:</b><br><span class='gtag'>Fully beneficial even without intense exercise</span> These are for general health.<br><br>Supplements enhance results from your efforts. No effort = nothing to enhance."]},
+
+{id:'natural_vs_supplement',p:['food vs supplement','natural vs supplement','food better than supplement','why not just eat','natural food','egg vs protein','real food supplement'],
+ r:["<strong>Natural Food vs Supplements — Honest Answer</strong><br><br><strong>Real food wins always. Supplements supplement.</strong><br><br><b>Real food advantages:</b><br>✅ Complete nutrition — vitamins, minerals, fiber, thousands of phytonutrients<br>✅ Better satiety<br>✅ Nutrient absorption synergies<br><br><b>But here's the reality:</b><br>To hit 150g protein from food: 6 chicken breasts + 6 eggs + 500ml milk + 100g paneer = possible but expensive and time-consuming daily.<br>1 scoop whey + 3 chicken + eggs = easier and cheaper.<br><br>For Vitamin D: needs 20 mins full-body sun between 11AM–2PM. Not realistic for most.<br><br><b>Best approach:</b><br>1. Build diet around whole foods first<br>2. Use supplements to fill the GAPS<br>3. Whey + Multivitamin + Omega-3 + Vitamin D3 = the four most useful supplements for most people<br><br>Supplements are tools, not shortcuts."]},
+
+{id:'how_long_results',p:['how long results','when will i see results','how long to see muscle','how fast','kab dikhe','results supplement','how many months'],
+ r:["<strong>How Long Before You See Results?</strong><br><br><b>With consistent training + diet:</b><br><br><strong>Whey Protein:</strong><br>• Recovery improves: 1–2 weeks<br>• Visible muscle: 4–8 weeks<br>• Significant transformation: 3–6 months<br><br><strong>Creatine:</strong><br>• Strength increase: 1–2 weeks<br>• Muscle fullness: 1 week (water retention)<br>• Real gains: 4–6 weeks<br><br><strong>Fat Burners / L-Carnitine:</strong><br>• Noticeable fat loss: 4–8 weeks (with cardio + diet)<br><br><strong>Vitamins / Omega-3:</strong><br>• Energy improvement: 2–4 weeks<br>• Full benefits: 8–12 weeks<br><br><strong>Ashwagandha:</strong><br>• Stress reduction: 2–4 weeks | Full: 6–8 weeks<br><br><span class='gtag'>Training + Diet + Sleep + Supplements = Results</span><br>All four together = transformation. Missing any one slows everything down."]},
+
+{id:'can_take_together',p:['can i take together','stack supplements','combine supplements','whey and creatine','multiple supplements','take all at once','safe to combine'],
+ r:["<strong>Can You Take Multiple Supplements Together? Yes — this is called a Stack!</strong><br><br><b>Safe proven daily schedule:</b><br><br>🌅 <strong>Morning with breakfast:</strong><br>• Multivitamin, Omega-3, Vitamin D3, Creatine 3–5g<br><br>⚡ <strong>Pre-Workout (20–30 mins before):</strong><br>• Pre-Workout supplement only (not stacked with energy drinks)<br><br>🏃 <strong>During Workout:</strong><br>• BCAA or Amino Water<br><br>💪 <strong>Post-Workout:</strong><br>• Whey Protein<br><br>🌙 <strong>Before Bed:</strong><br>• Ashwagandha, Collagen (optional)<br><br><b>Combinations to AVOID:</b><br>❌ Two stimulant products together (two pre-workouts, pre-workout + energy drink)<br>❌ Dumping everything at the same time<br><br>Start simple: Whey + Multivitamin + Creatine = most effective beginner stack with zero complications."]},
+
+{id:'about_store',p:['about vitamin store','what is vitamin store','tell me about','who are you','about your store','which store'],
+ r:["<strong>Vitamin Store — Anantapur's Number 1 Supplement Store</strong><br><br>Founded by <strong>Firoz</strong> — veteran gym trainer with 10+ years of experience transforming bodies. Built Vitamin Store to bring 100% genuine supplements to Anantapur athletes.<br><br><b>Why choose us:</b><br>🛡️ Every product authenticated — zero fakes<br>🏷️ Best prices — we match competitor prices<br>👨‍⚕️ Free expert guidance from Firoz and team<br>🛵 Home delivery within 2 hours<br>📦 30+ premium brands in stock<br><br><b>Two branches in Anantapur:</b><br>📍 Main: 80 Feet Rd, Ram Nagar<br>📍 Branch: Muscle Tools India, near Chandra Hospital<br><br>WhatsApp: <strong>+91 99495 31515</strong>"]},
+
+{id:'store_hours',p:['store hours','opening hours','timing','open time','close time','when open','timings','working hours','open today'],
+ r:["<b>Vitamin Store Timings</b><br><br>📍 <strong>Main Store</strong><br>Mon – Sat: 9:00 AM – 9:30 PM<br>Sunday: 10:00 AM – 8:00 PM<br><br>📍 <strong>Branch (Muscle Tools India)</strong><br>Call +91 98851 03717 to confirm<br><br>You can WhatsApp your order anytime — we respond during store hours!"]},
+
+{id:'store_location',p:['address','location','where','directions','store address','how to find','where are you','near me'],
+ r:["<b>Two Branches in Anantapur</b><br><br><strong>Main Store — Vitamin Store</strong><br>80 Feet Rd, opp. SR Grand Hotel, Ram Nagar, Maruthi Nagar, Anantapur — 515001<br>Phone: +91 99495 31515<br><br><strong>Branch — Muscle Tools India</strong><br>Chandra Hospital Backside, Residency Lodge Building, Anantapur — 515001<br>Phone: +91 98851 03717<br><em>(AP Distributor for MAXN)</em><br><br>Or order via WhatsApp and we deliver to you!"]},
+
+{id:'contact',p:['contact','phone number','call','mobile number','how to contact','email','instagram','social media'],
+ r:["<b>Contact Vitamin Store</b><br><br>Main: <strong>+91 99495 31515</strong><br>Branch: <strong>+91 98851 03717</strong><br>Email: muscletoolsindia@gmail.com<br>Instagram: <strong>@vitamin.1515</strong><br><br>Fastest: WhatsApp +91 99495 31515"]},
+
+{id:'delivery',p:['delivery','deliver','shipping','how long','order process','home delivery','whatsapp order','how to buy','order kaise'],
+ r:["<b>Delivery Information</b><br><br>Rs.20 flat delivery charge<br>⏱ Anantapur: <strong>within 2 hours</strong><br>⏱ Within 50km: <strong>8–24 hours</strong><br><br><b>How to order:</b><br>1. WhatsApp the product name<br>2. Share your delivery address<br>3. We confirm price and dispatch!<br><br>Payment: UPI or Cash on Delivery<br>Order: <strong>+91 99495 31515</strong>"]},
+
+{id:'price',p:['price','cost','how much','rate','pricing','what is price','mrp','charges'],
+ r:["For exact pricing, WhatsApp us at <strong>+91 99495 31515</strong> — best price guaranteed!<br><br>We also do price matching. Which product are you looking for?"]},
+
+{id:'genuine',p:['genuine','original','fake','authentic','real','duplicate','trust','quality','certified'],
+ r:["<strong>100% Genuine — Our Biggest Promise</strong><br><br>Every product is sourced from authorized distributors and batch-verified before stocking. Zero fakes, zero compromises.<br><br>Firoz built this store specifically to fight supplement adulteration in India. Your health is not worth compromising on."]},
+
+{id:'whey_protein',p:['whey protein','protein powder','isolate','concentrate','protein supplement','protein shake','best protein','show protein','which protein'],
+ r:["<strong>Whey Protein at Vitamin Store</strong><br><br>Top picks:<br><span class='tag'>ON</span> Gold Standard 100% Whey — 4kg (World's best-selling protein)<br><span class='tag'>MuscleBlaze</span> Biozyme Performance Whey — 1kg and 2kg<br><span class='tag'>Dymatize</span> ISO100 — 5lb (Fastest absorbing isolate)<br><span class='tag'>GNC</span> Pro Performance 100% Whey — 450g and 1.81kg<br><span class='tag'>Wellbeing Nutrition</span> 100% Whey Isolate — 26g protein<br><span class='tag'>Isopure</span> Low Carb Protein — Great for cutting<br><span class='tag'>MuscleTech</span> Nitro Tech — 30g protein<br><span class='tag'>Trueforma</span>, <span class='tag'>BSN Syntha-6</span>, <span class='tag'>Ronnie Coleman</span> Pro Antium and 30+ more!<br><br>Tell me your goal and budget and I'll recommend the right one!"]},
+
+{id:'preworkout_products',p:['pre workout','preworkout','c4','energy boost','pump','before workout','psychotic','wrath x','which preworkout'],
+ r:["<strong>Pre-Workout Collection</strong><br><br><span class='tag'>Cellucor</span> C4 Original — 60 Servings (Best for beginners)<br><span class='tag'>Insane Labz</span> Psychotic — 35 Servings (High stimulant!)<br><span class='tag'>MuscleBlaze</span> Wrath X — 510g<br><span class='tag'>Optimum Nutrition</span> Gold Standard Pre-Workout<br><span class='tag'>Redcon1</span> Total War Black Ops<br><span class='tag'>Rising Labs</span> Mongrel — 60 Servings<br><span class='tag'>ProSupps</span> Hyde Nightmare<br><span class='tag'>Crack Head</span> Pre-Workout — 50 Servings<br><span class='tag'>Labrada</span> Super Charge and more!<br><br>Want to know about side effects or how to use pre-workouts? Just ask!"]},
+
+{id:'creatine_products',p:['creatine products','which creatine','creatine supplement','buy creatine','creatine available','creatine show'],
+ r:["<strong>Creatine at Vitamin Store</strong><br><br><span class='tag'>GNC</span> Pro Performance Creatine — 250g, Fruit Punch<br><span class='tag'>Wellcore</span> Micronised Creatine — 250g (Unflavored and Fruit Fusion)<br><span class='tag'>C9 Nutrition</span> Micronised Creatine — 250g<br><span class='tag'>Dexter Jackson</span> Micronized Creatine — 250g<br><br>All pure Creatine Monohydrate — most researched and effective form.<br>Want to know how creatine works or its side effects? Just ask!"]},
+
+{id:'vitamins_products',p:['vitamins','multivitamin','omega 3','fish oil','vitamin d','vitamin c','b12','zinc','immunity','minerals'],
+ r:["<strong>Vitamins and Health at Vitamin Store</strong><br><br><b>Multivitamins:</b><br><span class='tag'>MuscleBlaze</span> Biozyme 5-in-1 — 90 Tablets<br><span class='tag'>GNC</span> Mega Men One Daily<br><span class='tag'>Carbamide Forte</span> 43-in-1 for Women<br><br><b>Omega-3:</b><br><span class='tag'>Wellbeing Nutrition</span> Slow Triple Strength Omega-3<br><span class='tag'>Carbamide Forte</span> Triple Strength Fish Oil<br><br><b>Vitamin D3, B12, C+Zinc:</b><br><span class='tag'>Wellbeing Nutrition</span> Melts range (oral strips!)<br><span class='tag'>Carbamide Forte</span> D3+K2 Gummies, B12<br><span class='tag'>Trueforma</span> Vitamin C + Zinc Effervescent<br><br><b>Herbal:</b><br><span class='tag'>Carbamide Forte</span> Ashwagandha 600 | <span class='tag'>GAT Sport</span> Testrol Gold ES<br><br>Ask me about any specific vitamin for details!"]},
+
+{id:'oats_products',p:['oats','muesli','granola','breakfast','protein oats','healthy breakfast'],
+ r:["<strong>Oats, Muesli and More</strong><br><br><span class='tag'>Doctor's Choice</span> Protein Oats — Dark Choco Berry 750g<br><span class='tag'>Fit and Flex</span> High Protein Power Oats — PB Chocolate 1kg and Honey 400g<br><span class='tag'>Fit and Flex</span> High Protein Muesli — Choco Almond 450g<br><span class='tag'>MuscleBlaze</span> MB Fit High Protein Oats — Dark Chocolate<br><span class='tag'>Health Ninja</span> High Protein Oats — Cold Coffee<br><span class='tag'>Pintola</span> High Protein Oats, Jumbo Rolled Oats — 1kg<br><span class='tag'>WellX Brothers</span> High Protein Muesli<br><span class='tag'>Pro.Fitness</span> High Protein Choco Oats<br><br>Great nutritious breakfast options! WhatsApp for pricing."]},
+
+{id:'goal_muscle',p:['muscle building','build muscle','gain muscle','bulk','bulking','mass gain','muscle growth','gain weight','pack muscle'],
+ r:["<strong>Muscle Building Stack</strong><br><br><b>Priority 1 — Foundation:</b><br>1. <strong>Whey Protein</strong> post-workout — <span class='tag'>ON Gold Standard</span> or <span class='tag'>MuscleBlaze Biozyme</span><br>2. <strong>Creatine</strong> 3–5g daily — <span class='tag'>Wellcore Micronised</span> or <span class='tag'>GNC Creatine</span><br>3. <strong>Multivitamin</strong> daily — <span class='tag'>MuscleBlaze Biozyme 5-in-1</span><br><br><b>Priority 2 — Performance:</b><br>4. <strong>Pre-Workout</strong> — <span class='tag'>C4 Original</span> to start<br>5. <strong>BCAA</strong> intra-workout — <span class='tag'>Trueforma Armed BCAA</span><br><br><b>Priority 3 — Recovery:</b><br>6. <strong>Omega-3</strong> — anti-inflammatory, joint health<br>7. <strong>Ashwagandha</strong> — testosterone, recovery, stress<br><br>Rule: Calorie surplus + Progressive overload + Adequate sleep = Muscle growth. Supplements SUPPORT, not replace these fundamentals.<br><br>Free consultation: WhatsApp Firoz at +91 99495 31515"]},
+
+{id:'goal_fat_loss',p:['fat loss','weight loss','lose fat','lose weight','slim down','cutting','shred','reduce weight','belly fat','burn fat'],
+ r:["<strong>Fat Loss Stack</strong><br><br>1. <strong>Whey Isolate</strong> — low carb protein: <span class='tag'>Isopure Low Carb</span> or <span class='tag'>Wellbeing 100% Isolate</span><br>2. <strong>L-Carnitine</strong> — fat metabolism: <span class='tag'>Carbamide Forte L-Carnitine 1000</span><br>3. <strong>Pre-Workout</strong> — boosts calorie burn: <span class='tag'>C4 Original</span><br>4. <strong>BCAA</strong> — protects muscle while cutting<br>5. <strong>Multivitamin</strong> — critical during cutting<br>6. <strong>Omega-3</strong> — reduces inflammation, supports fat metabolism<br><br>Rule: Calorie deficit (250–500 kcal) + Cardio 3–4x/week + Strength training = Fat loss. Diet is 80% of the result."]},
+
+{id:'goal_health',p:['general health','stay healthy','wellness','wellbeing','everyday supplements','health goal'],
+ r:["<strong>Daily Wellness Stack</strong><br><br>1. <strong>Multivitamin</strong> — fills all gaps: <span class='tag'>MuscleBlaze MB-Vite</span> or <span class='tag'>GNC Mega Men</span><br>2. <strong>Omega-3</strong> — heart, brain, joints: <span class='tag'>Wellbeing Triple Strength</span><br>3. <strong>Vitamin D3</strong> — immunity and mood: <span class='tag'>Wellbeing Melts D3</span><br>4. <strong>Vitamin C + Zinc</strong> — immunity: <span class='tag'>Carbamide Forte</span><br>5. <strong>Ashwagandha</strong> — stress and sleep: <span class='tag'>Carbamide Forte Ashwagandha 600</span><br><br>Simple, effective, covers most common Indian deficiencies. WhatsApp for pricing!"]},
+
+{id:'beginner',p:['beginner','new to gym','starting gym','first supplement','where to start','newbie','first time','start supplements'],
+ r:["<strong>Beginner's Guide — Start Simple!</strong><br><br><b>Beginner Stack:</b><br>1. <strong>Whey Protein</strong> — 1 scoop post-workout: <span class='tag'>MuscleBlaze Biozyme Whey PR</span> or <span class='tag'>GNC Pro Performance</span><br>2. <strong>Multivitamin</strong> — 1 tablet daily: <span class='tag'>MuscleBlaze MB-Vite</span><br>3. <strong>Creatine</strong> — add after 2–3 months<br><br><b>DON'T start with:</b><br>❌ Pre-Workout — too soon, build natural energy first<br>❌ Fat Burners<br>❌ 5–6 supplements at once<br><br>First 3–6 months, <strong>training consistency matters more</strong> than any supplement. A beginner who trains properly beats an advanced person who trains badly.<br><br>Free consultation: WhatsApp <strong>+91 99495 31515</strong>"]},
+
+{id:'comparison',p:['which is better','compare','difference between','vs','should i take','recommend','what should i buy','best one','which one'],
+ r:["To give you the best recommendation, tell me:<br><br>1. Your <strong>main goal</strong>? (Muscle gain / Fat loss / General health / Performance)<br>2. Beginner or experienced?<br>3. Any budget preference?<br>4. Dietary restrictions? (Vegan, lactose intolerant?)<br><br>Or WhatsApp Firoz for instant expert advice: <strong>+91 99495 31515</strong>"]},
+
+{id:'all_brands',p:['all brands','which brands','brands available','brand list','what brands'],
+ r:["<strong>30+ Premium Brands at Vitamin Store</strong><br><br>Optimum Nutrition, MuscleBlaze, GNC, Wellbeing Nutrition, Carbamide Forte, Trueforma, Cellucor, Insane Labz, Dymatize, Isopure, MuscleTech, Ronnie Coleman, Kevin Levrone, MAXN (AP Distributor!), Aquatein, QNT, RUN, BSN, Rule 1, TrueBasics, Performance Inspired, C9 Nutrition, Dexter Jackson, Labrada, Rising Labs, Crack Head, ProSupps, Fit and Flex, Pintola, Health Ninja, Doctor's Choice, Pro.Fitness, WellX Brothers and more!<br><br>All 100% genuine. Which brand interests you?"]},
+
+{id:'all_categories',p:['all products','categories','what do you sell','product list','what supplements','range','show products'],
+ r:["<strong>Our Complete Product Range</strong><br><br>💪 Whey Protein — Isolates, Concentrates, Blends<br>⚡ Pre-Workout — Energy, Focus, Pump<br>🔬 BCAA and Aminos — Recovery, Endurance<br>🔥 Creatine — Strength, Power<br>🌡️ Fat Burners / L-Carnitine<br>💊 Vitamins and Minerals — Daily Health<br>🍫 Protein Bars — On-the-go Protein<br>🌾 Oats, Muesli and More — Clean Breakfast<br>💚 Health and Immunity — Collagen, Omega-3, Fish Oil<br>🌿 Ayurvedic and Herbal — Ashwagandha, Moringa<br>🎒 Gym Accessories — Bags, Bottles, Gloves<br><br>What category can I help with?"]},
+
+{id:'payment',p:['payment','how to pay','payment method','upi','cash','cod','gpay','phonepay','paytm'],
+ r:["<b>Payment Options</b><br><br>✅ UPI (GPay, PhonePe, Paytm, etc.)<br>✅ Cash on Delivery<br><br>Details shared on WhatsApp after order confirmation.<br>Order: <strong>+91 99495 31515</strong>"]},
+
+{id:'consultation',p:['consultation','advice','suggest','recommend','help me choose','free advice','expert','need guidance','confusion','not sure'],
+ r:["<strong>Free Expert Consultation</strong><br><br>Founder <strong>Firoz</strong> — 10+ years as a gym trainer — and our expert advisors are on WhatsApp.<br><br>Share: your goal, training routine, health conditions, and budget.<br><br>They'll build your <strong>perfect supplement stack — free, no pressure.</strong><br><br>WhatsApp: <strong>+91 99495 31515</strong>"]},
+
+{id:'thanks',p:['thank you','thanks','thankyou','thank u','thnks','ty','thx','great','awesome','perfect','helpful','nice'],
+ r:["Happy to help! Anything else you'd like to know?","Anytime! What else can I help with?"]},
+
+{id:'farewell',p:['bye','goodbye','see you','later','ok bye','cya','take care','gn'],
+ r:["Take care! Stay consistent — results come to those who show up!","Bye! Train hard, eat right, supplement smart. Come back anytime!"]},
+
+{id:'fallback',p:[],
+ r:["I am not sure about that one. Try asking me about:<br>• <strong>Why you need</strong> protein, vitamins, supplements<br>• <strong>Side effects</strong> of any supplement<br>• <strong>How to use</strong> — dosage and timing<br>• <strong>Products</strong> we stock<br>• <strong>Your goal</strong> — I will build your stack!<br><br>Or WhatsApp: <strong>+91 99495 31515</strong>",
+   "I didn't quite catch that! Ask me about any supplement — why you need it, side effects, how to use it, or which products we have. WhatsApp: <strong>+91 99495 31515</strong>"]}
+];
+
+const QR={
+ default:[{l:'💪 Build Muscle',m:'I want to build muscle'},{l:'🔥 Lose Fat',m:'I want to lose fat'},{l:'❓ Why take Protein?',m:'Why do we need protein?'},{l:'⚠️ Side Effects?',m:'What are side effects of supplements?'},{l:'📍 Location',m:'Where is the store?'},{l:'💬 WhatsApp',m:'__wa__',c:'g'}],
+ education:[{l:'🥛 What is Whey?',m:'What is whey protein?'},{l:'⚡ What is Pre-Workout?',m:'What is pre-workout?'},{l:'🔥 What is Creatine?',m:'What is creatine?'},{l:'🌿 Ashwagandha?',m:'What is ashwagandha?'},{l:'❤️ Why Omega-3?',m:'Why should I take omega-3?'},{l:'☀️ Vitamin D3?',m:'Why do we need vitamin D3?'}],
+ side_effects:[{l:'Whey Side Effects',m:'Side effects of whey protein?'},{l:'Pre-Workout Effects',m:'Side effects of pre-workout?'},{l:'Creatine Safe?',m:'Is creatine safe?'},{l:'Protein and Kidneys',m:'Does protein damage kidneys?'},{l:'Protein Hair Loss?',m:'Does protein cause hair loss?'},{l:'Fat Burner Effects',m:'Side effects of L-carnitine?'}],
+ how_to_use:[{l:'How to use Whey',m:'How to use whey protein?'},{l:'How to use Creatine',m:'How to use creatine?'},{l:'How to use Pre-Workout',m:'How to use pre-workout?'},{l:'How to use BCAA',m:'How to use BCAA?'},{l:'How to use L-Carnitine',m:'How to use L-carnitine?'},{l:'Stack Supplements?',m:'Can I take multiple supplements together?'}],
+ products:[{l:'🥤 Whey Protein',m:'Show whey protein options'},{l:'⚡ Pre-Workout',m:'What pre-workouts do you have?'},{l:'💊 Vitamins',m:'What vitamins do you have?'},{l:'🔥 Creatine',m:'Show creatine options'},{l:'🌾 Oats & Muesli',m:'Show oats and muesli'},{l:'🏷️ All Brands',m:'Which brands do you stock?'}],
+ order:[{l:'💬 WhatsApp Order',m:'__wa__',c:'g'},{l:'💰 Ask Price',m:'How much does it cost?'},{l:'🛵 Delivery Info',m:'How does delivery work?'},{l:'💳 Payment',m:'How do I pay?'}],
+ goals:[{l:'💪 Build Muscle',m:'I want to build muscle'},{l:'🔥 Lose Fat',m:'I want to lose fat'},{l:'⚡ Performance',m:'I want to improve performance'},{l:'💚 General Health',m:'General health supplements?'},{l:'🌟 Beginner',m:"I am a beginner where do I start?"}]
+};
+
+const IQR={
+ greeting:'default',farewell:'default',thanks:'default',
+ why_supplements:'education',why_protein:'education',why_vitamins:'education',
+ what_is_whey:'how_to_use',how_to_use_whey:'order',side_effects_whey:'order',
+ what_is_preworkout:'how_to_use',how_to_use_preworkout:'order',side_effects_preworkout:'order',
+ what_is_creatine:'how_to_use',how_to_use_creatine:'order',side_effects_creatine:'order',
+ what_is_bcaa:'how_to_use',how_to_use_bcaa:'order',side_effects_bcaa:'order',
+ what_is_lcarnitine:'how_to_use',how_to_use_fatburner:'order',side_effects_fatburner:'order',
+ vitamin_d3:'order',omega3:'order',ashwagandha_benefits:'order',collagen_benefits:'order',
+ protein_kidney:'side_effects',protein_hair:'side_effects',
+ women_supplements:'order',teen_supplements:'default',
+ natural_vs_supplement:'education',how_long_results:'default',
+ can_take_together:'order',without_workout:'education',
+ about_store:'products',store_hours:'default',store_location:'default',
+ contact:'default',delivery:'order',price:'order',genuine:'order',
+ whey_protein:'order',preworkout_products:'order',creatine_products:'order',
+ vitamins_products:'order',oats_products:'order',
+ goal_muscle:'order',goal_fat_loss:'order',goal_health:'order',beginner:'order',
+ comparison:'goals',all_brands:'products',all_categories:'products',
+ payment:'order',consultation:'default',fallback:'default'
+};
+
+function norm(t){return t.toLowerCase().replace(/[^\w\s]/g,' ').replace(/\s+/g,' ').trim();}
+function detectIntent(input){
+ const n=norm(input);let best={intent:null,score:0};
+ for(const intent of INTENTS){
+  if(intent.id==='fallback')continue;
+  let score=0;
+  for(const p of intent.p){if(n.includes(p))score+=p.split(' ').length*2;}
+  if(score>best.score)best={intent,score};
+ }
+ if(best.score===0)return INTENTS.find(i=>i.id==='fallback');
+ return best.intent;
+}
+function pick(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+const msgsArea=document.getElementById('msgsArea');
+const qrArea=document.getElementById('qrArea');
+const inputBox=document.getElementById('inputBox');
+const sendBtn=document.getElementById('sendBtn');
+
+function getTime(){const d=new Date();return d.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});}
+function scrollBot(){setTimeout(()=>{msgsArea.scrollTop=msgsArea.scrollHeight;},50);}
+
+function appendMsg(text,sender){
+ const row=document.createElement('div');row.className='msg-row '+sender;
+ if(sender==='bot'){const av=document.createElement('div');av.className='msg-avatar';av.innerHTML='<img src="ryan.jpg" alt="Ryan" style="width:100%;height:100%;object-fit:cover;object-position:top center;"/>';row.appendChild(av);}
+ const bubble=document.createElement('div');bubble.className='bubble '+sender;bubble.innerHTML=text;
+ const time=document.createElement('div');time.className='msg-time '+sender;time.textContent=getTime();
+ const wrap=document.createElement('div');wrap.style.cssText='display:flex;flex-direction:column;';
+ wrap.appendChild(bubble);wrap.appendChild(time);row.appendChild(wrap);msgsArea.appendChild(row);scrollBot();
+}
+
+function showTyping(){
+ const row=document.createElement('div');row.className='typing-row';row.id='typ';
+ const av=document.createElement('div');av.className='msg-avatar';av.innerHTML='<img src="ryan.jpg" alt="Ryan" style="width:100%;height:100%;object-fit:cover;object-position:top center;"/>';
+ const b=document.createElement('div');b.className='typing-bubble';
+ b.innerHTML='<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+ row.appendChild(av);row.appendChild(b);msgsArea.appendChild(row);scrollBot();
+}
+function removeTyping(){const el=document.getElementById('typ');if(el)el.remove();}
+
+function setQR(key){
+ qrArea.innerHTML='';
+ const chips=QR[key]||QR.default;
+ chips.forEach(chip=>{
+  if(chip.m==='__wa__'){
+   const b=document.createElement('button');b.className='qr g';
+   b.innerHTML='<i class="fab fa-whatsapp" style="margin-right:4px"></i>WhatsApp Order';
+   b.onclick=openWA;qrArea.appendChild(b);
+  } else {
+   const b=document.createElement('button');b.className='qr'+(chip.c?' '+chip.c:'');
+   b.textContent=chip.l;b.onclick=()=>processInput(chip.m);qrArea.appendChild(b);
+  }
+ });
+}
+
+const SHOW_WA=['whey_protein','preworkout_products','creatine_products','vitamins_products','oats_products','goal_muscle','goal_fat_loss','goal_health','beginner','what_is_whey','how_to_use_whey','how_to_use_creatine','how_to_use_preworkout','how_to_use_bcaa','how_to_use_fatburner','vitamin_d3','omega3','ashwagandha_benefits','collagen_benefits','women_supplements','price','delivery','comparison','consultation','genuine'];
+
+function processInput(text){
+ if(text==='__wa__'){openWA();return;}
+ appendMsg(text,'user');sendBtn.disabled=true;qrArea.innerHTML='';showTyping();
+ const delay=700+Math.random()*500;
+ setTimeout(()=>{
+  removeTyping();
+  const intent=detectIntent(text);
+  appendMsg(pick(intent.r),'bot');
+  if(SHOW_WA.includes(intent.id)){
+   setTimeout(()=>{
+    const row=document.createElement('div');row.className='msg-row bot';row.style.animation='msgIn 0.25s ease';
+    const av=document.createElement('div');av.className='msg-avatar';av.innerHTML='<img src="ryan.jpg" alt="Ryan" style="width:100%;height:100%;object-fit:cover;object-position:top center;"/>';
+    const b=document.createElement('div');b.className='bubble bot';
+    b.innerHTML='<button class="wa-btn" onclick="openWA()"><i class="fab fa-whatsapp"></i> Order on WhatsApp — +91 99495 31515</button>';
+    row.appendChild(av);row.appendChild(b);msgsArea.appendChild(row);scrollBot();
+   },400);
+  }
+  setQR(IQR[intent.id]||'default');sendBtn.disabled=false;scrollBot();
+ },delay);
+}
+
+function handleSend(){const t=inputBox.value.trim();if(!t)return;inputBox.value='';inputBox.style.height='auto';processInput(t);}
+function openWA(){window.open('https://wa.me/919949531515?text=Hi%2C%20I%20want%20to%20enquire%20about%20supplements.','_blank');}
+inputBox.addEventListener('input',function(){this.style.height='auto';this.style.height=Math.min(this.scrollHeight,100)+'px';});
+inputBox.addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();handleSend();}});
+
+function init(){
+ const div=document.createElement('div');div.className='date-div';div.textContent='Today';msgsArea.appendChild(div);
+ sendBtn.disabled=true;showTyping();
+ setTimeout(()=>{
+  removeTyping();
+  appendMsg("Hey! I'm <strong>Ryan</strong> — your complete supplement guide at <strong>Vitamin Store</strong>.<br><br>I can answer:<br>💊 <strong>Why</strong> you need protein, vitamins, supplements<br>⚠️ <strong>Side effects</strong> of every supplement — honest answers<br>📋 <strong>How to use</strong> — dosage, timing, stacking<br>🛒 <strong>Products and brands</strong> we carry (30+)<br>🎯 <strong>Your goal</strong> — I'll build your perfect stack<br><br>What would you like to know? <b>Ask me anything!</b>",'bot');
+  setQR('default');sendBtn.disabled=false;
+ },1200);
+}
+init();
+
+</script>
+</body>
+</html>
