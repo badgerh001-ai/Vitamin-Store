@@ -304,7 +304,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   .experts-grid{grid-template-columns:repeat(2,1fr);}
   .announce-item{font-size:0.7rem;padding:0 20px;}
   
-  /* NEW RYAN INTEGRATION RULES */
+  /* RYAN INTEGRATION RULES */
   #ryan-bubble { display: none !important; }
   .mob-nav { justify-content: space-between; padding: 10px 8px 16px; }
   .mob-nav a { font-size: 0.6rem; gap: 3px; }
@@ -314,7 +314,7 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
 @media(max-width:480px){.cat-grid{grid-template-columns:repeat(2,1fr);gap:10px;}.hero h1{font-size:3.2rem;}.hero-btns{flex-direction:column;align-items:center;}.hero-btns .btn{width:100%;max-width:280px;justify-content:center;}.cta-btns{flex-direction:column;align-items:center;}.cta-btns .btn{width:100%;max-width:280px;justify-content:center;}.experts-grid{grid-template-columns:repeat(2,1fr);gap:10px;}.consult-left{flex-direction:column;align-items:flex-start;gap:14px;}.why-card-img-wrap{aspect-ratio:4/3;}}
 
 
-/* ── RYAN FLOATING CHAT BUBBLE — CSS AVATAR ── */
+/* ── RYAN FLOATING CHAT BUBBLE — IMAGE AVATAR ── */
 #ryan-bubble{
   position:fixed;bottom:82px;right:16px;z-index:195;
   display:flex;flex-direction:column;align-items:flex-end;gap:8px;
@@ -338,10 +338,10 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
 }
 #ryan-bubble.pos-left .ryan-label{transform-origin:left center;}
 
-/* CSS Avatar Button — replaces ryan.jpg */
+/* Desktop Avatar Button */
 .ryan-btn{
   width:56px;height:56px;border-radius:50%;
-  background:linear-gradient(135deg,#E20000,#A80000);
+  background:var(--black);
   border:2.5px solid rgba(255,255,255,0.22);
   box-shadow:0 4px 22px rgba(226,0,0,0.5);
   display:flex;align-items:center;justify-content:center;
@@ -349,9 +349,9 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   transition:transform 0.22s,box-shadow 0.22s;
   animation:ryanPulse 3s ease-in-out infinite;
   text-decoration:none;-webkit-tap-highlight-color:transparent;
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:1.6rem;font-weight:900;color:#fff;
-  letter-spacing:0.02em;
+}
+.desk-ryan-img{
+  width:100%;height:100%;border-radius:50%;object-fit:cover;display:block;
 }
 .ryan-btn:hover{
   transform:scale(1.12);
@@ -379,11 +379,12 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
   100%{transform:scale(2.8);opacity:0;}
 }
 @media(min-width:769px){#ryan-bubble{bottom:100px;right:28px;}}
-@media(max-width:480px){#ryan-bubble{bottom:78px;}.ryan-btn{width:52px;height:52px;font-size:1.4rem;}}
+@media(max-width:480px){#ryan-bubble{bottom:78px;}.ryan-btn{width:52px;height:52px;}}
 </style>
 </head>
 <body>
 
+<!-- ANNOUNCEMENT BAR -->
 <div class="announce-bar">
   <div class="announce-track">
     <span class="announce-item"><i class="fas fa-tag"></i> UP TO 50% OFF ON SELECTED PRODUCTS</span>
@@ -412,10 +413,11 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:52px
 <div id="scroll-progress"></div>
 <button id="back-to-top" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
 
+<!-- RYAN FLOATING CHAT BUBBLE — IMAGE AVATAR -->
 <div id="ryan-bubble">
   <div class="ryan-label">&#x1F4AC; Chat with Ryan</div>
   <a href="robot.html" class="ryan-btn" aria-label="Chat with Ryan">
-    R
+    <img src="ryan.jpg" alt="Ryan AI" class="desk-ryan-img"/>
     <span class="ryan-online"></span>
   </a>
 </div>
