@@ -198,7 +198,6 @@ nav{position:fixed;top:0;width:100%;z-index:200;height:var(--nav-h);padding:0 24
 .prod-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:2px;}
 .prod-protein-tag{font-size:0.68rem;background:rgba(226,0,0,0.1);border:1px solid rgba(226,0,0,0.2);color:var(--red);padding:2px 7px;border-radius:4px;font-weight:700;}
 .prod-selector-block{margin-top:8px;display:flex;flex-direction:column;gap:5px;}
-.prod-selector-block{margin-top:8px;display:flex;flex-direction:column;gap:5px;}
 .prod-selector-label{font-size:0.6rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--muted);font-weight:700;display:flex;align-items:center;gap:5px;}
 .selected-name{color:var(--text);text-transform:none;letter-spacing:0;font-weight:500;font-size:0.66rem;max-width:130px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .flav-swatches{display:flex;flex-wrap:wrap;gap:5px;}
@@ -273,6 +272,16 @@ nav{position:fixed;top:0;width:100%;z-index:200;height:var(--nav-h);padding:0 24
 .talk-bar{display:none;position:fixed;bottom:62px;left:0;right:0;background:var(--red);z-index:197;padding:10px 16px;text-align:center;}
 .talk-bar a{color:#fff;font-weight:800;font-size:0.95rem;display:flex;align-items:center;justify-content:center;gap:8px;}
 
+/* ── MOBILE NAV ── */
+.mob-nav{display:none;position:fixed;bottom:0;width:100%;z-index:200;background:rgba(16,16,16,0.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:10px 0 16px;justify-content:space-around;}
+.mob-nav a{display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--muted);font-size:0.65rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;transition:color 0.2s;position:relative;cursor:pointer;}
+.mob-nav a i{font-size:1.1rem;}
+.mob-nav a.active,.mob-nav a:hover{color:var(--red);}
+.mob-nav a.cart-mob-link{color:var(--muted);}
+.mob-nav a.cart-mob-link.has-items{color:var(--green);}
+.mob-cart-badge{position:absolute;top:-4px;right:-6px;background:var(--red);color:#fff;font-size:0.55rem;font-weight:800;min-width:16px;height:16px;border-radius:20px;display:none;align-items:center;justify-content:center;padding:0 3px;border:2px solid var(--black);}
+.mob-cart-badge.show{display:flex;}
+
 /* ── FOOTER ── */
 footer{background:var(--surface);border-top:1px solid var(--border);padding:36px 24px 24px;}
 .footer-bottom{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
@@ -316,7 +325,6 @@ footer{background:var(--surface);border-top:1px solid var(--border);padding:36px
 .qty-num{font-family:var(--font-d);font-size:1rem;font-weight:800;color:var(--white);min-width:22px;text-align:center;}
 .cart-item-remove{margin-left:auto;width:26px;height:26px;border-radius:6px;background:rgba(226,0,0,0.06);border:1px solid rgba(226,0,0,0.15);color:rgba(226,0,0,0.5);font-size:0.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;flex-shrink:0;}
 .cart-item-remove:hover{background:rgba(226,0,0,0.15);border-color:var(--red);color:var(--red);}
-.cart-footer{padding:16px 20px 20px;border-top:1px solid var(--border);flex-shrink:0;}
 .cart-footer{padding:16px 20px 20px;border-top:1px solid var(--border);flex-shrink:0;}
 .cart-delivery-note{display:flex;align-items:center;gap:8px;background:rgba(37,211,102,0.07);border:1px solid rgba(37,211,102,0.2);border-radius:8px;padding:10px 14px;margin-bottom:14px;}
 .cart-delivery-note i{color:var(--green);font-size:0.9rem;flex-shrink:0;}
@@ -707,7 +715,6 @@ textarea.form-input{resize:vertical;min-height:80px;}
       </div>
       <div class="modal-body">
         <div class="modal-order-summary" id="modalOrderSummary"></div>
-        <div class="modal-order-summary" id="modalOrderSummary"></div>
         <div class="modal-delivery-tag">
           <i class="fas fa-motorcycle"></i>
           <span><strong>₹20 Delivery Charge</strong><br/>Anantapur: <strong>within 2 hrs</strong> &nbsp;·&nbsp; Up to 50km: <strong>8–24 hrs</strong></span>
@@ -755,7 +762,7 @@ textarea.form-input{resize:vertical;min-height:80px;}
 
 <script>
 /* ════════════════════════════════════════
-    NEW 42 PRODUCT INVENTORY ARRAY
+    42 PRODUCT INVENTORY ARRAY
 ════════════════════════════════════════ */
 var PRODUCTS = [
   {id:'wn-daily-greens',cat:'health',brand:'Wellbeing Nutrition',name:'Daily Greens',protein:'—',featured:true,icon:'fas fa-seedling',gradient:'linear-gradient(135deg,#005550,#00B8A9)',img:'',flavours:['Natural Lemon & Lime Flavor'],weights:[{size:'15 Effervescent Tablets',inStock:true}]},
@@ -865,9 +872,7 @@ var BRAND_COLORS = {
   'Ronnie Coleman':{bg:'rgba(0,11,33,0.18)',color:'#55A9FF'}
 };
 
-/* ════════════════════════════════════════
-    CART STATE
-════════════════════════════════════════ */
+/* ── CART STATE ── */
 var cart = [];
 
 function cartTotal(){
